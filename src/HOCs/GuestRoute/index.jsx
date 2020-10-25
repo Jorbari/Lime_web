@@ -12,7 +12,7 @@ const GuestRoute = ({ component: Component, ...rest }) => {
         !getToken() ? (
           <Component {...props} />
         ) : (
-          <Redirect to={{ pathname: `/` }} />
+          <Redirect to={{ pathname: `/dashboard` }} />
         )
       }
     />

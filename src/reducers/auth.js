@@ -1,5 +1,3 @@
-// import { toast } from 'react-toastify';
-
 import { authenticationRequest, registrationRequest } from "../../src/api/auth";
 
 import { setToken, encodeUserObject, decodeToken } from "../../src/api/helpers";
@@ -41,24 +39,15 @@ export const authenticate = (userData, history) => async dispatch => {
     const {
       data: { token }
     } = await authenticationRequest(userData);
-    console.log("login", token);
     await setToken(token);
     http.defaults.headers.Authorization = `Bearer ${token}`;
     await encodeUserObject(decodeToken(token)._doc);
     await dispatch({
       type: REQUEST_SUCCESS
     });
-    // toast.success('You have been logged in successfully');
-
-    // if (user.isAdmin === 'true' || user.isAdmin === true) {
-    //   history.push('/admin');
-    // } else if (localStorage.getItem('redirectUrl')) {
-    //   history.push(localStorage.getItem('redirectUrl'));
-    // } else {
     history.push("/dashboard");
-    // }
   } catch (error) {
-    // toast.error(`${error.response.data.message}`);
+    console.log(error)
     dispatch({ type: REQUEST_ERROR, payload: error.response.data });
   }
 };

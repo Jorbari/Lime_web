@@ -13,7 +13,7 @@ import "./Login.css";
 
 const usernameRegEx = /^\w{3,}$/;
 // const passwordRegEx = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,}/;
-const passwordRegEx = /^\w{3,}$/;
+const passwordRegEx = /^\w{4,}$/;
 
 const Login = props => {
   const { history } = props;
@@ -55,7 +55,7 @@ const Login = props => {
     if (passwordRegEx.test(value) && !usernameRegEx.test(username)) {
       setPassword(value);
       setPasswordError(false);
-      setSubmitButtonDisabled(false);
+      setSubmitButtonDisabled(true);
       return;
     }
 

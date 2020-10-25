@@ -1,6 +1,5 @@
 import React from "react";
 import { Image } from "react-bootstrap";
-import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
 import SignUp from "../Signup/SignUp";
@@ -14,7 +13,7 @@ import { authenticate } from "../../reducers/auth";
 
 import "./AuthWrapper.css";
 
-const AuthWrapper = ({ location: { pathname }, authenticate }) => {
+const AuthWrapper = ({ location: { pathname }, history }) => {
   return (
     <div className="auth-container mw-100">
       <Link to="/">
@@ -31,7 +30,7 @@ const AuthWrapper = ({ location: { pathname }, authenticate }) => {
             />
           </div>
           <div className="col-12 col-lg-5 p-0 d-flex justify-content-center justify-content-lg-end form-container">
-            {pathname === "/signup" ? <SignUp /> : <Login />}
+            {pathname === "/signup" ? <SignUp history={history} /> : <Login history={history} />}
           </div>
         </div>
       </div>
@@ -39,4 +38,4 @@ const AuthWrapper = ({ location: { pathname }, authenticate }) => {
   );
 };
 
-export default connect(null, { authenticate })(AuthWrapper);
+export default AuthWrapper;
