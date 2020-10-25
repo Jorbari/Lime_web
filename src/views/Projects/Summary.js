@@ -46,8 +46,7 @@ const SummaryContainer = styled.div`
     left: 30px;
     top: 526px;
 
-    /* font-family: Poppins;
-font-style: normal; */
+    font-family: "Poppins", sans-serif;
     font-weight: 600;
     font-size: 24px;
     line-height: 36px;
@@ -103,7 +102,7 @@ font-style: normal; */
   }
 `;
 
-const SummaryTab = (props) => {
+const SummaryTab = props => {
   return (
     <SummaryContainer>
       <div className="sapsHeader-conatiner">
@@ -114,7 +113,7 @@ const SummaryTab = (props) => {
         className="relative flex flex-col min-w-0 break-words w-full xl:w-10/12 mb-12 xl:mb-0 pr-4 mb-6 rounded"
         style={{
           marginLeft: "-1rem",
-          marginTop: "8rem",
+          marginTop: "8rem"
         }}
       >
         <table className="sapsTable table-fixed ml-4 w-full xl:w-10/12 mb-12 xl:mb-0 pr-4">

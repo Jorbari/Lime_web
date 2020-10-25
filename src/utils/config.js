@@ -1,1 +1,1 @@
-export const KEY = 'qwertyuiop';
+export const KEY = "qwertyuiop";

@@ -61,7 +61,7 @@ const ExecutionPlan = () => {
                 style={{
                   position: "absolute",
                   top: "19.5rem",
-                  right: "6rem",
+                  right: "6rem"
                 }}
               />
             </td>

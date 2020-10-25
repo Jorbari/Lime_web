@@ -1,80 +1,71 @@
 import React from "react";
-import { Row, Col, Image, Form, Button } from "react-bootstrap";
-import styled from "styled-components";
+import { Col, Form, Spinner } from "react-bootstrap";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 import limeLogo from "../../assets/Group 9.svg";
 // import limeText from "./assets/LIME..svg";
 import people from "../../assets/30816651.svg";
 
 import { authenticate } from "../../reducers/auth";
-import { decodeToken } from "../../api/helpers";
 
-const LoginContainer = styled.div`
-  /* margin: 0 auto; */
+import "./Login.css";
 
-  .login-text {
-    font-style: normal;
-    font-weight: bold;
-    font-size: 48px;
-    line-height: 72px;
-    text-align: center;
-    color: #5b5656;
-    mix-blend-mode: normal;
-  }
+const usernameRegEx = /^\w{3,}$/;
+// const passwordRegEx = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,}/;
+const passwordRegEx = /^\w{3,}$/;
 
-  .login-form {
-    width: 60%;
-    padding: 25px;
-    margin: auto;
-    height: 100%;
-  }
-
-  .login-input-styles {
-    /* width: 450px; */
-    height: 64px;
-    background: #f5f5f5;
-    border: none;
-    border-radius: 10px;
-  }
-
-  .login-forget-password {
-    width: 462px;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 22px;
-    line-height: 27px;
-    text-align: right;
-    text-decoration-line: underline;
-    color: #5b5656;
-  }
-
-  .btn-styles {
-    width: 485px;
-    height: 76px;
-    background: #b6e6bd;
-    border: 1px solid #b6e6bd;
-    box-sizing: border-box;
-    border-radius: 10px;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 24px;
-    line-height: 36px;
-    text-align: center;
-    color: #5b5656;
-  }
-
-  .limeLogo {
-    margin-left: 91px;
-  }
-`;
-
-const Login = (props) => {
+const Login = props => {
   const { history } = props;
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const [submitButtonDisabled, setSubmitButtonDisabled] = React.useState(true);
+  const [usernameError, setUsernameError] = React.useState(false);
+  const [passwordError, setPasswordError] = React.useState(false);
 
-  const onSubmit = async (e) => {
+  const handleEmailInput = value => {
+    if (usernameRegEx.test(value) && passwordRegEx.test(password)) {
+      setUsername(value);
+      setSubmitButtonDisabled(false);
+      setUsernameError(false);
+      return;
+    }
+
+    if (usernameRegEx.test(value) && !passwordRegEx.test(password)) {
+      setUsername(value);
+      setUsernameError(false);
+      setSubmitButtonDisabled(true);
+      return;
+    }
+
+    setUsername(value);
+    setSubmitButtonDisabled(true);
+    setUsernameError(true);
+    return;
+  };
+
+  const handlePasswordInput = value => {
+    if (passwordRegEx.test(value) && usernameRegEx.test(username)) {
+      setPassword(value);
+      setSubmitButtonDisabled(false);
+      setPasswordError(false);
+      return;
+    }
+
+    if (passwordRegEx.test(value) && !usernameRegEx.test(username)) {
+      setPassword(value);
+      setPasswordError(false);
+      setSubmitButtonDisabled(false);
+      return;
+    }
+
+    setPassword(value);
+    setSubmitButtonDisabled(true);
+    setPasswordError(true);
+    return;
+  };
+
+  const onSubmit = async e => {
     e.preventDefault();
 
     await props.authenticate({ username, password }, history);
@@ -82,64 +73,91 @@ const Login = (props) => {
     // console.log("user", first_name);
   };
 
-  return (
-    <LoginContainer className="mw-100 pt-5 mt-4">
-      <Image src={limeLogo} width="61px" height="61px" className="limeLogo" />
-      <Row md={10}>
-        <Col className="pt-5">
-          <Image src={people} width="900px" height="700px" />
-        </Col>
-        <Col className="pt-5">
-          <Form className="login-form" onSubmit={(e) => onSubmit(e)}>
-            <h1 className="login-text mr-5">L O G I N</h1>
-            <Form.Group as={Col} controlId="formBasicEmail" className="pt-5">
-              <Form.Label>Username:</Form.Label>
-              <Form.Control
-                type="text"
-                className="login-input-styles"
-                onChange={(e) => {
-                  setUsername(e.target.value);
-                }}
-                required
-                value={username}
-              />
-            </Form.Group>
+  console.log("isLoading", props.isLoading);
 
-            <Form.Group as={Col} controlId="formBasicPassword" className="pt-5">
-              <Form.Label>Password:</Form.Label>
-              <Form.Control
-                type="password"
-                className="login-input-styles"
-                onChange={(e) => {
-                  setPassword(e.target.value);
-                }}
-                required
-                value={password}
+  return (
+    <section className="form-section">
+      <h1 className="login-text">LOG IN</h1>
+      <Form className="login-form" onSubmit={e => onSubmit(e)}>
+        <Form.Group as={Col} controlId="formBasicEmail" className="form-input">
+          <Form.Label className="form-label">Username:</Form.Label>
+          <Form.Control
+            type="text"
+            className="login-input-styles"
+            onChange={e => handleEmailInput(e.target.value)}
+            required
+            value={username}
+            style={{
+              border: usernameError ? "1px solid red" : "none"
+            }}
+          />
+        </Form.Group>
+
+        <Form.Group
+          as={Col}
+          controlId="formBasicPassword"
+          className="form-input"
+        >
+          <Form.Label className="form-label">Password:</Form.Label>
+          <Form.Control
+            type="password"
+            className="login-input-styles"
+            onChange={e => handlePasswordInput(e.target.value)}
+            required
+            value={password}
+            style={{
+              border: passwordError ? "1px solid red" : "none"
+            }}
+          />
+        </Form.Group>
+        <div className="error-div">
+          {props.status === "error" && (
+            <p className="error-text">Username/password is incorrect</p>
+          )}
+        </div>
+        {/* <Form.Group as={Col} controlId="formBasicCheckbox">
+          <Form.Text className="login-forget-password">
+            Forgot password?
+          </Form.Text>
+        </Form.Group> */}
+        <Form.Group as={Col}>
+          <button
+            type="submit"
+            className="btn-lg btn-styles"
+            value="LOG IN"
+            disabled={props.isLoading ? props.isLoading : submitButtonDisabled}
+            style={{
+              background: submitButtonDisabled ? "#c4c4c4" : "#b6e6bd",
+              border: submitButtonDisabled
+                ? "1px solid #c4c4c4"
+                : "1px solid #b6e6bd"
+            }}
+          >
+            {props.isLoading ? (
+              <Spinner
+                as="span"
+                animation="border"
+                size="sm"
+                role="status"
+                aria-hidden="true"
               />
-            </Form.Group>
-            <Form.Group as={Col} controlId="formBasicCheckbox" className="ml-4">
-              <Form.Text className="login-forget-password pt-2">
-                Forgot password?
-              </Form.Text>
-            </Form.Group>
-            <Form.Group className="pt-5">
-              <Button
-                as={(Col, "input")}
-                // as="input"
-                variant="primary"
-                type="submit"
-                className="btn-lg btn-styles mx-3"
-                value="LOG IN"
-              />
-            </Form.Group>
-          </Form>
-        </Col>
-      </Row>
-    </LoginContainer>
+            ) : (
+              "LOG IN"
+            )}
+          </button>
+        </Form.Group>
+
+        <div className="d-flex justify-content-center link">
+          <Link to="/signup">Create Account</Link>
+        </div>
+      </Form>
+    </section>
   );
 };
 
-// const mapStateToProps = ({ auth: { isLoading } }) => ({
-//   isLoading,
-// });
-export default connect(null, { authenticate })(Login);
+const mapStateToProps = ({ auth: { isLoading, status } }) => ({
+  isLoading,
+  status
+});
+
+export default connect(mapStateToProps, { authenticate })(Login);

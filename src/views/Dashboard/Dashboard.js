@@ -40,7 +40,7 @@ const ModalHeader = styled.h1`
   /* top: 66px; */
   margin: 20px;
 
-  /* font-family: Poppins; */
+  font-family: "Poppins", sans-serif;
   font-style: normal;
   font-weight: 600;
   font-size: 28px;
@@ -60,7 +60,7 @@ const InputStyle = styled.input`
     /* left: 72px; */
     /* top: 173px; */
 
-    /* font-family: Poppins; */
+    font-family: "Poppins", sans-serif;
     /* font-style: normal; */
     font-weight: 500;
     font-size: 20px;

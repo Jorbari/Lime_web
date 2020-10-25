@@ -12,7 +12,7 @@ let http;
 
   http = axios.create({
     baseURL: "https://limeapiv1.herokuapp.com",
-    headers: { ...Authorization },
+    headers: { ...Authorization }
   });
 })();
 

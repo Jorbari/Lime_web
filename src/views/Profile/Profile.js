@@ -17,8 +17,8 @@ const ProfileContainer = styled.div`
     left: 30px;
     top: 526px;
 
-    /* font-family: Poppins;
-font-style: normal; */
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
     font-weight: 600;
     font-size: 24px;
     line-height: 36px;
@@ -52,7 +52,7 @@ font-style: normal; */
   }
 `;
 
-const Profile = (props) => {
+const Profile = props => {
   return (
     <>
       <SideBar />

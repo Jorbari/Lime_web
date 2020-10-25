@@ -8,7 +8,7 @@ const UserDropdown = () => {
   const popoverDropdownRef = React.createRef();
   const openDropdownPopover = () => {
     new Popper(btnDropdownRef.current, popoverDropdownRef.current, {
-      placement: "bottom-end",
+      placement: "bottom-end"
     });
     setDropdownPopoverShow(true);
   };
@@ -21,7 +21,7 @@ const UserDropdown = () => {
         className="text-gray-600 block"
         href="#pablo"
         ref={btnDropdownRef}
-        onClick={(e) => {
+        onClick={e => {
           e.preventDefault();
           dropdownPopoverShow ? closeDropdownPopover() : openDropdownPopover();
         }}
@@ -49,7 +49,7 @@ const UserDropdown = () => {
           className={
             "text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-gray-800"
           }
-          onClick={(e) => e.preventDefault()}
+          onClick={e => e.preventDefault()}
         >
           Action
         </a>
@@ -58,7 +58,7 @@ const UserDropdown = () => {
           className={
             "text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-gray-800"
           }
-          onClick={(e) => e.preventDefault()}
+          onClick={e => e.preventDefault()}
         >
           Another action
         </a>
@@ -67,7 +67,7 @@ const UserDropdown = () => {
           className={
             "text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-gray-800"
           }
-          onClick={(e) => e.preventDefault()}
+          onClick={e => e.preventDefault()}
         >
           Something else here
         </a>
@@ -77,7 +77,7 @@ const UserDropdown = () => {
           className={
             "text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-gray-800"
           }
-          onClick={(e) => e.preventDefault()}
+          onClick={e => e.preventDefault()}
         >
           Seprated link
         </a>

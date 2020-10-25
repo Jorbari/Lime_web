@@ -1,0 +1,29 @@
+.auth-container {
+  padding: 75px 67.5px 0;
+}
+
+.auth-container .limeLogo {
+  width: 45px;
+  height: 45px;
+}
+
+@media screen and (max-width:767px) {
+  .auth-container {
+    padding: 10px 20px 0;
+  }
+
+  .auth-container .limeLogo {
+    width: 45px;
+    height: 45px;
+  }
+
+  .auth-container .image-container {
+    display: none
+  }
+
+  .auth-container .row {
+    
+    margin-right: 0; 
+    margin-left: 0;
+  }
+}

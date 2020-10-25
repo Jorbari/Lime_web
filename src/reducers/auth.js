@@ -35,18 +35,18 @@ const REQUEST_SUCCESS = "REQUEST_SUCCESS";
 //   }
 // };
 
-export const authenticate = (userData, history) => async (dispatch) => {
+export const authenticate = (userData, history) => async dispatch => {
   try {
     dispatch({ type: REQUEST_PROCCESS });
     const {
-      data: { token },
+      data: { token }
     } = await authenticationRequest(userData);
+    console.log("login", token);
     await setToken(token);
     http.defaults.headers.Authorization = `Bearer ${token}`;
-
-    console.log("user", decodeToken());
+    await encodeUserObject(decodeToken(token)._doc);
     await dispatch({
-      type: REQUEST_SUCCESS,
+      type: REQUEST_SUCCESS
     });
     // toast.success('You have been logged in successfully');
 
@@ -55,7 +55,7 @@ export const authenticate = (userData, history) => async (dispatch) => {
     // } else if (localStorage.getItem('redirectUrl')) {
     //   history.push(localStorage.getItem('redirectUrl'));
     // } else {
-    history.push("/");
+    history.push("/dashboard");
     // }
   } catch (error) {
     // toast.error(`${error.response.data.message}`);
@@ -67,7 +67,7 @@ const DEFAULT_STATE = {
   error: {},
   isLoading: false,
   status: undefined,
-  user: {},
+  user: {}
 };
 
 export const authReducer = (state = DEFAULT_STATE, { type, payload }) => {
@@ -76,20 +76,21 @@ export const authReducer = (state = DEFAULT_STATE, { type, payload }) => {
       return {
         ...state,
         isLoading: true,
+        status: "loading"
       };
     case REQUEST_SUCCESS:
       return {
         ...state,
         isLoading: false,
         status: "success",
-        user: payload,
+        user: payload
       };
     case REQUEST_ERROR:
       return {
         ...state,
         isLoading: false,
         status: "error",
-        error: payload,
+        error: payload
       };
     default:
       return state;
