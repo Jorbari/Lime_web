@@ -1,15 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Row, Col, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-import limeLogo from "../../assets/Group 9.svg";
-// import limeText from "./assets/LIME..svg";
-import people from "../../assets/30816651.svg";
-
 import "./Signup.css";
 
-const SignUp = () => {
-  const [next, setNext] = React.useState(false);
+const SignUp = props => {
+  const [next, setNext] = useState(false);
+  const [firstname, setFirstname] = useState("");
+  const [firstnameError, setFirstnameError] = useState(null);
+  const [lastname, setLastname] = useState("");
+  const [lastnameError, setLastnameError] = useState(null);
+  const [username, setUsername] = useState("");
+  const [usernameError, setUsernameError] = useState(null);
+  const [password, setPassword] = useState("");
+  const [passwordError, setPasswordError] = useState(null);
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [confirmPasswordError, setConfirmPasswordError] = useState(null);
+
+  const handleBlur = () => {};
+
+  const handleNext = e => {
+    e.preventDefault();
+    setNext(true);
+  };
 
   return (
     <section className="form-section">
@@ -28,6 +41,13 @@ const SignUp = () => {
                   <Form.Control
                     type="text"
                     className="grid-input-style login-input-styles"
+                    onChange={({ target: { value } }) => setFirstname(value)}
+                    required
+                    value={firstname}
+                    style={{
+                      border: firstnameError ? "1px solid red" : "none"
+                    }}
+                    onBlur={() => handleBlur("firstname")}
                   />
                 </Col>
                 <Col sm={12} md={6}>
@@ -35,6 +55,13 @@ const SignUp = () => {
                   <Form.Control
                     type="text"
                     className="grid-input-style login-input-styles"
+                    onChange={({ target: { value } }) => setLastname(value)}
+                    required
+                    value={lastname}
+                    style={{
+                      border: lastnameError ? "1px solid red" : "none"
+                    }}
+                    onBlur={() => handleBlur("lastname")}
                   />
                 </Col>
               </Row>
@@ -49,6 +76,13 @@ const SignUp = () => {
               <Form.Control
                 type="text"
                 className="grid-input-style login-input-styles"
+                onChange={({ target: { value } }) => setUsername(value)}
+                required
+                value={username}
+                style={{
+                  border: usernameError ? "1px solid red" : "none"
+                }}
+                onBlur={() => handleBlur("username")}
               />
             </Form.Group>
 
@@ -58,7 +92,17 @@ const SignUp = () => {
               className="form-input"
             >
               <Form.Label className="form-label">Create Password:</Form.Label>
-              <Form.Control type="email" className="login-input-styles" />
+              <Form.Control
+                type="password"
+                className="login-input-styles"
+                onChange={({ target: { value } }) => setPassword(value)}
+                required
+                value={password}
+                style={{
+                  border: passwordError ? "1px solid red" : "none"
+                }}
+                onBlur={() => handleBlur("password")}
+              />
             </Form.Group>
 
             <Form.Group
@@ -67,7 +111,17 @@ const SignUp = () => {
               className="form-input"
             >
               <Form.Label className="form-label">Confirm password:</Form.Label>
-              <Form.Control type="password" className="login-input-styles" />
+              <Form.Control
+                type="password"
+                className="login-input-styles"
+                onChange={({ target: { value } }) => setConfirmPassword(value)}
+                required
+                value={confirmPassword}
+                style={{
+                  border: confirmPasswordError ? "1px solid red" : "none"
+                }}
+                onBlur={() => handleBlur("confirmPassword")}
+              />
             </Form.Group>
 
             <Form.Group as={Col}>
@@ -75,10 +129,7 @@ const SignUp = () => {
                 type="submit"
                 className="btn-lg btn-styles"
                 value="LOG IN"
-                onClick={e => {
-                  e.preventDefault();
-                  setNext(true);
-                }}
+                onClick={e => handleNext(e)}
               >
                 Next
               </button>

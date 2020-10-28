@@ -1,11 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Col, Form, Spinner } from "react-bootstrap";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-
-import limeLogo from "../../assets/Group 9.svg";
-// import limeText from "./assets/LIME..svg";
-import people from "../../assets/30816651.svg";
 
 import { authenticate } from "../../reducers/auth";
 
@@ -17,11 +13,11 @@ const passwordRegEx = /^\w{4,}$/;
 
 const Login = props => {
   const { history } = props;
-  const [username, setUsername] = React.useState("");
-  const [password, setPassword] = React.useState("");
-  const [submitButtonDisabled, setSubmitButtonDisabled] = React.useState(true);
-  const [usernameError, setUsernameError] = React.useState(false);
-  const [passwordError, setPasswordError] = React.useState(false);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [submitButtonDisabled, setSubmitButtonDisabled] = useState(true);
+  const [usernameError, setUsernameError] = useState(null);
+  const [passwordError, setPasswordError] = useState(null);
 
   const handleEmailInput = value => {
     if (usernameRegEx.test(value) && passwordRegEx.test(password)) {
@@ -65,12 +61,37 @@ const Login = props => {
     return;
   };
 
+  useEffect(() => {
+    if (usernameRegEx.test(username) && passwordRegEx.test(password)) {
+      setSubmitButtonDisabled(false);
+    } else {
+      setSubmitButtonDisabled(true);
+    }
+  }, [username, password]);
+
+  const handleBlur = type => {
+    if (type === "email") {
+      if (!usernameRegEx.test(username) && username !== "") {
+        setUsernameError("Username cannot be less than 3 characters");
+      } else {
+        setUsernameError(null);
+      }
+    }
+
+    if (type === "password") {
+      if (!passwordRegEx.test(password) && password !== "") {
+        setPasswordError("Password cannot be less than 4 characters");
+      } else {
+        setPasswordError(null);
+      }
+    }
+  };
+
   const onSubmit = async e => {
     e.preventDefault();
 
     await props.authenticate({ username, password }, history);
     await setPassword("");
-    // console.log("user", first_name);
   };
 
   console.log("isLoading", props.isLoading);
@@ -90,8 +111,12 @@ const Login = props => {
             style={{
               border: usernameError ? "1px solid red" : "none"
             }}
+            onBlur={() => handleBlur("email")}
           />
         </Form.Group>
+        <div className="error-div">
+          {usernameError && <p className="error-text">{usernameError}</p>}
+        </div>
 
         <Form.Group
           as={Col}
@@ -108,8 +133,13 @@ const Login = props => {
             style={{
               border: passwordError ? "1px solid red" : "none"
             }}
+            onBlur={() => handleBlur("password")}
           />
         </Form.Group>
+
+        <div className="error-div">
+          {passwordError && <p className="error-text">{passwordError}</p>}
+        </div>
         <div className="error-div">
           {props.status === "error" && (
             <p className="error-text">Username/password is incorrect</p>

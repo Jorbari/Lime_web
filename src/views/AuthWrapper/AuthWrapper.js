@@ -30,7 +30,11 @@ const AuthWrapper = ({ location: { pathname }, history }) => {
             />
           </div>
           <div className="col-12 col-lg-5 p-0 d-flex justify-content-center justify-content-lg-end form-container">
-            {pathname === "/signup" ? <SignUp history={history} /> : <Login history={history} />}
+            {pathname === "/signup" ? (
+              <SignUp history={history} />
+            ) : (
+              <Login history={history} />
+            )}
           </div>
         </div>
       </div>

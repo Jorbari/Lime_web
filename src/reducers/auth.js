@@ -47,7 +47,7 @@ export const authenticate = (userData, history) => async dispatch => {
     });
     history.push("/dashboard");
   } catch (error) {
-    console.log(error)
+    console.log(error);
     dispatch({ type: REQUEST_ERROR, payload: error.response.data });
   }
 };
