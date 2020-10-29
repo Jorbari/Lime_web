@@ -7,31 +7,26 @@ const REQUEST_PROCCESS = "REQUEST_PROCCESS";
 const REQUEST_ERROR = "REQUEST_ERROR";
 const REQUEST_SUCCESS = "REQUEST_SUCCESS";
 
-// export const register = (userData, history) => async dispatch => {
-//   try {
-//     dispatch({ type: REQUEST_PROCCESS });
-//     const {
-//       data: { token, user },
-//     } = await registrationRequest(userData);
-//     await setToken(token);
-//     http.defaults.headers.Authorization = `Bearer ${token}`;
-//     await encodeUserObject(user);
-//     dispatch({
-//       type: REQUEST_SUCCESS,
-//       payload: user,
-//     });
-//     toast.success('Account successfully created');
-
-//     if (localStorage.getItem('redirectUrl')) {
-//       history.push(localStorage.getItem('redirectUrl'));
-//     } else {
-//       history.push('/');
-//     }
-//   } catch (error) {
-//     toast.error(`${error.response.data.message}`);
-//     dispatch({ type: REQUEST_ERROR, payload: error.response.data });
-//   }
-// };
+export const register = (userData, history) => async dispatch => {
+  try {
+    dispatch({ type: REQUEST_PROCCESS });
+    const {
+      data: { token }
+    } = await registrationRequest(userData);
+    await setToken(token);
+    http.defaults.headers.Authorization = `Bearer ${token}`;
+    const user = decodeToken(token)._doc;
+    await encodeUserObject(user);
+    await dispatch({
+      type: REQUEST_SUCCESS,
+      user
+    });
+    history.push("/dashboard");
+  } catch (error) {
+    console.log(error);
+    dispatch({ type: REQUEST_ERROR, payload: error.response.data });
+  }
+};
 
 export const authenticate = (userData, history) => async dispatch => {
   try {
@@ -41,9 +36,11 @@ export const authenticate = (userData, history) => async dispatch => {
     } = await authenticationRequest(userData);
     await setToken(token);
     http.defaults.headers.Authorization = `Bearer ${token}`;
-    await encodeUserObject(decodeToken(token)._doc);
+    const user = decodeToken(token)._doc;
+    await encodeUserObject(user);
     await dispatch({
-      type: REQUEST_SUCCESS
+      type: REQUEST_SUCCESS,
+      user
     });
     history.push("/dashboard");
   } catch (error) {

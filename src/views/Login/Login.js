@@ -94,8 +94,6 @@ const Login = props => {
     await setPassword("");
   };
 
-  console.log("isLoading", props.isLoading);
-
   return (
     <section className="form-section">
       <h1 className="login-text">LOG IN</h1>
@@ -145,11 +143,6 @@ const Login = props => {
             <p className="error-text">Username/password is incorrect</p>
           )}
         </div>
-        {/* <Form.Group as={Col} controlId="formBasicCheckbox">
-          <Form.Text className="login-forget-password">
-            Forgot password?
-          </Form.Text>
-        </Form.Group> */}
         <Form.Group as={Col}>
           <button
             type="submit"
