@@ -8,10 +8,12 @@ import dashboardIcon from "../assets/dashboard.svg";
 import projectIcon from "../assets/project.svg";
 import surveyIcon from "../assets/surveys.svg";
 import reportIcon from "../assets/report.svg";
-// import profileIcon from "../assets/profile.svg";
+import profileIcon from "../assets/profile.svg";
+import "./SideBar.css";
 
 const SidebarContainer = styled.nav`
   background: #edeeed !important;
+  width: 256px;
 `;
 
 export default function SideBar() {
@@ -30,7 +32,7 @@ export default function SideBar() {
           </button>
           {/* Brand */}
           <Link
-            className="md:block text-left md:pb-2 text-gray-700 mr-0 inline-block whitespace-no-wrap text-sm uppercase font-bold p-4 px-0"
+            className="md:block text-right md:pb-2 text-gray-700 mr-0 inline-block whitespace-no-wrap text-sm uppercase font-bold py-4 px-0 pr-0"
             to="/"
           >
             Back
@@ -84,12 +86,9 @@ export default function SideBar() {
               </div>
             </form>
             {/* Navigation */}
-            <ul className="md:flex-col md:min-w-full flex flex-col list-none">
-              <li className="items-center">
-                <Link
-                  className="text-gray-800 hover:text-gray-600 text-xs uppercase py-3 font-bold block"
-                  to="/"
-                >
+            <ul className="md:flex-col md:min-w-full flex flex-col list-none sidebar-nav">
+              <li className="items-center sidebar-nav_item">
+                <Link className="text-gray-800 text-xs font-bold block" to="/">
                   <img
                     alt=""
                     src={dashboardIcon}
@@ -101,9 +100,9 @@ export default function SideBar() {
                 </Link>
               </li>
 
-              <li className="items-center">
+              <li className="items-center  sidebar-nav_item">
                 <Link
-                  className="text-gray-800 hover:text-gray-600 text-xs uppercase py-3 font-bold block"
+                  className="text-gray-800 hover:text-gray-600 text-xs  py-3 font-bold block"
                   to="/projects"
                 >
                   <img
@@ -117,9 +116,9 @@ export default function SideBar() {
                 </Link>
               </li>
 
-              <li className="items-center">
+              <li className="items-center  sidebar-nav_item">
                 <Link
-                  className="text-gray-800 hover:text-gray-600 text-xs uppercase py-3 font-bold block"
+                  className="text-gray-800 hover:text-gray-600 text-xs  py-3 font-bold block"
                   to="/surveys"
                 >
                   <img
@@ -133,9 +132,9 @@ export default function SideBar() {
                 </Link>
               </li>
 
-              <li className="items-center">
+              <li className="items-center  sidebar-nav_item">
                 <Link
-                  className="text-gray-800 hover:text-gray-600 text-xs uppercase py-3 font-bold block"
+                  className="text-gray-800 hover:text-gray-600 text-xs  py-3 font-bold block"
                   to="/report"
                 >
                   <img
@@ -149,25 +148,20 @@ export default function SideBar() {
                 </Link>
               </li>
 
-              <li className="items-center">
+              <li className="items-center  sidebar-nav_item">
                 <Link
-                  className="text-gray-800 hover:text-gray-600 text-xs uppercase py-3 font-bold block"
+                  className="text-gray-800 hover:text-gray-600 text-xs  py-3 font-bold block"
                   to="/profile"
                   //   onClick={(e) => e.preventDefault()}
                 >
-                  {/* <img
+                  <img
                     alt=""
                     src={profileIcon}
                     className="opacity-75 mr-2 text-sm"
                   />
                   <p style={{ marginTop: "-1.23rem", marginLeft: "2rem" }}>
-                  Profile
-                  </p> */}
-                  <i
-                    className="far fa-user text-gray-400 mr-2 text-lg"
-                    style={{ color: "#5B5656" }}
-                  ></i>{" "}
-                  Profile
+                    Profile
+                  </p>
                 </Link>
               </li>
 

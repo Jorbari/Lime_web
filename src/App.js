@@ -17,13 +17,12 @@ import Profile from "./views/Profile/Profile";
 import { simpleAction } from "./actions/simpleAction";
 
 function App(props) {
-  const simpleAction = (event) => {
+  const simpleAction = event => {
     props.simpleAction();
   };
 
   return (
     <React.Fragment>
-      {console.log(JSON.stringify(props))}
       {/* <Container> */}
       <Router>
         <Switch>
@@ -45,12 +44,12 @@ function App(props) {
   );
 }
 
-const mapStateToProps = (state) => ({
-  ...state,
+const mapStateToProps = state => ({
+  ...state
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  simpleAction: () => dispatch(simpleAction()),
+const mapDispatchToProps = dispatch => ({
+  simpleAction: () => dispatch(simpleAction())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

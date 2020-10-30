@@ -6,6 +6,8 @@ import NavBar from "../../components/NavBar";
 
 import profileImage from "../../assets/Mask Group.png";
 
+import { decodeUserObject } from "../../api/helpers";
+
 const ProfileContainer = styled.div`
   /* border: 1px solid #7fcd91; */
   /* border-radius: 10px; */
@@ -17,8 +19,8 @@ const ProfileContainer = styled.div`
     left: 30px;
     top: 526px;
 
-    /* font-family: Poppins;
-font-style: normal; */
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
     font-weight: 600;
     font-size: 24px;
     line-height: 36px;
@@ -52,7 +54,11 @@ font-style: normal; */
   }
 `;
 
-const Profile = (props) => {
+const Profile = props => {
+
+  const user = decodeUserObject();
+
+  console.log(user)
   return (
     <>
       <SideBar />
@@ -79,25 +85,40 @@ const Profile = (props) => {
               <tr>
                 <td className="w-2/4">
                   <div className="">
-                    <img
+                    {/* <img
                       alt=""
                       src={profileImage}
                       //   style={{ position: "relative", left: "10rem" }}
-                    />
+                    /> */}
+
+                    <div style={{
+                      background: '#c4c4c4',
+                      height: '107px',
+                      width: '107px',
+                      borderRadius: '100%',
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      fontSize: '48px'
+                    }} className="uppercase">{user.firstname.charAt(0)}
+            {user.lastname.charAt(0)}
+
+                    </div>
+
                   </div>
                 </td>
               </tr>
               <tr>
                 <td className="w-2/4">
                   <div className="">
-                    <h5>Sandra Omilo</h5>
-                    <p>sandra.omilo@vlp.com</p>
+                    <h5>{user.firstname.replace(user.firstname[0], user.firstname[0].toUpperCase())} {user.lastname.replace(user.lastname[0], user.lastname[0].toUpperCase())}</h5>
+                    <p>{user.email}</p>
                   </div>
                 </td>
                 <td className="py-6 w-2/4">
                   <div>
                     <p>Phone Number:</p>
-                    <h4>08045578995</h4>
+                    <h4>{user.phone? user.phone : ''}</h4>
                   </div>
                 </td>
                 <td className="py-6 w-2/4">
