@@ -1,6 +1,8 @@
 import React from "react";
 import Popper from "popper.js";
 
+import { decodeUserObject } from "../api/helpers";
+
 const UserDropdown = () => {
   // dropdown props
   const [dropdownPopoverShow, setDropdownPopoverShow] = React.useState(false);
@@ -15,6 +17,8 @@ const UserDropdown = () => {
   const closeDropdownPopover = () => {
     setDropdownPopoverShow(false);
   };
+
+  const user = decodeUserObject();
   return (
     <>
       <a
@@ -27,12 +31,9 @@ const UserDropdown = () => {
         }}
       >
         <div className="items-center flex">
-          <span className="w-12 h-12 text-sm text-white bg-gray-300 inline-flex items-center justify-center rounded-full">
-            <img
-              alt="..."
-              className="w-full rounded-full align-middle border-none shadow-lg"
-              //   src={require("assets/img/team-1-800x800.jpg")}
-            />
+          <span className="w-12 h-12 text-xl text-uppercase text-black bg-gray-300 inline-flex items-center justify-center rounded-full">
+            {user.firstname.charAt(0)}
+            {user.lastname.charAt(0)}
           </span>
         </div>
       </a>

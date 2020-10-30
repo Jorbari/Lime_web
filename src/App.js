@@ -23,7 +23,6 @@ function App(props) {
 
   return (
     <React.Fragment>
-      {console.log(JSON.stringify(props))}
       {/* <Container> */}
       <Router>
         <Switch>

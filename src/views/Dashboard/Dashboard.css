@@ -1,0 +1,12 @@
+.new-project-container {
+  background-color: lightpink;
+}
+
+.new-project-container .navbar {
+  background-color: white!important;
+  position: fixed !important;
+  /* left: 256px; */
+  margin-left: 256px;
+  z-index: 2;
+  width: -webkit-fill-available
+}

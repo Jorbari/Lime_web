@@ -131,7 +131,7 @@ export default function BarChart() {
             </div>
           </div>
         </BarGraphContainer>
-        <ProjectCards />
+        {/* <ProjectCards /> */}
       </div>
     </>
   );
