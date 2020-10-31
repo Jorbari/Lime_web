@@ -4,7 +4,7 @@ import {
   getSingleProjectRequest,
   editProjectRequest,
   deleteProjectRequest
-} from "../../src/api/projects";
+} from "../../src/api/project";
 
 const REQUEST_PROCCESS = "REQUEST_PROCCESS";
 const REQUEST_ERROR = "REQUEST_ERROR";
