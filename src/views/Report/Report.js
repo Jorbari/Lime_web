@@ -56,10 +56,16 @@ const CardContainer = styled.div`
   }
 `;
 
-function Report() {
+function Report(props) {
+  const { history } = props;
+  const [newProjectView, setNewProjectView] = React.useState(false);
+
+  const toggleNewProjectView = () => {
+    setNewProjectView(!newProjectView);
+  };
   return (
     <>
-      <SideBar />
+      <SideBar toggleNewProjectView={toggleNewProjectView} history={history} />
       <div className="relative md:ml-64 bg-white">
         <NavBar />
         <ReportProjectContainer className="relative bg-white md:pt-32 pb-32 pt-12">

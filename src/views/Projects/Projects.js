@@ -49,10 +49,16 @@ const CardContainer = styled.div`
   }
 `;
 
-function Projects() {
+function Projects(props) {
+  const { history } = props;
+  const [newProjectView, setNewProjectView] = React.useState(false);
+
+  const toggleNewProjectView = () => {
+    setNewProjectView(!newProjectView);
+  };
   return (
     <>
-      <SideBar />
+      <SideBar toggleNewProjectView={toggleNewProjectView} history={history} />
       <CardContainer className="relative md:ml-64 bg-white card flex flex-col md:flew-wrap">
         <NavBar />
         <div className="relative bg-white pt-32 mr-6">

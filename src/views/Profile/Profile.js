@@ -55,13 +55,18 @@ const ProfileContainer = styled.div`
 `;
 
 const Profile = props => {
-
   const user = decodeUserObject();
 
-  console.log(user)
+  const { history } = props;
+  const [newProjectView, setNewProjectView] = React.useState(false);
+
+  const toggleNewProjectView = () => {
+    setNewProjectView(!newProjectView);
+  };
+  console.log(user);
   return (
     <>
-      <SideBar />
+      <SideBar toggleNewProjectView={toggleNewProjectView} history={history} />
       <ProfileContainer
         className="mx-8 relative md:ml-64 bg-white flex flex-col md:flew-wrap"
         style={{ marginLeft: "18rem", marginRight: "2rem", height: "40vw" }}
@@ -91,34 +96,45 @@ const Profile = props => {
                       //   style={{ position: "relative", left: "10rem" }}
                     /> */}
 
-                    <div style={{
-                      background: '#c4c4c4',
-                      height: '107px',
-                      width: '107px',
-                      borderRadius: '100%',
-                      display: 'flex',
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                      fontSize: '48px'
-                    }} className="uppercase">{user.firstname.charAt(0)}
-            {user.lastname.charAt(0)}
-
+                    <div
+                      style={{
+                        background: "#c4c4c4",
+                        height: "107px",
+                        width: "107px",
+                        borderRadius: "100%",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        fontSize: "48px"
+                      }}
+                      className="uppercase"
+                    >
+                      {user.firstname.charAt(0)}
+                      {user.lastname.charAt(0)}
                     </div>
-
                   </div>
                 </td>
               </tr>
               <tr>
                 <td className="w-2/4">
                   <div className="">
-                    <h5>{user.firstname.replace(user.firstname[0], user.firstname[0].toUpperCase())} {user.lastname.replace(user.lastname[0], user.lastname[0].toUpperCase())}</h5>
+                    <h5>
+                      {user.firstname.replace(
+                        user.firstname[0],
+                        user.firstname[0].toUpperCase()
+                      )}{" "}
+                      {user.lastname.replace(
+                        user.lastname[0],
+                        user.lastname[0].toUpperCase()
+                      )}
+                    </h5>
                     <p>{user.email}</p>
                   </div>
                 </td>
                 <td className="py-6 w-2/4">
                   <div>
                     <p>Phone Number:</p>
-                    <h4>{user.phone? user.phone : ''}</h4>
+                    <h4>{user.phone ? user.phone : ""}</h4>
                   </div>
                 </td>
                 <td className="py-6 w-2/4">
