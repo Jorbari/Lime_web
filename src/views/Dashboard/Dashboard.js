@@ -106,56 +106,62 @@ const CreateButton = styled.button`
   margin-left: 19rem;
 `;
 
-function Dashboard() {
-  const [newProjectView, setNewProjectView] = React.useState(true);
+function Dashboard(props) {
+  const { history } = props;
+  const [newProjectView, setNewProjectView] = React.useState(false);
 
   const toggleNewProjectView = () => {
     setNewProjectView(!newProjectView);
   };
 
-  console.log("user", decodeUserObject());
+  console.log("user", props);
 
   return (
-    <>
-      <SideBar />
+    <div>
       {newProjectView ? (
-        <div className="relative md:ml-64 new-project-container">
-          <NavBar title="New Project" />
-          {/* Header height: "400px" */}
-          <div className="relative bg-white md:pt-32 pb-32 pt-12">
-            
-          <NewProject />
+        <>
+          <SideBar
+            toggleNewProjectView={toggleNewProjectView}
+            history={history}
+          />
+          <div className="relative md:ml-64 new-project-container">
+            <NavBar title="New Project" />
+            {/* Header height: "400px" */}
+            <div className="relative bg-white md:pt-32 pb-32 pt-12">
+              <NewProject />
+            </div>
           </div>
-
-
-        </div>
+        </>
       ) : (
-        <div className="relative md:ml-64 bg-white">
-          <NavBar title="Dashboard" />
-          {/* Header height: "400px" */}
-          <div className="relative bg-white md:pt-32 pb-32 pt-12">
-            <div className="px-4 md:px-10 mx-auto w-full">
-              <ButtonContainer className="flex flex-wrap">
-                <button
-                  className="newProjectButton"
-                  onClick={toggleNewProjectView}
-                >
-                  New Project
-                </button>
-                <button className="newSurveyButton ml-8">New Survey</button>
-              </ButtonContainer>
+        <>
+          <SideBar />
+          <div className="relative md:ml-64 bg-white">
+            <NavBar title="Dashboard" />
+            {/* Header height: "400px" */}
+            <div className="relative bg-white md:pt-32 pb-32 pt-12">
+              <div className="px-4 md:px-10 mx-auto w-full">
+                <ButtonContainer className="flex flex-wrap">
+                  <button
+                    className="newProjectButton"
+                    onClick={toggleNewProjectView}
+                  >
+                    New Project
+                  </button>
+                  <button className="newSurveyButton ml-8">New Survey</button>
+                </ButtonContainer>
+              </div>
             </div>
-          </div>
 
-          <div className="px-4 md:px-10 mx-auto w-full -m-24">
-            <div className="flex flex-wrap">
-              <LineChart />
-              <BarChart />
+            <div className="px-4 md:px-10 mx-auto w-full -m-24">
+              <div className="flex flex-wrap">
+                <LineChart />
+                <BarChart />
+              </div>
             </div>
           </div>
-        </div>
+        </>
       )}
-    </>
+    </div>
   );
 }
 

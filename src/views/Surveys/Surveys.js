@@ -37,10 +37,16 @@ const ButtonContainer = styled.div`
   }
 `;
 
-function Surveys() {
+function Surveys(props) {
+  const { history } = props;
+  const [newProjectView, setNewProjectView] = React.useState(false);
+
+  const toggleNewProjectView = () => {
+    setNewProjectView(!newProjectView);
+  };
   return (
     <>
-      <SideBar />
+      <SideBar toggleNewProjectView={toggleNewProjectView} history={history} />
       <ButtonContainer className="relative bg-white pt-32 mr-6">
         <div className="px-2 md:px-10 mx-auto w-full">
           <div className="flex justify-end">

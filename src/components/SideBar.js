@@ -16,8 +16,14 @@ const SidebarContainer = styled.nav`
   width: 256px;
 `;
 
-export default function SideBar() {
+export default function SideBar(props) {
+  const { toggleNewProjectView, history } = props;
   const [collapseShow, setCollapseShow] = React.useState("hidden");
+
+  const goToDashboard = () => {
+    history.push("/");
+    toggleNewProjectView();
+  };
   return (
     <>
       <SidebarContainer className="md:left-0 md:block md:fixed md:top-0 md:bottom-0 md:overflow-y-auto md:flex-row md:flex-no-wrap md:overflow-hidden shadow-xl bg-white flex flex-wrap items-center justify-between relative md:w-64 z-10 py-4 px-6">
@@ -88,7 +94,11 @@ export default function SideBar() {
             {/* Navigation */}
             <ul className="md:flex-col md:min-w-full flex flex-col list-none sidebar-nav">
               <li className="items-center sidebar-nav_item">
-                <Link className="text-gray-800 text-xs font-bold block" to="/">
+                <Link
+                  className="text-gray-800 text-xs font-bold block"
+                  to="/"
+                  onClick={() => goToDashboard()}
+                >
                   <img
                     alt=""
                     src={dashboardIcon}
