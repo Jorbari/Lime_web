@@ -1,5 +1,6 @@
 .sidebar-nav {
   margin-top: 40px;
+  height: -webkit-fill-available;
 }
 
 .sidebar-nav .sidebar-nav_item{
@@ -28,4 +29,10 @@
   line-height: 20px;
   text-transform: capitalize;
   color: #5B5656;
+}
+
+.sidebar-nav .sidebar-nav_item.logout{
+border-top: 0.5px solid rgba(91, 86, 86, 0.5);  
+border-radius: 0;
+padding-top: 15px;
 }
