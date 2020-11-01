@@ -75,7 +75,7 @@ const Project = props => {
     };
 
     fetchSingleProject();
-  }, []);
+  });
 
   const toggleNewProjectView = () => {
     setNewProjectView(!newProjectView);

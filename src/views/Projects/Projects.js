@@ -63,7 +63,7 @@ function Projects(props) {
     };
 
     fetchProjects();
-  }, []);
+  });
 
   const toggleNewProjectView = () => {
     setNewProjectView(!newProjectView);

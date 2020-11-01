@@ -2,8 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-import NotificationDropdown from "./NotificationDropdown.js";
-import UserDropdown from "./UserDropdown.js";
 import dashboardIcon from "../assets/dashboard.svg";
 import projectIcon from "../assets/project.svg";
 import surveyIcon from "../assets/surveys.svg";
@@ -129,7 +127,6 @@ export default function SideBar(props) {
                 <Link
                   className="text-gray-800 hover:text-gray-600 text-xs  py-3 font-bold block"
                   to="/profile"
-                  //   onClick={(e) => e.preventDefault()}
                 >
                   <img
                     alt=""

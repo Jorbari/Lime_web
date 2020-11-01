@@ -4,8 +4,6 @@ import styled from "styled-components";
 import SideBar from "../../components/SideBar";
 import NavBar from "../../components/NavBar";
 
-import profileImage from "../../assets/Mask Group.png";
-
 import { decodeUserObject } from "../../api/helpers";
 
 const ProfileContainer = styled.div`

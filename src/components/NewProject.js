@@ -7,7 +7,7 @@ import { createProject } from "../reducers/project";
 import "./NewProject.css";
 
 const NewProject = props => {
-  const { toggleNewProjectView, history, projects, isLoading } = props;
+  const { toggleNewProjectView, history, projects } = props;
   const [title, setTitle] = useState("");
   const [manager, setManager] = useState("");
   const [sponsor, setSponsor] = useState("");

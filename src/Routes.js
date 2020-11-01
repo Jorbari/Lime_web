@@ -1,7 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-// import { Container } from "react-bootstrap";
-import { connect } from "react-redux";
+import { BrowserRouter as Router, Switch } from "react-router-dom";
 
 import "./App.css";
 

@@ -1,16 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import { Modal } from "react-responsive-modal";
-// import { Row, Col } from "react-bootstrap";
 
 import SideBar from "../../components/SideBar";
 import NavBar from "../../components/NavBar";
 import LineChart from "../../components/LineChart";
 import BarChart from "../../components/BarChart";
 import NewProject from "../../components/NewProject";
-// import ProjectCards from "../../components/ProjectCards";
-
-import { decodeUserObject } from "../../api/helpers";
 
 import "./Dashboard.css";
 
@@ -43,67 +38,6 @@ const ButtonContainer = styled.div`
     width: 1068px;
     height: 666px;
   } */
-`;
-
-const ModalHeader = styled.h1`
-  /* position: absolute; */
-  width: 204px;
-  height: 42px;
-  /* left: 72px; */
-  /* top: 66px; */
-  margin: 20px;
-
-  font-family: "Poppins", sans-serif;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 28px;
-  line-height: 42px;
-  /* identical to box height */
-
-  color: #7fcd91;
-`;
-
-const InputStyle = styled.input`
-  border-bottom: 1px solid rgba(91, 86, 86, 0.5);
-
-  ::placeholder {
-    /* position: absolute; */
-    width: 233.87px;
-    height: 30px;
-    /* left: 72px; */
-    /* top: 173px; */
-
-    font-family: "Poppins", sans-serif;
-    /* font-style: normal; */
-    font-weight: 500;
-    font-size: 20px;
-    line-height: 30px;
-    /* identical to box height */
-
-    color: #5b5656;
-    /* background-color: red;
-    margin-left: -2rem; */
-  }
-
-  /* input[type="text"] {
-    margin-left: -12rem;
-  } */
-`;
-
-const CreateButton = styled.button`
-  /* display: flex;
-  flex-direction: row; */
-  padding: 11px 18px;
-
-  /* position: absolute; */
-  width: 171px;
-  height: 49px;
-  /* left: 449px; */
-  /* top: 551px; */
-
-  background: #b6e6bd;
-  border-radius: 10px;
-  margin-left: 19rem;
 `;
 
 function Dashboard(props) {
