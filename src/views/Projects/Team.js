@@ -70,7 +70,7 @@ const Team = () => {
             <td className="w-2/4 py-6">
               <input
                 type="checkbox"
-                class="appearance-none checked:bg-gray-900 checked:border-transparent ..."
+                className="appearance-none checked:bg-gray-900 checked:border-transparent ..."
               />
             </td>
             <td className="w-2/4 py-6">
@@ -88,7 +88,7 @@ const Team = () => {
             <td className="w-2/4 py-6">
               <input
                 type="checkbox"
-                class="appearance-none checked:bg-gray-900 checked:border-transparent ..."
+                className="appearance-none checked:bg-gray-900 checked:border-transparent ..."
               />
             </td>
             <td className="w-2/4 py-6">
@@ -106,7 +106,7 @@ const Team = () => {
             <td className="w-2/4 py-6">
               <input
                 type="checkbox"
-                class="appearance-none checked:bg-gray-900 checked:border-transparent ..."
+                className="appearance-none checked:bg-gray-900 checked:border-transparent ..."
               />
             </td>
             <td className="w-2/4 py-6">
@@ -124,7 +124,7 @@ const Team = () => {
             <td className="w-2/4 py-6">
               <input
                 type="checkbox"
-                class="appearance-none checked:bg-gray-900 checked:border-transparent ..."
+                className="appearance-none checked:bg-gray-900 checked:border-transparent ..."
               />
             </td>
             <td className="w-2/4 py-6">
@@ -142,7 +142,7 @@ const Team = () => {
             <td className="w-2/4 py-6">
               <input
                 type="checkbox"
-                class="appearance-none checked:bg-gray-900 checked:border-transparent ..."
+                className="appearance-none checked:bg-gray-900 checked:border-transparent ..."
               />
             </td>
             <td className="w-2/4 py-6">

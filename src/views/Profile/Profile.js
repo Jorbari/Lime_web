@@ -63,7 +63,7 @@ const Profile = props => {
   const toggleNewProjectView = () => {
     setNewProjectView(!newProjectView);
   };
-  console.log(user);
+
   return (
     <>
       <SideBar toggleNewProjectView={toggleNewProjectView} history={history} />

@@ -114,8 +114,6 @@ function Dashboard(props) {
     setNewProjectView(!newProjectView);
   };
 
-  console.log("user", props);
-
   return (
     <div>
       {newProjectView ? (
@@ -128,13 +126,19 @@ function Dashboard(props) {
             <NavBar title="New Project" />
             {/* Header height: "400px" */}
             <div className="relative bg-white md:pt-32 pb-32 pt-12">
-              <NewProject />
+              <NewProject
+                toggleNewProjectView={toggleNewProjectView}
+                history={history}
+              />
             </div>
           </div>
         </>
       ) : (
         <>
-          <SideBar />
+          <SideBar
+            toggleNewProjectView={toggleNewProjectView}
+            history={history}
+          />
           <div className="relative md:ml-64 bg-white">
             <NavBar title="Dashboard" />
             {/* Header height: "400px" */}

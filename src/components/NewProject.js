@@ -1,24 +1,64 @@
-import React from "react";
-import styled from "styled-components";
+import React, { useState } from "react";
 import { Accordion, Button, Card, Form, Col, Row } from "react-bootstrap";
+import { connect } from "react-redux";
+
+import { createProject } from "../reducers/project";
 
 import "./NewProject.css";
 
-const NewProject = () => {
+const NewProject = props => {
+  const { toggleNewProjectView, history, projects, isLoading } = props;
+  const [title, setTitle] = useState("");
+  const [manager, setManager] = useState("");
+  const [sponsor, setSponsor] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+  const [category, setCategory] = useState("Agriculture");
+  const [goals, setGoals] = useState("");
+  const [objectives, setObjectives] = useState("");
+  const [inScope, setInScope] = useState("");
+  const [outScope, setOutScope] = useState("");
+  const [requirement, setRequirement] = useState("");
+
+  const [managerEmail, setManagerEmail] = useState("");
+  const [sponsorEmail, setSponsorEmail] = useState("");
+  const [description, setDescription] = useState("");
+
+  const handleSubmit = async e => {
+    e.preventDefault();
+    await props.createProject(
+      {
+        title,
+        manager,
+        managerEmail,
+        sponsor,
+        sponsorEmail,
+        startDate,
+        endDate,
+        category,
+        goals,
+        objectives,
+        inScope,
+        outScope,
+        requirement,
+        description
+      },
+      history,
+      toggleNewProjectView,
+      projects
+    );
+  };
   return (
     <div style={{ position: "relative" }}>
-      <form className="w-full max-w-lg new-project-form">
-        {/* <div> */}
+      <form
+        className="w-full max-w-lg new-project-form"
+        onSubmit={e => handleSubmit(e)}
+      >
         <div className="top-save-btn-div pr-4">
-          <button
-            className="form-btn btn top-save-btn"
-            type="submit"
-            onClick={e => e.preventDefault()}
-          >
+          <button className="form-btn btn top-save-btn" type="submit">
             Save
           </button>
         </div>
-        {/* </div> */}
 
         <Accordion
           defaultActiveKey="0"
@@ -51,9 +91,9 @@ const NewProject = () => {
                       type="text"
                       className="login-input-styles"
                       placeholder="Name of Project"
-                      onChange={e => e.preventDefault()}
+                      onChange={({ target: { value } }) => setTitle(value)}
                       required
-                      value=""
+                      value={title}
                       style={{ height: "36px", fontSize: "15px" }}
                     />
                   </Form.Group>
@@ -75,9 +115,11 @@ const NewProject = () => {
                         <Form.Control
                           type="text"
                           className="grid-input-style login-input-styles"
-                          onChange={e => e.preventDefault()}
+                          onChange={({ target: { value } }) =>
+                            setManager(value)
+                          }
                           required
-                          value=""
+                          value={manager}
                           placeholder="Name of Manger"
                           style={{ height: "36px", fontSize: "15px" }}
                         />
@@ -92,9 +134,10 @@ const NewProject = () => {
                         <Form.Control
                           type="text"
                           className="grid-input-style login-input-styles"
-                          onChange={e => e.preventDefault()}
-                          required
-                          value=""
+                          onChange={({ target: { value } }) =>
+                            setManagerEmail(value)
+                          }
+                          value={managerEmail}
                           placeholder="Email Address of Manager"
                           style={{ height: "36px", fontSize: "15px" }}
                         />
@@ -119,9 +162,11 @@ const NewProject = () => {
                         <Form.Control
                           type="text"
                           className="grid-input-style login-input-styles"
-                          onChange={e => e.preventDefault()}
+                          onChange={({ target: { value } }) =>
+                            setSponsor(value)
+                          }
                           required
-                          value=""
+                          value={sponsor}
                           placeholder="Name of Sponsor"
                           style={{ height: "36px", fontSize: "15px" }}
                         />
@@ -136,9 +181,10 @@ const NewProject = () => {
                         <Form.Control
                           type="text"
                           className="grid-input-style login-input-styles"
-                          onChange={e => e.preventDefault()}
-                          required
-                          value=""
+                          onChange={({ target: { value } }) =>
+                            setSponsorEmail(value)
+                          }
+                          value={sponsorEmail}
                           placeholder="Email Address of Sponsor"
                           style={{ height: "36px", fontSize: "15px" }}
                         />
@@ -161,6 +207,10 @@ const NewProject = () => {
                     <Form.Control
                       as="textarea"
                       rows={3}
+                      onChange={({ target: { value } }) =>
+                        setDescription(value)
+                      }
+                      value={description}
                       className="login-input-styles"
                       style={{ fontSize: "15px" }}
                     />
@@ -180,12 +230,13 @@ const NewProject = () => {
                           Project Start Date:
                         </Form.Label>
                         <Form.Control
-                          type="text"
+                          type="date"
                           className="grid-input-style login-input-styles"
-                          onChange={e => e.preventDefault()}
+                          onChange={({ target: { value } }) =>
+                            setStartDate(value)
+                          }
+                          value={startDate}
                           required
-                          value=""
-                          placeholder="Name of Sponsor"
                           style={{ height: "36px", fontSize: "15px" }}
                         />
                       </Col>
@@ -197,12 +248,13 @@ const NewProject = () => {
                           Project End Date:
                         </Form.Label>
                         <Form.Control
-                          type="text"
+                          type="date"
                           className="grid-input-style login-input-styles"
-                          onChange={e => e.preventDefault()}
+                          onChange={({ target: { value } }) =>
+                            setEndDate(value)
+                          }
+                          value={endDate}
                           required
-                          value=""
-                          placeholder="Email Address of Sponsor"
                           style={{ height: "36px", fontSize: "15px" }}
                         />
                       </Col>
@@ -225,20 +277,33 @@ const NewProject = () => {
                       as="select"
                       rows={3}
                       className="login-input-styles"
+                      required
+                      value={category}
+                      onChange={({ target: { value } }) => setCategory(value)}
                       style={{ height: "36px", fontSize: "15px" }}
                     >
-                      <option>Agriculture</option>
-                      <option>Mining</option>
-                      <option>Construction</option>
-                      <option>Manufacturing &amp; Production</option>
-                      <option>Transportation</option>
-                      <option>Wholesale</option>
-                      <option>Retail &amp; Trading</option>
-                      <option>Finance</option>
-                      <option>Public Administration</option>
-                      <option>Information Techonology</option>
-                      <option>Services</option>
-                      <option>Communications</option>
+                      <option selected value="Agriculture">
+                        Agriculture
+                      </option>
+                      <option value="Mining">Mining</option>
+                      <option value="Construction">Construction</option>
+                      <option value="Manufacturing &amp; Production">
+                        Manufacturing &amp; Production
+                      </option>
+                      <option value="Transportation">Transportation</option>
+                      <option value="Wholesale">Wholesale</option>
+                      <option value="Retail &amp; Trading<">
+                        Retail &amp; Trading
+                      </option>
+                      <option value="Finance">Finance</option>
+                      <option value="Public Administration">
+                        Public Administration
+                      </option>
+                      <option value="Information Techonology">
+                        Information Techonology
+                      </option>
+                      <option value="Services">Services</option>
+                      <option value="Communications">Communications</option>
                     </Form.Control>
                   </Form.Group>
                 </div>
@@ -270,6 +335,9 @@ const NewProject = () => {
                     <Form.Control
                       as="textarea"
                       rows={3}
+                      onChange={({ target: { value } }) => setGoals(value)}
+                      value={goals}
+                      required
                       className="login-input-styles"
                       style={{ fontSize: "15px" }}
                     />
@@ -289,6 +357,9 @@ const NewProject = () => {
                     <Form.Control
                       as="textarea"
                       rows={3}
+                      onChange={({ target: { value } }) => setObjectives(value)}
+                      value={objectives}
+                      required
                       className="login-input-styles"
                       style={{ hfontSize: "15px" }}
                     />
@@ -323,6 +394,9 @@ const NewProject = () => {
                     <Form.Control
                       as="textarea"
                       rows={3}
+                      onChange={({ target: { value } }) => setInScope(value)}
+                      value={inScope}
+                      required
                       className="login-input-styles"
                       style={{ fontSize: "15px" }}
                     />
@@ -342,6 +416,9 @@ const NewProject = () => {
                     <Form.Control
                       as="textarea"
                       rows={3}
+                      onChange={({ target: { value } }) => setOutScope(value)}
+                      value={outScope}
+                      required
                       className="login-input-styles"
                       style={{ fontSize: "15px" }}
                     />
@@ -376,6 +453,11 @@ const NewProject = () => {
                     <Form.Control
                       as="textarea"
                       rows={6}
+                      onChange={({ target: { value } }) =>
+                        setRequirement(value)
+                      }
+                      value={requirement}
+                      required
                       className="login-input-styles"
                       style={{ fontSize: "15px" }}
                     />
@@ -390,15 +472,11 @@ const NewProject = () => {
           <button
             className="form-btn btn bottom-cancel-btn"
             type="submit"
-            onClick={e => e.preventDefault()}
+            onClick={() => toggleNewProjectView()}
           >
             Cancel
           </button>
-          <button
-            className="form-btn btn bottom-save-btn"
-            type="submit"
-            onClick={e => e.preventDefault()}
-          >
+          <button className="form-btn btn bottom-save-btn" type="submit">
             Save
           </button>
         </div>
@@ -407,4 +485,10 @@ const NewProject = () => {
   );
 };
 
-export default NewProject;
+const mapStateToProps = ({ project: { isLoading, status, projects } }) => ({
+  isLoading,
+  status,
+  projects
+});
+
+export default connect(mapStateToProps, { createProject })(NewProject);

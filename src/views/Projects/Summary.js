@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import moment from "moment";
 
 import infoIcon from "../../assets/info.svg";
 
@@ -102,12 +103,19 @@ const SummaryContainer = styled.div`
   }
 `;
 
-const SummaryTab = props => {
+const SummaryTab = ({ project, history, deleteProject, projects }) => {
   return (
     <SummaryContainer>
       <div className="sapsHeader-conatiner">
-        <h1 className="sapsHeader font-semibold ml-8 py-4">SAPS Project</h1>
-        <span className="deleteProjectText">Delete project</span>
+        <h1 className="sapsHeader capitalize font-semibold ml-8 py-4">
+          {project.title}
+        </h1>
+        <button
+          type="button"
+          onClick={() => deleteProject(project._id, history, projects)}
+        >
+          <span className="deleteProjectText">Delete project</span>
+        </button>
       </div>
       <div
         className="relative flex flex-col min-w-0 break-words w-full xl:w-10/12 mb-12 xl:mb-0 pr-4 mb-6 rounded"
@@ -122,19 +130,19 @@ const SummaryTab = props => {
               <td className="w-2/4 text-center">
                 <div className="borderLine pt-6">
                   <h4>Total No. of Surveys:</h4>
-                  <p>3</p>
+                  <p>0</p>
                 </div>
               </td>
               <td className="py-10 w-2/4 text-center">
                 <div>
                   <h4>Active Surveys:</h4>
-                  <p>2</p>
+                  <p>0</p>
                 </div>
               </td>
               <td className="py-10 w-2/4 text-center">
                 <div className="borderLineLeft pt-6">
                   <h4>Drafted Surveys:</h4>
-                  <p>1</p>
+                  <p>0</p>
                 </div>
               </td>
             </tr>
@@ -158,10 +166,7 @@ const SummaryTab = props => {
       <div className="table-card-container w-full xl:w-9/12 mb-12 xl:mb-0 pr-4">
         <div className="py-10" style={{ paddingLeft: "1rem" }}>
           <p>Decription:</p>
-          <h5>
-            The project is to ascetain the custlomer satisfaction level of the
-            clients of SAPS
-          </h5>
+          <h5>{project.description}</h5>
         </div>
         <table className="details-card-table table-fixed ml-4">
           <thead>
@@ -169,13 +174,13 @@ const SummaryTab = props => {
               <td className="w-2/4">
                 <div className="">
                   <p>Date Started:</p>
-                  <h4>10th of January 2020</h4>
+                  <h4>{moment(project.startDate).format("Do of MMMM YYYY")}</h4>
                 </div>
               </td>
               <td className="py-6 w-2/4">
                 <div>
                   <p>Deadline:</p>
-                  <h4>Unknown</h4>
+                  <h4>{moment(project.endDate).format("Do of MMMM YYYY")}</h4>
                 </div>
               </td>
             </tr>
@@ -183,19 +188,13 @@ const SummaryTab = props => {
               <td className="w-2/4">
                 <div className="">
                   <p>Project Manager:</p>
-                  <h4>Yasmin Olabanjo</h4>
-                </div>
-              </td>
-              <td className="py-6 w-2/4">
-                <div>
-                  <p>Phone Number:</p>
-                  <h4>08045578995</h4>
+                  <h4>{project.manager}</h4>
                 </div>
               </td>
               <td className="py-6 w-2/4">
                 <div>
                   <p>E-mail:</p>
-                  <h4>Yasminolabanjo@gmail.com </h4>
+                  <h4>{project.managerEmail}</h4>
                 </div>
               </td>
             </tr>
@@ -203,19 +202,13 @@ const SummaryTab = props => {
               <td className="w-2/4">
                 <div className="">
                   <p>Executive sponsor:</p>
-                  <h4>Pearl Bawa</h4>
-                </div>
-              </td>
-              <td className="py-6 w-2/4">
-                <div>
-                  <p>Phone Number:</p>
-                  <h4>08054478965 </h4>
+                  <h4>{project.sponsor}</h4>
                 </div>
               </td>
               <td className="py-6 w-2/4">
                 <div>
                   <p>E-mail:</p>
-                  <h4>earlbawa@gmail.com</h4>
+                  <h4>{project.sponsorEmail}</h4>
                 </div>
               </td>
             </tr>
