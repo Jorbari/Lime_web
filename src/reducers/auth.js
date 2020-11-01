@@ -23,7 +23,6 @@ export const register = (userData, history) => async dispatch => {
     });
     history.push("/dashboard");
   } catch (error) {
-    console.log(error);
     dispatch({ type: REQUEST_ERROR, payload: error.response.data });
   }
 };
@@ -44,7 +43,6 @@ export const authenticate = (userData, history) => async dispatch => {
     });
     history.push("/dashboard");
   } catch (error) {
-    console.log(error);
     dispatch({ type: REQUEST_ERROR, payload: error.response.data });
   }
 };

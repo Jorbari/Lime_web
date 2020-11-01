@@ -3,8 +3,8 @@ import React from "react";
 const NavBar = () => {
   return (
     <div>
-      <nav class="nav">
-        <a class="nav-link active" href="#">
+      <nav className="nav">
+        <a clasNames="nav-link active" href="#">
           Active
         </a>
         {/* <a class="nav-link" href="#">Link</a>

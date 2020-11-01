@@ -38,7 +38,6 @@ export const createSurvey = (
     });
     history.push("/surveys");
   } catch (error) {
-    console.log(error);
     dispatch({ type: REQUEST_ERROR, payload: error.response.data });
   }
 };
@@ -67,7 +66,6 @@ export const editSurvey = (
     });
     history.push("/surveys");
   } catch (error) {
-    console.log(error);
     dispatch({ type: REQUEST_ERROR, payload: error.response.data });
   }
 };
@@ -83,7 +81,6 @@ export const deleteSurvey = (surveyId, history, surveys) => async dispatch => {
     });
     history.push("/surveys");
   } catch (error) {
-    console.log(error);
     dispatch({ type: REQUEST_ERROR, payload: error.response.data });
   }
 };
@@ -99,7 +96,6 @@ export const getAllSurveys = () => async dispatch => {
       surveys
     });
   } catch (error) {
-    console.log(error);
     dispatch({ type: REQUEST_ERROR, payload: error.response.data });
   }
 };
@@ -115,7 +111,6 @@ export const getSingleSurvey = id => async dispatch => {
       survey
     });
   } catch (error) {
-    console.log(error);
     dispatch({ type: REQUEST_ERROR, payload: error.response.data });
   }
 };
@@ -138,7 +133,6 @@ export const completeSurveyQuestionnaire = (
     });
     history.push("/surveys");
   } catch (error) {
-    console.log(error);
     dispatch({ type: REQUEST_ERROR, payload: error.response.data });
   }
 };
@@ -154,7 +148,6 @@ export const getAllSurveyResponses = surveyId => async dispatch => {
       responses
     });
   } catch (error) {
-    console.log(error);
     dispatch({ type: REQUEST_ERROR, payload: error.response.data });
   }
 };
@@ -173,7 +166,6 @@ export const getSingleSurveyResponse = (
       response
     });
   } catch (error) {
-    console.log(error);
     dispatch({ type: REQUEST_ERROR, payload: error.response.data });
   }
 };
@@ -189,7 +181,6 @@ export const generateSurveyLink = (surveyId, url) => async dispatch => {
       link
     });
   } catch (error) {
-    console.log(error);
     dispatch({ type: REQUEST_ERROR, payload: error.response.data });
   }
 };
@@ -205,7 +196,6 @@ export const emailSurveyLink = (surveyId, mail) => async dispatch => {
       link
     });
   } catch (error) {
-    console.log(error);
     dispatch({ type: REQUEST_ERROR, payload: error.response.data });
   }
 };

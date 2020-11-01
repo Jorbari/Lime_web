@@ -9,7 +9,7 @@ import SignUp from "./views/Signup/SignUp";
 import Login from "./views/Login/Login";
 import Dashboard from "./views/Dashboard/Dashboard";
 import Projects from "./views/Projects/Projects";
-import SapsProject from "./views/Projects/SapsProject";
+import Project from "./views/Projects/Project";
 import Surveys from "./views/Surveys/Surveys";
 import Report from "./views/Report/Report";
 import Profile from "./views/Profile/Profile";
@@ -30,7 +30,7 @@ function App(props) {
           <Route exact path="/login" component={Login} />
           <Route exact path="/" component={Dashboard} />
           <Route exact path="/projects" component={Projects} />
-          <Route exact path="/projects/saps" component={SapsProject} />
+          <Route exact path="/projects/:id" component={Project} />
           <Route exact path="/surveys" component={Surveys} />
           <Route exact path="/report" component={Report} />
           <Route exact path="/profile" component={Profile} />

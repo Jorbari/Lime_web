@@ -1,6 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import { connect } from "react-redux";
+
+import { getSingleProject, deleteProject } from "../../reducers/project";
 
 import SideBar from "../../components/SideBar";
 import NavBar from "../../components/NavBar";
@@ -54,10 +57,33 @@ const SapsProjectContainer = styled.div`
   }
 `;
 
-const SapsProject = () => {
+const Project = props => {
+  const {
+    history,
+    project,
+    projects,
+    deleteProject,
+    match: {
+      params: { id }
+    }
+  } = props;
+  const [newProjectView, setNewProjectView] = React.useState(false);
+
+  React.useEffect(() => {
+    const fetchSingleProject = async () => {
+      await props.getSingleProject(id);
+    };
+
+    fetchSingleProject();
+  });
+
+  const toggleNewProjectView = () => {
+    setNewProjectView(!newProjectView);
+  };
+
   return (
     <>
-      <SideBar />
+      <SideBar toggleNewProjectView={toggleNewProjectView} history={history} />
       <div className="relative md:ml-64 bg-white">
         <NavBar />
         {/* <div> */}
@@ -83,7 +109,12 @@ const SapsProject = () => {
 
             <div className="px-4 md:px-10 mx-auto w-full -m-24">
               <TabPanel className="w-full xl:w-8/12 mb-12 xl:mb-0 pr-4">
-                <Summary />
+                <Summary
+                  project={project}
+                  history={history}
+                  deleteProject={deleteProject}
+                  projects={projects}
+                />
               </TabPanel>
             </div>
             <TabPanel>
@@ -106,4 +137,15 @@ const SapsProject = () => {
   );
 };
 
-export default SapsProject;
+const mapStateToProps = ({
+  project: { isLoading, status, project, projects }
+}) => ({
+  isLoading,
+  status,
+  project,
+  projects
+});
+
+export default connect(mapStateToProps, { getSingleProject, deleteProject })(
+  Project
+);

@@ -2,8 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-import NotificationDropdown from "./NotificationDropdown.js";
-import UserDropdown from "./UserDropdown.js";
 import dashboardIcon from "../assets/dashboard.svg";
 import projectIcon from "../assets/project.svg";
 import surveyIcon from "../assets/surveys.svg";
@@ -11,10 +9,9 @@ import reportIcon from "../assets/report.svg";
 import profileIcon from "../assets/profile.svg";
 import LogoutIcon from "../assets/logout.svg";
 
-
 import "./SideBar.css";
 
-import {logout} from '../api/helpers'
+import { logout } from "../api/helpers";
 
 const SidebarContainer = styled.nav`
   background: #edeeed !important;
@@ -27,6 +24,11 @@ export default function SideBar(props) {
 
   const goToDashboard = () => {
     history.push("/");
+    toggleNewProjectView();
+  };
+
+  const goToProjects = () => {
+    history.push("/projects");
     toggleNewProjectView();
   };
   return (
@@ -76,6 +78,7 @@ export default function SideBar(props) {
                 <Link
                   className="text-gray-800 hover:text-gray-600 text-xs  py-3 font-bold block"
                   to="/projects"
+                  onClick={() => goToProjects()}
                 >
                   <img
                     alt=""
@@ -124,7 +127,6 @@ export default function SideBar(props) {
                 <Link
                   className="text-gray-800 hover:text-gray-600 text-xs  py-3 font-bold block"
                   to="/profile"
-                  //   onClick={(e) => e.preventDefault()}
                 >
                   <img
                     alt=""
@@ -137,18 +139,24 @@ export default function SideBar(props) {
                 </Link>
               </li>
 
-              <li className="items-center  sidebar-nav_item mt-auto logout" >
+              <li className="items-center  sidebar-nav_item mt-auto logout">
                 <Link
                   className="text-gray-800 hover:text-gray-600 text-xs  py-3 font-bold block"
-                  // to="/profile"
-                    onClick={() => logout()}
+                  to="#"
+                  onClick={() => logout()}
                 >
                   <img
                     alt=""
                     src={LogoutIcon}
                     className="opacity-75 mr-2 text-sm"
                   />
-                  <p style={{ marginTop: "-1.23rem", marginLeft: "2rem", color: '#DC4343' }}>
+                  <p
+                    style={{
+                      marginTop: "-1.23rem",
+                      marginLeft: "2rem",
+                      color: "#DC4343"
+                    }}
+                  >
                     Logout
                   </p>
                 </Link>

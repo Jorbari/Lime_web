@@ -6,10 +6,7 @@ import SignUp from "../Signup/SignUp";
 import Login from "../Login/Login";
 
 import limeLogo from "../../assets/Group 9.svg";
-// import limeText from "./assets/LIME..svg";
 import people from "../../assets/30816651.svg";
-
-import { authenticate } from "../../reducers/auth";
 
 import "./AuthWrapper.css";
 
