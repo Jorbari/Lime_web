@@ -12,7 +12,6 @@
 .top-save-btn-div {
   display: flex;
   justify-content: flex-end;
-  background-color: magenta;
   /* position: fixed; */
   width: 100%;
   /* margin-left: 256px; */
