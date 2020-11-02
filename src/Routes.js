@@ -7,7 +7,7 @@ import AuthWrapper from "./views/AuthWrapper/AuthWrapper";
 import Dashboard from "./views/Dashboard/Dashboard";
 import Projects from "./views/Projects/Projects";
 import Project from "./views/Projects/Project";
-import SingleSurvey from "./views/Surveys/SingleSurvey";
+// import SingleSurvey from "./views/Surveys/SingleSurvey";
 import Surveys from "./views/Surveys/Surveys";
 import Report from "./views/Report/Report";
 import Profile from "./views/Profile/Profile";

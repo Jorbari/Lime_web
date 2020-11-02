@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Accordion, Button, Card, Form, Col, Row } from "react-bootstrap";
+import { Form, Col, Row } from "react-bootstrap";
 import { connect } from "react-redux";
 import { Modal } from "react-responsive-modal";
 
@@ -19,13 +19,6 @@ const NewSurvey = props => {
 
   const handleSubmit = async e => {
     e.preventDefault();
-
-    console.log({
-      name,
-      tag,
-      category,
-      project
-    });
     await props.createSurvey(
       {
         name,
@@ -153,10 +146,7 @@ const NewSurvey = props => {
                 className="login-input-styles"
                 required
                 value={project}
-                onChange={({ target: { value } }) => {
-                  console.log("value", value);
-                  setProject(value);
-                }}
+                onChange={({ target: { value } }) =>  setProject(value)}
                 style={{
                   height: "36px",
                   fontSize: "15px",

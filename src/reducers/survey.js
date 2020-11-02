@@ -95,8 +95,6 @@ export const getAllSurveys = () => async dispatch => {
     const {
       data: { data }
     } = await getAllSurveysRequest();
-
-    console.log("store", data);
     await dispatch({
       type: SURVEYS_REQUEST_SUCCESS,
       payload: data

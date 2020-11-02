@@ -63,8 +63,6 @@ function Surveys(props) {
     fetchSurveys();
   }, []);
 
-  console.log("hey", projects);
-
   const getProjectName = id =>
     projects.find(project => project._id.toString() === id.toString()).title;
 
