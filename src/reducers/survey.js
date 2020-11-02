@@ -24,19 +24,23 @@ const RESPONSE_LINK_REQUEST_SUCCESS = "RESPONSE_LINK_REQUEST_SUCCESS";
 export const createSurvey = (
   surveyData,
   history,
-  surveys
+  surveys,
+  toggleModal,
+  toggleNewSurveyView
 ) => async dispatch => {
   try {
     dispatch({ type: REQUEST_PROCCESS });
     const {
-      data: { survey }
+      data: { data }
     } = await createSurveyRequest(surveyData);
-    surveys.push(survey);
+    surveys.push(data);
     await dispatch({
       type: MODIFY_SURVEY_REQUEST_SUCCESS,
-      payload: { survey, surveys }
+      payload: { survey: data, surveys }
     });
+    toggleModal();
     history.push("/surveys");
+    toggleNewSurveyView();
   } catch (error) {
     dispatch({ type: REQUEST_ERROR, payload: error.response.data });
   }
@@ -51,18 +55,18 @@ export const editSurvey = (
   try {
     dispatch({ type: REQUEST_PROCCESS });
     const {
-      data: { survey }
+      data: { data }
     } = await editSurveyRequest(surveyId, surveyData);
 
     let itemIndex;
     surveys.forEach((item, index) => {
       if (item.id === surveyId) return (itemIndex = index);
     });
-    surveys.splice(itemIndex, 0, survey);
+    surveys.splice(itemIndex, 0, data);
 
     await dispatch({
       type: MODIFY_SURVEY_REQUEST_SUCCESS,
-      payload: { survey, surveys }
+      payload: { survey: data, surveys }
     });
     history.push("/surveys");
   } catch (error) {
@@ -89,11 +93,11 @@ export const getAllSurveys = () => async dispatch => {
   try {
     dispatch({ type: REQUEST_PROCCESS });
     const {
-      data: { surveys }
+      data: { data }
     } = await getAllSurveysRequest();
     await dispatch({
       type: SURVEYS_REQUEST_SUCCESS,
-      surveys
+      payload: data
     });
   } catch (error) {
     dispatch({ type: REQUEST_ERROR, payload: error.response.data });
@@ -104,11 +108,11 @@ export const getSingleSurvey = id => async dispatch => {
   try {
     dispatch({ type: REQUEST_PROCCESS });
     const {
-      data: { survey }
+      data: { data }
     } = await getSingleSurveyRequest(id);
     await dispatch({
       type: SURVEY_REQUEST_SUCCESS,
-      survey
+      payload: data.find(item => item._id === id)
     });
   } catch (error) {
     dispatch({ type: REQUEST_ERROR, payload: error.response.data });
