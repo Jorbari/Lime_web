@@ -57,15 +57,15 @@ const SapsProjectContainer = styled.div`
   }
 `;
 
-const Project = props => {
+const Project = (props) => {
   const {
     history,
     project,
     projects,
     deleteProject,
     match: {
-      params: { id }
-    }
+      params: { id },
+    },
   } = props;
   const [newProjectView, setNewProjectView] = React.useState(false);
 
@@ -75,7 +75,7 @@ const Project = props => {
     };
 
     fetchSingleProject();
-  });
+  }, []);
 
   const toggleNewProjectView = () => {
     setNewProjectView(!newProjectView);
@@ -138,12 +138,12 @@ const Project = props => {
 };
 
 const mapStateToProps = ({
-  project: { isLoading, status, project, projects }
+  project: { isLoading, status, project, projects },
 }) => ({
   isLoading,
   status,
   project,
-  projects
+  projects,
 });
 
 export default connect(mapStateToProps, { getSingleProject, deleteProject })(

@@ -2,6 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+
+import { getAllProjects } from "../../reducers/project";
 
 import SideBar from "../../components/SideBar";
 import NavBar from "../../components/NavBar";
@@ -57,8 +60,16 @@ const CardContainer = styled.div`
 `;
 
 function Report(props) {
-  const { history } = props;
+  const { history, projects } = props;
   const [newProjectView, setNewProjectView] = React.useState(false);
+
+  React.useEffect(() => {
+    const fetchProjects = async () => {
+      await props.getAllProjects();
+    };
+
+    fetchProjects();
+  }, []);
 
   const toggleNewProjectView = () => {
     setNewProjectView(!newProjectView);
@@ -130,27 +141,32 @@ function Report(props) {
               <CardContainer className="relative bg-white card flex flex-col md:flew-wrap">
                 <div className="flex flex-row pt-8">
                   <div className="flex flex-wrap">
-                    <Link to="/projects/saps">
-                      <div className="relative bg-white">
-                        <div className="w-full xl:w-4/12 pl-1 pr-1 ml-4 card">
-                          <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 rounded h-32">
-                            <div className="rounded-t mb-0 px-4 bg-transparent card-image-and-text-container">
-                              <div className="flex flex-wrap items-center">
-                                <div className="relative w-full max-w-full flex-grow flex-1">
-                                  <img
-                                    src={folder}
-                                    alt=""
-                                    width="57.39px"
-                                    height="50px"
-                                  />
+                    {projects.length > 0 &&
+                      projects.map((project) => (
+                        <Link to={`/projects/${project._id}`} key={project._id}>
+                          <div className="relative bg-white">
+                            <div className="w-full xl:w-4/12 pl-1 pr-1 ml-4 card">
+                              <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 rounded h-32">
+                                <div className="rounded-t mb-0 px-4 bg-transparent card-image-and-text-container">
+                                  <div className="flex flex-wrap items-center">
+                                    <div className="relative w-full max-w-full flex-grow flex-1">
+                                      <img
+                                        src={folder}
+                                        alt=""
+                                        width="57.39px"
+                                        height="50px"
+                                      />
+                                    </div>
+                                  </div>
                                 </div>
+                                <p className="card-text mt-4">
+                                  {project.title}
+                                </p>
                               </div>
                             </div>
-                            <p className="card-text mt-4">SAPS Project</p>
                           </div>
-                        </div>
-                      </div>
-                    </Link>
+                        </Link>
+                      ))}
                   </div>
                 </div>
               </CardContainer>
@@ -162,4 +178,10 @@ function Report(props) {
   );
 }
 
-export default Report;
+const mapStateToProps = ({ project: { isLoading, status, projects } }) => ({
+  isLoading,
+  status,
+  projects,
+});
+
+export default connect(mapStateToProps, { getAllProjects })(Report);
