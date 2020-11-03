@@ -60,14 +60,16 @@ export const authReducer = (state = DEFAULT_STATE, { type, payload }) => {
       return {
         ...state,
         isLoading: true,
-        status: "loading"
+        status: "loading",
+        error: {}
       };
     case REQUEST_SUCCESS:
       return {
         ...state,
         isLoading: false,
         status: "success",
-        user: payload
+        user: payload,
+        error: {}
       };
     case REQUEST_ERROR:
       return {

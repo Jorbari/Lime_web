@@ -17,13 +17,8 @@ import Profile from "./views/Profile/Profile";
 import { simpleAction } from "./actions/simpleAction";
 
 function App(props) {
-  const simpleAction = event => {
-    props.simpleAction();
-  };
-
   return (
     <React.Fragment>
-      {/* <Container> */}
       <Router>
         <Switch>
           <Route exact path="/signup" component={SignUp} />
@@ -36,10 +31,6 @@ function App(props) {
           <Route exact path="/profile" component={Profile} />
         </Switch>
       </Router>
-      {/* </Container> */}
-      {/* <button onClick={simpleAction}>Test redux action</button>
-
-      <pre>{JSON.stringify(props)}</pre> */}
     </React.Fragment>
   );
 }
