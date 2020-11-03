@@ -69,102 +69,114 @@ const Profile = props => {
         className="mx-8 relative md:ml-64 bg-white flex flex-col md:flew-wrap"
         style={{ marginLeft: "18rem", marginRight: "2rem", height: "40vw" }}
       >
-        {/* <h1 className="card-header-text">Details</h1> */}
         <div
           className="table-card-container w-full xl:w-9/12 mb-12 xl:mb-0 pr-4"
           style={{ marginTop: "9rem" }}
         >
           <NavBar />
-          {/* <div className="py-10" style={{ paddingLeft: "1rem" }}>
-          <p>Decription:</p>
-          <h5>
-            The project is to ascetain the custlomer satisfaction level of the
-            clients of SAPS
-          </h5>
-        </div> */}
-          <div>
-            <table className="details-card-table table-fixed ml-4">
-              {/* <thead> */}
-              <tr>
-                <td className="w-2/4">
-                  <div className="">
-                    {/* <img
-                      alt=""
-                      src={profileImage}
-                      //   style={{ position: "relative", left: "10rem" }}
-                    /> */}
 
-                    <div
+          {Object.keys(user).length > 0 && (
+            <div
+              className="d-flex jusify-content-center"
+              style={{ height: "60vh" }}
+            >
+              <div className="row w-100">
+                <div className="col-12 col-md-4 d-flex flex-column align-items-center justify-content-center">
+                  <div
+                    style={{
+                      background: "#c4c4c4",
+                      height: "107px",
+                      width: "107px",
+                      borderRadius: "100%",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      fontSize: "48px",
+                      marginBottom: "10px"
+                    }}
+                    className="uppercase"
+                  >
+                    {user.firstname.charAt(0)}
+                    {user.lastname.charAt(0)}
+                  </div>
+                  <h5
+                    style={{
+                      marginBottom: "10px"
+                    }}
+                  >
+                    {user.firstname.replace(
+                      user.firstname[0],
+                      user.firstname[0].toUpperCase()
+                    )}{" "}
+                    {user.lastname.replace(
+                      user.lastname[0],
+                      user.lastname[0].toUpperCase()
+                    )}
+                  </h5>
+                  <p>{user.email}</p>
+                </div>
+                <div className="col-12 col-md-4 d-flex justify-content-center">
+                  <div className="w-75">
+                    <h2
+                      className="font-weight-bold"
                       style={{
-                        background: "#c4c4c4",
-                        height: "107px",
-                        width: "107px",
-                        borderRadius: "100%",
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        fontSize: "48px"
+                        fontSize: "24px",
+                        marginBottom: "50px",
+                        marginTop: "30px"
                       }}
-                      className="uppercase"
                     >
-                      {user.firstname.charAt(0)}
-                      {user.lastname.charAt(0)}
+                      Details
+                    </h2>
+                    <div style={{ marginBottom: "20px" }}>
+                      <p className="title">Organization</p>
+                      <p className="body font-weight-bold">{user.company}</p>
+                    </div>
+                    <div style={{ marginBottom: "20px" }}>
+                      <p className="title">Designation</p>
+                      <p className="body font-weight-bold">{user.role}</p>
+                    </div>
+
+                    <div style={{ marginBottom: "20px" }}>
+                      <p className="title">Profile created</p>
+                      <p className="body font-weight-bold">0</p>
+                    </div>
+
+                    <div style={{ marginBottom: "20px" }}>
+                      <p className="title">Surveys created</p>
+                      <p className="body font-weight-bold">0</p>
                     </div>
                   </div>
-                </td>
-              </tr>
-              <tr>
-                <td className="w-2/4">
-                  <div className="">
-                    <h5>
-                      {user.firstname.replace(
-                        user.firstname[0],
-                        user.firstname[0].toUpperCase()
-                      )}{" "}
-                      {user.lastname.replace(
-                        user.lastname[0],
-                        user.lastname[0].toUpperCase()
-                      )}
-                    </h5>
-                    <p>{user.email}</p>
+                </div>
+                <div className="col-12 col-md-4 px-0">
+                  <div
+                    className="w-100 h-100"
+                    style={{
+                      border: "1.5px solid #A4D4AE",
+                      padding: "30px 37px",
+                      boxSizing: "border-box",
+                      borderRadius: "10px",
+                      position: "relative"
+                    }}
+                  >
+                    <h2
+                      className="font-weight-bold"
+                      style={{ fontSize: "24px" }}
+                    >
+                      Teammates
+                    </h2>
+                    <button
+                      type="button"
+                      className="btn-success btn"
+                      style={{ position: "absolute", bottom: 30, right: 37 }}
+                    >
+                      <i className="fas fa-pencil" />
+                      Invite teammate
+                    </button>
                   </div>
-                </td>
-                <td className="py-6 w-2/4">
-                  <div>
-                    <p>Phone Number:</p>
-                    <h4>{user.phone ? user.phone : ""}</h4>
-                  </div>
-                </td>
-                <td className="py-6 w-2/4">
-                  <div>
-                    <p>E-mail:</p>
-                    <h4>Yasminolabanjo@gmail.com </h4>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td className="w-2/4">
-                  <div className="">
-                    <p>Executive sponsor:</p>
-                    <h4>Pearl Bawa</h4>
-                  </div>
-                </td>
-                <td className="py-6 w-2/4">
-                  <div>
-                    <p>Phone Number:</p>
-                    <h4>08054478965 </h4>
-                  </div>
-                </td>
-                <td className="py-6 w-2/4">
-                  <div>
-                    <p>E-mail:</p>
-                    <h4>earlbawa@gmail.com</h4>
-                  </div>
-                </td>
-              </tr>
-              {/* </thead> */}
-            </table>
-          </div>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </ProfileContainer>
     </>

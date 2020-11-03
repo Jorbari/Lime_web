@@ -147,9 +147,9 @@ export default function ProjectCards() {
               src={folderIcon}
               // className="opacity-75 mr-2 text-sm"
             />
-            <div className="relative" style={{ left: "9rem", top: "-5.5rem" }}>
-              <h1 className="mb-1 text-2xl">
-                <span className="font-semibold text-3xl card-number">5</span>
+            <div className="relative" style={{ left: "6rem", top: "-5.5rem" }}>
+              <h1 className="mb-1 tet-2xl ml-4">
+                <span className="font-semibold tet-3xl card-number">5</span>
                 &nbsp; &nbsp;Recent Projects
               </h1>
               <Link to="/projects">
@@ -176,9 +176,11 @@ export default function ProjectCards() {
               src={reportIcon}
               // className="opacity-75 mr-2 text-sm"
             />
-            <div className="relative" style={{ left: "9rem", top: "-5.5rem" }}>
-              <h1 className="mb-1 text-2xl">
-                <span className="font-semibold text-3xl card-number">2</span>
+            <div className="relative" style={{ left: "6rem", top: "-5.5rem" }}>
+              <h1 className="mb-1 tet-2xl">
+                <span className="font-semibold  ml-4 txt-3xl card-number">
+                  2
+                </span>
                 &nbsp; &nbsp;New surveys
               </h1>
               <Link to="/surveys">

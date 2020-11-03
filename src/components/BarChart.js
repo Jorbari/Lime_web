@@ -2,6 +2,7 @@ import React from "react";
 import Chart from "chart.js";
 
 import styled from "styled-components";
+import ProjectCards from "./ProjectCards";
 
 const BarGraphContainer = styled.div`
   border: 2px solid #7fcd91;
@@ -125,6 +126,7 @@ export default function BarChart() {
             </div>
           </div>
         </BarGraphContainer>
+        <ProjectCards />
       </div>
     </>
   );

@@ -142,7 +142,7 @@ function Report(props) {
                 <div className="flex flex-row pt-8">
                   <div className="flex flex-wrap">
                     {projects.length > 0 &&
-                      projects.map((project) => (
+                      projects.map(project => (
                         <Link to={`/projects/${project._id}`} key={project._id}>
                           <div className="relative bg-white">
                             <div className="w-full xl:w-4/12 pl-1 pr-1 ml-4 card">
@@ -181,7 +181,7 @@ function Report(props) {
 const mapStateToProps = ({ project: { isLoading, status, projects } }) => ({
   isLoading,
   status,
-  projects,
+  projects
 });
 
 export default connect(mapStateToProps, { getAllProjects })(Report);
