@@ -146,7 +146,7 @@ const NewSurvey = props => {
                 className="login-input-styles"
                 required
                 value={project}
-                onChange={({ target: { value } }) =>  setProject(value)}
+                onChange={({ target: { value } }) => setProject(value)}
                 style={{
                   height: "36px",
                   fontSize: "15px",

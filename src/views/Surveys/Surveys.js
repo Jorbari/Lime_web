@@ -63,8 +63,8 @@ function Surveys(props) {
     fetchSurveys();
   }, []);
 
-  const getProjectName = (id) =>
-    projects.find((project) => project._id.toString() === id.toString()).title;
+  const getProjectName = id =>
+    projects.find(project => project._id.toString() === id.toString()).title;
 
   const toggleNewProjectView = () => {
     setNewProjectView(!newProjectView);
@@ -134,7 +134,7 @@ function Surveys(props) {
             style={{
               marginLeft: "18rem",
               marginRight: "2rem",
-              height: "fit-content",
+              height: "fit-content"
             }}
           >
             <div className="flex flex-row">
@@ -155,7 +155,7 @@ function Surveys(props) {
                 </thead>
                 <tbody>
                   {surveys.length > 0 &&
-                    surveys.map((survey) => (
+                    surveys.map(survey => (
                       <tr className="table-border" key={survey._id}>
                         <td className="w-2/4 py-6">
                           <Link
@@ -237,12 +237,12 @@ function Surveys(props) {
 
 const mapStateToProps = ({
   survey: { isLoading, status, surveys },
-  project: { projects },
+  project: { projects }
 }) => ({
   isLoading,
   status,
   surveys,
-  projects,
+  projects
 });
 
 export default connect(mapStateToProps, { getAllSurveys, getAllProjects })(
