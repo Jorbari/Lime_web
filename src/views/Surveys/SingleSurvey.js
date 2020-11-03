@@ -75,7 +75,7 @@ const SingleSurvey = props => {
     };
 
     fetchSingleSurvey();
-  });
+  }, []);
 
   const toggleNewProjectView = () => {
     setNewProjectView(!newProjectView);
