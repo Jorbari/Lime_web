@@ -82,7 +82,7 @@ export const deleteSurvey = (surveyId, history, surveys) => async dispatch => {
 
 export const getAllSurveys = () => async dispatch => {
     try {
-        dispatch({type: SurveyActionTypes.REQUEST_PROCCESS});
+        dispatch({type: SurveyActionTypes.REQUEST_PROCESS});
         const {
             data: {data}
         } = await getAllSurveysRequest();
