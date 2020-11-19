@@ -11,7 +11,7 @@ import "react-tabs/style/react-tabs.css";
 import "react-responsive-modal/styles.css";
 
 ReactDOM.render(
-  <Provider store={configureStore()}>
+  <Provider store={configureStore}>
     <React.StrictMode>
       <Routes />
     </React.StrictMode>
