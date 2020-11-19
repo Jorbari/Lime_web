@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 
-import SideBar from "../../components/SideBar";
+import SideBar from "../../components/side-bar/SideBar";
 import NavBar from "../../components/NavBar";
 import LineChart from "../../components/LineChart";
 import BarChart from "../../components/BarChart";
-import NewProject from "../../components/NewProject";
+import NewProject from "../../components/new-project/NewProject";
 
 import "./Dashboard.css";
 

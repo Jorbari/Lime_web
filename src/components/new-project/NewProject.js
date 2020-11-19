@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Accordion, Button, Card, Form, Col, Row } from "react-bootstrap";
 import { connect } from "react-redux";
 
-import { createProject } from "../reducers/project";
+import { createProject } from "../../redux/project/project.actions";
 
 import "./NewProject.css";
 

@@ -1,12 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import {Tab, Tabs, TabList, TabPanel} from "react-tabs";
+import {connect} from "react-redux";
+import {Link} from "react-router-dom";
 
-import { getSingleSurvey } from "../../reducers/survey";
+import {getSingleSurvey} from "../../redux/survey/survey.action";
 
-import SideBar from "../../components/SideBar";
+import SideBar from "../../components/side-bar/SideBar";
 import NavBar from "../../components/NavBar";
 import Summary from "../Projects/Summary";
 import Survey from "../Projects/Survey";
@@ -59,86 +59,86 @@ const SapsProjectContainer = styled.div`
 `;
 
 const SingleSurvey = props => {
-  const {
-    history,
-    survey,
-    surveys,
-    match: {
-      params: { id }
-    }
-  } = props;
-  const [newProjectView, setNewProjectView] = React.useState(false);
+    const {
+        history,
+        survey,
+        surveys,
+        match: {
+            params: {id}
+        }
+    } = props;
+    const [newProjectView, setNewProjectView] = React.useState(false);
 
-  React.useEffect(() => {
-    const fetchSingleSurvey = async () => {
-      await props.getSingleSurvey(id);
+    React.useEffect(() => {
+        const fetchSingleSurvey = async () => {
+            await props.getSingleSurvey(id);
+        };
+
+        fetchSingleSurvey();
+    }, []);
+
+    const toggleNewProjectView = () => {
+        setNewProjectView(!newProjectView);
     };
 
-    fetchSingleSurvey();
-  }, []);
+    return (
+        <>
+            <SideBar toggleNewProjectView={toggleNewProjectView} history={history}/>
+            <div className="relative md:ml-64 bg-white">
+                <NavBar/>
+                {/* <div> */}
+                <SapsProjectContainer className="relative bg-white md:pt-32 pb-32 pt-12">
+                    <Tabs>
+                        <TabList>
+                            <Tab style={{paddingLeft: "2rem", paddingRight: "2rem"}}>
+                                Summary
+                            </Tab>
+                            <Tab style={{paddingLeft: "2rem", paddingRight: "2rem"}}>
+                                Survey
+                            </Tab>
+                            <Tab style={{paddingLeft: "2rem", paddingRight: "2rem"}}>
+                                Team
+                            </Tab>
+                            <Tab style={{paddingLeft: "2rem", paddingRight: "2rem"}}>
+                                Execution plan
+                            </Tab>
+                            <Tab style={{paddingLeft: "2rem", paddingRight: "2rem"}}>
+                                Budget
+                            </Tab>
+                        </TabList>
 
-  const toggleNewProjectView = () => {
-    setNewProjectView(!newProjectView);
-  };
-
-  return (
-    <>
-      <SideBar toggleNewProjectView={toggleNewProjectView} history={history} />
-      <div className="relative md:ml-64 bg-white">
-        <NavBar />
-        {/* <div> */}
-        <SapsProjectContainer className="relative bg-white md:pt-32 pb-32 pt-12">
-          <Tabs>
-            <TabList>
-              <Tab style={{ paddingLeft: "2rem", paddingRight: "2rem" }}>
-                Summary
-              </Tab>
-              <Tab style={{ paddingLeft: "2rem", paddingRight: "2rem" }}>
-                Survey
-              </Tab>
-              <Tab style={{ paddingLeft: "2rem", paddingRight: "2rem" }}>
-                Team
-              </Tab>
-              <Tab style={{ paddingLeft: "2rem", paddingRight: "2rem" }}>
-                Execution plan
-              </Tab>
-              <Tab style={{ paddingLeft: "2rem", paddingRight: "2rem" }}>
-                Budget
-              </Tab>
-            </TabList>
-
-            <div className="px-4 md:px-10 mx-auto w-full -m-24">
-              <TabPanel className="w-full xl:w-8/12 mb-12 xl:mb-0 pr-4">
-                <Summary survey={survey} history={history} surveys={surveys} />
-              </TabPanel>
+                        <div className="px-4 md:px-10 mx-auto w-full -m-24">
+                            <TabPanel className="w-full xl:w-8/12 mb-12 xl:mb-0 pr-4">
+                                <Summary survey={survey} history={history} surveys={surveys}/>
+                            </TabPanel>
+                        </div>
+                        <TabPanel>
+                            <Survey/>
+                        </TabPanel>
+                        <TabPanel>
+                            <Team/>
+                        </TabPanel>
+                        <TabPanel>
+                            <ExecutionPlan/>
+                        </TabPanel>
+                        <TabPanel>
+                            <Budget/>
+                        </TabPanel>
+                    </Tabs>
+                </SapsProjectContainer>
+                {/* </div> */}
             </div>
-            <TabPanel>
-              <Survey />
-            </TabPanel>
-            <TabPanel>
-              <Team />
-            </TabPanel>
-            <TabPanel>
-              <ExecutionPlan />
-            </TabPanel>
-            <TabPanel>
-              <Budget />
-            </TabPanel>
-          </Tabs>
-        </SapsProjectContainer>
-        {/* </div> */}
-      </div>
-    </>
-  );
+        </>
+    );
 };
 
 const mapStateToProps = ({
-  survey: { isLoading, status, survey, surveys }
-}) => ({
-  isLoading,
-  status,
-  survey,
-  surveys
+                             survey: {isLoading, status, survey, surveys}
+                         }) => ({
+    isLoading,
+    status,
+    survey,
+    surveys
 });
 
-export default connect(mapStateToProps, { getSingleSurvey })(SingleSurvey);
+export default connect(mapStateToProps, {getSingleSurvey})(SingleSurvey);

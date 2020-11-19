@@ -1,7 +1,7 @@
 import React from "react";
 import { Modal, Button } from "react-bootstrap";
 import './confirmationBox.css'
-import Spinner from './spinner';
+import Spinner from '../spinner/spinner';
 
 const ConfirmationBox = (props) => {
   

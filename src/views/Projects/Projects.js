@@ -3,12 +3,12 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
-import { getAllProjects } from "../../reducers/project";
+import { getAllProjects } from "../../redux/project/project.actions";
 
-import SideBar from "../../components/SideBar";
+import SideBar from "../../components/side-bar/SideBar";
 import NavBar from "../../components/NavBar";
 import folder from "../../assets/bigFolder.png";
-import NewProject from "../../components/NewProject";
+import NewProject from "../../components/new-project/NewProject";
 
 const CardContainer = styled.div`
   border: none;
