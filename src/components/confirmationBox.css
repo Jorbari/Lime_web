@@ -1,0 +1,19 @@
+.modal-footer {
+    padding: .3rem;
+}
+.modal-footer > button {
+    background-color: #e9f7eb;
+    border: none;
+    color: black;
+    font-size: 1rem;
+}
+.modal-footer > button:hover {
+    background-color: #a2e8ac;
+}
+.modal {
+    top: 50%;
+    transform: translateY(-25%);
+}
+.modal-title {
+    font-size: 1rem;
+}

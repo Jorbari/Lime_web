@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import moment from "moment";
+import ConfirmationBox from '../../components/confirmationBox'
+import configureStore from '../../store';
 
 import infoIcon from "../../assets/info.svg";
 
@@ -104,17 +106,58 @@ const SummaryContainer = styled.div`
 `;
 
 const SummaryTab = ({ project, history, deleteProject, projects }) => {
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const showSpinner = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  React.useEffect(() => {
+    // const fetchProjects = async () => {
+    //   await props.getAllProjects();
+    // };
+
+    const getApiResponse = () => {
+      configureStore.subscribe(
+        () => {
+          // console.log('data changed',data)
+          console.log(configureStore.getState());
+        }
+      )
+    }
+
+    getApiResponse();
+  }, []);
+
+  const DeleteProject = () => {
+    deleteProject(project._id, history, projects)
+    handleClose();
+  }
+
+  const confirmation = () => {
+    DeleteProject();
+  } 
+  
+
   return (
     <SummaryContainer>
       <div className="sapsHeader-conatiner">
         <h1 className="sapsHeader capitalize font-semibold ml-8 py-4">
           {project.title}
         </h1>
-        <button
+        {/* <button
           type="button"
           onClick={() => deleteProject(project._id, history, projects)}
         >
           <span className="deleteProjectText">Delete project</span>
+        </button> */}
+        <button
+          type="button"
+          className="deleteProjectText"
+          onClick={() => handleShow()}
+        >
+          <span >Delete project</span>
         </button>
       </div>
       <div
@@ -215,8 +258,20 @@ const SummaryTab = ({ project, history, deleteProject, projects }) => {
           </thead>
         </table>
       </div>
+      <ConfirmationBox 
+        title="Delete project" 
+        buttonMessage="Confirm Delete"
+        handleClose={() => handleClose()} 
+        confirm={() => confirmation()}
+        show={show}>
+          Are you sure you want to delete this project?
+      </ConfirmationBox>
     </SummaryContainer>
   );
 };
+
+// const mapStateToProps = state => ({
+  
+// })
 
 export default SummaryTab;

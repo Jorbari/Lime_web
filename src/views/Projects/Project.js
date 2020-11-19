@@ -109,6 +109,7 @@ const Project = props => {
 
             <div className="px-4 md:px-10 mx-auto w-full -m-24">
               <TabPanel className="w-full xl:w-8/12 mb-12 xl:mb-0 pr-4">
+            
                 <Summary
                   project={project}
                   history={history}

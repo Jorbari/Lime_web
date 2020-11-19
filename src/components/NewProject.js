@@ -48,6 +48,13 @@ const NewProject = props => {
       projects
     );
   };
+
+  const checkIfFilled = () => {
+    if(title && manager && managerEmail && sponsor && sponsorEmail && startDate && endDate && category && goals && objectives && inScope && outScope && requirement && description) {
+      return false;
+    }
+    return true;
+  }
   return (
     <div style={{ position: "relative" }}>
       <form
@@ -55,7 +62,7 @@ const NewProject = props => {
         onSubmit={e => handleSubmit(e)}
       >
         <div className="top-save-btn-div pr-4">
-          <button className="form-btn btn top-save-btn" type="submit">
+          <button className="form-btn btn top-save-btn" type="submit" disabled={checkIfFilled()}>
             Save
           </button>
         </div>
@@ -92,7 +99,7 @@ const NewProject = props => {
                       className="login-input-styles"
                       placeholder="Name of Project"
                       onChange={({ target: { value } }) => setTitle(value)}
-                      required
+                      // required
                       value={title}
                       style={{ height: "36px", fontSize: "15px" }}
                     />
@@ -118,7 +125,7 @@ const NewProject = props => {
                           onChange={({ target: { value } }) =>
                             setManager(value)
                           }
-                          required
+                          // required
                           value={manager}
                           placeholder="Name of Manger"
                           style={{ height: "36px", fontSize: "15px" }}
@@ -165,7 +172,7 @@ const NewProject = props => {
                           onChange={({ target: { value } }) =>
                             setSponsor(value)
                           }
-                          required
+                          // required
                           value={sponsor}
                           placeholder="Name of Sponsor"
                           style={{ height: "36px", fontSize: "15px" }}
@@ -236,7 +243,7 @@ const NewProject = props => {
                             setStartDate(value)
                           }
                           value={startDate}
-                          required
+                          // required
                           style={{ height: "36px", fontSize: "15px" }}
                         />
                       </Col>
@@ -254,7 +261,7 @@ const NewProject = props => {
                             setEndDate(value)
                           }
                           value={endDate}
-                          required
+                          // required
                           style={{ height: "36px", fontSize: "15px" }}
                         />
                       </Col>
@@ -277,12 +284,12 @@ const NewProject = props => {
                       as="select"
                       rows={3}
                       className="login-input-styles"
-                      required
+                      // required
                       value={category}
                       onChange={({ target: { value } }) => setCategory(value)}
                       style={{ height: "36px", fontSize: "15px" }}
                     >
-                      <option selected value="Agriculture">
+                      <option defaultValue value="Agriculture">
                         Agriculture
                       </option>
                       <option value="Mining">Mining</option>
@@ -337,7 +344,7 @@ const NewProject = props => {
                       rows={3}
                       onChange={({ target: { value } }) => setGoals(value)}
                       value={goals}
-                      required
+                      // required
                       className="login-input-styles"
                       style={{ fontSize: "15px" }}
                     />
@@ -359,7 +366,7 @@ const NewProject = props => {
                       rows={3}
                       onChange={({ target: { value } }) => setObjectives(value)}
                       value={objectives}
-                      required
+                      // required
                       className="login-input-styles"
                       style={{ hfontSize: "15px" }}
                     />
@@ -396,7 +403,7 @@ const NewProject = props => {
                       rows={3}
                       onChange={({ target: { value } }) => setInScope(value)}
                       value={inScope}
-                      required
+                      // required
                       className="login-input-styles"
                       style={{ fontSize: "15px" }}
                     />
@@ -418,7 +425,7 @@ const NewProject = props => {
                       rows={3}
                       onChange={({ target: { value } }) => setOutScope(value)}
                       value={outScope}
-                      required
+                      // required
                       className="login-input-styles"
                       style={{ fontSize: "15px" }}
                     />
@@ -457,7 +464,7 @@ const NewProject = props => {
                         setRequirement(value)
                       }
                       value={requirement}
-                      required
+                      // required
                       className="login-input-styles"
                       style={{ fontSize: "15px" }}
                     />
@@ -476,7 +483,7 @@ const NewProject = props => {
           >
             Cancel
           </button>
-          <button className="form-btn btn bottom-save-btn" type="submit">
+          <button className="form-btn btn bottom-save-btn" type="submit" disabled={checkIfFilled()}>
             Save
           </button>
         </div>

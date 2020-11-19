@@ -58,6 +58,7 @@ function Projects(props) {
   const [newProjectView, setNewProjectView] = React.useState(false);
 
   React.useEffect(() => {
+    console.log(props);
     const fetchProjects = async () => {
       await props.getAllProjects();
     };
