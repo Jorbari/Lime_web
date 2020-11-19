@@ -3,7 +3,7 @@ import { Form, Col, Row } from "react-bootstrap";
 import { connect } from "react-redux";
 import { Modal } from "react-responsive-modal";
 
-import { createSurvey } from "../reducers/survey";
+import { createSurvey } from "../../redux/survey/survey.action";
 
 import "./NewSurvey.css";
 

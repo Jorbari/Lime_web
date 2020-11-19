@@ -2,16 +2,16 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-import dashboardIcon from "../assets/dashboard.svg";
-import projectIcon from "../assets/project.svg";
-import surveyIcon from "../assets/surveys.svg";
-import reportIcon from "../assets/report.svg";
-import profileIcon from "../assets/profile.svg";
-import LogoutIcon from "../assets/logout.svg";
+import dashboardIcon from "../../assets/dashboard.svg";
+import projectIcon from "../../assets/project.svg";
+import surveyIcon from "../../assets/surveys.svg";
+import reportIcon from "../../assets/report.svg";
+import profileIcon from "../../assets/profile.svg";
+import LogoutIcon from "../../assets/logout.svg";
 
 import "./SideBar.css";
 
-import { logout } from "../api/helpers";
+import { logout } from "../../api/helpers";
 
 const SidebarContainer = styled.nav`
   background: #edeeed !important;

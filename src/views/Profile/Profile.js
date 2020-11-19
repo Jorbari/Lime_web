@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import SideBar from "../../components/SideBar";
+import SideBar from "../../components/side-bar/SideBar";
 import NavBar from "../../components/NavBar";
 
 import { decodeUserObject } from "../../api/helpers";

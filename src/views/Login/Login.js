@@ -3,7 +3,7 @@ import { Col, Form, Spinner } from "react-bootstrap";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
-import { authenticate } from "../../reducers/auth";
+import { authenticate } from "../../redux/auth/auth.actions";
 
 import "./Login.css";
 

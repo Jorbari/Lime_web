@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import moment from "moment";
-import ConfirmationBox from '../../components/confirmationBox'
+import ConfirmationBox from '../../components/confirmation-box/confirmationBox'
 import configureStore from '../../store';
 
 import infoIcon from "../../assets/info.svg";

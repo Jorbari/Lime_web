@@ -3,9 +3,9 @@ import styled from "styled-components";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import { connect } from "react-redux";
 
-import { getSingleProject, deleteProject } from "../../reducers/project";
+import { getSingleProject, deleteProject } from "../../redux/project/project.actions";
 
-import SideBar from "../../components/SideBar";
+import SideBar from "../../components/side-bar/SideBar";
 import NavBar from "../../components/NavBar";
 import Summary from "./Summary";
 import Survey from "./Survey";

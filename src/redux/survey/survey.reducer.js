@@ -13,7 +13,7 @@ const DEFAULT_STATE = {
   
   export const surveyReducer = (state = DEFAULT_STATE, { type, payload }) => {
     switch (type) {
-      case SurveyActionTypes.REQUEST_PROCCESS:
+      case SurveyActionTypes.REQUEST_PROCESS:
         return {
           ...state,
           isLoading: true,

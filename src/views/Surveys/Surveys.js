@@ -4,12 +4,12 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import moment from "moment";
 
-import { getAllSurveys } from "../../reducers/survey";
-import { getAllProjects } from "../../reducers/project";
+import { getAllSurveys } from "../../redux/survey/survey.action";
+import { getAllProjects } from "../../redux/project/project.actions";
 
-import SideBar from "../../components/SideBar";
+import SideBar from "../../components/side-bar/SideBar";
 import NavBar from "../../components/NavBar";
-import NewSurvey from "../../components/NewSurvey";
+import NewSurvey from "../../components/new-survey/NewSurvey";
 
 const SurveysContainer = styled.div`
   margin-top: 1rem;
