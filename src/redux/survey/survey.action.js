@@ -20,7 +20,7 @@ export const createSurvey = (
     toggleNewSurveyView
 ) => async dispatch => {
     try {
-        dispatch({type: SurveyActionTypes.REQUEST_PROCCESS});
+        dispatch({type: SurveyActionTypes.REQUEST_PROCESS});
         const {
             data: {data}
         } = await createSurveyRequest(surveyData);
@@ -44,7 +44,7 @@ export const editSurvey = (
     surveys
 ) => async dispatch => {
     try {
-        dispatch({type: SurveyActionTypes.REQUEST_PROCCESS});
+        dispatch({type: SurveyActionTypes.REQUEST_PROCESS});
         const {
             data: {data}
         } = await editSurveyRequest(surveyId, surveyData);
@@ -67,7 +67,7 @@ export const editSurvey = (
 
 export const deleteSurvey = (surveyId, history, surveys) => async dispatch => {
     try {
-        dispatch({type: SurveyActionTypes.REQUEST_PROCCESS});
+        dispatch({type: SurveyActionTypes.REQUEST_PROCESS});
         await deleteSurveyRequest(surveyId);
         const newSurveys = surveys.filter(item => item.id !== surveyId);
         await dispatch({
@@ -82,7 +82,7 @@ export const deleteSurvey = (surveyId, history, surveys) => async dispatch => {
 
 export const getAllSurveys = () => async dispatch => {
     try {
-        dispatch({type: SurveyActionTypes.REQUEST_PROCCESS});
+        dispatch({type: SurveyActionTypes.REQUEST_PROCESS});
         const {
             data: {data}
         } = await getAllSurveysRequest();
@@ -97,7 +97,7 @@ export const getAllSurveys = () => async dispatch => {
 
 export const getSingleSurvey = id => async dispatch => {
     try {
-        dispatch({type: SurveyActionTypes.REQUEST_PROCCESS});
+        dispatch({type: SurveyActionTypes.REQUEST_PROCESS});
         const {
             data: {data}
         } = await getSingleSurveyRequest(id);
@@ -117,7 +117,7 @@ export const completeSurveyQuestionnaire = (
     responses
 ) => async dispatch => {
     try {
-        dispatch({type: SurveyActionTypes.REQUEST_PROCCESS});
+        dispatch({type: SurveyActionTypes.REQUEST_PROCESS});
         const {
             data: {response}
         } = await completeSurveyQuestionnaireRequest(surveyId, responseData);
@@ -134,7 +134,7 @@ export const completeSurveyQuestionnaire = (
 
 export const getAllSurveyResponses = surveyId => async dispatch => {
     try {
-        dispatch({type: SurveyActionTypes.REQUEST_PROCCESS});
+        dispatch({type: SurveyActionTypes.REQUEST_PROCESS});
         const {
             data: {responses}
         } = await getAllSurveyResponsesRequest(surveyId);
@@ -152,7 +152,7 @@ export const getSingleSurveyResponse = (
     responseId
 ) => async dispatch => {
     try {
-        dispatch({type: SurveyActionTypes.REQUEST_PROCCESS});
+        dispatch({type: SurveyActionTypes.REQUEST_PROCESS});
         const {
             data: {response}
         } = await getSingleResponseToSurveyRequest(surveyId, responseId);
@@ -167,7 +167,7 @@ export const getSingleSurveyResponse = (
 
 export const generateSurveyLink = (surveyId, url) => async dispatch => {
     try {
-        dispatch({type: SurveyActionTypes.REQUEST_PROCCESS});
+        dispatch({type: SurveyActionTypes.REQUEST_PROCESS});
         const {
             data: {link}
         } = await generateSurveyLinkRequest(surveyId, url);
@@ -182,7 +182,7 @@ export const generateSurveyLink = (surveyId, url) => async dispatch => {
 
 export const emailSurveyLink = (surveyId, mail) => async dispatch => {
     try {
-        dispatch({type: SurveyActionTypes.REQUEST_PROCCESS});
+        dispatch({type: SurveyActionTypes.REQUEST_PROCESS});
         const {
             data: {link}
         } = await emailSurveyLinkRequest(surveyId, mail);
