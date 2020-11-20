@@ -1,5 +1,4 @@
 import React from "react";
-import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import moment from "moment";
@@ -11,38 +10,9 @@ import SideBar from "../../components/side-bar/SideBar";
 import NavBar from "../../components/NavBar";
 import NewSurvey from "../../components/new-survey/NewSurvey";
 
-const SurveysContainer = styled.div`
-  margin-top: 1rem;
-  border: 1px solid #7fcd91;
-  border-radius: 10px;
+import { ButtonContainer, SurveysContainer} from './surveys.styles'
 
-  .survey-table {
-    border-left: none;
-    border-right: none;
-  }
 
-  .table-border {
-    border-bottom: 0.5px solid #7fcd91;
-  }
-`;
-
-const ButtonContainer = styled.div`
-  .newProjectButton {
-    padding: 11px 18px;
-    width: 203.11px;
-    height: 49px;
-    background: #b6e6bd;
-    border-radius: 10px;
-  }
-
-  .sortBy {
-    border: 1px solid #7fcd91;
-    box-sizing: border-box;
-    border-radius: 10px;
-    width: 176px;
-    height: 49px;
-  }
-`;
 
 function Surveys(props) {
   const { history, surveys, projects } = props;
@@ -64,7 +34,7 @@ function Surveys(props) {
   }, []);
 
   const getProjectName = id =>
-    projects.find(project => project._id.toString() === id.toString()).title;
+    projects.find(project => project._id.toString() === id.toString())?.title;
 
   const toggleNewProjectView = () => {
     setNewProjectView(!newProjectView);
@@ -75,50 +45,15 @@ function Surveys(props) {
   };
   return (
     <div>
-      {newSurveyView ? (
-        <>
-          <SideBar
-            toggleNewSurveyView={toggleNewSurveyView}
-            toggleNewProjectView={toggleNewProjectView}
-            history={history}
-          />
-
           <div
-            className="mx-8 relative md:ml-64 bg-white flex flex-col md:flew-wrap new-survey-container "
-            style={{ marginLeft: "18rem", marginRight: "2rem" }}
+            className="mx-8 relative bg-white flex flex-col md:flew-wrap "
           >
-            <NavBar title="Surveys" />
-            <div
-              className="relative bg-white pb-32"
-              style={{ marginTop: "113px" }}
-            >
-              <NewSurvey
-                toggleNewSurveyView={toggleNewSurveyView}
-                history={history}
-                projects={projects}
-              />
-            </div>
-          </div>
-        </>
-      ) : (
-        <>
-          <SideBar
-            toggleNewSurveyView={toggleNewSurveyView}
-            toggleNewProjectView={toggleNewProjectView}
-            history={history}
-          />
-
-          <div
-            className="mx-8 relative md:ml-64 bg-white flex flex-col md:flew-wrap "
-            style={{ marginLeft: "18rem", marginRight: "2rem" }}
-          >
-            <NavBar title="Surveys" />
             <ButtonContainer className="relative bg-white pt-32 mr-6">
               <div className="px-2 md:px-10 mx-auto w-full">
                 <div className="flex justify-end">
                   <button
                     className="newProjectButton"
-                    onClick={toggleNewSurveyView}
+                    onClick={()=>history.push('/new-survey')}
                   >
                     <i className="fa fa-plus mr-2" aria-hidden="true"></i>
                     New Survey
@@ -130,10 +65,8 @@ function Surveys(props) {
           </div>
 
           <SurveysContainer
-            className="mx-8 relative md:ml-64 bg-white card flex flex-col md:flew-wrap"
+            className="mx-8 relative bg-white card flex flex-col md:flew-wrap"
             style={{
-              marginLeft: "18rem",
-              marginRight: "2rem",
               height: "fit-content"
             }}
           >
@@ -229,8 +162,7 @@ function Surveys(props) {
               </table>
             </div>
           </SurveysContainer>
-        </>
-      )}
+
     </div>
   );
 }

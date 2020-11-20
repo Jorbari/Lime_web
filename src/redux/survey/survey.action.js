@@ -91,7 +91,7 @@ export const getAllSurveys = () => async dispatch => {
             payload: data
         });
     } catch (error) {
-        dispatch({type: SurveyActionTypes.REQUEST_ERROR, payload: error.response.data});
+        dispatch({type: SurveyActionTypes.REQUEST_ERROR, payload: 'Failed to load survey'});
     }
 };
 

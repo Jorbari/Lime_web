@@ -1,27 +1,31 @@
 import React from "react";
 import styled from "styled-components";
-
+import {withRouter} from 'react-router-dom'
 import UserDropdown from "./UserDropdown.js";
+import { 
+  NavBar,
+  NavBarContainer
+} from './NavBar.styles'
 
-const BorderStyle = styled.div`
-  border-bottom: 1px solid rgba(91, 86, 86, 0.5);
-  padding-bottom: 1rem;
-`;
+//can be changed to pull from state current route name
+const setNavBarName = (name)=>{
+  return name.slice(1).replace( /-/g,' ')
+}
 
-export default function Navbar(props) {
+const Navbar = (props) => {
+  const {location} = props;
   return (
     <>
-      <nav className="navbar absolute top-0 left-0 w-full z-10 bg-transparent md:flex-row md:flex-no-wrap md:justify-start flex items-center p-4">
-        <BorderStyle className="w-full mx-autp items-center flex justify-between md:flex-no-wrap flex-wrap md:px-10 px-4">
-          {/* Brand */}
-          <p className="text-dark text-sm uppercase hidden lg:inline-block font-semibold">
-            {props.title}
+    <NavBarContainer>
+      <NavBar>
+          <p className="">
+            {(setNavBarName(location.pathname))}
           </p>
-          <ul className="flex-col md:flex-row list-none items-center hidden md:flex">
-            <UserDropdown />
-          </ul>
-        </BorderStyle>
-      </nav>
+          <UserDropdown />
+      </NavBar>
+    </NavBarContainer>
     </>
   );
 }
+
+export default withRouter(Navbar)
