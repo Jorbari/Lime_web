@@ -64,16 +64,14 @@ const Profile = props => {
 
   return (
     <>
-      <SideBar toggleNewProjectView={toggleNewProjectView} history={history} />
       <ProfileContainer
-        className="mx-8 relative md:ml-64 bg-white flex flex-col md:flew-wrap"
-        style={{ marginLeft: "18rem", marginRight: "2rem", height: "40vw" }}
+        className="mx-8 relative bg-white flex flex-col md:flew-wrap"
+        style={{ height: "40vw" }}
       >
         <div
           className="table-card-container w-full xl:w-9/12 mb-12 xl:mb-0 pr-4"
           style={{ marginTop: "9rem" }}
         >
-          <NavBar />
 
           {Object.keys(user).length > 0 && (
             <div

@@ -72,83 +72,58 @@ function Projects(props) {
 
   return (
     <div>
-      {newProjectView ? (
-        <>
-          <SideBar
-            toggleNewProjectView={toggleNewProjectView}
-            history={history}
-          />
-          <div className="relative md:ml-64 new-project-container">
-            <NavBar title="New Project" />
-            {/* Header height: "400px" */}
-            <div className="relative bg-white md:pt-32 pb-32 pt-12">
-              <NewProject
-                toggleNewProjectView={toggleNewProjectView}
-                history={history}
-              />
+        <CardContainer className="relative bg-white card flex flex-col md:flew-wrap">
+
+          <div className="relative bg-white pt-32 mr-6">
+            <div className="px-4 md:px-10 mx-auto w-full">
+              <div className="flex justify-end">
+                <button
+                  className="newProjectButton"
+                  onClick={toggleNewProjectView}
+                >
+                  <i className="fa fa-plus mr-2" aria-hidden="true"></i>
+                  New Project
+                </button>
+                <button className="sortBy ml-8">New Survey</button>
+              </div>
             </div>
           </div>
-        </>
-      ) : (
-        <>
-          <SideBar
-            toggleNewProjectView={toggleNewProjectView}
-            history={history}
-          />
-          <CardContainer className="relative md:ml-64 bg-white card flex flex-col md:flew-wrap">
-            <NavBar />
-            <div className="relative bg-white pt-32 mr-6">
-              <div className="px-4 md:px-10 mx-auto w-full">
-                <div className="flex justify-end">
-                  <button
-                    className="newProjectButton"
-                    onClick={toggleNewProjectView}
-                  >
-                    <i className="fa fa-plus mr-2" aria-hidden="true"></i>
-                    New Project
-                  </button>
-                  <button className="sortBy ml-8">New Survey</button>
-                </div>
-              </div>
-            </div>
 
-            <div className="flex flex-row pt-8">
-              <div className="flex flex-wrap">
-                {projects.length > 0 &&
-                  projects.map(project => (
-                    <Link
-                      to={`/projects/${project._id}`}
-                      key={project._id}
-                      className="mb-4"
-                    >
-                      <div className="relative bg-white">
-                        <div className="w-full xl:w-4/12 pl-1 pr-1 ml-4 card">
-                          <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 rounded h-32">
-                            <div className="rounded-t mb-0 px-4 bg-transparent card-image-and-text-container">
-                              <div className="flex flex-wrap items-center">
-                                <div className="relative w-full max-w-full flex-grow flex-1">
-                                  <img
-                                    src={folder}
-                                    alt=""
-                                    width="57.39px"
-                                    height="50px"
-                                  />
-                                </div>
+          <div className="flex flex-row pt-8">
+            <div className="flex flex-wrap">
+              {projects.length > 0 &&
+                projects.map(project => (
+                  <Link
+                    to={`/projects/${project._id}`}
+                    key={project._id}
+                    className="mb-4"
+                  >
+                    <div className="relative bg-white">
+                      <div className="w-full xl:w-4/12 pl-1 pr-1 ml-4 card">
+                        <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 rounded h-32">
+                          <div className="rounded-t mb-0 px-4 bg-transparent card-image-and-text-container">
+                            <div className="flex flex-wrap items-center">
+                              <div className="relative w-full max-w-full flex-grow flex-1">
+                                <img
+                                  src={folder}
+                                  alt=""
+                                  width="57.39px"
+                                  height="50px"
+                                />
                               </div>
                             </div>
-                            <p className="card-text mt-4 capitalize">
-                              {project.title}
-                            </p>
                           </div>
+                          <p className="card-text mt-4 capitalize">
+                            {project.title}
+                          </p>
                         </div>
                       </div>
-                    </Link>
-                  ))}
-              </div>
+                    </div>
+                  </Link>
+                ))}
             </div>
-          </CardContainer>
-        </>
-      )}
+          </div>
+        </CardContainer> 
     </div>
   );
 }
