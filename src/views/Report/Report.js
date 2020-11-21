@@ -1,5 +1,4 @@
 import React from "react";
-import styled from "styled-components";
 import {Tab, Tabs, TabList, TabPanel} from "react-tabs";
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
@@ -9,8 +8,6 @@ import {
     CardContainer,
     ReportProjectContainer
 } from './report.styles'
-import SideBar from "../../components/side-bar/SideBar";
-import NavBar from "../../components/NavBar";
 import folder from "../../assets/bigFolder.png";
 
 

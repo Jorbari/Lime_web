@@ -1,4 +1,45 @@
 import React from "react";
+import CustomButton from "../custom-button/custom-button.component";
+import TeammateCard from "../teammate-card/teammate-card.component";
+import { InviteButton, TeamMateBody, TeammateTitle } from "./teammates.style";
+
+const teammateData = [
+    {
+        name: "Ralph Philips",
+        email: "ralph@mm.com",
+        id: 1
+    },
+    {
+        name: "Toahh kerl",
+        email: "kerl@mm.com",
+        id: 2
+    },
+    {
+        name: "Adam jones",
+        email: "adam@mm.com",
+        id: 3
+    },
+    {
+        name: "helen dan",
+        email: "helen@mm.com",
+        id: 4
+    },
+    {
+        name: "abraham jay",
+        email: "jay@mm.com",
+        id: 5
+    },
+    {
+        name: "abrajellyham fish",
+        email: "fish@mm.com",
+        id: 6
+    },
+    {
+        name: "kkk amm",
+        email: "eee@mm.s",
+        id: 7
+    }
+]
 
 const Teammates = () => {
     return (
@@ -13,20 +54,24 @@ const Teammates = () => {
                     position: "relative"
                 }}
             >
-                <h2
-                    className="font-weight-bold"
-                    style={{ fontSize: "24px" }}
-                >
-                    Teammates
+                <TeammateTitle>
+                    <h2>
+                        Teammates
                     </h2>
-                <button
-                    type="button"
-                    className="btn-success btn"
-                    style={{ position: "absolute", bottom: 30, right: 37 }}
-                >
+                    <p>
+                        7 members
+                    </p>
+                </TeammateTitle>
+                <TeamMateBody>
+                    {
+                        teammateData.map((teammateDatum, idx) => <TeammateCard name={teammateDatum.name} email={teammateDatum.email} key={idx} />)
+                    }
+                </TeamMateBody>
+                <InviteButton>
                     <i className="fas fa-pencil" />
                       Invite teammate
-                    </button>
+                </InviteButton>
+
             </div>
         </div>
     )

@@ -9,6 +9,7 @@ import "./NewSurvey.css";
 
 const NewSurvey = props => {
   const { toggleNewSurveyView, history, projects, surveys } = props;
+  console.log(props)
   const [name, setName] = useState("");
   const [tag, setTag] = useState("");
   const [category, setCategory] = useState("");
@@ -156,7 +157,7 @@ const NewSurvey = props => {
                   borderRadius: 0
                 }}
               >
-                {projects.length > 0 &&
+                {projects?.length > 0 &&
                   projects.map(item => (
                     <option key={item._id} value={item._id}>
                       {item.title}

@@ -83,9 +83,7 @@ const Project = props => {
 
   return (
     <>
-      <SideBar toggleNewProjectView={toggleNewProjectView} history={history} />
       <div className="relative md:ml-64 bg-white">
-        <NavBar />
         {/* <div> */}
         <SapsProjectContainer className="relative bg-white md:pt-32 pb-32 pt-12">
           <Tabs>
