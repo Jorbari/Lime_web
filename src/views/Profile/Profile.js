@@ -1,8 +1,5 @@
 import React from "react";
 
-import SideBar from "../../components/side-bar/SideBar";
-import NavBar from "../../components/NavBar";
-
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 
 import { decodeUserObject } from "../../api/helpers";

@@ -94,7 +94,7 @@ export const getAllProjects = () => async dispatch => {
 
 export const getSingleProject = id => async dispatch => {
     try {
-        dispatch({type: ProjectActionTypes.REQUEST_PROCCESS});
+        dispatch({type: ProjectActionTypes.REQUEST_PROCESS});
         const {
             data: {data}
         } = await getSingleProjectRequest(id);
