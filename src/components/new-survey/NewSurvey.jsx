@@ -11,6 +11,7 @@ import {DropdownMenu, Caret} from './NewSurvey.styles';
 
 const NewSurvey = props => {
   const { toggleNewSurveyView, history, projects, surveys } = props;
+  console.log(props)
   const [name, setName] = useState("");
   const [tag, setTag] = useState("");
   const [category, setCategory] = useState("");

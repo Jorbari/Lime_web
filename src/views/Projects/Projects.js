@@ -5,10 +5,7 @@ import { connect } from "react-redux";
 
 import { getAllProjects } from "../../redux/project/project.actions";
 
-import SideBar from "../../components/side-bar/SideBar";
-import NavBar from "../../components/NavBar";
 import folder from "../../assets/bigFolder.png";
-import NewProject from "../../components/new-project/NewProject";
 
 const CardContainer = styled.div`
   border: none;

@@ -1,4 +1,5 @@
 import React from 'react';
+import { EditProfileButton } from './user-profile-image.styles';
 
 const UserProfileImage = ({firstname, lastname, email}) => {
     return (
@@ -35,6 +36,9 @@ const UserProfileImage = ({firstname, lastname, email}) => {
                 )}
             </h5>
             <p>{email}</p>
+            <EditProfileButton>
+                Edit Profile
+            </EditProfileButton>
         </div>
     )
 }
