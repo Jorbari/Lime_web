@@ -13,7 +13,7 @@ const FormBuilder = ()=>{
                 <span>Add Question</span>
             </CustomButton>
         </MainContainer>
-    )
+    ) 
 }
 
 export default FormBuilder
