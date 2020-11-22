@@ -88,7 +88,7 @@ export const getAllProjects = () => async dispatch => {
             payload: data
         });
     } catch (error) {
-        dispatch({type: ProjectActionTypes.REQUEST_ERROR, payload: error.response.data});
+        dispatch({type: ProjectActionTypes.REQUEST_ERROR, payload: "failed to fetch all projects"});
     }
 };
 
@@ -100,9 +100,9 @@ export const getSingleProject = id => async dispatch => {
         } = await getSingleProjectRequest(id);
         await dispatch({
             type: ProjectActionTypes.PROJECT_REQUEST_SUCCESS,
-            payload: data.find(item => item._id === id)
+            payload: data[0]
         });
     } catch (error) {
-        dispatch({type: ProjectActionTypes.REQUEST_ERROR, payload: error.response.data});
+        dispatch({type: ProjectActionTypes.REQUEST_ERROR, payload: 'failed to load project'});
     }
 };
