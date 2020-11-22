@@ -8,11 +8,9 @@ import { getAllProjects } from "../../../redux/project/project.actions";
 import { ButtonContainer, SurveysContainer} from './survey-list.styles'
 
 
-
 const SurveyList = (props)=>{
   const { history, surveys, projects } = props;
-  const [newProjectView, setNewProjectView] = React.useState(false);
-  const [newSurveyView, setNewSurveyView] = React.useState(false);
+
 
   React.useEffect(() => {
     const fetchProjects = async () => {
@@ -26,7 +24,7 @@ const SurveyList = (props)=>{
     fetchProjects();
 
     fetchSurveys();
-  }, []);
+  });
 
   const getProjectName = id =>
     projects.find(project => project._id.toString() === id.toString())?.title;

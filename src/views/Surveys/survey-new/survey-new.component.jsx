@@ -5,7 +5,6 @@ import { Modal } from "react-responsive-modal";
 
 import { createSurvey } from "../../../redux/survey/survey.action";
 
-import "./survey-new.styles.scss";
 
 import {DropdownMenu, Caret} from './survey-new.styles';
 

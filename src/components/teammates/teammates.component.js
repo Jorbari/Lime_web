@@ -1,7 +1,6 @@
 import React from "react";
-import CustomButton from "../custom-button/custom-button.component";
 import TeammateCard from "../teammate-card/teammate-card.component";
-import { InviteButton, TeamMateBody, TeammateTitle } from "./teammates.style";
+import * as Style from "./teammates.style";
 
 const teammateData = [
     {
@@ -54,23 +53,23 @@ const Teammates = () => {
                     position: "relative"
                 }}
             >
-                <TeammateTitle>
+                <Style.TeammateTitle>
                     <h2>
                         Teammates
                     </h2>
                     <p>
                         7 members
                     </p>
-                </TeammateTitle>
-                <TeamMateBody>
+                </Style.TeammateTitle>
+                <Style.TeamMateBody>
                     {
                         teammateData.map((teammateDatum, idx) => <TeammateCard name={teammateDatum.name} email={teammateDatum.email} key={idx} />)
                     }
-                </TeamMateBody>
-                <InviteButton>
+                </Style.TeamMateBody>
+                <Style.InviteButton>
                     <i className="fas fa-pencil" />
                       Invite teammate
-                </InviteButton>
+                </Style.InviteButton>
 
             </div>
         </div>
