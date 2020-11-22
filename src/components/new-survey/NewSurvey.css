@@ -26,16 +26,17 @@ color: #5B5656
 
 .react-responsive-modal-modal {
   width: 800px;
+  border-radius: 4rem;
 }
 
 .react-responsive-modal-modal .title {
   font-family: Poppins;
-font-style: normal;
-font-weight: 600;
-font-size: 20px;
-line-height: 31px;
-color: #7FCD91;
-margin-bottom: 22.5px;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 31px;
+  color: #7FCD91;
+  margin-bottom: 22.5px;
 }
 
 .react-responsive-modal-modal .form-input:nth-child(2) {
@@ -53,3 +54,4 @@ margin-bottom: 22.5px;
   line-height: 20px;
   text-align: center;
 }
+

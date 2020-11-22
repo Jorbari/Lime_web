@@ -3,14 +3,12 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import moment from "moment";
 
-import { getAllSurveys } from "../../redux/survey/survey.action";
-import { getAllProjects } from "../../redux/project/project.actions";
-
-import { ButtonContainer, SurveysContainer} from './surveys.styles'
-
+import { getAllSurveys } from "../../../redux/survey/survey.action";
+import { getAllProjects } from "../../../redux/project/project.actions";
+import { ButtonContainer, SurveysContainer} from './survey-list.styles'
 
 
-function Surveys(props) {
+const SurveyList = (props)=>{
   const { history, surveys, projects } = props;
 
 
@@ -41,7 +39,7 @@ function Surveys(props) {
                 <div className="flex justify-end">
                   <button
                     className="newProjectButton"
-                    onClick={()=>history.push('/new-survey')}
+                    onClick={()=>history.push('/surveys/new')}
                   >
                     <i className="fa fa-plus mr-2" aria-hidden="true"></i>
                     New Survey
@@ -80,7 +78,7 @@ function Surveys(props) {
                       <tr className="table-border" key={survey._id}>
                         <td className="w-2/4 py-6">
                           <Link
-                            to={`/surveys/${survey._id}`}
+                            to={`/surveys/details/${survey._id}`}
                             key={survey._id}
                             className="mb-4"
                           >
@@ -92,7 +90,7 @@ function Surveys(props) {
                         </td>
                         <td className="w-2/4 py-6">
                           <Link
-                            to={`/surveys/${survey._id}`}
+                            to={`/surveys/details/${survey._id}`}
                             key={survey._id}
                             className="mb-4"
                           >
@@ -101,7 +99,7 @@ function Surveys(props) {
                         </td>
                         <td className="w-2/4 py-6">
                           <Link
-                            to={`/surveys/${survey._id}`}
+                            to={`/surveys/details/${survey._id}`}
                             key={survey._id}
                             className="mb-4"
                           >
@@ -110,7 +108,7 @@ function Surveys(props) {
                         </td>
                         <td className="w-2/4 py-6">
                           <Link
-                            to={`/surveys/${survey._id}`}
+                            to={`/surveys/details/${survey._id}`}
                             key={survey._id}
                             className="mb-4"
                           >
@@ -119,7 +117,7 @@ function Surveys(props) {
                         </td>
                         <td className="w-2/4 py-6">
                           <Link
-                            to={`/surveys/${survey._id}`}
+                            to={`/surveys/details/${survey._id}`}
                             key={survey._id}
                             className="mb-4"
                           >
@@ -128,7 +126,7 @@ function Surveys(props) {
                         </td>
                         <td className="w-2/4 py-6">
                           <Link
-                            to={`/surveys/${survey._id}`}
+                            to={`/surveys/details/${survey._id}`}
                             key={survey._id}
                             className="mb-4"
                           >
@@ -137,7 +135,7 @@ function Surveys(props) {
                         </td>
                         <td className="w-2/4 py-6">
                           <Link
-                            to={`/surveys/${survey._id}`}
+                            to={`/surveys/details/${survey._id}`}
                             key={survey._id}
                             className="mb-4"
                           >
@@ -166,5 +164,5 @@ const mapStateToProps = ({
 });
 
 export default connect(mapStateToProps, { getAllSurveys, getAllProjects })(
-  Surveys
+    SurveyList
 );

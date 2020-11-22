@@ -17,7 +17,6 @@ export const createSurvey = (
     history,
     surveys,
     toggleModal,
-    toggleNewSurveyView
 ) => async dispatch => {
     try {
         dispatch({type: SurveyActionTypes.REQUEST_PROCESS});
@@ -31,9 +30,8 @@ export const createSurvey = (
         });
         toggleModal();
         history.push("/surveys");
-        toggleNewSurveyView();
     } catch (error) {
-        dispatch({type: SurveyActionTypes.REQUEST_ERROR, payload: error.response.data});
+        dispatch({type: SurveyActionTypes.REQUEST_ERROR, payload: 'failed to create survey'});
     }
 };
 
@@ -101,6 +99,7 @@ export const getSingleSurvey = id => async dispatch => {
         const {
             data: {data}
         } = await getSingleSurveyRequest(id);
+        console.log("data>>>>",data)
         await dispatch({
             type: SurveyActionTypes.SURVEY_REQUEST_SUCCESS,
             payload: data.find(item => item._id === id)
