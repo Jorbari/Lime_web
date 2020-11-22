@@ -3,11 +3,13 @@ import { Form, Col, Row } from "react-bootstrap";
 import { connect } from "react-redux";
 import { Modal } from "react-responsive-modal";
 
-import { createSurvey } from "../../redux/survey/survey.action";
+import { createSurvey } from "../../../redux/survey/survey.action";
 
-import "./NewSurvey.css";
+import "./survey-new.styles.scss";
 
-const NewSurvey = props => {
+import {DropdownMenu, Caret} from './survey-new.styles';
+
+const SurveyNew = props => {
   const { toggleNewSurveyView, history, projects, surveys } = props;
   const [name, setName] = useState("");
   const [tag, setTag] = useState("");
@@ -34,8 +36,8 @@ const NewSurvey = props => {
   };
   return (
     <div style={{ position: "relative" }}>
-      <Modal open={open} onClose={() => toggleModal()} center>
-        <div style={{ height: "fit-content", padding: "30.8px 35.8px" }}>
+      <Modal open={open} onClose={() => toggleModal()} center modalId dialogClassName="br-4">
+        <div style={{ height: "fit-content", padding: "30.8px 35.8px",  }}>
           <p className="title">Create Survey</p>
           <form
             className="w-full max-w-lg new-project-form"
@@ -85,22 +87,44 @@ const NewSurvey = props => {
                   >
                     Survey Category:
                   </Form.Label>
-                  <Form.Control
-                    type="text"
-                    className="grid-input-style login-input-styles"
-                    onChange={({ target: { value } }) => setCategory(value)}
-                    required
-                    value={category}
-                    placeholder="Name of Category"
-                    style={{
+                  <div className="dropdown">
+                    {/* <div className="grid-input-style login-input-styles dropdown-toggle "                   
+                     style={{
                       height: "36px",
                       fontSize: "15px",
                       backgroundColor: "white",
                       paddingLeft: 0,
                       borderBottom: "1px solid rgba(91, 86, 86, 0.5)",
-                      borderRadius: 0
-                    }}
-                  />
+                      borderRadius: 0,
+                      cursor:'pointer'
+                    }} data-toggle="dropdown">
+                      Name of Category
+                    </div> */}
+                    <Form.Control
+                      type="text"
+                      className="grid-input-style login-input-styles dropdown-toggle"
+                      required
+                      data-toggle="dropdown"
+                      value={category}
+                      placeholder="Name of Category"
+                      readOnly
+                      style={{
+                        height: "36px",
+                        fontSize: "15px",
+                        backgroundColor: "white",
+                        paddingLeft: 0,
+                        borderBottom: "1px solid rgba(91, 86, 86, 0.5)",
+                        borderRadius: 0,
+                        cursor:'pointer'
+                      }}
+                    />
+                    <Caret></Caret>
+                    <DropdownMenu className="dropdown-menu" onClick = {(event) =>{event.persist(); console.log(event); setCategory(event.target.id)}}>
+                      <span className="dropdown-item" id="Baseline">Baseline</span>
+                      <span className="dropdown-item" id="Midline">Midline</span>
+                      <span className="dropdown-item" id="Endline">Endline</span>
+                    </DropdownMenu>
+                  </div>
                 </Col>
                 <Col sm={12} md={6}>
                   <Form.Label
@@ -156,7 +180,7 @@ const NewSurvey = props => {
                   borderRadius: 0
                 }}
               >
-                {projects.length > 0 &&
+                {projects?.length > 0 &&
                   projects.map(item => (
                     <option key={item._id} value={item._id}>
                       {item.title}
@@ -191,10 +215,11 @@ const NewSurvey = props => {
   );
 };
 
-const mapStateToProps = ({ survey: { isLoading, status, surveys } }) => ({
+const mapStateToProps = ({ survey: { isLoading, status, surveys }, project:{ projects} }) => ({
   isLoading,
   status,
-  surveys
+  surveys,
+  projects
 });
 
-export default connect(mapStateToProps, { createSurvey })(NewSurvey);
+export default connect(mapStateToProps, { createSurvey })(SurveyNew);

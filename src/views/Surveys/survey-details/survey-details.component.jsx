@@ -1,64 +1,18 @@
 import React from "react";
-import styled from "styled-components";
 import {Tab, Tabs, TabList, TabPanel} from "react-tabs";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 
-import {getSingleSurvey} from "../../redux/survey/survey.action";
-
-import SideBar from "../../components/side-bar/SideBar";
-import NavBar from "../../components/NavBar";
-import Summary from "../Projects/Summary";
-import Survey from "../Projects/Survey";
-import Team from "../Projects/Team";
-import ExecutionPlan from "../Projects/ExecutionPlan";
-import Budget from "../Projects/Budget";
-
-const SapsProjectContainer = styled.div`
-  .sapsHeader {
-    font-style: normal;
-    font-size: 36px;
-    line-height: 54px;
-    color: #a4d4ae;
-  }
-
-  .sapsTable {
-    width: 1000px;
-    border: 0.5px solid #7fcd91;
-    border-left: none;
-    border-right: none;
-  }
-
-  .borderLine {
-    height: 85.19px;
-    border-right: 1px solid #7fcd91;
-  }
-
-  .borderLineLeft {
-    height: 85.19px;
-    border-left: 1px solid #7fcd91;
-  }
-
-  .deleteProjectText {
-    position: relative;
-    right: -58.8rem;
-    top: -21px;
-    font-style: normal;
-    font-weight: 300;
-    font-size: 14px;
-    line-height: 21px;
-    text-decoration-line: underline;
-    /* margin-right: -200px; */
-    color: #dc4343;
-    transform: matrix(1, 0.01, -0.01, 1, 0, 0);
-  }
-
-  .react-tabs__tab-list {
-    margin-left: 2rem !important;
-  }
-`;
-
-const SingleSurvey = props => {
+import {getSingleSurvey} from "../../../redux/survey/survey.action";
+import Summary from "../../Projects/Summary";
+import Survey from "../../Projects/Survey";
+import Team from "../../Projects/Team";
+import ExecutionPlan from "../../Projects/ExecutionPlan";
+import Budget from "../../Projects/Budget";
+import {
+    SapsProjectContainer
+} from './survey.details.styles'
+const SurveyDetails = props => {
     const {
         history,
         survey,
@@ -83,9 +37,7 @@ const SingleSurvey = props => {
 
     return (
         <>
-            <SideBar toggleNewProjectView={toggleNewProjectView} history={history}/>
-            <div className="relative md:ml-64 bg-white">
-                <NavBar/>
+            <div className="relative bg-white">
                 {/* <div> */}
                 <SapsProjectContainer className="relative bg-white md:pt-32 pb-32 pt-12">
                     <Tabs>
@@ -133,12 +85,14 @@ const SingleSurvey = props => {
 };
 
 const mapStateToProps = ({
-                             survey: {isLoading, status, survey, surveys}
+                             survey: {isLoading, status, survey, surveys}, project:{project,projects}
                          }) => ({
     isLoading,
     status,
     survey,
-    surveys
+    surveys,
+    project,
+    projects
 });
 
-export default connect(mapStateToProps, {getSingleSurvey})(SingleSurvey);
+export default connect(mapStateToProps, {getSingleSurvey})(SurveyDetails);
