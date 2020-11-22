@@ -13,6 +13,7 @@ import SideBar from './components/side-bar/SideBar'
 import NavBar from './components/NavBar'
 import NewProject from "./components/new-project/NewProject";
 import NewSurvey from "./components/new-survey/NewSurvey";
+import ViewReport from './views/view-report/view-report.component'
 import {
     MainContentContainer, 
     MainContainer, 
@@ -38,6 +39,7 @@ const App = () => {
                             <ProtectedRoute exact path="/new-survey" component={NewSurvey}/>
                             <ProtectedRoute exact path="/surveys/:id" component={Surveys}/>
                             <ProtectedRoute exact path="/report" component={Report}/>
+                            <ProtectedRoute exact path="/report/view" component={ViewReport}/>
                             <ProtectedRoute exact path="/profile" component={Profile}/>
                         </Switch>
                     </MainContent>

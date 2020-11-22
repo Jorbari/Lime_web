@@ -1,7 +1,7 @@
 import React from 'react';
-import { EditProfileButton } from './user-profile-image.styles';
+import * as Style from './user-profile-image.styles';
 
-const UserProfileImage = ({firstname, lastname, email}) => {
+const UserProfileImage = ({ firstname, lastname, email }) => {
     return (
         <div className="col-12 col-md-4 d-flex flex-column align-items-center justify-content-center">
             <div
@@ -36,9 +36,9 @@ const UserProfileImage = ({firstname, lastname, email}) => {
                 )}
             </h5>
             <p>{email}</p>
-            <EditProfileButton>
+            <Style.EditProfileButton>
                 Edit Profile
-            </EditProfileButton>
+            </Style.EditProfileButton>
         </div>
     )
 }

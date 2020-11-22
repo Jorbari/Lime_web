@@ -6,18 +6,13 @@ import moment from "moment";
 import { getAllSurveys } from "../../redux/survey/survey.action";
 import { getAllProjects } from "../../redux/project/project.actions";
 
-import SideBar from "../../components/side-bar/SideBar";
-import NavBar from "../../components/NavBar";
-import NewSurvey from "../../components/new-survey/NewSurvey";
-
 import { ButtonContainer, SurveysContainer} from './surveys.styles'
 
 
 
 function Surveys(props) {
   const { history, surveys, projects } = props;
-  const [newProjectView, setNewProjectView] = React.useState(false);
-  const [newSurveyView, setNewSurveyView] = React.useState(false);
+
 
   React.useEffect(() => {
     const fetchProjects = async () => {
@@ -31,18 +26,11 @@ function Surveys(props) {
     fetchProjects();
 
     fetchSurveys();
-  }, []);
+  });
 
   const getProjectName = id =>
     projects.find(project => project._id.toString() === id.toString())?.title;
 
-  const toggleNewProjectView = () => {
-    setNewProjectView(!newProjectView);
-  };
-
-  const toggleNewSurveyView = () => {
-    setNewSurveyView(!newSurveyView);
-  };
   return (
     <div>
           <div
