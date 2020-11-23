@@ -34,7 +34,7 @@ export const NavItem = styled.span`
     background:unset;
     &.active{
         font-weight: bold;
-        border-bottom: 1px solid #5B5656;
+        border-bottom: 1.5px solid #5B5656;
     }
 `
 

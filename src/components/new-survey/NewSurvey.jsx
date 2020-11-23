@@ -89,18 +89,6 @@ const NewSurvey = props => {
                     Survey Category:
                   </Form.Label>
                   <div className="dropdown">
-                    {/* <div className="grid-input-style login-input-styles dropdown-toggle "                   
-                     style={{
-                      height: "36px",
-                      fontSize: "15px",
-                      backgroundColor: "white",
-                      paddingLeft: 0,
-                      borderBottom: "1px solid rgba(91, 86, 86, 0.5)",
-                      borderRadius: 0,
-                      cursor:'pointer'
-                    }} data-toggle="dropdown">
-                      Name of Category
-                    </div> */}
                     <Form.Control
                       type="text"
                       className="grid-input-style login-input-styles dropdown-toggle"

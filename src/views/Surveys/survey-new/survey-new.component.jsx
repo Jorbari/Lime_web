@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import { Form, Col, Row } from "react-bootstrap";
 import { connect } from "react-redux";
 import { Modal } from "react-responsive-modal";
+import CustomButton from "../../../components/custom-button/custom-button.component";
 
 import { createSurvey } from "../../../redux/survey/survey.action";
 
 
-import {DropdownMenu, Caret} from './survey-new.styles';
+import {DropdownMenu, Caret,ButtonGroup} from './survey-new.styles';
 
 const SurveyNew = props => {
   const { toggleNewSurveyView, history, projects, surveys } = props;
@@ -87,18 +88,6 @@ const SurveyNew = props => {
                     Survey Category:
                   </Form.Label>
                   <div className="dropdown">
-                    {/* <div className="grid-input-style login-input-styles dropdown-toggle "                   
-                     style={{
-                      height: "36px",
-                      fontSize: "15px",
-                      backgroundColor: "white",
-                      paddingLeft: 0,
-                      borderBottom: "1px solid rgba(91, 86, 86, 0.5)",
-                      borderRadius: 0,
-                      cursor:'pointer'
-                    }} data-toggle="dropdown">
-                      Name of Category
-                    </div> */}
                     <Form.Control
                       type="text"
                       className="grid-input-style login-input-styles dropdown-toggle"
@@ -195,21 +184,11 @@ const SurveyNew = props => {
         </div>
       </Modal>
 
-      <div className="top-btn-group pr-4">
-        <button
-          className="form-btn btn top-save-btn"
-          type="submit"
-          onClick={() => toggleModal()}
-        >
-          Start from scratch
-        </button>
-        <button className="form-btn btn top-save-btn" type="submit">
-          Import questions
-        </button>
-        <button className="form-btn btn top-save-btn" type="submit">
-          Suggest Template
-        </button>
-      </div>
+      <ButtonGroup>
+        <CustomButton type="submit" primary onClick={() => toggleModal()}>Start from scratch</CustomButton>
+        <CustomButton type="submit" primary>Import questions</CustomButton>
+        <CustomButton type="submit" primary>Suggest Template</CustomButton>
+      </ButtonGroup>
     </div>
   );
 };
