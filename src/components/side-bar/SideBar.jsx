@@ -1,5 +1,4 @@
 import React from "react";
-import styled from "styled-components";
 
 import dashboardIcon from "../../assets/dashboard.svg";
 import projectIcon from "../../assets/project.svg";
@@ -8,11 +7,9 @@ import surveyIcon from "../../assets/surveys.svg";
 import reportIcon from "../../assets/report.svg";
 import profileIcon from "../../assets/profile.svg";
 import LogoutIcon from "../../assets/logout.svg";
-import {matchPath} from 'react-router';
 import "./SideBar.css";
 import { withRouter } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { logout } from "../../api/helpers";
 
 import {
   SidebarContainer,
@@ -24,26 +21,6 @@ import {
 } from './SideBar.styles'
 
 const SideBar = (props) => {
-  const {history, location } = props;
-  console.log(props)
-  const [collapseShow, setCollapseShow] = React.useState("hidden");
-
-  const goToDashboard = () => {
-    history.push("/");
-    // toggleNewProjectView();
-  };
-
-  const goToProjects = () => {
-    history.push("/projects");
-    // toggleNewProjectView();
-  };
-
-  const isActive = (path)=>{
-    return !!matchPath(
-      location.pathname,
-      path
-    )
-  }
 
   return (
     <>
