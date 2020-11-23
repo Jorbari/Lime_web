@@ -1,7 +1,6 @@
 import styled,{css} from 'styled-components';
 const primaryStyles = css`
     background: #B6E6BD;
-
     &:hover {
     }
 `
@@ -20,7 +19,7 @@ const SpanWidthStyles = css`
     ${ButtonStyles};
     width: 100%;
     justify-content: center;
-    padding: 2.4rem 0;
+    padding: 1.4rem 0;
 `
 
 const getButtonStyles = props =>{
