@@ -6,7 +6,7 @@ import { createProject } from "../../redux/project/project.actions";
 
 import "./NewProject.css";
 
-const NewProject = props => {
+const NewProject = (props) => {
   const { toggleNewProjectView, history, projects } = props;
   const [title, setTitle] = useState("");
   const [manager, setManager] = useState("");
@@ -24,24 +24,22 @@ const NewProject = props => {
   const [sponsorEmail, setSponsorEmail] = useState("");
   const [description, setDescription] = useState("");
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     await props.createProject(
       {
         title,
-        manager,
-        managerEmail,
-        sponsor,
-        sponsorEmail,
-        startDate,
-        endDate,
+        manager: { name: manager, email: managerEmail },
+        sponsor: { name: sponsor, email: sponsorEmail },
+        startDate: new Date(`${startDate}`).getTime(),
+        endDate: new Date(`${endDate}`).getTime(),
         category,
         goals,
         objectives,
         inScope,
         outScope,
         requirement,
-        description
+        description,
       },
       history,
       toggleNewProjectView,
@@ -50,19 +48,38 @@ const NewProject = props => {
   };
 
   const checkIfFilled = () => {
-    if(title && manager && managerEmail && sponsor && sponsorEmail && startDate && endDate && category && goals && objectives && inScope && outScope && requirement && description) {
+    if (
+      title &&
+      manager &&
+      managerEmail &&
+      sponsor &&
+      sponsorEmail &&
+      startDate &&
+      endDate &&
+      category &&
+      goals &&
+      objectives &&
+      inScope &&
+      outScope &&
+      requirement &&
+      description
+    ) {
       return false;
     }
     return true;
-  }
+  };
   return (
     <div style={{ position: "relative" }}>
       <form
         className="w-full max-w-lg new-project-form"
-        onSubmit={e => handleSubmit(e)}
+        onSubmit={(e) => handleSubmit(e)}
       >
         <div className="top-save-btn-div pr-4">
-          <button className="form-btn btn top-save-btn" type="submit" disabled={checkIfFilled()}>
+          <button
+            className="form-btn btn top-save-btn"
+            type="submit"
+            disabled={checkIfFilled()}
+          >
             Save
           </button>
         </div>
@@ -483,7 +500,11 @@ const NewProject = props => {
           >
             Cancel
           </button>
-          <button className="form-btn btn bottom-save-btn" type="submit" disabled={checkIfFilled()}>
+          <button
+            className="form-btn btn bottom-save-btn"
+            type="submit"
+            disabled={checkIfFilled()}
+          >
             Save
           </button>
         </div>
@@ -495,7 +516,7 @@ const NewProject = props => {
 const mapStateToProps = ({ project: { isLoading, status, projects } }) => ({
   isLoading,
   status,
-  projects
+  projects,
 });
 
 export default connect(mapStateToProps, { createProject })(NewProject);
