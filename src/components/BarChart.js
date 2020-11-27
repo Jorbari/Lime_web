@@ -2,12 +2,13 @@ import React from "react";
 import Chart from "chart.js";
 
 import styled from "styled-components";
-import ProjectCards from "./ProjectCards";
+import ProjectCards from "./ProjectCard/ProjectCards.jsx";
 
 const BarGraphContainer = styled.div`
   border: 2px solid #7fcd91;
   box-sizing: border-box;
   border-radius: 4px;
+  margin-bottom: 3.9rem;
 `;
 
 export default function BarChart() {
@@ -15,97 +16,62 @@ export default function BarChart() {
     let config = {
       type: "bar",
       data: {
-        labels: [
-          "January",
-          "February",
-          "March",
-          "April",
-          "May",
-          "June",
-          "July",
-        ],
+        labels: ["Mon", "Tue", "Wed", "Thu", "Fri"],
         datasets: [
           {
-            label: new Date().getFullYear(),
+            label: "",
             backgroundColor: "#575A89",
-            borderColor: "#575A89",
-            data: [30, 78, 56, 34, 100, 45, 13],
+            // borderColor: "#575A89",
+            data: [4, 5, 6, 5, 4, 7],
             fill: false,
             barThickness: 8,
           },
-          // {
-          //   label: new Date().getFullYear() - 1,
-          //   fill: false,
-          //   backgroundColor: "#4c51bf",
-          //   borderColor: "#4c51bf",
-          //   data: [27, 68, 86, 74, 10, 4, 87],
-          //   barThickness: 8
-          // }
         ],
       },
       options: {
-        maintainAspectRatio: false,
-        responsive: true,
-        title: {
-          display: false,
-          text: "Orders Chart",
-        },
-        tooltips: {
-          mode: "index",
-          intersect: false,
-        },
-        hover: {
-          mode: "nearest",
-          intersect: true,
-        },
-        legend: {
-          labels: {
-            fontColor: "rgba(0,0,0,.4)",
-          },
-          align: "end",
-          position: "bottom",
-        },
         scales: {
           xAxes: [
             {
-              display: false,
-              scaleLabel: {
-                display: true,
-                labelString: "Month",
-              },
               gridLines: {
-                borderDash: [2],
-                borderDashOffset: [2],
-                color: "rgba(33, 37, 41, 0.3)",
-                zeroLineColor: "rgba(33, 37, 41, 0.3)",
-                zeroLineBorderDash: [2],
-                zeroLineBorderDashOffset: [2],
-              },
-            },
-          ],
-          yAxes: [
-            {
-              display: true,
-              scaleLabel: {
-                display: false,
-                labelString: "Value",
-              },
-              gridLines: {
-                borderDash: [2],
-                drawBorder: false,
-                borderDashOffset: [2],
-                color: "rgba(33, 37, 41, 0.2)",
-                zeroLineColor: "rgba(33, 37, 41, 0.15)",
-                zeroLineBorderDash: [2],
-                zeroLineBorderDashOffset: [2],
+                offsetGridLines: true,
               },
             },
           ],
         },
       },
     };
+
     let ctx = document.getElementById("bar-chart").getContext("2d");
     window.myBar = new Chart(ctx, config);
+
+    // let data = {
+    //   datasets: [
+    //     {
+    //       barPercentage: 0.5,
+    //       barThickness: 6,
+    //       maxBarThickness: 8,
+    //       minBarLength: 2,
+    //       data: [10, 20, 30, 40, 50, 60, 70],
+    //     },
+    //   ],
+    // };
+    // let options = {
+    //   scales: {
+    //     xAxes: [
+    //       {
+    //         gridLines: {
+    //           offsetGridLines: true,
+    //         },
+    //       },
+    //     ],
+    //   },
+    // };
+
+    // window.myBar = new Chart(ctx, {
+    //   type: "bar",
+    //   data: data,
+    //   options: options,
+    // });
   }, []);
   return (
     <>
