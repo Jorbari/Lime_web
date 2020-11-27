@@ -36,7 +36,7 @@ const UserProfileImage = ({ firstname, lastname, email }) => {
                 )}
             </h5>
             <p>{email}</p>
-            <Style.EditProfileButton>
+            <Style.EditProfileButton primary>
                 Edit Profile
             </Style.EditProfileButton>
         </div>
