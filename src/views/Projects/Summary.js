@@ -1,21 +1,18 @@
 import React, { useState } from "react";
-import styled from "styled-components";
 import moment from "moment";
-import ConfirmationBox from '../../components/confirmation-box/confirmationBox'
-import configureStore from '../../store';
+import ConfirmationBox from "../../components/confirmation-box/confirmationBox";
 
 import infoIcon from "../../assets/info.svg";
-import {getSingleProject} from '../../redux/project/project.actions'
-import {connect} from 'react-redux';
-import {selectSingleProject} from '../../redux/project/project.selectors'
-import {SummaryContainer} from './summary.styles';
+import { getSingleProject } from "../../redux/project/project.actions";
+import { connect } from "react-redux";
+import { selectSingleProject } from "../../redux/project/project.selectors";
+import { SummaryContainer } from "./summary.styles";
 
 const SummaryTab = (props) => {
   const { project, history, deleteProject, projects } = props;
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
-  const showSpinner = () => setShow(false);
   const handleShow = () => setShow(true);
 
   React.useEffect(() => {
@@ -27,20 +24,19 @@ const SummaryTab = (props) => {
   }, []);
 
   const DeleteProject = () => {
-    deleteProject(project._id, history, projects)
+    deleteProject(project._id, history, projects);
     handleClose();
-  }
+  };
 
   const confirmation = () => {
     DeleteProject();
-  } 
-  
+  };
 
   return (
     <SummaryContainer>
       <div className="sapsHeader-conatiner">
         <h1 className="sapsHeader capitalize font-semibold ml-8 py-4">
-          {project?.title || 'null'}
+          {project?.title || "null"}
         </h1>
         {/* <button
           type="button"
@@ -53,14 +49,14 @@ const SummaryTab = (props) => {
           className="deleteProjectText"
           onClick={() => handleShow()}
         >
-          <span >Delete project</span>
+          <span>Delete project</span>
         </button>
       </div>
       <div
         className="relative flex flex-col min-w-0 break-words w-full xl:w-10/12 mb-12 xl:mb-0 pr-4 mb-6 rounded"
         style={{
           marginLeft: "-1rem",
-          marginTop: "8rem"
+          marginTop: "8rem",
         }}
       >
         <table className="sapsTable table-fixed ml-4 w-full xl:w-10/12 mb-12 xl:mb-0 pr-4">
@@ -89,7 +85,7 @@ const SummaryTab = (props) => {
         </table>
       </div>
 
-      <div className="p-4 flex-auto project-status">
+      {/* <div className="p-4 flex-auto project-status">
         <img
           alt=""
           src={infoIcon}
@@ -99,7 +95,7 @@ const SummaryTab = (props) => {
           <h1 className="mb-1 font-semibold text-xl">Project Status:</h1>
           <p>Ongoing</p>
         </div>
-      </div>
+      </div> */}
 
       <h1 className="card-header-text">Details</h1>
       <div className="table-card-container w-full xl:w-9/12 mb-12 xl:mb-0 pr-4">
@@ -113,7 +109,9 @@ const SummaryTab = (props) => {
               <td className="w-2/4">
                 <div className="">
                   <p>Date Started:</p>
-                  <h4>{moment(project?.startDate).format("Do of MMMM YYYY")}</h4>
+                  <h4>
+                    {moment(project?.startDate).format("Do of MMMM YYYY")}
+                  </h4>
                 </div>
               </td>
               <td className="py-6 w-2/4">
@@ -154,20 +152,21 @@ const SummaryTab = (props) => {
           </thead>
         </table>
       </div>
-      <ConfirmationBox 
-        title="Delete project" 
+      <ConfirmationBox
+        title="Delete project"
         buttonMessage="Confirm Delete"
-        handleClose={() => handleClose()} 
+        handleClose={() => handleClose()}
         confirm={() => confirmation()}
-        show={show}>
-          Are you sure you want to delete this project?
+        show={show}
+      >
+        Are you sure you want to delete this project?
       </ConfirmationBox>
     </SummaryContainer>
   );
 };
 
-const mapStateToProps = state => ({
-  project: selectSingleProject(state)
-})
+const mapStateToProps = (state) => ({
+  project: selectSingleProject(state),
+});
 
-export default connect(mapStateToProps, {getSingleProject})(SummaryTab);
+export default connect(mapStateToProps, { getSingleProject })(SummaryTab);

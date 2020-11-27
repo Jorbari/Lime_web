@@ -8,11 +8,6 @@ import {withRouter} from 'react-router-dom'
 
 function Dashboard(props) {
   const { history } = props;
-  const [newProjectView, setNewProjectView] = React.useState(false);
-
-  const toggleNewProjectView = () => {
-    setNewProjectView(!newProjectView);
-  };
 
   return (
     <div>
