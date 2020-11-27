@@ -3,10 +3,11 @@ import styled from "styled-components";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import { connect } from "react-redux";
 
-import { getSingleProject, deleteProject } from "../../redux/project/project.actions";
+import {
+  getSingleProject,
+  deleteProject,
+} from "../../redux/project/project.actions";
 
-import SideBar from "../../components/side-bar/SideBar";
-import NavBar from "../../components/NavBar";
 import Summary from "./Summary";
 import Survey from "./Survey";
 import Team from "./Team";
@@ -57,15 +58,15 @@ const SapsProjectContainer = styled.div`
   }
 `;
 
-const Project = props => {
+const Project = (props) => {
   const {
     history,
     project,
     projects,
     deleteProject,
     match: {
-      params: { id }
-    }
+      params: { id },
+    },
   } = props;
   const [newProjectView, setNewProjectView] = React.useState(false);
 
@@ -77,13 +78,9 @@ const Project = props => {
     fetchSingleProject();
   }, []);
 
-  const toggleNewProjectView = () => {
-    setNewProjectView(!newProjectView);
-  };
-
   return (
     <>
-      <div className="relative md:ml-64 bg-white">
+      <div className="relative bg-white">
         {/* <div> */}
         <SapsProjectContainer className="relative bg-white md:pt-32 pb-32 pt-12">
           <Tabs>
@@ -107,7 +104,6 @@ const Project = props => {
 
             <div className="px-4 md:px-10 mx-auto w-full -m-24">
               <TabPanel className="w-full xl:w-8/12 mb-12 xl:mb-0 pr-4">
-            
                 <Summary
                   project={project}
                   history={history}
@@ -137,12 +133,12 @@ const Project = props => {
 };
 
 const mapStateToProps = ({
-  project: { isLoading, status, project, projects }
+  project: { isLoading, status, project, projects },
 }) => ({
   isLoading,
   status,
   project,
-  projects
+  projects,
 });
 
 export default connect(mapStateToProps, { getSingleProject, deleteProject })(
