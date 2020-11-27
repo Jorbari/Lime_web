@@ -4,22 +4,22 @@ import ReportBuilderDescription from '../report-builder-description/report-build
 import ReportBuilderGoals from '../report-builder-goal/report-builder-goal.component'
 import * as Style from './report-buider-document.styles';
 
-const ReportBuiderDocs = ({ title }) => {
+const ReportBuiderDocs = ({ current_report }) => {
     return (
         <Style.ReportBuiderDocsContainer>
             <Style.DocsTopNavContainer>
                 <Style.DocsTopNav>
-                    <CustomButton>
+                    <CustomButton primary>
                         Print Document
                     </CustomButton>
-                    <CustomButton>
+                    <CustomButton primary>
                         Save As PDF
                     </CustomButton>
                 </Style.DocsTopNav>
             </Style.DocsTopNavContainer>
             <Style.DocsBody>
                 <Style.Title>
-                    {title}
+                    {current_report.title}
                 </Style.Title>
                 <ReportBuilderDescription />
                 <ReportBuilderGoals />
@@ -27,5 +27,6 @@ const ReportBuiderDocs = ({ title }) => {
         </Style.ReportBuiderDocsContainer>
     )
 }
+
 
 export default ReportBuiderDocs;

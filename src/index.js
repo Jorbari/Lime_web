@@ -2,17 +2,23 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import { Provider } from "react-redux";
-import configureStore from "./store";
+import { persistor, store } from "./store";
 
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "react-tabs/style/react-tabs.css";
 import "react-responsive-modal/styles.css";
 import App from "./App";
+import { BrowserRouter } from "react-router-dom";
+import { PersistGate } from "redux-persist/integration/react";
 
 ReactDOM.render(
-  <Provider store={configureStore}>
+  <Provider store={store}>
     <React.StrictMode>
-      <App />
+      <BrowserRouter>
+        <PersistGate persistor={persistor}>
+          <App />
+        </PersistGate>
+      </BrowserRouter>
     </React.StrictMode>
   </Provider>,
   document.getElementById("root")
