@@ -6,5 +6,6 @@ export const ReportBuilderTitleMixin = css`
     font-size: 2.5rem;
     font-weight: 600;
     margin: .5rem 0;
-    padding: 0 2rem;
+    padding: 2rem 2rem;
+    justify-content: space-between
 `

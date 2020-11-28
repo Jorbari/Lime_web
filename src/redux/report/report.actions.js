@@ -19,3 +19,74 @@ export const getAProjectReport = (id) => {
         })
     }
 }
+
+export const manageDescriptionTab = () => {
+    return async dispatch => {
+        dispatch({
+            type: ReportActionTypes.MANAGE_DESCRIPTION_TAB_DISPLAY
+        })
+    }
+}
+
+export const manageGoalsAndObjectiveTab = () => {
+    return async dispatch => {
+        dispatch({
+            type: ReportActionTypes.MANAGE_GOALS_AND_OBJECTIVE_TAB_DISPLAY
+        })
+    }
+}
+
+export const manageTeamMembersTab = () => {
+    return dispatch => {
+        dispatch({
+            type: ReportActionTypes.MANAGE_TEAM_TAB_DISPLAY
+        })
+    }
+}
+export const manageDateAndMilestoneTab = () => {
+    return dispatch => {
+        dispatch({
+            type: ReportActionTypes.MANAGE_DATE_AND_MILESTONE_TAB_DISPLAY
+        })
+    }
+}
+
+export const manageScopeTab = () => {
+    return dispatch => {
+        dispatch({
+            type: ReportActionTypes.MANAGE_SCOPE_TAB_DISPLAY
+        })
+    }
+}
+
+export const manageExecutionPlanTab = () => {
+    return dispatch => {
+        dispatch({
+            type: ReportActionTypes.MANAGE_EXECUTION_PLAN_TAB_DISPLAY
+        })
+    }
+}
+
+export const manageResourceRequirementTab = () => {
+    return dispatch => {
+        dispatch({
+            type: ReportActionTypes.MANAGE_RESOURCE_REQUIREMENT_TAB_DISPLAY
+        })
+    }
+}
+
+export const manageBudgetTab = () => {
+    return dispatch => {
+        dispatch({
+            type: ReportActionTypes.MANAGE_BUDGET_TAB_DISPLAY
+        })
+    }
+}
+
+export const manageSurveyInformationTab = () => {
+    return dispatch => {
+        dispatch({
+            type: ReportActionTypes.MANAGE_SURVEY_INFORMATION_TAB_DISPLAY
+        })
+    }
+}

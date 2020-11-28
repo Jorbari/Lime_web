@@ -7,7 +7,7 @@ export const ReportBuilderGoalContainer = styled.div`
     flex-direction: column;
     border-top: 1px solid ${globalLines};
     margin: 3.5rem 0;
-    padding: 3.5rem 0;
+    padding: 1rem 0;
 `
 
 export const Title = styled.h1`
@@ -33,5 +33,9 @@ export const GoalsList = styled.div`
 
     & li {
         padding: .3rem 0;
+    }
+
+    & p{
+        padding: .3rem 1rem;
     }
 `

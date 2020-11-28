@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { primaryColorLight } from '../../../styles/global-variables';
+import { globalLines, primaryColor, primaryColorLight } from '../../../styles/global-variables';
 
 export const ReportBuiderContainer = styled.div`
     background-color: ${primaryColorLight};
@@ -22,10 +22,11 @@ export const ReportBuilderTitle = styled.h2`
 `
 
 export const ReportCards = styled.div`
-    border: 1px solid black;
+    border: 1px solid ${globalLines};
     border-radius:5px;
     display:flex;
     justify-content:center;
+    background-color: ${({ selected }) => selected ? primaryColor : null};
     align-items:center;
     width: auto;
     height: 5rem;
