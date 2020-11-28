@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Accordion, Button, Card, Form, Col, Row } from "react-bootstrap";
 import { connect } from "react-redux";
+import Notifier from "../Notifier/notifier.component";
 
 import { createProject } from "../../redux/project/project.actions";
 
 import "./NewProject.css";
 
 const NewProject = (props) => {
-  const { toggleNewProjectView, history, projects } = props;
+  const { toggleNewProjectView, history, projects, status, error } = props;
   const [title, setTitle] = useState("");
   const [manager, setManager] = useState("");
   const [sponsor, setSponsor] = useState("");
@@ -18,15 +19,31 @@ const NewProject = (props) => {
   const [objectives, setObjectives] = useState("");
   const [inScope, setInScope] = useState("");
   const [outScope, setOutScope] = useState("");
-  const [requirement, setRequirement] = useState("");
+  const [requirements, setRequirements] = useState("");
 
   const [managerEmail, setManagerEmail] = useState("");
   const [sponsorEmail, setSponsorEmail] = useState("");
   const [description, setDescription] = useState("");
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    if (status === "error") {
+      // alert("Oops an error occured");
+      if (error !== undefined || error !== null) {
+        console.log(error);
+      }
+
+      setOpen(true);
+    }
+  }, [status]);
+
+  const handleClick = () => {
+    setOpen(false);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await props.createProject(
+    props.createProject(
       {
         title,
         manager: { name: manager, email: managerEmail },
@@ -38,7 +55,7 @@ const NewProject = (props) => {
         objectives,
         inScope,
         outScope,
-        requirement,
+        requirements,
         description,
       },
       history,
@@ -61,7 +78,7 @@ const NewProject = (props) => {
       objectives &&
       inScope &&
       outScope &&
-      requirement &&
+      requirements &&
       description
     ) {
       return false;
@@ -70,6 +87,7 @@ const NewProject = (props) => {
   };
   return (
     <div style={{ position: "relative" }}>
+      <Notifier open={open} handleClick={() => handleClick()} message={error} />
       <form
         className="w-full max-w-lg new-project-form"
         onSubmit={(e) => handleSubmit(e)}
@@ -478,9 +496,9 @@ const NewProject = (props) => {
                       as="textarea"
                       rows={6}
                       onChange={({ target: { value } }) =>
-                        setRequirement(value)
+                        setRequirements(value)
                       }
-                      value={requirement}
+                      value={requirements}
                       // required
                       className="login-input-styles"
                       style={{ fontSize: "15px" }}
@@ -513,10 +531,13 @@ const NewProject = (props) => {
   );
 };
 
-const mapStateToProps = ({ project: { isLoading, status, projects } }) => ({
+const mapStateToProps = ({
+  project: { isLoading, status, projects, error },
+}) => ({
   isLoading,
   status,
   projects,
+  error,
 });
 
 export default connect(mapStateToProps, { createProject })(NewProject);
