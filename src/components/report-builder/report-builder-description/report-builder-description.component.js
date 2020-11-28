@@ -1,12 +1,16 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { manageDescriptionTab } from '../../../redux/report/report.actions';
+import CloseDivButton from '../../close-div-icon-button/close-div-icon-button.component';
 import * as Style from './report-builder-description.styles';
 
-const ReportBuilderDescription = ({ description }) => {
+const ReportBuilderDescription = ({ description, manageDescriptionTab }) => {
 
     return (
         <Style.ReportBuilderDescriptionContainer>
             <Style.Title>
                 Description
+                <CloseDivButton onClick={() => manageDescriptionTab()} />
             </Style.Title>
             <Style.Description>
                 Lorem Ipsum is simply dummy text of the printing and typesetting industry.
@@ -20,7 +24,6 @@ const ReportBuilderDescription = ({ description }) => {
             </Style.Description>
         </Style.ReportBuilderDescriptionContainer>
     )
-
 }
 
-export default ReportBuilderDescription
+export default connect(null, { manageDescriptionTab })(ReportBuilderDescription)

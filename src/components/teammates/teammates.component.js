@@ -66,7 +66,7 @@ const Teammates = () => {
                         teammateData.map((teammateDatum, idx) => <TeammateCard name={teammateDatum.name} email={teammateDatum.email} key={idx} />)
                     }
                 </Style.TeamMateBody>
-                <Style.InviteButton>
+                <Style.InviteButton primary>
                     <i className="fas fa-pencil" />
                       Invite teammate
                 </Style.InviteButton>

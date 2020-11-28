@@ -5,7 +5,6 @@ export const ReportBuilderDescriptionContainer = styled.div`
 
     display: flex;
     flex-direction: column;
-
 `
 
 export const Title = styled.h1`
