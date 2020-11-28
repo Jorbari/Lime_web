@@ -1,5 +1,6 @@
-import { getAllProjectsRequest } from "../../api/project"
+import { getAllProjectsRequest, getSingleProjectRequest } from "../../api/project"
 import ReportActionTypes from "./report.types";
+import _ from 'lodash';
 
 export const showAllProject = () => {
     return async (dispatch) => {
@@ -13,15 +14,21 @@ export const showAllProject = () => {
 
 export const getAProjectReport = (id) => {
     return async (dispatch) => {
-        dispatch({
-            type: ReportActionTypes.FETCH_A_SINGLE_REPORT,
-            payload: id
-        })
+        _fetchAProject(dispatch, id)
+
     }
 }
 
+const _fetchAProject = _.memoize(async (dispatch, id) => {
+    const { data: { data } } = await getSingleProjectRequest(id);
+    dispatch({
+        type: ReportActionTypes.FETCH_A_SINGLE_REPORT,
+        payload: data
+    })
+})
+
 export const manageDescriptionTab = () => {
-    return async dispatch => {
+    return dispatch => {
         dispatch({
             type: ReportActionTypes.MANAGE_DESCRIPTION_TAB_DISPLAY
         })
@@ -29,7 +36,7 @@ export const manageDescriptionTab = () => {
 }
 
 export const manageGoalsAndObjectiveTab = () => {
-    return async dispatch => {
+    return dispatch => {
         dispatch({
             type: ReportActionTypes.MANAGE_GOALS_AND_OBJECTIVE_TAB_DISPLAY
         })

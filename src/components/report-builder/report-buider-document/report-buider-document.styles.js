@@ -40,7 +40,5 @@ export const DocsBody = styled.div`
     margin: 0 10rem;
     padding: 3rem 6rem;
     border: 2px solid ${primaryColor};
-    max-height:80vh;
-    overflow: scroll
 `
 

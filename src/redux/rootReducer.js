@@ -10,7 +10,7 @@ import { surveyReducer } from "./survey/survey.reducer";
 const persistConfig = {
     key: 'base',
     storage,
-    whitelist: ['report']
+    whitelist: []
 }
 
 const rootReducer = combineReducers({
