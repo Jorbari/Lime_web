@@ -49,6 +49,20 @@ const CardContainer = styled.div`
     width: 176px;
     height: 49px;
   }
+  .pt-32 {
+    padding-top: 2.6rem;
+  }
+  .break-words {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .break-words > p {
+    margin-top: 2.9rem
+  }
 `;
 
 function Projects(props) {
@@ -93,7 +107,8 @@ function Projects(props) {
                   <div className="relative bg-white">
                     <div className="w-full xl:w-4/12 pl-1 pr-1 ml-4 card">
                       <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 rounded h-32">
-                        <div className="rounded-t mb-0 px-4 bg-transparent card-image-and-text-container">
+
+                        {/* <div className="rounded-t mb-0 px-4 bg-transparent card-image-and-text-container">
                           <div className="flex flex-wrap items-center">
                             <div className="relative w-full max-w-full flex-grow flex-1">
                               <img
@@ -104,10 +119,17 @@ function Projects(props) {
                               />
                             </div>
                           </div>
-                        </div>
-                        <p className="card-text mt-4 capitalize">
+                        </div> */}
+                        <section>
+                          <img
+                                  src={folder}
+                                  alt=""
+                                />
+                        </section>
+                        <p className="card-text capitalize">
                           {project.title}
                         </p>
+
                       </div>
                     </div>
                   </div>

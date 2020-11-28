@@ -73,6 +73,7 @@ const Project = (props) => {
   React.useEffect(() => {
     const fetchSingleProject = async () => {
       await props.getSingleProject(id);
+      console.log(project);
     };
 
     fetchSingleProject();
