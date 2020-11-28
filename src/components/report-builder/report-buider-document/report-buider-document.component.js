@@ -13,21 +13,26 @@ import ReportBuilderPlan from '../report-builder-plan/report-builder-plan.compon
 import ReportBuilderRequirement from '../report-builder-requirement/report-builder-requirement.component';
 import ReportBuilderBudget from '../report-builder-budget/report-builder-budget.component';
 import ReportBuilderSurvey from '../report-builder-survey/report-builder-survey.component'
+import html2pdf from 'html2pdf.js';
 
 const ReportBuiderDocs = ({ current_report, rendered_div }) => {
+    const handlePagePrint = () => {
+        let element = document.getElementById("project_document");
+        html2pdf().from(element).save()
+    }
     return (
         <Style.ReportBuiderDocsContainer>
             <Style.DocsTopNavContainer>
                 <Style.DocsTopNav>
-                    <CustomButton primary>
+                    <CustomButton primary onClick={handlePagePrint}>
                         Print Document
                     </CustomButton>
-                    <CustomButton primary>
+                    <CustomButton primary onClick={handlePagePrint}>
                         Save As PDF
                     </CustomButton>
                 </Style.DocsTopNav>
             </Style.DocsTopNavContainer>
-            <Style.DocsBody id={"test_id_print"}>
+            <Style.DocsBody id={"project_document"}>
                 <Style.Title>
                     {current_report.title}
                 </Style.Title>
@@ -50,7 +55,7 @@ const ReportBuiderDocs = ({ current_report, rendered_div }) => {
                     rendered_div.execution_plan ? <ReportBuilderPlan /> : null
                 }
                 {
-                    rendered_div.resource_requirement ? <ReportBuilderRequirement requirements={current_report.requirements}/> : null
+                    rendered_div.resource_requirement ? <ReportBuilderRequirement requirements={current_report.requirements} /> : null
                 }
                 {
                     rendered_div.budget ? <ReportBuilderBudget /> : null
