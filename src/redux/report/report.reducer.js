@@ -23,7 +23,21 @@ const reportReducer = (state = INITIAL_STATE, { type, payload }) => {
             return { ...state, all_reports: payload };
 
         case ReportActionTypes.FETCH_A_SINGLE_REPORT:
-            return { ...state, current_report: payload };
+            return {
+                ...state, current_report: fetchASingleReport(payload, state.all_reports), is_rendered:
+                {
+                    ...state.is_rendered,
+                    description: false,
+                    goals_and_objective: false,
+                    team_members: false,
+                    date_and_milestone: false,
+                    scope: false,
+                    execution_plan: false,
+                    resource_requirement: false,
+                    budget: false,
+                    survey_information: false
+                }
+            };
 
         case ReportActionTypes.MANAGE_DESCRIPTION_TAB_DISPLAY:
             return { ...state, is_rendered: { ...state.is_rendered, description: !state.is_rendered.description } };

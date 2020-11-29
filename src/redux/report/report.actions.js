@@ -14,18 +14,21 @@ export const showAllProject = () => {
 
 export const getAProjectReport = (id) => {
     return async (dispatch) => {
-        _fetchAProject(dispatch, id)
-
+        dispatch({
+            type: ReportActionTypes.FETCH_A_SINGLE_REPORT,
+            payload: id
+        })
     }
 }
 
-const _fetchAProject = _.memoize(async (dispatch, id) => {
-    const { data: { data } } = await getSingleProjectRequest(id);
-    dispatch({
-        type: ReportActionTypes.FETCH_A_SINGLE_REPORT,
-        payload: data
-    })
-})
+// const _fetchAProject = _.memoize(async (dispatch, id) => {
+//     console.log(id)
+//     const { data: { data } } = await getSingleProjectRequest(id);
+//     dispatch({
+//         type: ReportActionTypes.FETCH_A_SINGLE_REPORT,
+//         payload: data
+//     })
+// })
 
 export const manageDescriptionTab = () => {
     return dispatch => {
