@@ -8,5 +8,5 @@ export default combineReducers({
     auth: authReducer,
     project: projectReducer,
     survey: surveyReducer,
-    questions: questionsReducer
+    questionsState: questionsReducer
 });

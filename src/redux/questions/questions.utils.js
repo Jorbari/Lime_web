@@ -8,11 +8,23 @@ export const addDefaultQuestionToQuestions = (state)=>{
 
 export const removeQuestion = (state)=>{
     let questions = [...state.questions]
-    questions = questions.splice(state.currentId,1)
+    questions.splice(state.currentId,1)
     return {
-        currentId: newIdAfterRemove(),
+        currentId: newIdAfterRemove(state),
         questions
     }
+}
+
+export const toggleRequired = (state)=>{
+    let questions = [...state.questions]
+    questions[state.currentId].required = !questions[state.currentId].required
+    return questions
+}
+
+export const setTitle = (state, payload)=>{
+    let questions = [...state.questions]
+    questions[state.currentId].title = payload
+    return questions
 }
 
 export const setQuestionFormat = (state, format)=>{

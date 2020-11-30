@@ -24,14 +24,16 @@ import{
     ContentFooter,
     ActionItem,
 } from './question.styles'
+import { selectCurrentQuestionId } from '../../redux/questions/questions.selector';
+import { toggleRequired, removeQuestion,setTitle} from '../../redux/questions/questions.action';
 import { questionFormatTypes } from '../../redux/questions/questions.utils';
 import MultiChoice from '../multichoice/multichoice.component';
 import {createStructuredSelector} from 'reselect'
-import { selectCurrentQuestionId } from '../../redux/questions/questions.selector';
 import {connect} from 'react-redux'
+import { debounce } from '../../helper';
 const Question = (props)=>{
     console.log(props)
-    const{currentQuestionId,questionNumber} =props
+    const{currentQuestionId,questionNumber,toggleRequired,setTitle,title,removeQuestion,required} =props
     const isCurrent =  currentQuestionId === questionNumber
     const selectBox = React.createRef()
     const onFormatChange = (event) =>{
@@ -44,7 +46,7 @@ const Question = (props)=>{
         <MainContainer isCurrent style={{border:isCurrent? '2px solid #A4D4AE' : '1px solid #A4D4AE'}}>
             <div className="" style={{textAlign: "center", marginBottom:'1rem'}}><MoveIcon style={{display: "inline-block", cursor: 'grab'}}/></div>
             <ContentHeader>
-                <QuestionTitle type="text" placeholder="Question"/>
+                <QuestionTitle type="text" placeholder="Question" value={title} onChange={(e)=>{debounce(setTitle(e.target.value))}}/>
                 <div className="dropdown">
                     <QuestionFormatDropdown data-toggle="dropdown" ref = {selectBox}>Multiple choice</QuestionFormatDropdown>
                     <Caret></Caret>
@@ -82,7 +84,7 @@ const Question = (props)=>{
             <ContentFooter>
                 <ActionItem>
                     <Switch>
-                        <SwitchInput type="checkbox"></SwitchInput>
+                        <SwitchInput type="checkbox" checked = {required} onChange={toggleRequired}></SwitchInput>
                         <SwitchSlider className="slider"></SwitchSlider>
                     </Switch>
                     <span>Required <span style={{color:'red'}}>*</span></span>
@@ -91,7 +93,7 @@ const Question = (props)=>{
                     <DuplicateIcon></DuplicateIcon>
                     <span>Duplicate</span>
                 </ActionItem>
-                <ActionItem>
+                <ActionItem onClick = {removeQuestion}>
                     <DeleteIcon></DeleteIcon>
                     <span>Delete</span>
                 </ActionItem>
@@ -102,4 +104,4 @@ const Question = (props)=>{
 const mapStateToProps =createStructuredSelector({
     currentQuestionId: selectCurrentQuestionId
 })
-export default connect(mapStateToProps)(Question)
+export default connect(mapStateToProps,{toggleRequired, removeQuestion, setTitle})(Question)

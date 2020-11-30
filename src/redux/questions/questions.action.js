@@ -8,6 +8,14 @@ export const removeQuestion = () => dispatch =>{
     dispatch({type: QuestionActionTypes.REMOVE_QUESTION});
 }
 
+export const toggleRequired = () => dispatch =>{
+    dispatch({type: QuestionActionTypes.TOGGLE_REQUIRED});
+}
+
+export const setTitle = (title) => dispatch =>{
+    dispatch({type: QuestionActionTypes.SET_TITLE, payload:title});
+}
+
 export const setFormat = (format) => dispatch =>{
     dispatch({type: QuestionActionTypes.SET_FORMAT, payload:format});
 }
