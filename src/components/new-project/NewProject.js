@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Accordion, Button, Card, Form, Col, Row } from "react-bootstrap";
 import { connect } from "react-redux";
+import Notifier from "../Notifier/notifier.component";
 
 import { createProject } from "../../redux/project/project.actions";
 
 import "./NewProject.css";
 
-const NewProject = props => {
-  const { toggleNewProjectView, history, projects } = props;
+const NewProject = (props) => {
+  const { toggleNewProjectView, history, projects, status, error } = props;
   const [title, setTitle] = useState("");
   const [manager, setManager] = useState("");
   const [sponsor, setSponsor] = useState("");
@@ -18,30 +19,44 @@ const NewProject = props => {
   const [objectives, setObjectives] = useState("");
   const [inScope, setInScope] = useState("");
   const [outScope, setOutScope] = useState("");
-  const [requirement, setRequirement] = useState("");
+  const [requirements, setRequirements] = useState("");
 
   const [managerEmail, setManagerEmail] = useState("");
   const [sponsorEmail, setSponsorEmail] = useState("");
   const [description, setDescription] = useState("");
+  const [open, setOpen] = useState(false);
 
-  const handleSubmit = async e => {
+  useEffect(() => {
+    if (status === "error") {
+      // alert("Oops an error occured");
+      if (error !== undefined || error !== null) {
+        console.log(error);
+      }
+
+      setOpen(true);
+    }
+  }, [status]);
+
+  const handleClick = () => {
+    setOpen(false);
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    await props.createProject(
+    props.createProject(
       {
         title,
-        manager,
-        managerEmail,
-        sponsor,
-        sponsorEmail,
-        startDate,
-        endDate,
+        manager: { name: manager, email: managerEmail },
+        sponsor: { name: sponsor, email: sponsorEmail },
+        startDate: new Date(`${startDate}`).getTime(),
+        endDate: new Date(`${endDate}`).getTime(),
         category,
         goals,
         objectives,
         inScope,
         outScope,
-        requirement,
-        description
+        requirements,
+        description,
       },
       history,
       toggleNewProjectView,
@@ -50,19 +65,39 @@ const NewProject = props => {
   };
 
   const checkIfFilled = () => {
-    if(title && manager && managerEmail && sponsor && sponsorEmail && startDate && endDate && category && goals && objectives && inScope && outScope && requirement && description) {
+    if (
+      title &&
+      manager &&
+      managerEmail &&
+      sponsor &&
+      sponsorEmail &&
+      startDate &&
+      endDate &&
+      category &&
+      goals &&
+      objectives &&
+      inScope &&
+      outScope &&
+      requirements &&
+      description
+    ) {
       return false;
     }
     return true;
-  }
+  };
   return (
     <div style={{ position: "relative" }}>
+      <Notifier open={open} handleClick={() => handleClick()} message={error} />
       <form
         className="w-full max-w-lg new-project-form"
-        onSubmit={e => handleSubmit(e)}
+        onSubmit={(e) => handleSubmit(e)}
       >
         <div className="top-save-btn-div pr-4">
-          <button className="form-btn btn top-save-btn" type="submit" disabled={checkIfFilled()}>
+          <button
+            className="form-btn btn top-save-btn"
+            type="submit"
+            disabled={checkIfFilled()}
+          >
             Save
           </button>
         </div>
@@ -461,9 +496,9 @@ const NewProject = props => {
                       as="textarea"
                       rows={6}
                       onChange={({ target: { value } }) =>
-                        setRequirement(value)
+                        setRequirements(value)
                       }
-                      value={requirement}
+                      value={requirements}
                       // required
                       className="login-input-styles"
                       style={{ fontSize: "15px" }}
@@ -483,7 +518,11 @@ const NewProject = props => {
           >
             Cancel
           </button>
-          <button className="form-btn btn bottom-save-btn" type="submit" disabled={checkIfFilled()}>
+          <button
+            className="form-btn btn bottom-save-btn"
+            type="submit"
+            disabled={checkIfFilled()}
+          >
             Save
           </button>
         </div>
@@ -492,10 +531,13 @@ const NewProject = props => {
   );
 };
 
-const mapStateToProps = ({ project: { isLoading, status, projects } }) => ({
+const mapStateToProps = ({
+  project: { isLoading, status, projects, error },
+}) => ({
   isLoading,
   status,
-  projects
+  projects,
+  error,
 });
 
 export default connect(mapStateToProps, { createProject })(NewProject);

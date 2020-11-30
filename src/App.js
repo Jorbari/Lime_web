@@ -1,5 +1,5 @@
 import React from "react";
-import {BrowserRouter as Router, Switch} from "react-router-dom";
+import { Router, Switch } from "react-router-dom";
 import GuestRoute from "./HOCs/GuestRoute";
 import AuthWrapper from "./views/AuthWrapper/AuthWrapper";
 import ProtectedRoute from "./HOCs/ProtectedRoute";
@@ -13,38 +13,36 @@ import NavBar from './components/NavBar'
 import NewProject from "./components/new-project/NewProject";
 import ViewReport from './views/view-report/view-report.component'
 import {
-    MainContentContainer, 
-    MainContainer, 
+    MainContentContainer,
+    MainContainer,
     MainContent
-}from './App.styles';
+} from './App.styles';
 import SurveyRoutes from "./views/Surveys/survey.routes";
 const App = () => {
     return (
-        <Router>
-        <MainContainer>
-            <SideBar />
-            <MainContentContainer>
-                <NavBar title="Dashboard" />
+            <MainContainer>
+                <SideBar />
+                <MainContentContainer>
+                    <NavBar title="Dashboard" />
                     <MainContent>
                         <Switch>
-                            <GuestRoute exact path="/signup" component={AuthWrapper}/>
-                            <GuestRoute exact path="/login" component={AuthWrapper}/>
-                            <GuestRoute exact path="/" component={AuthWrapper}/>
-                            <ProtectedRoute exact path="/dashboard" component={Dashboard}/>
-                            <ProtectedRoute exact path="/projects" component={Projects}/>
-                            <ProtectedRoute exact path="/new-project" component={NewProject}/>
-                            <ProtectedRoute exact path="/projects/:id" component={Project}/>
-                            <ProtectedRoute path="/surveys" component={SurveyRoutes}/>
+                            <GuestRoute exact path="/signup" component={AuthWrapper} />
+                            <GuestRoute exact path="/login" component={AuthWrapper} />
+                            <GuestRoute exact path="/" component={AuthWrapper} />
+                            <ProtectedRoute exact path="/dashboard" component={Dashboard} />
+                            <ProtectedRoute exact path="/projects" component={Projects} />
+                            <ProtectedRoute exact path="/new-project" component={NewProject} />
+                            <ProtectedRoute exact path="/projects/:id" component={Project} />
+                            <ProtectedRoute path="/surveys" component={SurveyRoutes} />
                             {/* <ProtectedRoute exact path="/new-survey" component={NewSurvey}/> */}
                             {/* <ProtectedRoute exact path="/surveys/:id" component={Surveys}/> */}
-                            <ProtectedRoute exact path="/report" component={Report}/>
-                            <ProtectedRoute exact path="/report/view" component={ViewReport}/>
-                            <ProtectedRoute exact path="/profile" component={Profile}/>
+                            <ProtectedRoute exact path="/report" component={Report} />
+                            <ProtectedRoute exact path="/report/:reportId" component={ViewReport} />
+                            <ProtectedRoute exact path="/profile" component={Profile} />
                         </Switch>
                     </MainContent>
-            </MainContentContainer>
-        </MainContainer>
-        </Router>
+                </MainContentContainer>
+            </MainContainer>
     );
 };
 

@@ -1,13 +1,8 @@
 import styled from 'styled-components';
-import { globalLines } from '../../../styles/global-variables';
-import { ReportBuilderTitleMixin } from '../../../styles/mixins';
+import { ReportBuiderContainerMixin, ReportBuilderTitleMixin } from '../../../styles/mixins';
 
 export const ReportBuilderGoalContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    border-top: 1px solid ${globalLines};
-    margin: 3.5rem 0;
-    padding: 3.5rem 0;
+    ${ReportBuiderContainerMixin}
 `
 
 export const Title = styled.h1`
@@ -33,5 +28,9 @@ export const GoalsList = styled.div`
 
     & li {
         padding: .3rem 0;
+    }
+
+    & p{
+        padding: .3rem 1rem;
     }
 `
