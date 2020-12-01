@@ -17,7 +17,7 @@ const rootReducer = combineReducers({
     auth: authReducer,
     project: projectReducer,
     survey: surveyReducer,
-    questions: questionsReducer,
+    questionsState: questionsReducer,
     report: reportReducer
 });
 

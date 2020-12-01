@@ -6,13 +6,26 @@ export const addDefaultQuestionToQuestions = (state)=>{
     }
 }
 
-export const removeQuestion = (state)=>{
+export const removeQuestion = (state,questionId)=>{
     let questions = [...state.questions]
-    questions = questions.splice(state.currentId,1)
+    console.log(questionId)
+    questions.splice(questionId,1)
     return {
-        currentId: newIdAfterRemove(),
+        currentId: newIdAfterRemove(state,questionId),
         questions
     }
+}
+
+export const toggleRequired = (state)=>{
+    let questions = [...state.questions]
+    questions[state.currentId].required = !questions[state.currentId].required
+    return questions
+}
+
+export const setTitle = (state, payload)=>{
+    let questions = [...state.questions]
+    questions[state.currentId].title = payload
+    return questions
 }
 
 export const setQuestionFormat = (state, format)=>{
@@ -22,10 +35,10 @@ export const setQuestionFormat = (state, format)=>{
 }
 
 //CALC ID AFTER REMOVE
-const newIdAfterRemove = (state)=>{
+const newIdAfterRemove = (state,questionId)=>{
     const currentId = state.currentId
     const totalQuestionsLength = state.questions.length
-    return currentId+1 === totalQuestionsLength? currentId-1: currentId+1
+    return (questionId+1 === totalQuestionsLength && questionId===currentId)? currentId-1: currentId+1
 }
 
 //TYPES OF QUESTION FORMAT
@@ -38,7 +51,7 @@ export const questionFormatTypes = {
     paragraph:'paragraph',
 }
 
-const setFormat = (format)=>{
+export const setFormat = (format)=>{
     switch(format){
         case `${questionFormatTypes.multichoice}`:
             return createMultiChoice()

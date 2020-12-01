@@ -46,6 +46,7 @@ export const ContentHeader = styled.div`
     display: grid;
     grid-gap: 2.6rem;
     grid-template-columns: 2.2fr 1.3fr;
+    padding: 0 2.5rem;
 `
 
 export const QuestionTitle = styled.input`
@@ -89,7 +90,7 @@ export const Caret = styled(caret)`
 `
 
 export const ContentBody = styled.div`
-    margin: 2.5rem; 
+    padding: 2.5rem; 
     
 `
 
@@ -116,4 +117,14 @@ export const ActionItem= styled.div`
         margin-right: 1rem;
     }
 
+`
+
+export const QuestionDisplay= styled.p`
+    margin: unset;
+    font-size: 2.4rem;
+    line-height: 3.6rem;
+    color: #5B5656;
+    & >:not(:last-child){
+        margin-right: .6rem;
+    }
 `

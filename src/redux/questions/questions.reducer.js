@@ -2,11 +2,13 @@ import QuestionActionTypes from './questions.types';
 import { 
     addDefaultQuestionToQuestions, 
     removeQuestion,
-    setQuestionFormat
+    setQuestionFormat,
+    toggleRequired,
+    setTitle
 } from "./questions.utils";
 
 const INITIAL_STATE = {
-    currentId: 0,
+    currentId: -1,
     questions: []
 };
 
@@ -20,17 +22,12 @@ export const questionsReducer = (state=INITIAL_STATE, action)=>{
         case QuestionActionTypes.REMOVE_QUESTION:
             return{
                 ...state,
-                ...removeQuestion(state)
+                ...removeQuestion(state,action.payload)
             }
         case QuestionActionTypes.SET_CURRENTID:
             return{
                 ...state,
                 currentId: action.payload
-            }
-        case QuestionActionTypes.SET_FORMAT:
-            return{
-                ...state,
-                questions: [...setQuestionFormat(state, action.payload)]
             }
         default:
             return {

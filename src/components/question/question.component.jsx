@@ -23,32 +23,90 @@ import{
     ContentBody,
     ContentFooter,
     ActionItem,
+    QuestionDisplay
 } from './question.styles'
-import { questionFormatTypes } from '../../redux/questions/questions.utils';
-import MultiChoice from '../multichoice/multichoice.component';
-import {createStructuredSelector} from 'reselect'
 import { selectCurrentQuestionId } from '../../redux/questions/questions.selector';
+import { toggleRequired, removeQuestion,setCurrentId} from '../../redux/questions/questions.action';
+import { questionFormatTypes, setFormat } from '../../redux/questions/questions.utils';
+import MultiChoice from '../multichoice/multichoice.component';
+import Checkboxes from '../checkboxes/checkboxes.component';
+import LinearScale from '../linearScale/linearScale.component';
+import {createStructuredSelector} from 'reselect'
 import {connect} from 'react-redux'
-const Question = (props)=>{
-    console.log(props)
-    const{currentQuestionId,questionNumber} =props
-    const isCurrent =  currentQuestionId === questionNumber
-    const selectBox = React.createRef()
-    const onFormatChange = (event) =>{
-        event.persist();
-        console.log(event.target.id)
-        selectBox.current.innerHTML = event.target.closest('div.dropdown-item').outerHTML
+import { debounce } from '../../helper';
+class Question extends React.Component{
+    
+    selectBox = React.createRef();
+    isCurrent = false
+    constructor() {
+        super();
+        this.state = {
+            ...setFormat(questionFormatTypes.multichoice)
+        };
     }
-    console.log("render");
-    return(
-        <MainContainer isCurrent style={{border:isCurrent? '2px solid #A4D4AE' : '1px solid #A4D4AE'}}>
-            <div className="" style={{textAlign: "center", marginBottom:'1rem'}}><MoveIcon style={{display: "inline-block", cursor: 'grab'}}/></div>
-            <ContentHeader>
-                <QuestionTitle type="text" placeholder="Question"/>
-                <div className="dropdown">
-                    <QuestionFormatDropdown data-toggle="dropdown" ref = {selectBox}>Multiple choice</QuestionFormatDropdown>
+    componentDidMount(){
+        const{currentQuestionId,questionNumber} =this.props;
+    }
+    componentDidUpdate(){
+        console.log("I just got updated >>>>", this.state)
+        if(!this.isCurrent && !this.state.previewMode){
+            this.setState({previewMode: true})
+        }
+        else if(this.isCurrent && this.state.previewMode){
+            this.setState({previewMode: false})
+        }
+    }
+    onFormatChange = (event) =>{
+        event.persist();
+        const id = event.target?.closest('div.dropdown-item')?.id
+        if(id){
+            this.setFormat(id)
+            this.selectBox.current.innerHTML = event.target.closest('div.dropdown-item').outerHTML
+        }
+    }
+    toggleRequired = ()=>{
+        this.setState((prevState, prevProps)=>({
+            required: !prevState.required
+        }))
+    }
+    setTitle = (title)=>{
+        this.setState({title})
+    }
+    setFormat = (format)=>{
+        this.setState({format})
+    }
+    setShape = (shape)=>{
+        this.setState({shape})
+    }
+    setCurrentId = ()=>{
+        console.log(this.isCurrent)
+        if(!this.isCurrent){
+            this.props.setCurrentId(this.props.questionNumber)
+        }
+    }
+
+    render(){
+        const{currentQuestionId,questionNumber,setCurrentId,removeQuestion} =this.props;
+        const{title, previewMode ,required, format, shape} =this.state;
+        this.isCurrent =  currentQuestionId === questionNumber
+        
+        return(
+            <MainContainer isCurrent style={{border:this.isCurrent? '2px solid #A4D4AE' : '1px solid #A4D4AE'}} onClick={this.setCurrentId}>
+                <div className="" style={{textAlign: "center", marginBottom:'1rem'}}><MoveIcon style={{display: "inline-block", cursor: 'grab'}}/></div>
+                <ContentHeader>
+                    {
+                        previewMode?(
+                            <QuestionDisplay><span>{questionNumber + 1}.</span> <span>{title || 'Question'}</span></QuestionDisplay>
+                        ):(
+                            <QuestionTitle type="text" placeholder="Question" value={title} onChange={(e)=>{this.setTitle(e.target.value)}}/>
+                        )
+                    }
+                    
+                    {previewMode?null:(
+                    <div className="dropdown">
+                    <QuestionFormatDropdown data-toggle="dropdown" ref = {this.selectBox}>Multiple choice</QuestionFormatDropdown>
                     <Caret></Caret>
-                    <DropdownMenu className="dropdown-menu" onClick = {onFormatChange}>
+                    <DropdownMenu className="dropdown-menu" onClick = {this.onFormatChange}>
                         <div className="dropdown-item" id={`${questionFormatTypes.multichoice}`}>
                             <MultichoiceIcon/>
                             <span>Multiple choice questions</span>
@@ -75,31 +133,45 @@ const Question = (props)=>{
                             </div>
                         </DropdownMenu>
                 </div>
-            </ContentHeader>
-            <ContentBody>
-                <MultiChoice/>
-            </ContentBody>
-            <ContentFooter>
-                <ActionItem>
-                    <Switch>
-                        <SwitchInput type="checkbox"></SwitchInput>
-                        <SwitchSlider className="slider"></SwitchSlider>
-                    </Switch>
-                    <span>Required <span style={{color:'red'}}>*</span></span>
-                </ActionItem>
-                <ActionItem>
-                    <DuplicateIcon></DuplicateIcon>
-                    <span>Duplicate</span>
-                </ActionItem>
-                <ActionItem>
-                    <DeleteIcon></DeleteIcon>
-                    <span>Delete</span>
-                </ActionItem>
-            </ContentFooter>
-        </MainContainer>
-    )
+                    )}
+                </ContentHeader>
+                <ContentBody>
+                    {
+                        {
+                            [questionFormatTypes.multichoice]:(<MultiChoice options={shape} setShape={this.setShape} previewMode={previewMode} />),
+                            [questionFormatTypes.checkbox]:(<Checkboxes options={shape} setShape={this.setShape} previewMode={previewMode} />),
+                            [questionFormatTypes.linearscale]:(<LinearScale options={shape} setShape={this.setShape} previewMode={previewMode} />),
+                        }[format]
+                    }
+                </ContentBody>
+                    {
+                        previewMode?null:(
+                            <ContentFooter>
+                            <ActionItem>
+                                <Switch>
+                                    <SwitchInput type="checkbox" checked = {required} onChange={this.toggleRequired}></SwitchInput>
+                                    <SwitchSlider className="slider"></SwitchSlider>
+                                </Switch>
+                                <span>Required <span style={{color:'red'}}>*</span></span>
+                            </ActionItem>
+                            <ActionItem>
+                                <DuplicateIcon></DuplicateIcon>
+                                <span>Duplicate</span>
+                            </ActionItem>
+                            <ActionItem onClick = {()=>removeQuestion(questionNumber)}>
+                                <DeleteIcon></DeleteIcon>
+                                <span>Delete</span>
+                            </ActionItem>
+                        </ContentFooter>
+                        )
+                    }
+
+            </MainContainer>
+        )
+
+    }
 }
 const mapStateToProps =createStructuredSelector({
     currentQuestionId: selectCurrentQuestionId
 })
-export default connect(mapStateToProps)(Question)
+export default connect(mapStateToProps,{toggleRequired, removeQuestion, setCurrentId})(Question)
