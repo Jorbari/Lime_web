@@ -1,5 +1,5 @@
 import React from 'react';
-import CustomRadio from '../custom-radio/custom-radio.component';
+import CustomCheckbox from '../custom-checkbox/custom-checkbox.component';
 import {ReactComponent as CloseIcon} from '../../assets/close-btn.svg'
 import{
     MainContainer,
@@ -9,10 +9,10 @@ import{
     AddOptionButton,
     AddOtherButton,
     CloseButton,
-} from './multichoice.styles'
+} from './checkboxes.styles'
 
 
-class MultiChoice extends React.Component{
+class Checkboxes extends React.Component{
     constructor() {
         super();
         this.state = {
@@ -59,7 +59,7 @@ class MultiChoice extends React.Component{
                 {
                     options.map((option, index)=>(
                         <OptionContainer key={index}>
-                            <CustomRadio type="radio" disabled name={`question${1}`} id={index}/>
+                            <CustomCheckbox type="checkbox" disabled name={`question${1}`} id={index}/>
                             <InputContainer style={previewMode?null:{borderBottom:'0.5px solid rgba(91, 86, 86, 0.5)'}}previewMode value={option} onChange={(e)=>{this.handleChange(e,index)}} readOnly={this.isLastAndisOther(index)}></InputContainer>
                             {index && !previewMode ? (<CloseButton onClick={()=>{this.removeOption(index)}}><CloseIcon/></CloseButton>): null}
                         </OptionContainer>
@@ -69,7 +69,7 @@ class MultiChoice extends React.Component{
                     previewMode? null:
                     (
                         <OptionContainer>
-                        <CustomRadio type="radio" disabled name={`question${1}`}/>
+                        <CustomCheckbox type="radio" disabled name={`question${1}`}/>
                         <div className="" style={{padding:"0 2.7rem"}}>
                             <AddOptionButton onClick = {()=>{this.addOptions()}}>Add option {isOther?null:'or'}</AddOptionButton>
                             {
@@ -86,4 +86,4 @@ class MultiChoice extends React.Component{
     }
 }
 
-export default MultiChoice
+export default Checkboxes

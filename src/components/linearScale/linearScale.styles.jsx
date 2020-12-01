@@ -16,6 +16,20 @@ export const OptionsContainer = styled.div`
     display:flex;
     flex-direction: column;
 `
+export const RangeContainer = styled.div`
+    display:flex;
+    align-items: center;
+    margin-bottom: 3rem;
+    & >:not(:last-child){
+        margin-right:2rem;
+    }
+`
+export const SelectContainer = styled.select`
+    border: unset;
+    &:focus{
+        outline: unset;
+    }
+`
 export const OptionContainer = styled.div`
     ${OptionStyles}
     position: relative;
@@ -28,27 +42,4 @@ export const InputContainer = styled.input`
     font-weight: 400;
     line-height: 2.7rem;
     &:focus{outline: unset}
-`
-const defaultTextStyle = css`
-    font-size: 1.8rem;
-    font-weight: 400;
-    line-height: 2.7rem;
-    cursor: pointer;
-`
-export const CloseButton =  styled.button`
-    border: unset;
-    background: unset;
-    &:focus{outline: unset}
-    position: absolute;
-    top: 50%;
-    right: 0;
-    transform: translateY(-50%);
-`
-export const AddOptionButton =  styled.span`
-    ${defaultTextStyle}
-    color: rgba(91, 86, 86, 0.5);
-`
-export const AddOtherButton =  styled.span`
-    ${defaultTextStyle}
-    color: #7fcd91;
 `

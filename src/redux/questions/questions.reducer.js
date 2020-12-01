@@ -22,27 +22,12 @@ export const questionsReducer = (state=INITIAL_STATE, action)=>{
         case QuestionActionTypes.REMOVE_QUESTION:
             return{
                 ...state,
-                ...removeQuestion(state)
-            }
-        case QuestionActionTypes.TOGGLE_REQUIRED:
-            return{
-                ...state,
-                questions: [...toggleRequired(state)]
-            }
-        case QuestionActionTypes.SET_TITLE:
-            return{
-                ...state,
-                questions: [...setTitle(state, action.payload)]
+                ...removeQuestion(state,action.payload)
             }
         case QuestionActionTypes.SET_CURRENTID:
             return{
                 ...state,
                 currentId: action.payload
-            }
-        case QuestionActionTypes.SET_FORMAT:
-            return{
-                ...state,
-                questions: [...setQuestionFormat(state, action.payload)]
             }
         default:
             return {
