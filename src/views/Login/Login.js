@@ -11,7 +11,7 @@ const usernameRegEx = /^\w{3,}$/;
 // const passwordRegEx = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,}/;
 const passwordRegEx = /^\w{4,}$/;
 
-const Login = props => {
+const Login = (props) => {
   const { history } = props;
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -19,7 +19,7 @@ const Login = props => {
   const [usernameError, setUsernameError] = useState(null);
   const [passwordError, setPasswordError] = useState(null);
 
-  const handleEmailInput = value => {
+  const handleEmailInput = (value) => {
     if (usernameRegEx.test(value) && passwordRegEx.test(password)) {
       setUsername(value);
       setSubmitButtonDisabled(false);
@@ -40,7 +40,7 @@ const Login = props => {
     return;
   };
 
-  const handlePasswordInput = value => {
+  const handlePasswordInput = (value) => {
     if (passwordRegEx.test(value) && usernameRegEx.test(username)) {
       setPassword(value);
       setSubmitButtonDisabled(false);
@@ -69,7 +69,7 @@ const Login = props => {
     }
   }, [username, password]);
 
-  const handleBlur = type => {
+  const handleBlur = (type) => {
     if (type === "email") {
       if (!usernameRegEx.test(username) && username !== "") {
         setUsernameError("Username cannot be less than 3 characters");
@@ -87,7 +87,7 @@ const Login = props => {
     }
   };
 
-  const onSubmit = async e => {
+  const onSubmit = async (e) => {
     e.preventDefault();
 
     await props.authenticate({ username, password }, history);
@@ -97,17 +97,17 @@ const Login = props => {
   return (
     <section className="form-section">
       <h1 className="login-text">LOG IN</h1>
-      <Form className="login-form" onSubmit={e => onSubmit(e)}>
+      <Form className="login-form" onSubmit={(e) => onSubmit(e)}>
         <Form.Group as={Col} controlId="formBasicEmail" className="form-input">
           <Form.Label className="form-label">Username:</Form.Label>
           <Form.Control
             type="text"
             className="login-input-styles"
-            onChange={e => handleEmailInput(e.target.value)}
+            onChange={(e) => handleEmailInput(e.target.value)}
             required
             value={username}
             style={{
-              border: usernameError ? "1px solid red" : "none"
+              border: usernameError ? "1px solid red" : "none",
             }}
             onBlur={() => handleBlur("email")}
           />
@@ -125,11 +125,11 @@ const Login = props => {
           <Form.Control
             type="password"
             className="login-input-styles"
-            onChange={e => handlePasswordInput(e.target.value)}
+            onChange={(e) => handlePasswordInput(e.target.value)}
             required
             value={password}
             style={{
-              border: passwordError ? "1px solid red" : "none"
+              border: passwordError ? "1px solid red" : "none",
             }}
             onBlur={() => handleBlur("password")}
           />
@@ -153,7 +153,7 @@ const Login = props => {
               background: submitButtonDisabled ? "#c4c4c4" : "#b6e6bd",
               border: submitButtonDisabled
                 ? "1px solid #c4c4c4"
-                : "1px solid #b6e6bd"
+                : "1px solid #b6e6bd",
             }}
           >
             {props.isLoading ? (
@@ -180,7 +180,7 @@ const Login = props => {
 
 const mapStateToProps = ({ auth: { isLoading, status } }) => ({
   isLoading,
-  status
+  status,
 });
 
 export default connect(mapStateToProps, { authenticate })(Login);
