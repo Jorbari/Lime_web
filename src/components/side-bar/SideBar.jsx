@@ -7,6 +7,7 @@ import surveyIcon from "../../assets/surveys.svg";
 import reportIcon from "../../assets/report.svg";
 import profileIcon from "../../assets/profile.svg";
 import LogoutIcon from "../../assets/logout.svg";
+import { logout } from '../../api/helpers';
 import "./SideBar.css";
 import { withRouter } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -21,6 +22,10 @@ import {
 } from './SideBar.styles'
 
 const SideBar = (props) => {
+
+  const Logout = () => {
+    logout();
+  }
 
   return (
     <>
@@ -93,16 +98,16 @@ const SideBar = (props) => {
           </SidebarList>
           <SidebarFooter>
             <SidebarListItem>
-                <SidebarListLink to="#"  >
-                <img
-                    alt="logout icon"
-                    src={LogoutIcon}
-                  />
-                  <p
-                  >
-                    Logout
-                  </p>
-                </SidebarListLink>
+                <div className="logout" onClick={ () => Logout() } >
+                  <img
+                      alt="logout icon"
+                      src={LogoutIcon}
+                    />
+                    <p
+                    >
+                      Logout
+                    </p>
+                </div>
               </SidebarListItem>
           </SidebarFooter>
       </SidebarContainer>
