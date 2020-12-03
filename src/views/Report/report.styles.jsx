@@ -6,6 +6,8 @@ export const ReportProjectContainer = styled.div`
   }
 `;
 
+
+
 export const CardContainer = styled.div`
   border: none;
 
@@ -46,5 +48,19 @@ export const CardContainer = styled.div`
     border-radius: 10px;
     width: 176px;
     height: 49px;
+  }
+  .pt-32 {
+    padding-top: 2.6rem;
+  }
+  .break-words {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .break-words > p {
+    margin-top: 2.9rem
   }
 `;
