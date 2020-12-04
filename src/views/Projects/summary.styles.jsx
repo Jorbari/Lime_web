@@ -18,18 +18,13 @@ export const SummaryContainer = styled.div`
     border-left: 1px solid #7fcd91;
   }
 
-  .deleteProjectText {
-    position: relative;
-    right: -58.8rem;
-    top: -21px;
-    font-style: normal;
-    font-weight: 300;
-    font-size: 14px;
-    line-height: 21px;
-    text-decoration-line: underline;
-    /* margin-right: -200px; */
-    color: #dc4343;
-    transform: matrix(1, 0.01, -0.01, 1, 0, 0);
+  .delete__ {
+    position: unset;
+    color: #DC4343;
+    font-size: 1.4rem;
+    text-decoration: underline;
+    outline: none;
+    border: none;
   }
 
   .react-tabs__tab-list {
@@ -47,18 +42,13 @@ export const SummaryContainer = styled.div`
     font-weight: 600;
     font-size: 24px;
     line-height: 36px;
-    /* identical to box height */
-
     color: #5b5656;
   }
 
   .table-card-container {
     border: 1px solid #7fcd91;
-    width: 1000px;
-    height: 447px;
     border-radius: 4px;
     margin-top: 4.5rem;
-    /* margin-left: 1rem; */
   }
 
   .details-card-table {
@@ -94,7 +84,7 @@ export const SummaryContainer = styled.div`
 
   .sapsHeader-conatiner {
     position: relative;
-    top: 7rem;
-    left: -2rem;
+    display: flex;
+    justify-content: space-between;
   }
 `;

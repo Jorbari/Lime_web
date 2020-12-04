@@ -46,7 +46,7 @@ const SummaryTab = (props) => {
         </button> */}
         <button
           type="button"
-          className="deleteProjectText"
+          className="delete__"
           onClick={() => handleShow()}
         >
           <span>Delete project</span>

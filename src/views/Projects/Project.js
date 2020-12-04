@@ -82,7 +82,6 @@ const Project = (props) => {
   return (
     <>
       <div className="relative bg-white">
-        {/* <div> */}
         <SapsProjectContainer className="relative bg-white md:pt-32 pb-32 pt-12">
           <Tabs>
             <TabList>
@@ -103,8 +102,8 @@ const Project = (props) => {
               </Tab>
             </TabList>
 
-            <div className="px-4 md:px-10 mx-auto w-full -m-24">
-              <TabPanel className="w-full xl:w-8/12 mb-12 xl:mb-0 pr-4">
+            <div style={{ width: "77%" }}>
+              <TabPanel className="">
                 <Summary
                   project={project}
                   history={history}
@@ -127,7 +126,6 @@ const Project = (props) => {
             </TabPanel>
           </Tabs>
         </SapsProjectContainer>
-        {/* </div> */}
       </div>
     </>
   );
