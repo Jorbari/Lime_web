@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import { connect } from "react-redux";
@@ -13,6 +13,7 @@ import Survey from "./Survey";
 import Team from "./Team";
 import ExecutionPlan from "./ExecutionPlan";
 import Budget from "./Budget";
+import { getSingleProjectRequest } from "../../api/project";
 
 const SapsProjectContainer = styled.div`
   .sapsHeader {
@@ -68,15 +69,26 @@ const Project = (props) => {
       params: { id },
     },
   } = props;
-  const [newProjectView, setNewProjectView] = React.useState(false);
+  const [currentProject, setCurrentProject] = useState({});
 
   React.useEffect(() => {
-    const fetchSingleProject = async () => {
-      await props.getSingleProject(id);
-      console.log(project);
+    console.log(id);
+
+    // const fetchSingleProject = async () => {
+    //   await props.getSingleProject(id);
+    //   console.log(projects);
+    // };
+
+    // fetchSingleProject();
+
+    const val = async () => {
+      const value = await getSingleProjectRequest(id);
+      console.log(value.data.data);
+      setCurrentProject(value.data.data);
+      console.log(currentProject);
     };
 
-    fetchSingleProject();
+    val();
   }, []);
 
   return (
@@ -103,9 +115,9 @@ const Project = (props) => {
             </TabList>
 
             <div style={{ width: "77%" }}>
-              <TabPanel className="">
+              <TabPanel>
                 <Summary
-                  project={project}
+                  project={currentProject}
                   history={history}
                   deleteProject={deleteProject}
                   projects={projects}

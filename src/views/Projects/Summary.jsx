@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import moment from "moment";
 import ConfirmationBox from "../../components/confirmation-box/confirmationBox";
 
-import infoIcon from "../../assets/info.svg";
+// import infoIcon from "../../assets/info.svg";
 import { getSingleProject } from "../../redux/project/project.actions";
 import { connect } from "react-redux";
 import { selectSingleProject } from "../../redux/project/project.selectors";
@@ -15,35 +15,26 @@ const SummaryTab = (props) => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  React.useEffect(() => {
-    const fetchProjectData = async () => {
-      await props.getSingleProject();
-    };
-
-    fetchProjectData();
-  }, []);
-
   const DeleteProject = () => {
     deleteProject(project._id, history, projects);
     handleClose();
   };
+
+  React.useEffect(() => {
+    console.log(project)
+  });
 
   const confirmation = () => {
     DeleteProject();
   };
 
   return (
+
     <SummaryContainer>
       <div className="sapsHeader-conatiner">
         <h1 className="sapsHeader capitalize font-semibold ml-8 py-4">
           {project?.title || "null"}
         </h1>
-        {/* <button
-          type="button"
-          onClick={() => deleteProject(project._id, history, projects)}
-        >
-          <span className="deleteProjectText">Delete project</span>
-        </button> */}
         <button
           type="button"
           className="delete__"
@@ -97,61 +88,77 @@ const SummaryTab = (props) => {
         </div>
       </div> */}
 
-      <h1 className="card-header-text">Details</h1>
-      <div className="table-card-container w-full xl:w-9/12 mb-12 xl:mb-0 pr-4">
-        <div className="py-10" style={{ paddingLeft: "1rem" }}>
-          <p>Decription:</p>
-          <h5>{project?.description}</h5>
+      <div className="project__detail">
+          <div className="project__detail--grid">
+              <h4>Details</h4>
+              <button>Edit details</button>
+          </div>
+
+        <div className="project__detail--box">
+
+            <div className="project__space">
+                <section className="project__info">
+                    <p>Description:</p>
+                    <h4> {project?.description || '----'} </h4>
+                </section>
+            </div>
+
+            <div className="project__info--grid project__space">
+
+            <section className="project__info">
+                <p>Date Started:</p>
+                <h4>{moment(project?.startDate).format("Do of MMMM YYYY")}</h4>
+            </section>
+
+            <section className="project__info">
+                <p>Deadline:</p>
+                <h4>{moment(project?.endDate).format("Do of MMMM YYYY")}</h4>
+            </section>
+
+            </div>
+
+            <div className="project__info--grid project__space">
+
+                <section className="project__info">
+                    <p>Project Manager:</p>
+                    <h4> {project?.manager?.name || '----'} </h4>
+                </section>
+
+                <section className="project__info">
+                    <p>Phone Number:</p>
+                    <h4>{project?.manager?.phone || '----'}</h4>
+                </section>
+
+                <section className="project__info">
+                    <p>E-mail:</p>
+                    <h4>{project?.manager?.email || '----'}</h4>
+                </section>
+
+            </div>
+
+            <div className="project__info--grid project__space">
+
+                <section className="project__info">
+                    <p>Executive sponsor:</p>
+                    <h4>{project?.sponsor?.name || '----'}</h4>
+                </section>
+
+                <section className="project__info">
+                    <p>Phone Number:</p>
+                    <h4>{project?.sponsor?.phone || '----'}</h4>
+                </section>
+
+                <section className="project__info">
+                    <p>E-mail:</p>
+                    <h4>{project?.sponsor?.email || '----'}</h4>
+                </section>
+
+            </div>
+
         </div>
-        <table className="details-card-table table-fixed ml-4">
-          <thead>
-            <tr>
-              <td className="w-2/4">
-                <div className="">
-                  <p>Date Started:</p>
-                  <h4>
-                    {moment(project?.startDate).format("Do of MMMM YYYY")}
-                  </h4>
-                </div>
-              </td>
-              <td className="py-6 w-2/4">
-                <div>
-                  <p>Deadline:</p>
-                  <h4>{moment(project?.endDate).format("Do of MMMM YYYY")}</h4>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td className="w-2/4">
-                <div className="">
-                  <p>Project Manager:</p>
-                  <h4>{project?.manager}</h4>
-                </div>
-              </td>
-              <td className="py-6 w-2/4">
-                <div>
-                  <p>E-mail:</p>
-                  <h4>{project?.managerEmail}</h4>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td className="w-2/4">
-                <div className="">
-                  <p>Executive sponsor:</p>
-                  <h4>{project?.sponsor}</h4>
-                </div>
-              </td>
-              <td className="py-6 w-2/4">
-                <div>
-                  <p>E-mail:</p>
-                  <h4>{project?.sponsorEmail}</h4>
-                </div>
-              </td>
-            </tr>
-          </thead>
-        </table>
+          
       </div>
+
       <ConfirmationBox
         title="Delete project"
         buttonMessage="Confirm Delete"
@@ -162,11 +169,16 @@ const SummaryTab = (props) => {
         Are you sure you want to delete this project?
       </ConfirmationBox>
     </SummaryContainer>
+  
   );
 };
 
-const mapStateToProps = (state) => ({
-  project: selectSingleProject(state),
-});
+// const mapStateToProps = (state) => ({
+//   project: selectSingleProject(state),
+// });
 
-export default connect(mapStateToProps, { getSingleProject })(SummaryTab);
+// export default connect(mapStateToProps, { getSingleProject })(SummaryTab);
+
+
+
+export default SummaryTab;
