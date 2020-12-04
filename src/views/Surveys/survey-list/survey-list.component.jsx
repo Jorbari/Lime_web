@@ -130,7 +130,7 @@ const SurveyList = (props)=>{
                             key={survey._id}
                             className="mb-4"
                           >
-                            {survey.response.length}
+                            {survey?.response?.length}
                           </Link>
                         </td>
                         <td className="w-2/4 py-6">

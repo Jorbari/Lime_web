@@ -1,19 +1,31 @@
 .modal-footer {
-    padding: .3rem;
+  padding: 0.3rem;
+}
+.modal-content {
+  border-radius: 0.5rem;
+}
+.modal-body {
+  padding: 3rem 1rem;
+  margin: auto;
+}
+.modal-footer {
+  padding: 1rem 2rem;
 }
 .modal-footer > button {
-    background-color: #e9f7eb;
-    border: none;
-    color: black;
-    font-size: 1rem;
+  background-color: #e9f7eb;
+  border: none;
+  color: rgba(0, 0, 0, 0.741);
+  font-size: 1.5rem;
+  padding: 1rem 2rem;
+  border-radius: 0.5rem;
 }
 .modal-footer > button:hover {
-    background-color: #a2e8ac;
+  background-color: #a2e8ac;
 }
 .modal {
-    top: 50%;
-    transform: translateY(-25%);
+  top: 50%;
+  transform: translateY(-25%);
 }
 .modal-title {
-    font-size: 1rem;
+  font-size: 1.5rem;
 }
