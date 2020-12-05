@@ -1,15 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Form, Col, Row } from "react-bootstrap";
 import { connect } from "react-redux";
 import { Modal } from "react-responsive-modal";
 import CustomButton from "../../../components/custom-button/custom-button.component";
-
+import { getAllProjects } from "../../../redux/project/project.actions";
 import { createSurvey } from "../../../redux/survey/survey.action";
 
+import { DropdownMenu, Caret, ButtonGroup } from "./survey-new.styles";
 
-import {DropdownMenu, Caret,ButtonGroup} from './survey-new.styles';
-
-const SurveyNew = props => {
+const SurveyNew = (props) => {
   const { toggleNewSurveyView, history, projects, surveys } = props;
   const [name, setName] = useState("");
   const [tag, setTag] = useState("");
@@ -19,14 +18,14 @@ const SurveyNew = props => {
 
   const toggleModal = () => setOpen(!open);
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     await props.createSurvey(
       {
         name,
         tag,
         category,
-        project: project === "" ? projects[0]._id : project
+        project: project === "" ? projects[0]._id : project,
       },
       history,
       surveys,
@@ -34,14 +33,25 @@ const SurveyNew = props => {
       toggleNewSurveyView
     );
   };
+
+  useEffect(() => {
+    props.getAllProjects();
+  });
+
   return (
     <div style={{ position: "relative" }}>
-      <Modal open={open} onClose={() => toggleModal()} center modalId dialogClassName="br-4">
-        <div style={{ height: "fit-content", padding: "30.8px 35.8px",  }}>
+      <Modal
+        open={open}
+        onClose={() => toggleModal()}
+        center
+        modalId
+        dialogClassName="br-4"
+      >
+        <div style={{ height: "fit-content", padding: "30.8px 35.8px" }}>
           <p className="title">Create Survey</p>
           <form
             className="w-full max-w-lg new-project-form"
-            onSubmit={e => handleSubmit(e)}
+            onSubmit={(e) => handleSubmit(e)}
           >
             <Form.Group
               as={Col}
@@ -68,7 +78,7 @@ const SurveyNew = props => {
                   backgroundColor: "white",
                   paddingLeft: 0,
                   borderBottom: "1px solid rgba(91, 86, 86, 0.5)",
-                  borderRadius: 0
+                  borderRadius: 0,
                 }}
               />
             </Form.Group>
@@ -103,14 +113,27 @@ const SurveyNew = props => {
                         paddingLeft: 0,
                         borderBottom: "1px solid rgba(91, 86, 86, 0.5)",
                         borderRadius: 0,
-                        cursor:'pointer'
+                        cursor: "pointer",
                       }}
                     />
                     <Caret></Caret>
-                    <DropdownMenu className="dropdown-menu" onClick = {(event) =>{event.persist(); console.log(event); setCategory(event.target.id)}}>
-                      <span className="dropdown-item" id="Baseline">Baseline</span>
-                      <span className="dropdown-item" id="Midline">Midline</span>
-                      <span className="dropdown-item" id="Endline">Endline</span>
+                    <DropdownMenu
+                      className="dropdown-menu"
+                      onClick={(event) => {
+                        event.persist();
+                        console.log(event);
+                        setCategory(event.target.id);
+                      }}
+                    >
+                      <span className="dropdown-item" id="Baseline">
+                        Baseline
+                      </span>
+                      <span className="dropdown-item" id="Midline">
+                        Midline
+                      </span>
+                      <span className="dropdown-item" id="Endline">
+                        Endline
+                      </span>
                     </DropdownMenu>
                   </div>
                 </Col>
@@ -134,7 +157,7 @@ const SurveyNew = props => {
                       backgroundColor: "white",
                       paddingLeft: 0,
                       borderBottom: "1px solid rgba(91, 86, 86, 0.5)",
-                      borderRadius: 0
+                      borderRadius: 0,
                     }}
                   />
                 </Col>
@@ -165,11 +188,11 @@ const SurveyNew = props => {
                   backgroundColor: "white",
                   paddingLeft: 0,
                   borderBottom: "1px solid rgba(91, 86, 86, 0.5)",
-                  borderRadius: 0
+                  borderRadius: 0,
                 }}
               >
                 {projects?.length > 0 &&
-                  projects.map(item => (
+                  projects.map((item) => (
                     <option key={item._id} value={item._id}>
                       {item.title}
                     </option>
@@ -185,19 +208,28 @@ const SurveyNew = props => {
       </Modal>
 
       <ButtonGroup>
-        <CustomButton type="submit" primary onClick={() => toggleModal()}>Start from scratch</CustomButton>
-        <CustomButton type="submit" primary>Import questions</CustomButton>
+        <CustomButton type="submit" primary onClick={() => toggleModal()}>
+          Start from scratch
+        </CustomButton>
+        <CustomButton type="submit" primary>
+          Import questions
+        </CustomButton>
         {/* <CustomButton type="submit" primary>Suggest Template</CustomButton> */}
       </ButtonGroup>
     </div>
   );
 };
 
-const mapStateToProps = ({ survey: { isLoading, status, surveys }, project:{ projects} }) => ({
+const mapStateToProps = ({
+  survey: { isLoading, status, surveys },
+  project: { projects },
+}) => ({
   isLoading,
   status,
   surveys,
-  projects
+  projects,
 });
 
-export default connect(mapStateToProps, { createSurvey })(SurveyNew);
+export default connect(mapStateToProps, { createSurvey, getAllProjects })(
+  SurveyNew
+);

@@ -109,7 +109,6 @@ const _fetchAllSurvey = _.memoize(async (dispatch) => {
   }
 })
 
-
 export const getSingleSurvey = (id) => async (dispatch) => {
   try {
     dispatch({ type: SurveyActionTypes.REQUEST_PROCESS });
