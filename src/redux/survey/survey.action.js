@@ -11,7 +11,7 @@ import {
   emailSurveyLinkRequest,
 } from "../../api/survey";
 import { SurveyActionTypes } from "./survey.types";
-import _ from 'lodash';
+import _ from "lodash";
 
 export const createSurvey = (
   surveyData,
@@ -30,7 +30,7 @@ export const createSurvey = (
       payload: { survey: data, surveys },
     });
     toggleModal();
-    history.push("/surveys");
+    history.push(`/surveys/create/${data._id}`);
   } catch (error) {
     dispatch({
       type: SurveyActionTypes.REQUEST_ERROR,
@@ -88,7 +88,7 @@ export const deleteSurvey = (surveyId, history, surveys) => async (
 };
 
 export const getAllSurveys = () => {
-  return dispatch => _fetchAllSurvey(dispatch)
+  return (dispatch) => _fetchAllSurvey(dispatch);
 };
 
 const _fetchAllSurvey = _.memoize(async (dispatch) => {
@@ -107,7 +107,7 @@ const _fetchAllSurvey = _.memoize(async (dispatch) => {
       payload: "Failed to load survey",
     });
   }
-})
+});
 
 export const getSingleSurvey = (id) => async (dispatch) => {
   try {
@@ -127,7 +127,6 @@ export const getSingleSurvey = (id) => async (dispatch) => {
     });
   }
 };
-
 
 export const completeSurveyQuestionnaire = (
   surveyId,

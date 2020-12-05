@@ -21,6 +21,7 @@ const SurveyNew = (props) => {
   const handleSubmit = async (e) => {
 
     const findIndex = projects.find( data => data._id == project );
+    console.log(findIndex);
 
     e.preventDefault();
     await props.createSurvey(
