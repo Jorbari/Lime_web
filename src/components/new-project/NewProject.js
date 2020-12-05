@@ -1,14 +1,26 @@
 import React, { useState, useEffect } from "react";
 import { Accordion, Button, Card, Form, Col, Row } from "react-bootstrap";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import Notifier from "../Notifier/notifier.component";
+import { getSingleProjectRequest, editProjectRequest } from "../../api/project";
 
 import { createProject } from "../../redux/project/project.actions";
 
 import "./NewProject.css";
 
 const NewProject = (props) => {
-  const { toggleNewProjectView, history, projects, status, error } = props;
+  const {
+    toggleNewProjectView,
+    history,
+    projects,
+    status,
+    error,
+    match: {
+      params: { id },
+    },
+  } = props;
+
   const [title, setTitle] = useState("");
   const [manager, setManager] = useState("");
   const [sponsor, setSponsor] = useState("");
@@ -26,16 +38,86 @@ const NewProject = (props) => {
   const [description, setDescription] = useState("");
   const [open, setOpen] = useState(false);
 
+  const [currentProject, setCurrentProject] = useState({});
+  const [apiMessageFeedback, setApiMessageFeedback] = useState("");
+
   useEffect(() => {
     if (status === "error") {
-      // alert("Oops an error occured");
       if (error !== undefined || error !== null) {
         console.log(error);
+        setApiMessageFeedback(error);
       }
 
       setOpen(true);
     }
   }, [status]);
+
+  useEffect(() => {
+    if (id) {
+      const val = async () => {
+        const value = await getSingleProjectRequest(id);
+        console.log(value);
+        if (value.status === 200) {
+          setCurrentProject(value.data.data);
+          console.log(value.data.data);
+          patchFormValues();
+        }
+      };
+
+      val();
+    }
+  }, [currentProject.title]);
+
+  const patchFormValues = () => {
+    console.log(currentProject.manager?.name);
+    console.log(currentProject);
+    setTitle(currentProject.title);
+    setManager(currentProject.manager?.name);
+    setSponsor(currentProject.sponsor?.name);
+    setStartDate(currentProject.startDate);
+    setEndDate(currentProject.endDate);
+    setCategory(currentProject.category);
+    setGoals(currentProject.goals);
+    setObjectives(currentProject.objectives);
+    setInScope(currentProject.inScope);
+    setOutScope(currentProject.outScope);
+    setRequirements(currentProject.requirements);
+
+    setManagerEmail(currentProject.manager?.email);
+    setSponsorEmail(currentProject.sponsor?.email);
+    setDescription(currentProject.description);
+  };
+
+  const editProject = (e) => {
+    e.preventDefault();
+
+    const payload = {
+      title,
+      manager: { name: manager, email: managerEmail },
+      sponsor: { name: sponsor, email: sponsorEmail },
+      startDate: new Date(`${startDate}`).getTime(),
+      endDate: new Date(`${endDate}`).getTime(),
+      category,
+      goals,
+      objectives,
+      inScope,
+      outScope,
+      requirements,
+      description,
+    };
+
+    const makeCall = async () => {
+      const response_ = await editProjectRequest(id, payload);
+      console.log(response_);
+      if (response_.status === 200) {
+        console.log(response_);
+        setApiMessageFeedback("Project was updated successfully");
+        setOpen(true);
+      }
+    };
+
+    makeCall();
+  };
 
   const handleClick = () => {
     setOpen(false);
@@ -87,10 +169,14 @@ const NewProject = (props) => {
   };
   return (
     <div style={{ position: "relative" }}>
-      <Notifier open={open} handleClick={() => handleClick()} message={error} />
+      <Notifier
+        open={open}
+        handleClick={() => handleClick()}
+        message={apiMessageFeedback}
+      />
       <form
         className="w-full max-w-lg new-project-form"
-        onSubmit={(e) => handleSubmit(e)}
+        onSubmit={(e) => (id ? editProject(e) : handleSubmit(e))}
       >
         <div className="top-save-btn-div pr-4">
           <button
@@ -98,7 +184,7 @@ const NewProject = (props) => {
             type="submit"
             disabled={checkIfFilled()}
           >
-            Save
+            {id ? "Edit" : "Save"}
           </button>
         </div>
 
@@ -109,7 +195,7 @@ const NewProject = (props) => {
         >
           <Card>
             <Card.Header>
-              <p className="title">Key Information</p>
+              <p className="title">Key Information </p>
               <Accordion.Toggle as={Button} variant="link" eventKey="0">
                 <i className="fas fa-chevron-up text-secondary" />
               </Accordion.Toggle>
@@ -135,7 +221,7 @@ const NewProject = (props) => {
                       placeholder="Name of Project"
                       onChange={({ target: { value } }) => setTitle(value)}
                       // required
-                      value={title}
+                      value={title || ""}
                       style={{ height: "36px", fontSize: "15px" }}
                     />
                   </Form.Group>
@@ -513,8 +599,8 @@ const NewProject = (props) => {
         <div className="d-flex justify-content-end bottom-btn-div">
           <button
             className="form-btn btn bottom-cancel-btn"
-            type="submit"
-            onClick={() => toggleNewProjectView()}
+            type="button"
+            onClick={() => history.push("/projects")}
           >
             Cancel
           </button>
@@ -523,7 +609,7 @@ const NewProject = (props) => {
             type="submit"
             disabled={checkIfFilled()}
           >
-            Save
+            {id ? "Edit" : "Save"}
           </button>
         </div>
       </form>
@@ -540,4 +626,6 @@ const mapStateToProps = ({
   error,
 });
 
-export default connect(mapStateToProps, { createProject })(NewProject);
+export default withRouter(
+  connect(mapStateToProps, { createProject })(NewProject)
+);

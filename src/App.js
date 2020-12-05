@@ -30,6 +30,11 @@ const App = () => {
             <ProtectedRoute exact path="/dashboard" component={Dashboard} />
             <ProtectedRoute exact path="/projects" component={Projects} />
             <ProtectedRoute exact path="/new-project" component={NewProject} />
+            <ProtectedRoute
+              exact
+              path="/edit-project/:id"
+              component={NewProject}
+            />
             <ProtectedRoute exact path="/projects/:id" component={Project} />
             <ProtectedRoute path="/surveys" component={SurveyRoutes} />
             {/* <ProtectedRoute exact path="/new-survey" component={NewSurvey}/> */}

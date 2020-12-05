@@ -72,8 +72,6 @@ const Project = (props) => {
   const [currentProject, setCurrentProject] = useState({});
 
   React.useEffect(() => {
-    console.log(id);
-
     // const fetchSingleProject = async () => {
     //   await props.getSingleProject(id);
     //   console.log(projects);
@@ -83,9 +81,11 @@ const Project = (props) => {
 
     const val = async () => {
       const value = await getSingleProjectRequest(id);
-      console.log(value.data.data);
-      setCurrentProject(value.data.data);
-      console.log(currentProject);
+      console.log(value);
+      if (value.status === 200) {
+        setCurrentProject(value.data.data);
+        console.log(currentProject);
+      }
     };
 
     val();

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { withRouter } from 'react-router-dom'
 import moment from "moment";
 import ConfirmationBox from "../../components/confirmation-box/confirmationBox";
 
@@ -20,20 +21,20 @@ const SummaryTab = (props) => {
     handleClose();
   };
 
-  React.useEffect(() => {
-    console.log(project)
-  });
-
   const confirmation = () => {
     DeleteProject();
   };
+
+  const editProject = () => {
+      history.push(`/edit-project/${project._id}`);
+  }
 
   return (
 
     <SummaryContainer>
       <div className="sapsHeader-conatiner">
         <h1 className="sapsHeader capitalize font-semibold ml-8 py-4">
-          {project?.title || "null"}
+          {project?.title || "----"}
         </h1>
         <button
           type="button"
@@ -91,7 +92,7 @@ const SummaryTab = (props) => {
       <div className="project__detail">
           <div className="project__detail--grid">
               <h4>Details</h4>
-              <button>Edit details</button>
+              <button onClick={ () => editProject() } >Edit details</button>
           </div>
 
         <div className="project__detail--box">
@@ -181,4 +182,4 @@ const SummaryTab = (props) => {
 
 
 
-export default SummaryTab;
+export default withRouter(SummaryTab);
