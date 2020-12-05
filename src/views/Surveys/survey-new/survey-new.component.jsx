@@ -19,13 +19,19 @@ const SurveyNew = (props) => {
   const toggleModal = () => setOpen(!open);
 
   const handleSubmit = async (e) => {
+
+    const findIndex = projects.find( data => data._id == project );
+
+    console.log(findIndex);
+
     e.preventDefault();
     await props.createSurvey(
       {
         name,
         tag,
         category,
-        project: project === "" ? projects[0]._id : project,
+        project: findIndex.title,
+        projectId: project
       },
       history,
       surveys,
@@ -36,7 +42,7 @@ const SurveyNew = (props) => {
 
   useEffect(() => {
     props.getAllProjects();
-  });
+  }, []);
 
   return (
     <div style={{ position: "relative" }}>
