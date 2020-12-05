@@ -22,15 +22,13 @@ const SurveyNew = (props) => {
 
     const findIndex = projects.find( data => data._id == project );
 
-    console.log(findIndex);
-
     e.preventDefault();
     await props.createSurvey(
       {
         name,
         tag,
         category,
-        project: findIndex.title,
+        project: findIndex?.title,
         projectId: project
       },
       history,
