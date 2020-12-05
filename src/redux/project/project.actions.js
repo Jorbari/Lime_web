@@ -6,6 +6,7 @@ import {
   getSingleProjectRequest,
 } from "../../api/project";
 import { ProjectActionTypes } from "./project.types";
+import _ from 'lodash';
 
 export const createProject = (
   projectData,
@@ -83,7 +84,11 @@ export const deleteProject = (projectId, history, projects) => async (
   }
 };
 
-export const getAllProjects = () => async (dispatch) => {
+export const getAllProjects = () => {
+  return dispatch => _fetchAllProject(dispatch)
+};
+
+const _fetchAllProject = _.memoize(async (dispatch) => {
   try {
     dispatch({ type: ProjectActionTypes.REQUEST_PROCESS });
     const {
@@ -99,7 +104,7 @@ export const getAllProjects = () => async (dispatch) => {
       payload: "failed to fetch all projects",
     });
   }
-};
+})
 
 export const getSingleProject = (id) => async (dispatch) => {
   try {

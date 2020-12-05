@@ -11,6 +11,7 @@ import {
   emailSurveyLinkRequest,
 } from "../../api/survey";
 import { SurveyActionTypes } from "./survey.types";
+import _ from 'lodash';
 
 export const createSurvey = (
   surveyData,
@@ -86,7 +87,11 @@ export const deleteSurvey = (surveyId, history, surveys) => async (
   }
 };
 
-export const getAllSurveys = () => async (dispatch) => {
+export const getAllSurveys = () => {
+  return dispatch => _fetchAllSurvey(dispatch)
+};
+
+const _fetchAllSurvey = _.memoize(async (dispatch) => {
   try {
     dispatch({ type: SurveyActionTypes.REQUEST_PROCESS });
     const {
@@ -102,7 +107,8 @@ export const getAllSurveys = () => async (dispatch) => {
       payload: "Failed to load survey",
     });
   }
-};
+})
+
 
 export const getSingleSurvey = (id) => async (dispatch) => {
   try {
@@ -122,6 +128,7 @@ export const getSingleSurvey = (id) => async (dispatch) => {
     });
   }
 };
+
 
 export const completeSurveyQuestionnaire = (
   surveyId,
