@@ -5,6 +5,7 @@ import surveyList from "./survey-list/survey-list.component";
 import surveyDetails from "./survey-details/survey-details.component";
 import surveyNew from './survey-new/survey-new.component';
 import CreateSurvey from './survey-create/survey-create.component';
+
 const SurveyRoutes = ({match}) => {
     console.log(match.path)
   return (
