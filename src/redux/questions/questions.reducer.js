@@ -1,37 +1,42 @@
 import QuestionActionTypes from './questions.types';
-import { 
-    addDefaultQuestionToQuestions, 
+import {
+    addDefaultQuestionToQuestions,
     removeQuestion,
-    setQuestionFormat,
-    toggleRequired,
-    setTitle
+    AddToQuestionCollection
 } from "./questions.utils";
 
 const INITIAL_STATE = {
     currentId: -1,
-    questions: []
+    questions: [],
+    questions_collection: []
 };
 
-export const questionsReducer = (state=INITIAL_STATE, action)=>{
-    switch(action.type){
+export const questionsReducer = (state = INITIAL_STATE, action) => {
+    switch (action.type) {
         case QuestionActionTypes.ADD_QUESTION:
-            return{
+            return {
                 ...state,
                 ...addDefaultQuestionToQuestions(state)
             }
         case QuestionActionTypes.REMOVE_QUESTION:
-            return{
+            return {
                 ...state,
-                ...removeQuestion(state,action.payload)
+                ...removeQuestion(state, action.payload)
             }
         case QuestionActionTypes.SET_CURRENTID:
-            return{
+            return {
                 ...state,
                 currentId: action.payload
             }
+
+        case QuestionActionTypes.ADD_TO_QUESTION_COLLECTION:
+            return {
+                ...state,
+                questions_collection: AddToQuestionCollection(state.questions_collection, action.payload)
+            }
         default:
             return {
-            ...state,
+                ...state,
             };
     }
 };
