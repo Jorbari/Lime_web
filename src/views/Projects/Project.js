@@ -62,7 +62,6 @@ const SapsProjectContainer = styled.div`
 const Project = (props) => {
   const {
     history,
-    project,
     projects,
     deleteProject,
     match: {
@@ -72,13 +71,6 @@ const Project = (props) => {
   const [currentProject, setCurrentProject] = useState({});
 
   React.useEffect(() => {
-    // const fetchSingleProject = async () => {
-    //   await props.getSingleProject(id);
-    //   console.log(projects);
-    // };
-
-    // fetchSingleProject();
-
     const val = async () => {
       const value = await getSingleProjectRequest(id);
       console.log(value);
