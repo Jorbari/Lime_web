@@ -1,11 +1,28 @@
 import React from 'react';
+import moment from "moment";
 import { SurveyComponent } from './survey-summary.styles';
+import { getSingleSurveyRequest } from '../../../api/survey';
 
 class SurveySummary extends React.Component {
 
     constructor(props) {
         super(props);
+
+        this.state = {
+            surveySummary: {}
+        }
+
+        this.getSurveySummary();
        
+    }
+
+    async getSurveySummary () {
+        let res = await getSingleSurveyRequest(this.props.id);
+        if (res.status === 200) {
+            this.setState({surveySummary: res.data.data});
+            console.log(this.state.surveySummary);
+        }
+        console.log(res.data.data);
     }
 
     render() {
@@ -16,11 +33,11 @@ class SurveySummary extends React.Component {
                     <div className="section__one">
                         <section>
                             <h3>Total No. of Responses</h3>
-                            <p>9</p>
+                            <p> {this.state.surveySummary?.numberOfResponses || 0} </p>
                         </section>
                         <section>
                             <h3>Survey Status</h3>
-                            <p>Active</p>
+                            <p> {this.state.surveySummary?.status || '---'} </p>
                         </section>
                         <section>
                             <h3>Drafted Surveys:</h3>
@@ -37,19 +54,19 @@ class SurveySummary extends React.Component {
 
                                 <section className="details">
                                     <p>Projet:</p>
-                                    <h4>SAPS Project</h4>
+                                    <h4> {this.state.surveySummary?.project || '---'} </h4>
                                 </section>
                                 <section className="details">
                                     <p>No. of questions:</p>
-                                    <h4>12</h4>
+                                    <h4> {this.state.surveySummary?.numberOfQuestions || '0'} </h4>
                                 </section>
                                 <section className="details">
                                     <p>Date Started:</p>
-                                    <h4>10th of January 2020</h4>
+                                    <h4> {moment(this.state.surveySummary?.dateStarted).format("Do of MMMM YYYY") || '---'} </h4>
                                 </section>
                                 <section className="details">
                                     <p>Last Modified:</p>
-                                    <h4>14th of January 2020</h4>
+                                    <h4> {moment(this.state.surveySummary?.dateUpdated).format("Do of MMMM YYYY") || '---'} </h4>
                                 </section>
                                 <section className="details">
                                     <p>Estimated completion time</p>
@@ -72,7 +89,7 @@ class SurveySummary extends React.Component {
                                     </section>
                                     <section></section>
                                     <section>
-                                        <h4>Live Survey</h4>
+                                        <h4>Web Link</h4>
                                         <p>3 responses</p>
                                     </section>
 
