@@ -15,6 +15,7 @@ const SurveyRoutes = ({match}) => {
           <ProtectedRoute exact path={`${match.url}/details/:id`} component={surveyDetails} />
           <ProtectedRoute exact path={`${match.url}/new`} component={surveyNew} />
           <ProtectedRoute exact path={`${match.url}/create/:id`} component={CreateSurvey} />
+          <ProtectedRoute exact path={`${match.url}/edit/:id`} component={CreateSurvey} />
         </Switch>
     </React.Fragment>
   );
