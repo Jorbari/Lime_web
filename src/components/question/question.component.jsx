@@ -42,6 +42,7 @@ import LinearScale from "../linearScale/linearScale.component";
 import { createStructuredSelector } from "reselect";
 import { connect } from "react-redux";
 import { debounce } from "../../helper";
+import { withRouter } from "react-router-dom";
 class Question extends React.Component {
   selectBox = React.createRef();
   isCurrent = false;
@@ -58,7 +59,7 @@ class Question extends React.Component {
   componentDidMount() {
     this.props.onRef(this);
   }
-  
+
   componentWillUnmount() {
     this.props.onRef(undefined);
   }
@@ -72,7 +73,10 @@ class Question extends React.Component {
   }
 
   AddToQuestionCollection() {
-    this.props.addQuestionToQuestionCollections({...this.state});
+    this.props.addQuestionToQuestionCollections(
+      { ...this.state },
+      this.props.match.params.id
+    );
   }
 
   onFormatChange = (event) => {
@@ -266,4 +270,4 @@ export default connect(mapStateToProps, {
   removeQuestion,
   setCurrentId,
   addQuestionToQuestionCollections,
-})(Question);
+})(withRouter(Question));

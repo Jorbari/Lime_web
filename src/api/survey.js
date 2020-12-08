@@ -15,7 +15,7 @@ export const deleteSurveyRequest = async id =>
   await http.delete(`/api/survey/${id}`);
 
 export const completeSurveyQuestionnaireRequest = async (id, credentials) =>
-  await http.post(`/api/survey/${id}`, { credentials });
+  await http.put(`/api/survey/${id}`, { credentials });
 
 export const getAllSurveyResponsesRequest = async id =>
   await http.get(`/api/survey/${id}/response`);
