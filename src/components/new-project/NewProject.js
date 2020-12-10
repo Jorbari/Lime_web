@@ -184,7 +184,7 @@ const NewProject = (props) => {
             type="submit"
             disabled={checkIfFilled()}
           >
-            {id ? "Edit" : "Save"}
+            {id ? "Save Changes" : "Save"}
           </button>
         </div>
 
@@ -609,7 +609,7 @@ const NewProject = (props) => {
             type="submit"
             disabled={checkIfFilled()}
           >
-            {id ? "Edit" : "Save"}
+            {id ? "Save Changes" : "Save"}
           </button>
         </div>
       </form>

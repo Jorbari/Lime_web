@@ -14,7 +14,6 @@ import NewProject from "./components/new-project/NewProject";
 import ViewReport from "./views/view-report/view-report.component";
 import { MainContentContainer, MainContainer, MainContent } from "./App.styles";
 import SurveyRoutes from "./views/Surveys/survey.routes";
-// import { getToken } from "./api/helpers";
 
 const App = () => {
   return (
@@ -37,8 +36,6 @@ const App = () => {
             />
             <ProtectedRoute exact path="/projects/:id" component={Project} />
             <ProtectedRoute path="/surveys" component={SurveyRoutes} />
-            {/* <ProtectedRoute exact path="/new-survey" component={NewSurvey}/> */}
-            {/* <ProtectedRoute exact path="/surveys/:id" component={Surveys}/> */}
             <ProtectedRoute exact path="/report" component={Report} />
             <ProtectedRoute
               exact

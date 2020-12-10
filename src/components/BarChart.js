@@ -75,7 +75,7 @@ export default function BarChart() {
   }, []);
   return (
     <>
-      <div className="w-full xl:w-4/12 pl-1 pr-4">
+      <div>
         <BarGraphContainer className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 rounded h-32">
           <div className="rounded-t mb-0 px-4 py-3 bg-transparent">
             <div className="flex flex-wrap items-center">

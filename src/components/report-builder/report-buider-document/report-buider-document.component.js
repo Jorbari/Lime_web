@@ -22,6 +22,17 @@ const ReportBuiderDocs = ({ current_report, rendered_div }) => {
     console.log(current_report);
   });
 
+  const {
+    description,
+    goals_and_objective,
+    team_members,
+    date_and_milestone,
+    scope,
+    execution_plan,
+    resource_requirement,
+    budget,
+    survey_information,
+  } = rendered_div;
   const handlePagePrint = () => {
     let element = document.getElementById("project_document");
     html2pdf()
@@ -30,58 +41,69 @@ const ReportBuiderDocs = ({ current_report, rendered_div }) => {
   };
   return (
     <>
-      {/* <Style.DefaultView>
-        <img alt="" src={noDataImg} />
-        <p>Click on a category from the left to build report</p>
-      </Style.DefaultView> */}
-      <Style.ReportBuiderDocsContainer>
-        <Style.DocsTopNavContainer>
-          <Style.DocsTopNav>
-            <CustomButton primary onClick={handlePagePrint}>
-              Print Document
-            </CustomButton>
-            <CustomButton primary onClick={handlePagePrint}>
-              Save As PDF
-            </CustomButton>
-          </Style.DocsTopNav>
-        </Style.DocsTopNavContainer>
-        <Style.DocsBody id={"project_document"}>
-          <Style.Title>{current_report.title}</Style.Title>
-          {rendered_div.description ? <ReportBuilderDescription /> : null}
-          {rendered_div.goals_and_objective ? (
-            <ReportBuilderGoals
-              goals={current_report.goals}
-              objectives={current_report.objectives}
-            />
-          ) : null}
-          {rendered_div.team_members ? (
-            <ReportBuilderTeam
-              projectManager={current_report.manager.name}
-              executiveSponsor={current_report.sponsor.name}
-            />
-          ) : null}
-          {rendered_div.date_and_milestone ? (
-            <ReportBuilderDates
-              startDate={current_report.startDate}
-              endDate={current_report.endDate}
-            />
-          ) : null}
-          {rendered_div.scope ? (
-            <ReportBuilderScope
-              inScope={current_report.inScope}
-              outScope={current_report.outScope}
-            />
-          ) : null}
-          {rendered_div.execution_plan ? <ReportBuilderPlan /> : null}
-          {rendered_div.resource_requirement ? (
-            <ReportBuilderRequirement
-              requirements={current_report.requirements}
-            />
-          ) : null}
-          {rendered_div.budget ? <ReportBuilderBudget /> : null}
-          {rendered_div.survey_information ? <ReportBuilderSurvey /> : null}
-        </Style.DocsBody>
-      </Style.ReportBuiderDocsContainer>
+      {!description &&
+      !goals_and_objective &&
+      !team_members &&
+      !date_and_milestone &&
+      !scope &&
+      !execution_plan &&
+      !resource_requirement &&
+      !budget &&
+      !survey_information ? (
+        <Style.DefaultView>
+          <img alt="" src={noDataImg} />
+          <p>Click on a category from the left to build report</p>
+        </Style.DefaultView>
+      ) : (
+        <Style.ReportBuiderDocsContainer>
+          <Style.DocsTopNavContainer>
+            <Style.DocsTopNav>
+              <CustomButton primary onClick={handlePagePrint}>
+                Print Document
+              </CustomButton>
+              <CustomButton primary onClick={handlePagePrint}>
+                Save As PDF
+              </CustomButton>
+            </Style.DocsTopNav>
+          </Style.DocsTopNavContainer>
+          <Style.DocsBody id={"project_document"}>
+            <Style.Title>{current_report.title}</Style.Title>
+            {rendered_div.description ? <ReportBuilderDescription /> : null}
+            {rendered_div.goals_and_objective ? (
+              <ReportBuilderGoals
+                goals={current_report.goals}
+                objectives={current_report.objectives}
+              />
+            ) : null}
+            {rendered_div.team_members ? (
+              <ReportBuilderTeam
+                projectManager={current_report.manager.name}
+                executiveSponsor={current_report.sponsor.name}
+              />
+            ) : null}
+            {rendered_div.date_and_milestone ? (
+              <ReportBuilderDates
+                startDate={current_report.startDate}
+                endDate={current_report.endDate}
+              />
+            ) : null}
+            {rendered_div.scope ? (
+              <ReportBuilderScope
+                inScope={current_report.inScope}
+                outScope={current_report.outScope}
+              />
+            ) : null}
+            {rendered_div.execution_plan ? <ReportBuilderPlan /> : null}
+            {rendered_div.resource_requirement ? (
+              <ReportBuilderRequirement
+                requirements={current_report.requirements}
+              />
+            ) : null}
+            {rendered_div.budget ? <ReportBuilderBudget /> : null}
+            {rendered_div.survey_information ? <ReportBuilderSurvey /> : null}
+          </Style.DocsBody>
+        </Style.ReportBuiderDocsContainer>
+      )}
     </>
   );
 };
