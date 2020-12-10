@@ -1,19 +1,21 @@
-
-
 .new-project-container .navbar {
-  background-color: white!important;
+  background-color: white !important;
   position: fixed !important;
   /* left: 256px; */
   margin-left: 256px;
   z-index: 2;
-  width: -webkit-fill-available
+  width: -webkit-fill-available;
 }
 
 .new-survey-container .navbar {
-  background-color: white!important;
+  background-color: white !important;
   position: fixed !important;
   /* left: 256px; */
   margin-left: 256px;
   z-index: 2;
-  width: -webkit-fill-available
+  width: -webkit-fill-available;
+}
+
+.space__padding {
+  padding-top: 6.2rem;
 }
