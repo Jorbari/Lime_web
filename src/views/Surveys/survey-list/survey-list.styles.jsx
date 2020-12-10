@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const SurveysContainer = styled.div`
   margin-top: 1rem;
@@ -16,6 +16,7 @@ export const SurveysContainer = styled.div`
 `;
 
 export const ButtonContainer = styled.div`
+  padding-top: 2.7rem;
   .newProjectButton {
     padding: 11px 18px;
     width: 203.11px;

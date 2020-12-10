@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 export const ButtonContainer = styled.div`
   .newProjectButton {
@@ -24,9 +24,19 @@ export const ButtonContainer = styled.div`
     text-align: center;
     color: #5b5656;
   }
+`;
 
-  /* .react-responsive-modal-modal {
-    width: 1068px;
-    height: 666px;
-  } */
+export const FlexGridStyle = styled.div`
+  .flex__ {
+    display: flex;
+    justify-content: space-between;
+    gap: 0 3.8rem;
+    padding: 6.2rem 0;
+  }
+  .flex__ > .flex__one {
+    width: 61%;
+  }
+  .flex__two {
+    flex: 1;
+  }
 `;
