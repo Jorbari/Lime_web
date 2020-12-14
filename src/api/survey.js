@@ -3,6 +3,9 @@ import { http } from "./client";
 export const createSurveyRequest = async credentials =>
   await http.post("/api/survey", credentials);
 
+export const createQuestionRequest = async (survey_id, credentials) =>
+  await http.post(`/api/question/${survey_id}`, credentials);
+
 export const getAllSurveysRequest = async () => await http.get("/api/survey");
 
 export const getSingleSurveyRequest = async id =>
@@ -15,7 +18,7 @@ export const deleteSurveyRequest = async id =>
   await http.delete(`/api/survey/${id}`);
 
 export const completeSurveyQuestionnaireRequest = async (id, credentials) =>
-  await http.post(`/api/survey/${id}`, { credentials });
+  await http.put(`/api/survey/${id}`, { credentials });
 
 export const getAllSurveyResponsesRequest = async id =>
   await http.get(`/api/survey/${id}/response`);
