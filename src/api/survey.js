@@ -3,6 +3,9 @@ import { http } from "./client";
 export const createSurveyRequest = async credentials =>
   await http.post("/api/survey", credentials);
 
+export const createQuestionRequest = async (survey_id, credentials) =>
+  await http.post(`/api/question/${survey_id}`, credentials);
+
 export const getAllSurveysRequest = async () => await http.get("/api/survey");
 
 export const getSingleSurveyRequest = async id =>
