@@ -57,7 +57,8 @@ export const ProfileContainerStyle = styled.div`
     justify-content: flex-end;
     padding: 2.6rem 0;
   }
-  .flex__right > button {
+  .flex__right > button,
+  .form-group > button {
     background-color: #b6e6bd;
     border-radius: 1rem;
     color: #5b5656;
@@ -184,7 +185,8 @@ export const ProfileContainerStyle = styled.div`
     margin-bottom: 3.6rem;
   }
 
-  .form-group > label {
+  .form-group > label,
+  .form-group > p {
     color: #5b5656;
     font-size: 1.8rem;
     font-weight: 300;
@@ -198,6 +200,28 @@ export const ProfileContainerStyle = styled.div`
     font-size: 2rem;
     font-weight: normal;
     width: 100%;
+  }
+  .form-group > .form__radios {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .form-group > .form__radios > div {
+    flex: 1;
+    display: flex;
+    /* justify-content: space-between; */
+    align-items: center;
+  }
+  .form-group > .form__radios > div > label {
+    color: #5b5656;
+    font-weight: 500;
+    font-size: 2rem;
+    margin: unset;
+    margin-right: 2rem;
+  }
+  .form-group > .form__radios > div > input {
+    width: 1.7rem;
+    height: 1.7rem;
   }
 
   .flex__two .grid__profile:not(:last-child) {
