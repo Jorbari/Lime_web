@@ -155,6 +155,36 @@ const Profile = (props) => {
                         value={email}
                       />
                     </div>
+
+                    <div className="grid__2 form__space">
+                      <div className="form-group">
+                        <p>Gender</p>
+
+                        <section className="form__radios">
+                          <div>
+                            <label htmlFor="male">Male</label>
+
+                            <input
+                              type="radio"
+                              name="gender"
+                              className="form-control"
+                            />
+                          </div>
+                          <div>
+                            <label htmlFor="female">Female</label>
+
+                            <input
+                              type="radio"
+                              name="gender"
+                              className="form-control"
+                            />
+                          </div>
+                        </section>
+                      </div>
+                      <div className="form-group flex__right">
+                        <button>Save</button>
+                      </div>
+                    </div>
                   </section>
                 </div>
 
