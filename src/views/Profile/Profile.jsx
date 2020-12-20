@@ -1,40 +1,42 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import { Spinner } from "react-bootstrap";
 
-import { decodeUserObject } from "../../api/helpers";
-import { ProfileContainer, ProfileContainerStyle } from "./profile.styles";
+import { decodeUserObject, encodeUserProfile } from "../../api/helpers";
+import { ProfileContainerStyle } from "./profile.styles";
+import { updateUserDetails } from "../../api/user";
+import Notifier from "../../components/Notifier/notifier.component";
 
-import UserProfileImage from "../../components/user-profile-image/user-profile-image.components";
-import UserProfileDetail from "../../components/user-profile-details/user-profile-details.component";
-import Teammates from "../../components/teammates/teammates.component";
+// import Teammates from "../../components/teammates/teammates.component";
 
 const Profile = (props) => {
   const user = decodeUserObject();
 
-  const { history } = props;
-  const [newProjectView, setNewProjectView] = React.useState(false);
-  const [imageUrl, setImageUrl] = React.useState("");
-
-  const [mobileNumber, setMobileNumber] = React.useState("");
-  const [firstName, setFirstName] = React.useState("");
-  const [lastName, setLastName] = React.useState("");
-  const [organization, setOrganization] = React.useState("");
-  const [designation, setDesignation] = React.useState("");
-  const [email, setEmail] = React.useState("");
-
-  const toggleNewProjectView = () => {
-    setNewProjectView(!newProjectView);
-  };
+  const [open, setOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [apiMessageFeedback, setApiMessageFeedback] = useState("");
+  const [form, setState] = useState({
+    userName: "",
+    imageUrl: "",
+    mobileNumber: "",
+    firstName: "",
+    lastName: "",
+    organization: "",
+    designation: "",
+    email: "",
+  });
 
   useEffect(() => {
-    console.log(user);
-    setMobileNumber();
-    setFirstName(user.firstname);
-    setLastName(user.lastname);
-    setOrganization(user.company);
-    setDesignation(user.role);
-    setEmail(user.email);
+    setState({
+      ...form,
+      username: user.username,
+      firstname: user.firstname,
+      lastname: user.lastname,
+      organization: user.company,
+      designation: user.role,
+      email: user.email,
+    });
   }, []);
 
   const readImageUrl = (event) => {
@@ -48,16 +50,60 @@ const Profile = (props) => {
         previewReader.readAsDataURL(file);
         previewReader.onload = (e) => {
           const fileBinary = e.target.result.split("base64,")[1];
-          setImageUrl(`data:image/png;base64,${fileBinary}`);
+          setState({
+            ...form,
+            imageUrl: `data:image/png;base64,${fileBinary}`,
+          });
         };
       }
     }
   };
 
-  const updateValue = (event) => {};
+  const updateValue = (event) => {
+    setState({
+      ...form,
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  const handleClick = () => {
+    setOpen(false);
+  };
+
+  const updateProfile = async (event) => {
+    event.preventDefault();
+    setIsLoading(true);
+
+    const payload = {
+      username: form.username,
+      firstname: form.firstname,
+      lastname: form.lastname,
+      company: form.organization,
+      role: form.designation,
+    };
+
+    const returnedValue = await updateUserDetails(payload);
+    if (returnedValue.data !== undefined || returnedValue.data !== null) {
+      setOpen(true);
+      setApiMessageFeedback("Profile updated successfully");
+      const userData = { ...user, ...payload };
+      encodeUserProfile(userData);
+      setIsLoading(false);
+    } else {
+      setOpen(true);
+      setApiMessageFeedback("An error occurred, please try again !!!");
+      setIsLoading(false);
+    }
+  };
 
   return (
     <>
+      <Notifier
+        open={open}
+        handleClick={() => handleClick()}
+        message={apiMessageFeedback}
+      />
+
       <ProfileContainerStyle>
         <div className="content__wrapper">
           <div className="flex__right">
@@ -86,13 +132,14 @@ const Profile = (props) => {
                           <input
                             type="file"
                             id="changeProfileImg"
+                            name="imageUrl"
                             onChange={readImageUrl}
                           />
                         </section>
 
                         <section className="displayImage">
-                          {imageUrl ? (
-                            <img src={imageUrl} alt="profile Image" />
+                          {form.imageUrl ? (
+                            <img src={form.imageUrl} alt="profile Image" />
                           ) : (
                             <h4>
                               {`${user.firstname.charAt(
@@ -105,7 +152,13 @@ const Profile = (props) => {
 
                       <div className="form-group">
                         <label htmlFor="">Mobile Number:</label>
-                        <input type="tel" className="form-control" />
+                        <input
+                          type="tel"
+                          name="mobileNumber"
+                          className="form-control"
+                          value={form.mobileNumber}
+                          onChange={updateValue}
+                        />
                       </div>
                     </div>
 
@@ -114,16 +167,20 @@ const Profile = (props) => {
                         <label htmlFor="">First Name:</label>
                         <input
                           type="text"
+                          name="firstname"
                           className="form-control"
-                          value={firstName}
+                          value={form.firstname}
+                          onChange={updateValue}
                         />
                       </div>
                       <div className="form-group">
                         <label htmlFor="">Last Name:</label>
                         <input
                           type="text"
+                          name="lastname"
                           className="form-control"
-                          value={lastName}
+                          value={form.lastname}
+                          onChange={updateValue}
                         />
                       </div>
                     </div>
@@ -133,16 +190,20 @@ const Profile = (props) => {
                         <label htmlFor="">Organization:</label>
                         <input
                           type="text"
+                          name="organization"
                           className="form-control"
-                          value={organization}
+                          value={form.organization}
+                          onChange={updateValue}
                         />
                       </div>
                       <div className="form-group">
                         <label htmlFor="">Designation:</label>
                         <input
                           type="text"
+                          name="designation"
                           className="form-control"
-                          value={designation}
+                          value={form.designation}
+                          onChange={updateValue}
                         />
                       </div>
                     </div>
@@ -151,13 +212,15 @@ const Profile = (props) => {
                       <label htmlFor="">E-mail:</label>
                       <input
                         type="text"
+                        name="email"
                         className="form-control"
-                        value={email}
+                        value={form.email}
+                        onChange={updateValue}
                       />
                     </div>
 
                     <div className="grid__2 form__space">
-                      <div className="form-group">
+                      {/* <div className="form-group">
                         <p>Gender</p>
 
                         <section className="form__radios">
@@ -180,9 +243,22 @@ const Profile = (props) => {
                             />
                           </div>
                         </section>
-                      </div>
+                      </div> */}
+
                       <div className="form-group flex__right">
-                        <button>Save</button>
+                        <button onClick={updateProfile}>
+                          {isLoading ? (
+                            <Spinner
+                              as="span"
+                              animation="border"
+                              size="sm"
+                              role="status"
+                              aria-hidden="true"
+                            />
+                          ) : (
+                            "Save"
+                          )}
+                        </button>
                       </div>
                     </div>
                   </section>
@@ -210,77 +286,6 @@ const Profile = (props) => {
           </Tabs>
         </div>
       </ProfileContainerStyle>
-
-      {/* ************** */}
-
-      {/* <ProfileContainer
-        className="mx-8 relative bg-white flex flex-col md:flew-wrap"
-        style={{ height: "40vw" }}
-      >
-        <div
-          className="table-card-container w-full xl:w-9/12 mb-12 xl:mb-0 pr-4"
-          style={{ marginTop: "9rem", width: "100%" }}
-        >
-          <Tabs>
-            <TabList>
-              <Tab style={{ paddingLeft: "2rem", paddingRight: "2rem" }}>
-                Summary
-              </Tab>
-              <Tab style={{ paddingLeft: "2rem", paddingRight: "2rem" }}>
-                Billing
-              </Tab>
-            </TabList>
-            <TabPanel style={{ marginTop: "5rem" }}>
-              {Object.keys(user).length > 0 && (
-                <div
-                  className="d-flex jusify-content-center"
-                  style={{
-                    height: "60vh",
-                    display: "flex",
-                    justifyContent: "space-around",
-                  }}
-                >
-                  <div className="row w-100">
-                    <UserProfileImage
-                      firstname={user.firstname}
-                      lastname={user.lastname}
-                      email={user.email}
-                    />
-
-                    <UserProfileDetail
-                      company={user.company}
-                      role={user.role}
-                    />
-
-                    <Teammates />
-                  </div>
-                </div>
-              )}
-            </TabPanel>
-            <TabPanel>
-              {Object.keys(user).length > 0 && (
-                <div
-                  className="d-flex jusify-content-center"
-                  style={{ height: "60vh" }}
-                >
-                  <div className="row w-100">
-                    <UserProfileImage
-                      firstname={user.firstname}
-                      lastname={user.lastname}
-                      email={user.email}
-                    />
-
-                    <UserProfileDetail
-                      company={user.company}
-                      role={user.role}
-                    />
-                  </div>
-                </div>
-              )}
-            </TabPanel>
-          </Tabs>
-        </div>
-      </ProfileContainer> */}
     </>
   );
 };
