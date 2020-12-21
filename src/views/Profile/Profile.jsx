@@ -5,7 +5,7 @@ import { Spinner } from "react-bootstrap";
 
 import { decodeUserObject, encodeUserProfile } from "../../api/helpers";
 import { ProfileContainerStyle } from "./profile.styles";
-import { updateUserDetails } from "../../api/user";
+import { updateUserDetails, updateUserProfileImage } from "../../api/user";
 import Notifier from "../../components/Notifier/notifier.component";
 
 // import Teammates from "../../components/teammates/teammates.component";
@@ -28,6 +28,7 @@ const Profile = (props) => {
   });
 
   useEffect(() => {
+    console.log(user);
     setState({
       ...form,
       username: user.username,
@@ -54,9 +55,18 @@ const Profile = (props) => {
             ...form,
             imageUrl: `data:image/png;base64,${fileBinary}`,
           });
+          updateProfileImage(fileBinary);
         };
       }
     }
+  };
+
+  const updateProfileImage = async (fileBinary) => {
+    const payload = {
+      imageBinary: fileBinary,
+    };
+    const profileData = await updateUserProfileImage(payload);
+    console.log(profileData);
   };
 
   const updateValue = (event) => {
@@ -89,6 +99,7 @@ const Profile = (props) => {
       const userData = { ...user, ...payload };
       encodeUserProfile(userData);
       setIsLoading(false);
+      console.log(returnedValue);
     } else {
       setOpen(true);
       setApiMessageFeedback("An error occurred, please try again !!!");
@@ -123,7 +134,7 @@ const Profile = (props) => {
                     <p>Key Information</p>
                   </section>
 
-                  <section className="profile__detail">
+                  <form className="profile__detail" onSubmit={updateProfile}>
                     <div className="grid__2 form__space">
                       <div className="grid__profile">
                         <section className="detail">
@@ -151,7 +162,7 @@ const Profile = (props) => {
                       </div>
 
                       <div className="form-group">
-                        <label htmlFor="">Mobile Number:</label>
+                        <label>Mobile Number:</label>
                         <input
                           type="tel"
                           name="mobileNumber"
@@ -164,22 +175,22 @@ const Profile = (props) => {
 
                     <div className="grid__2 form__space">
                       <div className="form-group">
-                        <label htmlFor="">First Name:</label>
+                        <label>First Name:</label>
                         <input
                           type="text"
                           name="firstname"
                           className="form-control"
-                          value={form.firstname}
+                          value={form.firstname || ""}
                           onChange={updateValue}
                         />
                       </div>
                       <div className="form-group">
-                        <label htmlFor="">Last Name:</label>
+                        <label>Last Name:</label>
                         <input
                           type="text"
                           name="lastname"
                           className="form-control"
-                          value={form.lastname}
+                          value={form.lastname || ""}
                           onChange={updateValue}
                         />
                       </div>
@@ -187,34 +198,34 @@ const Profile = (props) => {
 
                     <div className="grid__2 form__space">
                       <div className="form-group">
-                        <label htmlFor="">Organization:</label>
+                        <label>Organization:</label>
                         <input
                           type="text"
                           name="organization"
                           className="form-control"
-                          value={form.organization}
+                          value={form.organization || ""}
                           onChange={updateValue}
                         />
                       </div>
                       <div className="form-group">
-                        <label htmlFor="">Designation:</label>
+                        <label>Designation:</label>
                         <input
                           type="text"
                           name="designation"
                           className="form-control"
-                          value={form.designation}
+                          value={form.designation || ""}
                           onChange={updateValue}
                         />
                       </div>
                     </div>
 
                     <div className="form-group form__space">
-                      <label htmlFor="">E-mail:</label>
+                      <label>E-mail:</label>
                       <input
                         type="text"
                         name="email"
                         className="form-control"
-                        value={form.email}
+                        value={form.email || ""}
                         onChange={updateValue}
                       />
                     </div>
@@ -246,7 +257,7 @@ const Profile = (props) => {
                       </div> */}
 
                       <div className="form-group flex__right">
-                        <button onClick={updateProfile}>
+                        <button onClick={updateProfile} type="submit">
                           {isLoading ? (
                             <Spinner
                               as="span"
@@ -261,7 +272,7 @@ const Profile = (props) => {
                         </button>
                       </div>
                     </div>
-                  </section>
+                  </form>
                 </div>
 
                 <div className="flex__two">

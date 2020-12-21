@@ -18,6 +18,10 @@ const ExecutionPlanContainer = styled.div`
   .table-border {
     border-bottom: 0.5px solid #7fcd91;
   }
+  .table-border > td:last-child {
+    display: flex;
+    gap: 1rem;
+  }
 
   /* .ExecutionPlan-table  */
 `;
@@ -54,16 +58,7 @@ const ExecutionPlan = () => {
             <td className="w-2/4 py-6">10/01/2020</td>
             <td className="w-2/4 py-6">
               <img src={profileImage} alt="" className="rounded-full" />
-              <img
-                src={profileImage}
-                alt=""
-                className="rounded-full"
-                style={{
-                  position: "absolute",
-                  top: "19.5rem",
-                  right: "6rem"
-                }}
-              />
+              <img src={profileImage} alt="" className="rounded-full" />
             </td>
           </tr>
           <tr className="table-border">
