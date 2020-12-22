@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
+import { getSingleProjectRequest } from "../../api/project";
 
 // import profileImage from "../../assets/profileImage.png";
 
@@ -46,6 +47,7 @@ const BudgetContainer = styled.div`
 `;
 
 const Budget = () => {
+  useEffect(() => {}, []);
   return (
     <BudgetContainer
       className="mx-8"

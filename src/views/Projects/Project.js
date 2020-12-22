@@ -14,6 +14,7 @@ import Team from "./Team";
 import ExecutionPlan from "./ExecutionPlan";
 import Budget from "./Budget";
 import { getSingleProjectRequest } from "../../api/project";
+import { Link } from "react-router-dom";
 
 const SapsProjectContainer = styled.div`
   .sapsHeader {
@@ -57,6 +58,21 @@ const SapsProjectContainer = styled.div`
   .react-tabs__tab-list {
     margin-left: 2rem !important;
   }
+
+  .tab__buttons {
+    padding: 2.6rem 0 0.8rem 0;
+    display: flex;
+    justify-content: flex-end;
+  }
+  .tab__buttons > .btn {
+    color: #5b5656;
+    font-size: 1.8rem;
+    padding: 1.1rem 1.8rem;
+    background-color: #b6e6bd;
+    border-radius: 1rem;
+    text-decoration: none;
+    text-decoration: none;
+  }
 `;
 
 const Project = (props) => {
@@ -69,6 +85,7 @@ const Project = (props) => {
     },
   } = props;
   const [currentProject, setCurrentProject] = useState({});
+  const [currentTab, setCurrentTab] = useState(0);
 
   React.useEffect(() => {
     const val = async () => {
@@ -86,22 +103,61 @@ const Project = (props) => {
   return (
     <>
       <div className="relative bg-white">
-        <SapsProjectContainer className="relative bg-white md:pt-32 pb-32 pt-12">
+        <SapsProjectContainer className="relative bg-white pb-32">
+          <div className="tab__buttons">
+            {currentTab === 1 ? (
+              <Link className="btn" to="/surveys/new">
+                <i className="fa fa-plus mr-2" aria-hidden="true"></i>
+                New Survey
+              </Link>
+            ) : currentTab === 3 ? (
+              <button className="btn">
+                <i className="fa fa-plus mr-2" aria-hidden="true"></i>
+                New entry
+              </button>
+            ) : currentTab === 4 ? (
+              <button className="btn">
+                <i className="fa fa-plus mr-2" aria-hidden="true"></i>
+                New entry
+              </button>
+            ) : (
+              ""
+            )}
+
+            {/* <button className="btn">New entry</button>
+            <button className="btn">New entry</button> */}
+          </div>
+
           <Tabs>
             <TabList>
-              <Tab style={{ paddingLeft: "2rem", paddingRight: "2rem" }}>
+              <Tab
+                style={{ paddingLeft: "2rem", paddingRight: "2rem" }}
+                onClick={() => setCurrentTab(0)}
+              >
                 Summary
               </Tab>
-              <Tab style={{ paddingLeft: "2rem", paddingRight: "2rem" }}>
+              <Tab
+                style={{ paddingLeft: "2rem", paddingRight: "2rem" }}
+                onClick={() => setCurrentTab(1)}
+              >
                 Survey
               </Tab>
-              <Tab style={{ paddingLeft: "2rem", paddingRight: "2rem" }}>
+              <Tab
+                style={{ paddingLeft: "2rem", paddingRight: "2rem" }}
+                onClick={() => setCurrentTab(2)}
+              >
                 Team
               </Tab>
-              <Tab style={{ paddingLeft: "2rem", paddingRight: "2rem" }}>
+              <Tab
+                style={{ paddingLeft: "2rem", paddingRight: "2rem" }}
+                onClick={() => setCurrentTab(3)}
+              >
                 Execution plan
               </Tab>
-              <Tab style={{ paddingLeft: "2rem", paddingRight: "2rem" }}>
+              <Tab
+                style={{ paddingLeft: "2rem", paddingRight: "2rem" }}
+                onClick={() => setCurrentTab(4)}
+              >
                 Budget
               </Tab>
             </TabList>

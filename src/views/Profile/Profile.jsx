@@ -12,6 +12,7 @@ import Notifier from "../../components/Notifier/notifier.component";
 
 const Profile = (props) => {
   const user = decodeUserObject();
+  console.log(user);
 
   const [open, setOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -31,6 +32,7 @@ const Profile = (props) => {
     console.log(user);
     setState({
       ...form,
+      imageUrl: user.imageUrl,
       username: user.username,
       firstname: user.firstname,
       lastname: user.lastname,
