@@ -1,0 +1,69 @@
+.modalCenter__.modal {
+  transform: translateY(-50%) !important;
+}
+.modalCenter__ .modal-body {
+  margin: unset !important;
+}
+.modalCenter__ .modal-content {
+  border-radius: 4rem;
+}
+.modalCenter__ .modal-header {
+  margin-right: 3rem;
+  border: none !important;
+}
+.modalCenter__ .form__body {
+  padding: 4rem 7rem;
+}
+.modalCenter__ .form-group:not(:last-child) {
+  margin-bottom: 3rem;
+}
+.modalCenter__ .form-group > h4 {
+  color: #7fcd91;
+  font-size: 2.8rem;
+}
+.modalCenter__ .form-group > h3 {
+  color: #5b5656;
+  font-size: 2rem;
+}
+.modalCenter__ .center__content {
+  display: flex;
+  justify-content: center;
+}
+.modalCenter__ .form-group > button {
+  color: #5b5656;
+  font-size: 1.8rem;
+  background: #b6e6bd;
+  border-radius: 1rem;
+  padding: 1.1rem 1.8rem;
+  margin: 0 auto;
+  width: fit-content;
+}
+.modalCenter__ .form-group > button:disabled {
+  background: #b6e6bd4b;
+}
+.modalCenter__ .form-group > label {
+  color: #5b5656;
+  font-size: 1.8rem;
+  font-weight: 300;
+  margin-bottom: 0.8rem;
+}
+.modalCenter__ .form-group > input {
+  color: #5b5656;
+  font-size: 2rem;
+  font-weight: 500;
+  border: none;
+  border-bottom: 1px solid rgba(91, 86, 86, 0.5);
+  outline: none;
+}
+.modalCenter__ .grid__2 {
+  display: flex;
+  justify-content: space-between;
+  gap: 0 3.3rem;
+}
+.modalCenter__ .grid__2 > div {
+  flex: 1;
+}
+.edit-text,
+.delete-text {
+  cursor: pointer;
+}
