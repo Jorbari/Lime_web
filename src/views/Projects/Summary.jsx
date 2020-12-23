@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { withRouter } from 'react-router-dom'
+import { withRouter } from "react-router-dom";
 import moment from "moment";
 import ConfirmationBox from "../../components/confirmation-box/confirmationBox";
 
@@ -26,21 +26,16 @@ const SummaryTab = (props) => {
   };
 
   const editProject = () => {
-      history.push(`/edit-project/${project._id}`);
-  }
+    history.push(`/edit-project/${project._id}`);
+  };
 
   return (
-
     <SummaryContainer>
       <div className="sapsHeader-conatiner">
         <h1 className="sapsHeader capitalize font-semibold ml-8 py-4">
           {project?.title || "----"}
         </h1>
-        <button
-          type="button"
-          className="delete__"
-          onClick={() => handleShow()}
-        >
+        <button type="button" className="delete__" onClick={() => handleShow()}>
           <span>Delete project</span>
         </button>
       </div>
@@ -90,74 +85,65 @@ const SummaryTab = (props) => {
       </div> */}
 
       <div className="project__detail">
-          <div className="project__detail--grid">
-              <h4>Details</h4>
-              <button onClick={ () => editProject() } >Edit details</button>
-          </div>
+        <div className="project__detail--grid">
+          <h4>Details</h4>
+          <button onClick={() => editProject()}>Edit details</button>
+        </div>
 
         <div className="project__detail--box">
-
-            <div className="project__space">
-                <section className="project__info">
-                    <p>Description:</p>
-                    <h4> {project?.description || '----'} </h4>
-                </section>
-            </div>
-
-            <div className="project__info--grid project__space">
-
+          <div className="project__space">
             <section className="project__info">
-                <p>Date Started:</p>
-                <h4>{moment(project?.startDate).format("Do of MMMM YYYY")}</h4>
+              <p>Description:</p>
+              <h4> {project?.description || "----"} </h4>
+            </section>
+          </div>
+
+          <div className="project__info--grid project__space">
+            <section className="project__info">
+              <p>Date Started:</p>
+              <h4>{moment(project?.startDate).format("Do of MMMM YYYY")}</h4>
             </section>
 
             <section className="project__info">
-                <p>Deadline:</p>
-                <h4>{moment(project?.endDate).format("Do of MMMM YYYY")}</h4>
+              <p>Deadline:</p>
+              <h4>{moment(project?.endDate).format("Do of MMMM YYYY")}</h4>
+            </section>
+          </div>
+
+          <div className="project__info--grid project__space">
+            <section className="project__info">
+              <p>Project Manager:</p>
+              <h4> {project?.manager?.name || "----"} </h4>
             </section>
 
-            </div>
+            <section className="project__info">
+              <p>Phone Number:</p>
+              <h4>{project?.manager?.phone || "----"}</h4>
+            </section>
 
-            <div className="project__info--grid project__space">
+            <section className="project__info">
+              <p>E-mail:</p>
+              <h4>{project?.manager?.email || "----"}</h4>
+            </section>
+          </div>
 
-                <section className="project__info">
-                    <p>Project Manager:</p>
-                    <h4> {project?.manager?.name || '----'} </h4>
-                </section>
+          <div className="project__info--grid project__space">
+            <section className="project__info">
+              <p>Executive sponsor:</p>
+              <h4>{project?.sponsor?.name || "----"}</h4>
+            </section>
 
-                <section className="project__info">
-                    <p>Phone Number:</p>
-                    <h4>{project?.manager?.phone || '----'}</h4>
-                </section>
+            <section className="project__info">
+              <p>Phone Number:</p>
+              <h4>{project?.sponsor?.phone || "----"}</h4>
+            </section>
 
-                <section className="project__info">
-                    <p>E-mail:</p>
-                    <h4>{project?.manager?.email || '----'}</h4>
-                </section>
-
-            </div>
-
-            <div className="project__info--grid project__space">
-
-                <section className="project__info">
-                    <p>Executive sponsor:</p>
-                    <h4>{project?.sponsor?.name || '----'}</h4>
-                </section>
-
-                <section className="project__info">
-                    <p>Phone Number:</p>
-                    <h4>{project?.sponsor?.phone || '----'}</h4>
-                </section>
-
-                <section className="project__info">
-                    <p>E-mail:</p>
-                    <h4>{project?.sponsor?.email || '----'}</h4>
-                </section>
-
-            </div>
-
+            <section className="project__info">
+              <p>E-mail:</p>
+              <h4>{project?.sponsor?.email || "----"}</h4>
+            </section>
+          </div>
         </div>
-          
       </div>
 
       <ConfirmationBox
@@ -170,16 +156,7 @@ const SummaryTab = (props) => {
         Are you sure you want to delete this project?
       </ConfirmationBox>
     </SummaryContainer>
-  
   );
 };
-
-// const mapStateToProps = (state) => ({
-//   project: selectSingleProject(state),
-// });
-
-// export default connect(mapStateToProps, { getSingleProject })(SummaryTab);
-
-
 
 export default withRouter(SummaryTab);

@@ -86,6 +86,8 @@ const Project = (props) => {
   } = props;
   const [currentProject, setCurrentProject] = useState({});
   const [currentTab, setCurrentTab] = useState(0);
+  // For triggering new budget entry modal
+  const [modalShow, setModalShow] = React.useState(false);
 
   React.useEffect(() => {
     const val = async () => {
@@ -116,9 +118,9 @@ const Project = (props) => {
                 New entry
               </button>
             ) : currentTab === 4 ? (
-              <button className="btn">
+              <button className="btn" onClick={() => setModalShow(true)}>
                 <i className="fa fa-plus mr-2" aria-hidden="true"></i>
-                New entry
+                New entry budget
               </button>
             ) : (
               ""
@@ -182,7 +184,12 @@ const Project = (props) => {
               <ExecutionPlan />
             </TabPanel>
             <TabPanel>
-              <Budget />
+              <Budget
+                project={currentProject}
+                show={modalShow}
+                onHide={() => setModalShow(false)}
+                openDialog={() => setModalShow(true)}
+              />
             </TabPanel>
           </Tabs>
         </SapsProjectContainer>

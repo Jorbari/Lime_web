@@ -12,7 +12,6 @@ import Notifier from "../../components/Notifier/notifier.component";
 
 const Profile = (props) => {
   const user = decodeUserObject();
-  console.log(user);
 
   const [open, setOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -29,7 +28,6 @@ const Profile = (props) => {
   });
 
   useEffect(() => {
-    console.log(user);
     setState({
       ...form,
       imageUrl: user.imageUrl,
@@ -68,7 +66,6 @@ const Profile = (props) => {
       imageBinary: fileBinary,
     };
     const profileData = await updateUserProfileImage(payload);
-    console.log(profileData);
   };
 
   const updateValue = (event) => {
@@ -101,7 +98,6 @@ const Profile = (props) => {
       const userData = { ...user, ...payload };
       encodeUserProfile(userData);
       setIsLoading(false);
-      console.log(returnedValue);
     } else {
       setOpen(true);
       setApiMessageFeedback("An error occurred, please try again !!!");
