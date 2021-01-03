@@ -38,11 +38,15 @@ import {
 } from "../../redux/questions/questions.utils";
 import MultiChoice from "../multichoice/multichoice.component";
 import Checkboxes from "../checkboxes/checkboxes.component";
+import Dropdown from "../dropdown/dropdown.component";
+import ShortAnswer from "../shortAnswer/shortAnswer.component";
+import LongAnswer from "../longAnswer/longAnswer.component";
 import LinearScale from "../linearScale/linearScale.component";
 import { createStructuredSelector } from "reselect";
 import { connect } from "react-redux";
 import { debounce } from "../../helper";
 import { withRouter } from "react-router-dom";
+import { Hidden } from "@material-ui/core";
 class Question extends React.Component {
   selectBox = React.createRef();
   isCurrent = false;
@@ -83,7 +87,8 @@ class Question extends React.Component {
     event.persist();
     const id = event.target?.closest("div.dropdown-item")?.id;
     if (id) {
-      this.setFormat(id);
+      this.setFormatProp(id);
+      this.setState({...setFormat(id)})
       this.selectBox.current.innerHTML = event.target.closest(
         "div.dropdown-item"
       ).outerHTML;
@@ -97,7 +102,7 @@ class Question extends React.Component {
   setTitle = (title) => {
     this.setState({ title });
   };
-  setFormat = (format) => {
+  setFormatProp = (format) => {
     this.setState({ format });
   };
   setShape = (shape) => {
@@ -147,8 +152,8 @@ class Question extends React.Component {
             />
           )}
 
-          {previewMode ? null : (
-            <div className="dropdown">
+          
+            <div className="dropdown" style={{visibility: previewMode? "hidden": "visible"}}>
               <QuestionFormatDropdown
                 data-toggle="dropdown"
                 ref={this.selectBox}
@@ -204,7 +209,6 @@ class Question extends React.Component {
                 </div>
               </DropdownMenu>
             </div>
-          )}
         </ContentHeader>
         <ContentBody>
           {
@@ -223,9 +227,26 @@ class Question extends React.Component {
                   previewMode={previewMode}
                 />
               ),
+              [questionFormatTypes.dropdown]: (
+                <Dropdown
+                  options={shape}
+                  setShape={this.setShape}
+                  previewMode={previewMode}
+                />
+              ),
+              [questionFormatTypes.shortanswer]: (
+                <ShortAnswer
+                  previewMode={previewMode}
+                />
+              ),
+              [questionFormatTypes.paragraph]: (
+                <LongAnswer
+                  previewMode={previewMode}
+                />
+              ),
               [questionFormatTypes.linearscale]: (
                 <LinearScale
-                  options={shape}
+                  shape={shape}
                   setShape={this.setShape}
                   previewMode={previewMode}
                 />
