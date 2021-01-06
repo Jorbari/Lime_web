@@ -19,9 +19,10 @@ const TeamContainer = styled.div`
     border-bottom: 0.5px solid #7fcd91;
   }
 
-  .profile-cell-text {
-    margin-top: -2.2rem;
-    margin-left: 3.8rem;
+  .flex__ {
+    display: flex;
+    align-items: center;
+    gap: 0 1rem;
   }
 
   .edit-text {
@@ -74,7 +75,7 @@ const Team = () => {
               />
             </td>
             <td className="w-2/4 py-6">
-              <div>
+              <div className="flex__">
                 <img src={profileImage} alt="" className="rounded-full" />
                 <p className="profile-cell-text">Ralph Phillips</p>
               </div>
@@ -84,6 +85,7 @@ const Team = () => {
             <td className="w-2/4 py-6 edit-text">Edit</td>
             <td className="w-2/4 py-6 delete-text">Delete</td>
           </tr>
+
           <tr className="table-border">
             <td className="w-2/4 py-6">
               <input
@@ -92,7 +94,7 @@ const Team = () => {
               />
             </td>
             <td className="w-2/4 py-6">
-              <div>
+              <div className="flex__">
                 <img src={profileImage} alt="" className="rounded-full" />
                 <p className="profile-cell-text">Ralph Phillips</p>
               </div>
@@ -102,6 +104,7 @@ const Team = () => {
             <td className="w-2/4 py-6 edit-text">Edit</td>
             <td className="w-2/4 py-6 delete-text">Delete</td>
           </tr>
+
           <tr className="table-border">
             <td className="w-2/4 py-6">
               <input
@@ -110,7 +113,7 @@ const Team = () => {
               />
             </td>
             <td className="w-2/4 py-6">
-              <div>
+              <div className="flex__">
                 <img src={profileImage} alt="" className="rounded-full" />
                 <p className="profile-cell-text">Ralph Phillips</p>
               </div>
@@ -120,6 +123,7 @@ const Team = () => {
             <td className="w-2/4 py-6 edit-text">Edit</td>
             <td className="w-2/4 py-6 delete-text">Delete</td>
           </tr>
+
           <tr className="table-border">
             <td className="w-2/4 py-6">
               <input
@@ -128,7 +132,7 @@ const Team = () => {
               />
             </td>
             <td className="w-2/4 py-6">
-              <div>
+              <div className="flex__">
                 <img src={profileImage} alt="" className="rounded-full" />
                 <p className="profile-cell-text">Ralph Phillips</p>
               </div>
@@ -138,6 +142,7 @@ const Team = () => {
             <td className="w-2/4 py-6 edit-text">Edit</td>
             <td className="w-2/4 py-6 delete-text">Delete</td>
           </tr>
+
           <tr className="table-border">
             <td className="w-2/4 py-6">
               <input
@@ -146,7 +151,7 @@ const Team = () => {
               />
             </td>
             <td className="w-2/4 py-6">
-              <div>
+              <div className="flex__">
                 <img src={profileImage} alt="" className="rounded-full" />
                 <p className="profile-cell-text">Ralph Phillips</p>
               </div>
