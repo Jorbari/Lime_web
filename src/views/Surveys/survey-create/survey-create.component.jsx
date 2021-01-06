@@ -36,8 +36,8 @@ const CreateSurvey = () => {
 
           <TabPanel>
             <FormBuilderContainer>
-              <SurveySideBar></SurveySideBar>
-              <FormBuilder></FormBuilder>
+              <SurveySideBar />
+              <FormBuilder />
             </FormBuilderContainer>
           </TabPanel>
           <TabPanel>

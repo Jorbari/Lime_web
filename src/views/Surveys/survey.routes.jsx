@@ -5,6 +5,7 @@ import surveyList from "./survey-list/survey-list.component";
 import surveyDetails from "./survey-details/survey-details.component";
 import surveyNew from './survey-new/survey-new.component';
 import CreateSurvey from './survey-create/survey-create.component';
+import EditSurvey from './survey-edit/survey-edit.component';
 
 const SurveyRoutes = ({match}) => {
     console.log(match.path)
@@ -15,7 +16,7 @@ const SurveyRoutes = ({match}) => {
           <ProtectedRoute exact path={`${match.url}/details/:id`} component={surveyDetails} />
           <ProtectedRoute exact path={`${match.url}/new`} component={surveyNew} />
           <ProtectedRoute exact path={`${match.url}/create/:id`} component={CreateSurvey} />
-          <ProtectedRoute exact path={`${match.url}/edit/:id`} component={CreateSurvey} />
+          <ProtectedRoute exact path={`${match.url}/edit/:id`} component={EditSurvey} />
         </Switch>
     </React.Fragment>
   );

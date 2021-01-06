@@ -44,3 +44,9 @@ const modifyQuestionNodesTitle = (question) => {
         format: question.format
     }
 }
+
+export const updateQuestion = (questions_array) => {
+    return dispatch => {
+        dispatch({ type: QuestionActionTypes.UPDATE_QUESTIONS, payload: questions_array })
+    }
+}

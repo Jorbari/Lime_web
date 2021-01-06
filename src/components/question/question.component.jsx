@@ -48,8 +48,12 @@ class Question extends React.Component {
   isCurrent = false;
   constructor(props) {
     super(props);
+    const myState = props.isEdit
+      ? props
+      : { ...setFormat(questionFormatTypes.multichoice) };
+
     this.state = {
-      ...setFormat(questionFormatTypes.multichoice),
+      ...myState,
     };
   }
   // componentDidMount() {

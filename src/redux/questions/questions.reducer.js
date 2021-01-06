@@ -8,7 +8,7 @@ import {
 const INITIAL_STATE = {
     currentId: -1,
     questions: [],
-    questions_collection: []
+    // questions_collection: []
 };
 
 export const questionsReducer = (state = INITIAL_STATE, action) => {
@@ -33,6 +33,10 @@ export const questionsReducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 questions_collection: AddToQuestionCollection(state.questions_collection, action.payload)
+            }
+        case QuestionActionTypes.UPDATE_QUESTIONS:
+            return {
+                ...state, questions: [...action.payload]
             }
         default:
             return {
