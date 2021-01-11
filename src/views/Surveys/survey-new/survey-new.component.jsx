@@ -19,9 +19,9 @@ const SurveyNew = (props) => {
   const toggleModal = () => setOpen(!open);
 
   const handleSubmit = async (e) => {
-
+    
     const findIndex = projects.find( data => data._id == project );
-    console.log(findIndex);
+    console.log(projects);
 
     e.preventDefault();
     await props.createSurvey(
@@ -196,6 +196,7 @@ const SurveyNew = (props) => {
                   borderRadius: 0,
                 }}
               >
+                <option value="" disabled selected >Select Project</option>
                 {projects?.length > 0 &&
                   projects.map((item) => (
                     <option key={item._id} value={item._id}>

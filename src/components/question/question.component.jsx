@@ -90,7 +90,7 @@ class Question extends React.Component {
   onFormatChange = (event) => {
     event.persist();
     const id = event.target?.closest("div.dropdown-item")?.id;
-    if (id) {
+    if (id) { 
       this.setFormatProp(id);
       this.setState({...setFormat(id)})
       this.selectBox.current.innerHTML = event.target.closest(
@@ -127,7 +127,7 @@ class Question extends React.Component {
     } = this.props;
     const { title, previewMode, required, format, shape } = this.state;
     this.isCurrent = currentQuestionId === questionNumber;
-
+    
     return (
       <MainContainer
         isCurrent
