@@ -263,12 +263,14 @@ const Budget = (props) => {
         show={props.show}
         onHide={props.onHide}
       >
-        <Modal.Header closeButton></Modal.Header>
+        <Modal.Header className="modalHeader" closeButton>
+          <h4>Budget - New entry</h4>
+        </Modal.Header>
         <Modal.Body className="form__body">
           <form onSubmit={newBudgetEntry}>
-            <div className="form-group">
+            {/* <div className="form-group">
               <h4>Budget - New entry</h4>
-            </div>
+            </div> */}
             <div className="form-group">
               <label>Item:</label>
               <input

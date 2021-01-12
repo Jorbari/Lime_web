@@ -176,6 +176,7 @@ const NewProject = (props) => {
       />
       <form
         className="w-full max-w-lg new-project-form"
+        style={{ padding: "3rem 0" }}
         onSubmit={(e) => (id ? editProject(e) : handleSubmit(e))}
       >
         <div className="top-save-btn-div pr-4">
@@ -489,7 +490,7 @@ const NewProject = (props) => {
                       value={objectives}
                       // required
                       className="login-input-styles"
-                      style={{ hfontSize: "15px" }}
+                      style={{ fontSize: "15px" }}
                     />
                   </Form.Group>
                 </div>

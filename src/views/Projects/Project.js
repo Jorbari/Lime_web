@@ -73,6 +73,25 @@ const SapsProjectContainer = styled.div`
     text-decoration: none;
     text-decoration: none;
   }
+
+  .tab {
+    display: flex;
+  }
+  .tab > .tab__list {
+    color: #5b5656;
+    font-size: 1.8rem;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+  }
+  .tab__list.react-tabs__tab--selected {
+    color: #5b5656;
+    font-size: 2rem;
+    font-weight: bold;
+    border-bottom: 1px solid #5b5656;
+  }
+  .tab > .tab__list:not(:last-child) {
+    margin-right: 4.2rem;
+  }
 `;
 
 const Project = (props) => {
@@ -131,35 +150,20 @@ const Project = (props) => {
           </div>
 
           <Tabs>
-            <TabList>
-              <Tab
-                style={{ paddingLeft: "2rem", paddingRight: "2rem" }}
-                onClick={() => setCurrentTab(0)}
-              >
+            <TabList className="tab">
+              <Tab onClick={() => setCurrentTab(0)} className="tab__list">
                 Summary
               </Tab>
-              <Tab
-                style={{ paddingLeft: "2rem", paddingRight: "2rem" }}
-                onClick={() => setCurrentTab(1)}
-              >
+              <Tab onClick={() => setCurrentTab(1)} className="tab__list">
                 Survey
               </Tab>
-              <Tab
-                style={{ paddingLeft: "2rem", paddingRight: "2rem" }}
-                onClick={() => setCurrentTab(2)}
-              >
+              <Tab onClick={() => setCurrentTab(2)} className="tab__list">
                 Team
               </Tab>
-              <Tab
-                style={{ paddingLeft: "2rem", paddingRight: "2rem" }}
-                onClick={() => setCurrentTab(3)}
-              >
+              <Tab onClick={() => setCurrentTab(3)} className="tab__list">
                 Execution plan
               </Tab>
-              <Tab
-                style={{ paddingLeft: "2rem", paddingRight: "2rem" }}
-                onClick={() => setCurrentTab(4)}
-              >
+              <Tab onClick={() => setCurrentTab(4)} className="tab__list">
                 Budget
               </Tab>
             </TabList>

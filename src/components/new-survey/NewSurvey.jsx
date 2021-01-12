@@ -7,11 +7,11 @@ import { createSurvey } from "../../redux/survey/survey.action";
 
 import "./NewSurvey.css";
 
-import {DropdownMenu, Caret} from './NewSurvey.styles';
+import { DropdownMenu, Caret } from "./NewSurvey.styles";
 
-const NewSurvey = props => {
+const NewSurvey = (props) => {
   const { toggleNewSurveyView, history, projects, surveys } = props;
-  console.log(props)
+  console.log(props);
   const [name, setName] = useState("");
   const [tag, setTag] = useState("");
   const [category, setCategory] = useState("");
@@ -20,14 +20,16 @@ const NewSurvey = props => {
 
   const toggleModal = () => setOpen(!open);
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(project);
+    console.log(projects);
     await props.createSurvey(
       {
         name,
         tag,
         category,
-        project: project === "" ? projects[0]._id : project
+        project: project === "" ? projects[0]._id : project,
       },
       history,
       surveys,
@@ -37,12 +39,18 @@ const NewSurvey = props => {
   };
   return (
     <div style={{ position: "relative" }}>
-      <Modal open={open} onClose={() => toggleModal()} center modalId dialogClassName="br-4">
-        <div style={{ height: "fit-content", padding: "30.8px 35.8px",  }}>
+      <Modal
+        open={open}
+        onClose={() => toggleModal()}
+        center
+        modalId
+        dialogClassName="br-4"
+      >
+        <div style={{ height: "fit-content", padding: "30.8px 35.8px" }}>
           <p className="title">Create Survey</p>
           <form
             className="w-full max-w-lg new-project-form"
-            onSubmit={e => handleSubmit(e)}
+            onSubmit={(e) => handleSubmit(e)}
           >
             <Form.Group
               as={Col}
@@ -69,7 +77,7 @@ const NewSurvey = props => {
                   backgroundColor: "white",
                   paddingLeft: 0,
                   borderBottom: "1px solid rgba(91, 86, 86, 0.5)",
-                  borderRadius: 0
+                  borderRadius: 0,
                 }}
               />
             </Form.Group>
@@ -104,14 +112,27 @@ const NewSurvey = props => {
                         paddingLeft: 0,
                         borderBottom: "1px solid rgba(91, 86, 86, 0.5)",
                         borderRadius: 0,
-                        cursor:'pointer'
+                        cursor: "pointer",
                       }}
                     />
                     <Caret></Caret>
-                    <DropdownMenu className="dropdown-menu" onClick = {(event) =>{event.persist(); console.log(event); setCategory(event.target.id)}}>
-                      <span className="dropdown-item" id="Baseline">Baseline</span>
-                      <span className="dropdown-item" id="Midline">Midline</span>
-                      <span className="dropdown-item" id="Endline">Endline</span>
+                    <DropdownMenu
+                      className="dropdown-menu"
+                      onClick={(event) => {
+                        event.persist();
+                        console.log(event);
+                        setCategory(event.target.id);
+                      }}
+                    >
+                      <span className="dropdown-item" id="Baseline">
+                        Baseline
+                      </span>
+                      <span className="dropdown-item" id="Midline">
+                        Midline
+                      </span>
+                      <span className="dropdown-item" id="Endline">
+                        Endline
+                      </span>
                     </DropdownMenu>
                   </div>
                 </Col>
@@ -135,7 +156,7 @@ const NewSurvey = props => {
                       backgroundColor: "white",
                       paddingLeft: 0,
                       borderBottom: "1px solid rgba(91, 86, 86, 0.5)",
-                      borderRadius: 0
+                      borderRadius: 0,
                     }}
                   />
                 </Col>
@@ -166,11 +187,11 @@ const NewSurvey = props => {
                   backgroundColor: "white",
                   paddingLeft: 0,
                   borderBottom: "1px solid rgba(91, 86, 86, 0.5)",
-                  borderRadius: 0
+                  borderRadius: 0,
                 }}
               >
                 {projects?.length > 0 &&
-                  projects.map(item => (
+                  projects.map((item) => (
                     <option key={item._id} value={item._id}>
                       {item.title}
                     </option>
@@ -204,11 +225,14 @@ const NewSurvey = props => {
   );
 };
 
-const mapStateToProps = ({ survey: { isLoading, status, surveys }, project:{ projects} }) => ({
+const mapStateToProps = ({
+  survey: { isLoading, status, surveys },
+  project: { projects },
+}) => ({
   isLoading,
   status,
   surveys,
-  projects
+  projects,
 });
 
 export default connect(mapStateToProps, { createSurvey })(NewSurvey);
