@@ -197,7 +197,9 @@ const SurveyNew = (props) => {
                   borderRadius: 0,
                 }}
               >
-                <option>Select One</option>
+                <option value="" disabled selected>
+                  Select Project
+                </option>
                 {projects?.length > 0 &&
                   projects.map((item) => (
                     <option key={item._id} value={item._id}>

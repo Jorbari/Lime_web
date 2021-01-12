@@ -407,7 +407,7 @@ const SignUp = props => {
                                     background: submitButtonDisabled ? "#c4c4c4" : "#b6e6bd",
                                     color: submitButtonDisabled ? "#FFFFFF" : "#5b5656"
                                 }}
-                            >
+                            > 
                                 {props.isLoading ? (
                                     <Spinner
                                         as="span"

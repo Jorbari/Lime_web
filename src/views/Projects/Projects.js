@@ -3,11 +3,10 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-
+import Spinner from '../../components/spinner/spinner';
 import { getAllProjects } from "../../redux/project/project.actions";
 
 import folder from "../../assets/bigFolder.png";
-
 const CardContainer = styled.div`
   border: none;
 
@@ -66,10 +65,8 @@ const CardContainer = styled.div`
 `;
 
 function Projects(props) {
-  const { history, projects } = props;
-
+  const { history, projects,isLoading } = props;
   React.useEffect(() => {
-    console.log(props);
     const fetchProjects = async () => {
       await props.getAllProjects();
     };
@@ -96,46 +93,55 @@ function Projects(props) {
         </div>
 
         <div className="flex flex-row pt-8">
-          <div className="flex flex-wrap">
-            {projects.length > 0 &&
-              projects.map((project) => (
-                <Link
-                  to={`/projects/${project._id}`}
-                  key={project._id}
-                  className="mb-4"
-                >
-                  <div className="relative bg-white">
-                    <div className="w-full xl:w-4/12 pl-1 pr-1 ml-4 card">
-                      <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 rounded h-32">
-
-                        {/* <div className="rounded-t mb-0 px-4 bg-transparent card-image-and-text-container">
-                          <div className="flex flex-wrap items-center">
-                            <div className="relative w-full max-w-full flex-grow flex-1">
-                              <img
-                                src={folder}
-                                alt=""
-                                width="57.39px"
-                                height="50px"
-                              />
-                            </div>
-                          </div>
-                        </div> */}
-                        <section>
-                          <img
+          {
+            isLoading?
+            (
+              <Spinner showSpinner={true} radius = {'5rem'} />
+            ):
+            (
+              <div className="flex flex-wrap">
+              {projects.length > 0 &&
+                projects.map((project) => (
+                  <Link
+                    to={`/projects/${project._id}`}
+                    key={project._id}
+                    className="mb-4"
+                  >
+                    <div className="relative bg-white">
+                      <div className="w-full xl:w-4/12 pl-1 pr-1 ml-4 card">
+                        <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 rounded h-32">
+  
+                          {/* <div className="rounded-t mb-0 px-4 bg-transparent card-image-and-text-container">
+                            <div className="flex flex-wrap items-center">
+                              <div className="relative w-full max-w-full flex-grow flex-1">
+                                <img
                                   src={folder}
                                   alt=""
+                                  width="57.39px"
+                                  height="50px"
                                 />
-                        </section>
-                        <p className="card-text capitalize">
-                          {project.title}
-                        </p>
-
+                              </div>
+                            </div>
+                          </div> */}
+                          <section>
+                            <img
+                                    src={folder}
+                                    alt=""
+                                  />
+                          </section>
+                          <p className="card-text capitalize">
+                            {project.title}
+                          </p>
+  
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </Link>
-              ))}
-          </div>
+                  </Link>
+                ))}
+            </div>
+            )
+          }
+
         </div>
       </CardContainer>
     </div>

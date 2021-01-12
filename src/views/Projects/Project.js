@@ -15,6 +15,7 @@ import ExecutionPlan from "./ExecutionPlan";
 import Budget from "./Budget";
 import { getSingleProjectRequest } from "../../api/project";
 import { Link } from "react-router-dom";
+import Spinner from "../../components/spinner/spinner";
 
 const SapsProjectContainer = styled.div`
   .sapsHeader {
@@ -95,6 +96,7 @@ const SapsProjectContainer = styled.div`
 `;
 
 const Project = (props) => {
+  const [isLoading, setIsLoading] = useState(true);
   const {
     history,
     projects,
@@ -113,6 +115,7 @@ const Project = (props) => {
       const value = await getSingleProjectRequest(id);
       console.log(value);
       if (value.status === 200) {
+        setIsLoading(false);
         setCurrentProject(value.data.data);
         console.log(currentProject);
       }
@@ -124,79 +127,83 @@ const Project = (props) => {
   return (
     <>
       <div className="relative bg-white">
-        <SapsProjectContainer className="relative bg-white pb-32">
-          <div className="tab__buttons">
-            {currentTab === 1 ? (
-              <Link className="btn" to="/surveys/new">
-                <i className="fa fa-plus mr-2" aria-hidden="true"></i>
-                New Survey
-              </Link>
-            ) : currentTab === 3 ? (
-              <button className="btn">
-                <i className="fa fa-plus mr-2" aria-hidden="true"></i>
-                New entry
-              </button>
-            ) : currentTab === 4 ? (
-              <button className="btn" onClick={() => setModalShow(true)}>
-                <i className="fa fa-plus mr-2" aria-hidden="true"></i>
-                New entry budget
-              </button>
-            ) : (
-              ""
-            )}
+        {isLoading ? (
+          <Spinner showSpinner={true} radius={"5rem"} />
+        ) : (
+          <SapsProjectContainer className="relative bg-white pb-32">
+            <div className="tab__buttons">
+              {currentTab === 1 ? (
+                <Link className="btn" to="/surveys/new">
+                  <i className="fa fa-plus mr-2" aria-hidden="true"></i>
+                  New Survey
+                </Link>
+              ) : currentTab === 3 ? (
+                <button className="btn">
+                  <i className="fa fa-plus mr-2" aria-hidden="true"></i>
+                  New entry
+                </button>
+              ) : currentTab === 4 ? (
+                <button className="btn" onClick={() => setModalShow(true)}>
+                  <i className="fa fa-plus mr-2" aria-hidden="true"></i>
+                  New entry budget
+                </button>
+              ) : (
+                ""
+              )}
 
-            {/* <button className="btn">New entry</button>
-            <button className="btn">New entry</button> */}
-          </div>
+              {/* <button className="btn">New entry</button>
+              <button className="btn">New entry</button> */}
+            </div>
 
-          <Tabs>
-            <TabList className="tab">
-              <Tab onClick={() => setCurrentTab(0)} className="tab__list">
-                Summary
-              </Tab>
-              <Tab onClick={() => setCurrentTab(1)} className="tab__list">
-                Survey
-              </Tab>
-              <Tab onClick={() => setCurrentTab(2)} className="tab__list">
-                Team
-              </Tab>
-              <Tab onClick={() => setCurrentTab(3)} className="tab__list">
-                Execution plan
-              </Tab>
-              <Tab onClick={() => setCurrentTab(4)} className="tab__list">
-                Budget
-              </Tab>
-            </TabList>
+            <Tabs>
+              <TabList className="tab">
+                <Tab className="tab__list" onClick={() => setCurrentTab(0)}>
+                  Summary
+                </Tab>
+                <Tab className="tab__list" onClick={() => setCurrentTab(1)}>
+                  Survey
+                </Tab>
+                <Tab className="tab__list" onClick={() => setCurrentTab(2)}>
+                  Team
+                </Tab>
+                <Tab className="tab__list" onClick={() => setCurrentTab(3)}>
+                  Execution plan
+                </Tab>
+                <Tab className="tab__list" onClick={() => setCurrentTab(4)}>
+                  Budget
+                </Tab>
+              </TabList>
 
-            <div style={{ width: "77%" }}>
+              <div style={{ width: "77%" }}>
+                <TabPanel>
+                  <Summary
+                    project={currentProject}
+                    history={history}
+                    deleteProject={deleteProject}
+                    projects={projects}
+                  />
+                </TabPanel>
+              </div>
               <TabPanel>
-                <Summary
+                <Survey />
+              </TabPanel>
+              <TabPanel>
+                <Team />
+              </TabPanel>
+              <TabPanel>
+                <ExecutionPlan />
+              </TabPanel>
+              <TabPanel>
+                <Budget
                   project={currentProject}
-                  history={history}
-                  deleteProject={deleteProject}
-                  projects={projects}
+                  show={modalShow}
+                  onHide={() => setModalShow(false)}
+                  openDialog={() => setModalShow(true)}
                 />
               </TabPanel>
-            </div>
-            <TabPanel>
-              <Survey />
-            </TabPanel>
-            <TabPanel>
-              <Team />
-            </TabPanel>
-            <TabPanel>
-              <ExecutionPlan />
-            </TabPanel>
-            <TabPanel>
-              <Budget
-                project={currentProject}
-                show={modalShow}
-                onHide={() => setModalShow(false)}
-                openDialog={() => setModalShow(true)}
-              />
-            </TabPanel>
-          </Tabs>
-        </SapsProjectContainer>
+            </Tabs>
+          </SapsProjectContainer>
+        )}
       </div>
     </>
   );

@@ -31,9 +31,15 @@ class FormBuilder extends React.Component {
   }
 
   fetchAllChildState = () => {
-    this.props.questions.forEach((question, index) => {
-      this.childArray[index].AddToQuestionCollection();
-    });
+    let questions = []
+    this.childArray.forEach((questionRef)=>{
+      questionRef.state.shape = JSON.stringify(questionRef.state.shape)
+      questions.push(questionRef.state)
+    })
+    console.log(questions)
+    // this.props.questions.forEach((question, index) => {
+    //   this.childArray[index].AddToQuestionCollection();
+    // });
   };
   render() {
     return (
@@ -56,6 +62,7 @@ class FormBuilder extends React.Component {
     );
   }
 }
+
 const matchStateToProps = createStructuredSelector({
   questions: selectQuestions,
 });
