@@ -19,18 +19,19 @@ const SurveyNew = (props) => {
   const toggleModal = () => setOpen(!open);
 
   const handleSubmit = async (e) => {
-    
-    const findIndex = projects.find( data => data._id == project );
-    console.log(projects);
-
     e.preventDefault();
+
+    const findIndex = projects.find((data) => data._id == project);
+    // console.log(findIndex);
+    // console.log(project);
+
     await props.createSurvey(
       {
         name,
         tag,
         category,
         project: findIndex?.title,
-        projectId: project
+        projectId: project,
       },
       history,
       surveys,
@@ -186,7 +187,7 @@ const SurveyNew = (props) => {
                 className="login-input-styles"
                 required
                 value={project}
-                onChange={({ target: { value } }) => setProject(value)}
+                onChange={(e) => setProject(e.target.value)}
                 style={{
                   height: "36px",
                   fontSize: "15px",
@@ -196,7 +197,9 @@ const SurveyNew = (props) => {
                   borderRadius: 0,
                 }}
               >
-                <option value="" disabled selected >Select Project</option>
+                <option value="" disabled selected>
+                  Select Project
+                </option>
                 {projects?.length > 0 &&
                   projects.map((item) => (
                     <option key={item._id} value={item._id}>
