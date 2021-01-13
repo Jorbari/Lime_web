@@ -109,6 +109,7 @@ const Project = (props) => {
   const [currentTab, setCurrentTab] = useState(0);
   // For triggering new budget entry modal
   const [modalShow, setModalShow] = React.useState(false);
+  const [execModalShow, setExecModalShow] = React.useState(false);
 
   React.useEffect(() => {
     const val = async () => {
@@ -138,7 +139,7 @@ const Project = (props) => {
                   New Survey
                 </Link>
               ) : currentTab === 3 ? (
-                <button className="btn">
+                <button className="btn" onClick={() => setExecModalShow(true)}>
                   <i className="fa fa-plus mr-2" aria-hidden="true"></i>
                   New entry
                 </button>
@@ -191,7 +192,9 @@ const Project = (props) => {
                 <Team />
               </TabPanel>
               <TabPanel>
-                <ExecutionPlan />
+                <ExecutionPlan 
+                showModal={execModalShow}
+                  onHide={() => setExecModalShow(false)}/>
               </TabPanel>
               <TabPanel>
                 <Budget
