@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import profileImage from "../../assets/profileImage.png";
+import ExecPlanModal from "../../components/execution-plan-modal/execution-plan-modal.component";
 
 const ExecutionPlanContainer = styled.div`
   margin-top: 9rem;
@@ -26,7 +27,8 @@ const ExecutionPlanContainer = styled.div`
   /* .ExecutionPlan-table  */
 `;
 
-const ExecutionPlan = () => {
+const ExecutionPlan = ({ showModal, onHide }) => {
+  
   return (
     <ExecutionPlanContainer
       className="mx-8"
@@ -87,6 +89,7 @@ const ExecutionPlan = () => {
           </tr>
         </tbody>
       </table>
+      <ExecPlanModal showModal={showModal} onHide={onHide} />
     </ExecutionPlanContainer>
   );
 };
