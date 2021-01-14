@@ -59,7 +59,7 @@ class ShareSurveyComponent extends React.Component {
             </TabPanel>
 
             {/* Live survey View */}
-            <TabPanel>
+            <TabPanel className="panel">
               <div className="options_control colored__">
                 <section>
                   <input type="checkbox" id="geoTagging" />

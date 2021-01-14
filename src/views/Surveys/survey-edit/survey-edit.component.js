@@ -3,7 +3,7 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import CustomButton from "../../../components/custom-button/custom-button.component";
 import SurveySideBar from "../../../components/survey-side-bar/survey-side-bar.component";
 import FormBuilder from "../../../components/form-builder/form-builder.component";
-import { updateQuestion } from '../../../redux/questions/questions.action'
+import { updateQuestions } from '../../../redux/questions/questions.action'
 import {
     MainContainer,
     ButtonContainer,
@@ -14,7 +14,7 @@ import {
 } from "./survey-edit.styles";
 import { connect } from "react-redux";
 
-const EditSurvey = ({ updateQuestion }) => {
+const EditSurvey = ({ updateQuestions }) => {
     const dataTest = [
         {
             format: "multichoice",
@@ -42,9 +42,9 @@ const EditSurvey = ({ updateQuestion }) => {
         },
     ];
     useEffect(() => {
-        updateQuestion(dataTest);
+        updateQuestions(dataTest);
         return () => {
-            updateQuestion([])
+            updateQuestions([])
         }
     })
 
@@ -75,4 +75,4 @@ const EditSurvey = ({ updateQuestion }) => {
     );
 };
 
-export default connect(null, { updateQuestion })(EditSurvey);
+export default connect(null, { updateQuestions })(EditSurvey);

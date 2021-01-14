@@ -8,3 +8,11 @@ export const MainContainer = styled.div`
         margin-bottom: 2rem;
     }
 `
+
+export const ButtonContainer = styled.div`
+    display: flex;
+    justify-content: flex-end;
+    & >:not(:last-child){
+        margin-right: 2rem;
+    }
+`

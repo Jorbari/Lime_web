@@ -52,20 +52,17 @@ class Question extends React.Component {
   isCurrent = false;
   constructor(props) {
     super(props);
-    const myState = props.isEdit
-      ? props
-      : { ...setFormat(questionFormatTypes.multichoice) };
+    const {title,required,previewMode,format,shape} = props
+    const myState = {title,required,previewMode,format,shape}
 
     this.state = {
       ...myState,
     };
   }
-  // componentDidMount() {
-  //   const { currentQuestionId, questionNumber } = this.props;
-  // }
-
+  
   componentDidMount() {
-    this.props.onRef(this);
+      console.log(this);
+      this.props.onRef(this);
   }
 
   componentWillUnmount() {
@@ -80,12 +77,12 @@ class Question extends React.Component {
     }
   }
 
-  AddToQuestionCollection() {
-    this.props.addQuestionToQuestionCollections(
-      { ...this.state },
-      this.props.match.params.id
-    );
-  }
+  // AddToQuestionCollection() {
+  //   this.props.addQuestionToQuestionCollections(
+  //     { ...this.state },
+  //     this.props.match.params.id
+  //   );
+  // }
 
   onFormatChange = (event) => {
     event.persist();
@@ -98,20 +95,25 @@ class Question extends React.Component {
       ).outerHTML;
     }
   };
+
   toggleRequired = () => {
     this.setState((prevState, prevProps) => ({
       required: !prevState.required,
     }));
   };
+
   setTitle = (title) => {
     this.setState({ title });
   };
+
   setFormatProp = (format) => {
     this.setState({ format });
   };
+
   setShape = (shape) => {
     this.setState({ shape });
   };
+
   setCurrentId = () => {
     if (!this.isCurrent) {
       this.props.setCurrentId(this.props.questionNumber);
@@ -294,5 +296,4 @@ export default connect(mapStateToProps, {
   toggleRequired,
   removeQuestion,
   setCurrentId,
-  addQuestionToQuestionCollections,
 })(withRouter(Question));
