@@ -14,8 +14,8 @@ const Spinner = (props) => {
             {
                 props.showSpinner ? (
                     <SpinnerContainer>
-                        <div class="spinner-border" role="status" style = {{width: props.radius, height: props.radius}}>
-                            <span class="sr-only">Loading...</span>
+                        <div className="spinner-border" role="status" style = {{width: props.radius, height: props.radius}}>
+                            <span className="sr-only">Loading...</span>
                         </div>
                     </SpinnerContainer>
                 ) : ''

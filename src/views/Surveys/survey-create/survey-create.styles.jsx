@@ -1,58 +1,58 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 import { ReactComponent as caret } from "../../../assets/caret-down.svg";
 import { ReactComponent as eye } from "../../../assets/preview-eye.svg";
-import { variables } from "../../../App.styles";
+import {variables} from '../../../App.styles'
 export const MainContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: ${`calc(100vh - ${variables.navHeight})`};
-`;
+    display: flex;
+    flex-direction: column;
+    height: ${`calc(100vh - ${variables.navHeight})`};
+`
 
 export const ButtonContainer = styled.div`
-  padding: 2.7rem;
-  padding-bottom: unset;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  & > :not(:last-child) {
-    margin-right: 3rem;
-  }
-`;
-
-export const Container = styled.div`
-  .tab {
+    padding: 2.7rem;
+    padding-bottom:unset;
     display: flex;
-    margin-bottom: 3.4rem;
-    border-bottom: 0.5px solid rgba(91, 86, 86, 0.5);
-  }
-  .tab > .tab__list {
-    color: #5b5656;
+    align-items: center;
+    justify-content: flex-end;
+    & >:not(:last-child){
+        margin-right: 3rem;
+    }
+`
+
+export const Nav = styled.nav`
+    font-weight: normal;
     font-size: 1.8rem;
+    padding: 1rem 0;
+    color: #5B5656;
+    border-bottom: 0.5px solid rgba(91, 86, 86, 0.5);
+    margin-bottom: 3.4rem;
+`
+
+export const NavItem = styled.span`
     cursor: pointer;
-    transition: all 0.3s ease-in-out;
-  }
-  .tab__list.react-tabs__tab--selected {
-    color: #5b5656;
-    font-size: 2rem;
-    font-weight: bold;
-    border-bottom: 1px solid #5b5656;
-  }
-  .tab > .tab__list:not(:last-child) {
-    margin-right: 4.2rem;
-  }
-`;
+    padding: 1rem;
+    background:unset;
+    &.active{
+        font-weight: bold;
+        border-bottom: 1px solid #5B5656;
+    }
+`
 
 export const FormBuilderContainer = styled.div`
-  flex: 1;
-  display: grid;
-  grid-template-columns: max-content 1fr;
-  grid-gap: 3rem;
-  margin-bottom: 3.4rem;
-  min-height: 0;
-`;
+    flex: 1;
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    grid-gap: 3rem;
+    margin-bottom: 3.4rem;
+    min-height: 0;
+`
 
-export const Eye = styled(eye)``;
-export const CaretDown = styled(caret)``;
+export const Eye = styled(eye)`
+
+`
+export const CaretDown = styled(caret)`
+
+`
 
 export const ShareSurvey = styled.div`
   .collector__wrapper {

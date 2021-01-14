@@ -6,6 +6,9 @@ export const createSurveyRequest = async credentials =>
 export const createQuestionRequest = async (survey_id, credentials) =>
   await http.post(`/api/question/${survey_id}`, credentials);
 
+export const addSurveyQuestions = async (survey_id, questions) =>
+  await http.post(`/api/question/${survey_id}`, questions);
+
 export const getAllSurveysRequest = async () => await http.get("/api/survey");
 
 export const getSingleSurveyRequest = async id =>

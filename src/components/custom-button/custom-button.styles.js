@@ -42,8 +42,9 @@ export const CustomButtonContainer = styled.button`
     align-items: center;
     color: #5B5656;
     border-radius: 1rem;
+    transition: all .2s ease-in;
     & >:not(:last-child){
-        margin-right:1rem;
+        margin-right:2rem;
     }
     ${getButtonStyles}
 `

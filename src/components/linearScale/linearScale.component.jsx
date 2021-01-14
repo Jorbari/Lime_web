@@ -37,7 +37,7 @@ class LinearScale extends React.Component{
         let previewRadios = []
         for(let i=shape.range[0]; i < shape.range[1] + 1; i++){
             previewRadios.push(
-                <PreviewRadio>
+                <PreviewRadio key={i}>
                     <span>{i}</span>
                     <CustomRadio></CustomRadio>
                 </PreviewRadio>
