@@ -15,7 +15,7 @@ import ExecutionPlan from "./ExecutionPlan";
 import Budget from "./Budget";
 import { getSingleProjectRequest } from "../../api/project";
 import { Link } from "react-router-dom";
-import Spinner from '../../components/spinner/spinner';
+import Spinner from "../../components/spinner/spinner";
 
 const SapsProjectContainer = styled.div`
   .sapsHeader {
@@ -74,10 +74,29 @@ const SapsProjectContainer = styled.div`
     text-decoration: none;
     text-decoration: none;
   }
+
+  .tab {
+    display: flex;
+  }
+  .tab > .tab__list {
+    color: #5b5656;
+    font-size: 1.8rem;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+  }
+  .tab__list.react-tabs__tab--selected {
+    color: #5b5656;
+    font-size: 2rem;
+    font-weight: bold;
+    border-bottom: 1px solid #5b5656;
+  }
+  .tab > .tab__list:not(:last-child) {
+    margin-right: 4.2rem;
+  }
 `;
 
 const Project = (props) => {
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(true);
   const {
     history,
     projects,
@@ -90,13 +109,14 @@ const Project = (props) => {
   const [currentTab, setCurrentTab] = useState(0);
   // For triggering new budget entry modal
   const [modalShow, setModalShow] = React.useState(false);
+  const [execModalShow, setExecModalShow] = React.useState(false);
 
   React.useEffect(() => {
     const val = async () => {
       const value = await getSingleProjectRequest(id);
       console.log(value);
       if (value.status === 200) {
-        setIsLoading(false)
+        setIsLoading(false);
         setCurrentProject(value.data.data);
         console.log(currentProject);
       }
@@ -108,13 +128,10 @@ const Project = (props) => {
   return (
     <>
       <div className="relative bg-white">
-        {
-          isLoading?
-          (
-            <Spinner showSpinner={true} radius = {'5rem'} />
-          ):
-          (
-            <SapsProjectContainer className="relative bg-white pb-32">
+        {isLoading ? (
+          <Spinner showSpinner={true} radius={"5rem"} />
+        ) : (
+          <SapsProjectContainer className="relative bg-white pb-32">
             <div className="tab__buttons">
               {currentTab === 1 ? (
                 <Link className="btn" to="/surveys/new">
@@ -122,7 +139,7 @@ const Project = (props) => {
                   New Survey
                 </Link>
               ) : currentTab === 3 ? (
-                <button className="btn">
+                <button className="btn" onClick={() => setExecModalShow(true)}>
                   <i className="fa fa-plus mr-2" aria-hidden="true"></i>
                   New entry
                 </button>
@@ -134,45 +151,30 @@ const Project = (props) => {
               ) : (
                 ""
               )}
-  
+
               {/* <button className="btn">New entry</button>
               <button className="btn">New entry</button> */}
             </div>
-  
+
             <Tabs>
-              <TabList>
-                <Tab
-                  style={{ paddingLeft: "2rem", paddingRight: "2rem" }}
-                  onClick={() => setCurrentTab(0)}
-                >
+              <TabList className="tab">
+                <Tab className="tab__list" onClick={() => setCurrentTab(0)}>
                   Summary
                 </Tab>
-                <Tab
-                  style={{ paddingLeft: "2rem", paddingRight: "2rem" }}
-                  onClick={() => setCurrentTab(1)}
-                >
+                <Tab className="tab__list" onClick={() => setCurrentTab(1)}>
                   Survey
                 </Tab>
-                <Tab
-                  style={{ paddingLeft: "2rem", paddingRight: "2rem" }}
-                  onClick={() => setCurrentTab(2)}
-                >
+                <Tab className="tab__list" onClick={() => setCurrentTab(2)}>
                   Team
                 </Tab>
-                <Tab
-                  style={{ paddingLeft: "2rem", paddingRight: "2rem" }}
-                  onClick={() => setCurrentTab(3)}
-                >
+                <Tab className="tab__list" onClick={() => setCurrentTab(3)}>
                   Execution plan
                 </Tab>
-                <Tab
-                  style={{ paddingLeft: "2rem", paddingRight: "2rem" }}
-                  onClick={() => setCurrentTab(4)}
-                >
+                <Tab className="tab__list" onClick={() => setCurrentTab(4)}>
                   Budget
                 </Tab>
               </TabList>
-  
+
               <div style={{ width: "77%" }}>
                 <TabPanel>
                   <Summary
@@ -190,7 +192,9 @@ const Project = (props) => {
                 <Team />
               </TabPanel>
               <TabPanel>
-                <ExecutionPlan />
+                <ExecutionPlan 
+                showModal={execModalShow}
+                  onHide={() => setExecModalShow(false)}/>
               </TabPanel>
               <TabPanel>
                 <Budget
@@ -201,9 +205,8 @@ const Project = (props) => {
                 />
               </TabPanel>
             </Tabs>
-          </SapsProjectContainer>  
-          )
-        }
+          </SapsProjectContainer>
+        )}
       </div>
     </>
   );
