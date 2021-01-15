@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Modal from "react-bootstrap/Modal";
-import Button from "react-bootstrap/Button";
 import {
   getProjectBudget,
   createProjectBudget,
@@ -194,10 +193,6 @@ const Budget = (props) => {
     handleClose();
   };
 
-  const confirmation = () => {
-    DeleteBudgetEntry();
-  };
-
   return (
     <>
       <Notifier
@@ -268,9 +263,6 @@ const Budget = (props) => {
         </Modal.Header>
         <Modal.Body className="form__body">
           <form onSubmit={newBudgetEntry}>
-            {/* <div className="form-group">
-              <h4>Budget - New entry</h4>
-            </div> */}
             <div className="form-group">
               <label>Item:</label>
               <input
@@ -322,10 +314,10 @@ const Budget = (props) => {
       </Modal>
 
       <ConfirmationBox
-        title="Delete project"
+        title="Remove Team-mate"
         buttonMessage="Confirm Delete"
         handleClose={() => handleClose()}
-        confirm={() => confirmation()}
+        confirm={() => DeleteBudgetEntry()}
         show={show}
       >
         Are you sure you want to delete this project?
