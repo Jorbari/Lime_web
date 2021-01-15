@@ -1,6 +1,13 @@
 .modalCenter__.modal {
   transform: translateY(-50%) !important;
 }
+.modalCenter__.miniModal {
+  transform: translateY(-70%) !important;
+}
+.modalCenter__.miniModal .modal-content {
+  width: 45rem;
+  margin: auto;
+}
 .modalCenter__ .modal-body {
   margin: unset !important;
 }
