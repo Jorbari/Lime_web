@@ -114,7 +114,6 @@ const Project = (props) => {
   React.useEffect(() => {
     const val = async () => {
       const value = await getSingleProjectRequest(id);
-      console.log(value);
       if (value.status === 200) {
         setIsLoading(false);
         setCurrentProject(value.data.data);
