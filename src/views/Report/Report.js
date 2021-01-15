@@ -8,10 +8,11 @@ import { CardContainer, ReportProjectContainer } from "./report.styles";
 import folder from "../../assets/bigFolder.png";
 import { createStructuredSelector } from "reselect";
 import { selectAllReport } from "../../redux/report/report.selectors";
+import { setHeading } from '../../redux/layout/layout.action'
 
 function Report(props) {
-  const { showAllProject, allReport } = props;
-
+  const { showAllProject, allReport,setHeading } = props;
+  setHeading("Reports")
   React.useEffect(() => {
     showAllProject();
   }, []);
@@ -68,4 +69,4 @@ const mapStateToProps = createStructuredSelector({
   allReport: selectAllReport,
 });
 
-export default connect(mapStateToProps, { showAllProject })(Report);
+export default connect(mapStateToProps, { showAllProject,setHeading })(Report);

@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import Notifier from "../Notifier/notifier.component";
 import { getSingleProjectRequest, editProjectRequest } from "../../api/project";
+import { setHeading } from '../../redux/layout/layout.action'
 
 import { createProject } from "../../redux/project/project.actions";
 
@@ -16,11 +17,12 @@ const NewProject = (props) => {
     projects,
     status,
     error,
+    setHeading,
     match: {
       params: { id },
     },
   } = props;
-
+  setHeading("Projects")
   const [title, setTitle] = useState("");
   const [manager, setManager] = useState("");
   const [sponsor, setSponsor] = useState("");
@@ -628,5 +630,5 @@ const mapStateToProps = ({
 });
 
 export default withRouter(
-  connect(mapStateToProps, { createProject })(NewProject)
+  connect(mapStateToProps, { createProject,setHeading })(NewProject)
 );
