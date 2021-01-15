@@ -43,5 +43,6 @@ export const logout = () => {
   destroyToken();
   destroyEncodedUser();
   removeRedirectUrl();
-  window.location.assign("/login");
+  localStorage.removeItem("persist:base");
+  // window.location.assign("/login");
 };
