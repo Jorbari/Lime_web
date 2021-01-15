@@ -23,5 +23,13 @@ export const editProjectBudget = async (id, payload) =>
 export const getProjectBudget = async (id) =>
   await http.get(`/api/budget/${id}`);
 
+export const getAllUsers = async () => await http.get(`/api/user/all`);
+
+export const getListOfProjectSurvey = async (id) =>
+  await http.get(`/api/project/${id}/survey`);
+
+export const addTeamMember = async (projectId, id) =>
+  await http.post(`/api/team/${projectId}`, { userId: id });
+
 export const deleteProjectBudget = async (id) =>
   await http.delete(`/api/budget/${id}`);

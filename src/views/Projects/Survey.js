@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import moment from "moment";
+import { getListOfProjectSurvey } from "../../api/project";
 
 const SurveyContainer = styled.div`
   margin-top: 9rem;
@@ -20,7 +22,21 @@ const SurveyContainer = styled.div`
   /* .survey-table  */
 `;
 
-const Survey = () => {
+const Survey = (props) => {
+  const [surveyList, setSurveyList] = useState([]);
+
+  useEffect(() => {
+    const val = async () => {
+      const data = await getListOfProjectSurvey(props.project._id);
+
+      if (data.data.data) {
+        setSurveyList(data.data.data);
+      }
+    };
+
+    val();
+  }, []);
+
   return (
     <SurveyContainer
       className="mx-8"
@@ -41,45 +57,24 @@ const Survey = () => {
           </tr>
         </thead>
         <tbody>
-          <tr className="table-border">
-            <td className="w-2/4 py-6">
-              <input
-                type="checkbox"
-                className="appearance-none checked:bg-gray-900 checked:border-transparent ..."
-              />
-            </td>
-            <td className="w-2/4 py-6">Market Research Product Testing</td>
-            <td className="w-2/4 py-6">10/01/2020</td>
-            <td className="w-2/4 py-6">Baseline</td>
-            <td className="w-2/4 py-6">54</td>
-            <td className="w-2/4 py-6">Active</td>
-          </tr>
-          <tr className="table-border">
-            <td className="w-2/4 py-6">
-              <input
-                type="checkbox"
-                className="appearance-none checked:bg-gray-900 checked:border-transparent ..."
-              />
-            </td>
-            <td className="w-2/4 py-6">Market Research Product Testing</td>
-            <td className="w-2/4 py-6">10/01/2020</td>
-            <td className="w-2/4 py-6">Baseline</td>
-            <td className="w-2/4 py-6">54</td>
-            <td className="w-2/4 py-6">Active</td>
-          </tr>
-          <tr className="table-border">
-            <td className="w-2/4 py-6">
-              <input
-                type="checkbox"
-                className="appearance-none checked:bg-gray-900 checked:border-transparent ..."
-              />
-            </td>
-            <td className="w-2/4 py-6">Market Research Product Testing</td>
-            <td className="w-2/4 py-6">10/01/2020</td>
-            <td className="w-2/4 py-6">Baseline</td>
-            <td className="w-2/4 py-6">54</td>
-            <td className="w-2/4 py-6">Active</td>
-          </tr>
+          {surveyList.length > 0 &&
+            surveyList.map((survey, index) => (
+              <tr className="table-border" key={index}>
+                <td className="w-2/4 py-6">
+                  <input
+                    type="checkbox"
+                    className="appearance-none checked:bg-gray-900 checked:border-transparent ..."
+                  />
+                </td>
+                <td className="w-2/4 py-6">{survey?.name}</td>
+                <td className="w-2/4 py-6">
+                  {moment(survey?.lastModified).format("Do of MMMM, YYYY")}
+                </td>
+                <td className="w-2/4 py-6"> {survey?.category} </td>
+                <td className="w-2/4 py-6"> {survey?.responses} </td>
+                <td className="w-2/4 py-6"> {survey?.status} </td>
+              </tr>
+            ))}
         </tbody>
       </table>
     </SurveyContainer>

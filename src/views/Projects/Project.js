@@ -148,6 +148,11 @@ const Project = (props) => {
                   <i className="fa fa-plus mr-2" aria-hidden="true"></i>
                   New entry budget
                 </button>
+              ) : currentTab === 2 ? (
+                <button className="btn" onClick={() => setModalShow(true)}>
+                  <i className="fa fa-plus mr-2" aria-hidden="true"></i>
+                  invite team-mate
+                </button>
               ) : (
                 ""
               )}
@@ -186,15 +191,21 @@ const Project = (props) => {
                 </TabPanel>
               </div>
               <TabPanel>
-                <Survey />
+                <Survey project={currentProject} />
               </TabPanel>
               <TabPanel>
-                <Team />
+                <Team
+                  project={currentProject}
+                  show={modalShow}
+                  onHide={() => setModalShow(false)}
+                  openDialog={() => setModalShow(true)}
+                />
               </TabPanel>
               <TabPanel>
-                <ExecutionPlan 
-                showModal={execModalShow}
-                  onHide={() => setExecModalShow(false)}/>
+                <ExecutionPlan
+                  showModal={execModalShow}
+                  onHide={() => setExecModalShow(false)}
+                />
               </TabPanel>
               <TabPanel>
                 <Budget
