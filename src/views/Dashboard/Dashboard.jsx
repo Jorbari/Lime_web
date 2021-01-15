@@ -4,9 +4,11 @@ import BarChart from "../../components/BarChart";
 import { ButtonContainer, FlexGridStyle } from "./dashboard.styles";
 import "./Dashboard.css";
 import { withRouter } from "react-router-dom";
-
+import { setHeading } from '../../redux/layout/layout.action'
+import {connect} from 'react-redux'
 function Dashboard(props) {
-  const { history } = props;
+  const { history,setHeading } = props;
+  setHeading("Dashboard")
 
   return (
     <div>
@@ -44,4 +46,4 @@ function Dashboard(props) {
   );
 }
 
-export default withRouter(Dashboard);
+export default connect(null,{setHeading})(withRouter(Dashboard));

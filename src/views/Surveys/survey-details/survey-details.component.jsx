@@ -3,6 +3,7 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import { withRouter } from "react-router-dom";
 import { SapsProjectContainer } from "./survey.details.styles";
 import SurveySummary from "../survey-summary/survey-summary";
+import SurveyPreview from "../../../components/survey-preview/survey-preview.component"
 import SurveyCollector from "../survey-collectors/survey-collectors.component";
 
 class SurveyDetails extends React.Component {
@@ -43,7 +44,9 @@ class SurveyDetails extends React.Component {
             <TabPanel>
               <SurveySummary id={this.state.currentSurveyId} />
             </TabPanel>
-            <TabPanel>hello two</TabPanel>
+            <TabPanel>
+              <SurveyPreview/>
+            </TabPanel>
             <TabPanel>
               <SurveyCollector />
             </TabPanel>

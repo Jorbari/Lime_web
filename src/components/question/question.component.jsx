@@ -61,7 +61,6 @@ class Question extends React.Component {
   }
   
   componentDidMount() {
-      console.log(this);
       this.props.onRef(this);
   }
 
@@ -76,13 +75,6 @@ class Question extends React.Component {
       this.setState({ previewMode: false });
     }
   }
-
-  // AddToQuestionCollection() {
-  //   this.props.addQuestionToQuestionCollections(
-  //     { ...this.state },
-  //     this.props.match.params.id
-  //   );
-  // }
 
   onFormatChange = (event) => {
     event.persist();
@@ -115,7 +107,8 @@ class Question extends React.Component {
   };
 
   setCurrentId = () => {
-    if (!this.isCurrent) {
+    const {preview} = this.props;
+    if (!this.isCurrent && !preview) {
       this.props.setCurrentId(this.props.questionNumber);
     }
   };
@@ -126,6 +119,7 @@ class Question extends React.Component {
       questionNumber,
       setCurrentId,
       removeQuestion,
+      preview
     } = this.props;
     const { title, previewMode, required, format, shape } = this.state;
     this.isCurrent = currentQuestionId === questionNumber;

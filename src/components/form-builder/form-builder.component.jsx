@@ -1,16 +1,16 @@
 import React from "react";
+import { addQuestion, updateQuestions } from "../../redux/questions/questions.action";
 import { ReactComponent as AddCircleIcon } from "../../assets/add-with-circle.svg";
 import { selectQuestions } from "../../redux/questions/questions.selector";
-import { addQuestion, updateQuestions } from "../../redux/questions/questions.action";
 import CustomButton from "../custom-button/custom-button.component";
+import { MainContainer,ButtonContainer } from "./form-builder.styles";
 import Question from "../question/question.component";
 import { createStructuredSelector } from "reselect";
 import { connect } from "react-redux";
-import { MainContainer,ButtonContainer } from "./form-builder.styles";
 import { withRouter } from "react-router-dom";
 import Spinner from '../spinner/spinner';
 import Notifier from "../Notifier/notifier.component";  
-import {addSurveyQuestions} from "../../api/survey";
+import {addSurveyQuestions,updateSurveyQuestions} from "../../api/survey";
 class FormBuilder extends React.Component {
   constructor(props) {
     super(props);
@@ -67,10 +67,16 @@ class FormBuilder extends React.Component {
       questions.push(this.modifyQuestionNodesTitle(question))
     })
     console.log(this.props.match.params.id,questions)
+    const {match} = this.props
     try{
-      const { data: { response }, } = await addSurveyQuestions(this.props.match.params.id,questions);
-      console.log(response,">>>>>>>>>>>")
-      this.setState({open:true,apiMessageFeedback:"Survey Questions Added Successfully",isLoading:false})
+      if(match.path.includes("create")){
+        const data = await addSurveyQuestions(match.params.id,questions);
+        this.setState({open:true,apiMessageFeedback:"Survey Questions Added Successfully",isLoading:false})
+      }
+      else{
+        const data = await updateSurveyQuestions(match.params.id,questions);
+        this.setState({open:true,apiMessageFeedback:"Survey Questions updated Successfully",isLoading:false})
+      }
     }
     catch (error) {
       console.log(error.response)
@@ -104,7 +110,6 @@ class FormBuilder extends React.Component {
             onRef={(ref) => (this.refArray[index] = ref)}
             key={index}
             {...question}
-            rArr = {this.refArray}
             questionNumber={index}
           ></Question>
         ))}

@@ -7,12 +7,15 @@ import { decodeUserObject, encodeUserProfile } from "../../api/helpers";
 import { ProfileContainerStyle } from "./profile.styles";
 import { updateUserDetails, updateUserProfileImage } from "../../api/user";
 import Notifier from "../../components/Notifier/notifier.component";
+import { setHeading } from '../../redux/layout/layout.action'
+import {connect} from 'react-redux'
 
 // import Teammates from "../../components/teammates/teammates.component";
 
 const Profile = (props) => {
+  const{setHeading} = props
+  setHeading("Profile")
   const user = decodeUserObject();
-
   const [open, setOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [apiMessageFeedback, setApiMessageFeedback] = useState("");
@@ -299,4 +302,4 @@ const Profile = (props) => {
   );
 };
 
-export default Profile;
+export default connect(null,{setHeading})(Profile);

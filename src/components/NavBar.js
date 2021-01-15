@@ -2,6 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import {withRouter} from 'react-router-dom'
 import UserDropdown from "./UserDropdown.js";
+import { createStructuredSelector } from "reselect";
+import { connect } from "react-redux";
+import {selectHeading} from '../redux/layout/layout.selector'
 import { 
   NavBar,
   NavBarContainer
@@ -13,13 +16,14 @@ const setNavBarName = (name)=>{
 }
 
 const Navbar = (props) => {
-  const {location} = props;
+  const {location,heading} = props;
+  console.log(props)
   return (
     <>
     <NavBarContainer>
       <NavBar>
           <p className="">
-            {(setNavBarName(location.pathname))}
+            {heading}
           </p>
           <UserDropdown />
       </NavBar>
@@ -27,5 +31,7 @@ const Navbar = (props) => {
     </>
   );
 }
-
-export default withRouter(Navbar)
+const matchStateToProps = createStructuredSelector({
+  heading: selectHeading,
+});
+export default connect(matchStateToProps)(withRouter(Navbar))
