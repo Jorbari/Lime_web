@@ -31,5 +31,11 @@ export const getListOfProjectSurvey = async (id) =>
 export const addTeamMember = async (projectId, id) =>
   await http.post(`/api/team/${projectId}`, { userId: id });
 
+export const removeTeamMember = async (id) =>
+  await http.delete(`/api/team/${id}`);
+
+export const getTeamMember = async (projectId) =>
+  await http.get(`/api/team/${projectId}`);
+
 export const deleteProjectBudget = async (id) =>
   await http.delete(`/api/budget/${id}`);
