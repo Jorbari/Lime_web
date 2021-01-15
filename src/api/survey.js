@@ -9,6 +9,9 @@ export const createQuestionRequest = async (survey_id, credentials) =>
 export const addSurveyQuestions = async (survey_id, questions) =>
   await http.post(`/api/question/${survey_id}`, questions);
 
+export const updateSurveyQuestions = async (survey_id, questions) =>
+  await http.put(`/api/question/${survey_id}`, questions);
+
 export const getAllSurveysRequest = async () => await http.get("/api/survey");
 
 export const getSingleSurveyRequest = async id =>
@@ -34,3 +37,6 @@ export const generateSurveyLinkRequest = async (id, url) =>
 
 export const emailSurveyLinkRequest = async (id, mail) =>
   await http.post(`/api/survey/${id}/${mail}`);
+
+export const getSurveyQuestions = async (id) =>
+  await http.get(`/api/question/${id}/preview`);

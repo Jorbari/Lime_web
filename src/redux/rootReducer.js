@@ -6,6 +6,7 @@ import { projectReducer } from "./project/project.reducer";
 import { questionsReducer } from "./questions/questions.reducer";
 import reportReducer from "./report/report.reducer";
 import { surveyReducer } from "./survey/survey.reducer";
+import { layoutReducer } from "./layout/layout.reducer";
 
 const persistConfig = {
     key: 'base',
@@ -18,7 +19,8 @@ const rootReducer = combineReducers({
     project: projectReducer,
     survey: surveyReducer,
     questionsState: questionsReducer,
-    report: reportReducer
+    report: reportReducer,
+    layout:layoutReducer
 });
 
 export default persistReducer(persistConfig, rootReducer)

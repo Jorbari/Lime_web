@@ -13,10 +13,11 @@ import{
 
 
 class Checkboxes extends React.Component{
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+        let isOther = props.options[props.options.length - 1] == 'Other'? true: false
         this.state = {
-            isOther: false,
+            isOther
         };
     }
     handleChange = (event, index)=>{

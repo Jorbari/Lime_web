@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
-import CustomButton from "../../../components/custom-button/custom-button.component";
 import SurveySideBar from "../../../components/survey-side-bar/survey-side-bar.component";
+import CustomButton from "../../../components/custom-button/custom-button.component";
 import FormBuilder from "../../../components/form-builder/form-builder.component";
+import { setHeading } from '../../../redux/layout/layout.action'
+import { connect } from "react-redux";
+
 import {
   MainContainer,
   ButtonContainer,
@@ -14,7 +17,8 @@ import {
 } from "./survey-create.styles";
 import ShareSurveyComponent from "./survey-share.component";
 
-const CreateSurvey = () => {
+const CreateSurvey = ({setHeading}) => {
+  setHeading("New Survey")
   const [navItem, setNavItem] =  useState('create')
   const isNav = (value)=> value === navItem?'active':null;
   const setNav = (value)=>setNavItem(value)
@@ -50,40 +54,6 @@ const CreateSurvey = () => {
 
       </MainContainer>
   )
-
-  // return (
-  //   <MainContainer>
-  //     <ButtonContainer>
-  //       <CustomButton primary>
-  //         <Eye></Eye>
-  //         <span>Preview</span>
-  //       </CustomButton>
-  //       <CustomButton inverted>
-  //         <span>Add new</span>
-  //         <CaretDown></CaretDown>
-  //       </CustomButton>
-  //     </ButtonContainer>
-
-  //     <Container>
-  //       <Tabs>
-  //         <TabList className="tab">
-  //           <Tab className="tab__list">Create</Tab>
-  //           <Tab className="tab__list">Share</Tab>
-  //         </TabList>
-
-  //         <TabPanel>
-  //           <FormBuilderContainer>
-  //             <SurveySideBar />
-  //             <FormBuilder />
-  //           </FormBuilderContainer>
-  //         </TabPanel>
-  //         <TabPanel>
-  //           <ShareSurveyComponent />
-  //         </TabPanel>
-  //       </Tabs>
-  //     </Container>
-  //   </MainContainer>
-  // );
 };
 
-export default CreateSurvey;
+export default connect(null,{setHeading})(CreateSurvey);

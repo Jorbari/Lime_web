@@ -6,8 +6,11 @@ import surveyDetails from "./survey-details/survey-details.component";
 import surveyNew from './survey-new/survey-new.component';
 import CreateSurvey from './survey-create/survey-create.component';
 import EditSurvey from './survey-edit/survey-edit.component';
+import { setHeading } from '../../redux/layout/layout.action'
+import {connect} from 'react-redux'
 
-const SurveyRoutes = ({match}) => {
+const SurveyRoutes = ({setHeading, match}) => {
+  setHeading("Surveys")
     console.log(match.path)
   return (
     <React.Fragment>
@@ -22,4 +25,4 @@ const SurveyRoutes = ({match}) => {
   );
 };
 
-export default SurveyRoutes
+export default connect(null,{setHeading})(SurveyRoutes)

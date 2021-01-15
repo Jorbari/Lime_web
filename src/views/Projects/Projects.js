@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import Spinner from '../../components/spinner/spinner';
 import { getAllProjects } from "../../redux/project/project.actions";
+import { setHeading } from '../../redux/layout/layout.action'
 
 import folder from "../../assets/bigFolder.png";
 const CardContainer = styled.div`
@@ -65,7 +66,8 @@ const CardContainer = styled.div`
 `;
 
 function Projects(props) {
-  const { history, projects,isLoading } = props;
+  const { history, projects,isLoading,setHeading } = props;
+  setHeading("Projects")
   React.useEffect(() => {
     const fetchProjects = async () => {
       await props.getAllProjects();
@@ -155,5 +157,5 @@ const mapStateToProps = ({ project: { isLoading, status, projects } }) => ({
 });
 
 export default withRouter(
-  connect(mapStateToProps, { getAllProjects })(Projects)
+  connect(mapStateToProps, { getAllProjects,setHeading })(Projects)
 );
