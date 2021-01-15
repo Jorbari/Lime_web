@@ -97,10 +97,10 @@ const Team = (props) => {
 
     try {
       const data = await addTeamMember(props.project._id, selectedUser);
-      setTeamMates([...teamMates, data.data]);
+      setTeamMates([...teamMates, data.data.data]);
       setSelectedUser("");
       setApiMessageFeedback(
-        `successfully added ${data.data.name} as a team-mate`
+        `successfully added ${data.data.data.name} as a team-mate`
       );
       setOpen(true);
       props.onHide();
@@ -115,11 +115,12 @@ const Team = (props) => {
       const index = teamMates.findIndex(
         (x) => x._id == selectedTeamMemberShipId
       );
-      const trimeData = teamMates.splice(index, 1);
-      setTeamMates(trimeData);
+      teamMates.splice(index, 1);
+      setApiMessageFeedback("Team-mate successfully removed");
 
       setSelectedTeamMemberShipId("");
       setShow(false);
+      setOpen(true);
     } catch (err) {
       console.log(err);
     }
@@ -130,7 +131,6 @@ const Team = (props) => {
   };
 
   const triggerDeleteModal = (id) => {
-    console.log(id);
     setSelectedTeamMemberShipId(id);
     setShow(true);
   };
@@ -186,7 +186,7 @@ const Team = (props) => {
                     </div>
                   </td>
                   <td className="w-2/4 py-6">{team?.email}</td>
-                  <td className="w-2/4 py-6">(406) 555-0120</td>
+                  <td className="w-2/4 py-6">{team?.mobile}</td>
                   <td className="w-2/4 py-6 edit-text">Edit</td>
                   <td
                     className="w-2/4 py-6 delete-text"
@@ -224,7 +224,7 @@ const Team = (props) => {
                 {allUsers.length > 0 &&
                   allUsers.map((user) => (
                     <option key={user?._id} value={user?._id}>
-                      {user?.fullName} {user?.email}
+                      {user?.fullName} {user?.email ? `(${user?.email})` : ""}
                     </option>
                   ))}
               </select>
