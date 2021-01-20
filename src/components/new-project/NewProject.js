@@ -251,7 +251,7 @@ const NewProject = (props) => {
                           }
                           // required
                           value={manager}
-                          placeholder="Name of Manger"
+                          placeholder="Name of Manager"
                           style={{ height: "36px", fontSize: "15px" }}
                         />
                       </Col>
