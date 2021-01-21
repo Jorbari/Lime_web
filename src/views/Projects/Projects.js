@@ -89,7 +89,7 @@ function Projects(props) {
                 <i className="fa fa-plus mr-2" aria-hidden="true"></i>
                 New Project
               </button>
-              <button className="sortBy ml-8">New Survey</button>
+              <Link to="surveys/new" style={{color: "black"}}><button className="sortBy ml-8">New Survey</button></Link>
             </div>
           </div>
         </div>
