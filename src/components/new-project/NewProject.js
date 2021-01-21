@@ -37,6 +37,10 @@ const NewProject = (props) => {
 
   const [managerEmail, setManagerEmail] = useState("");
   const [sponsorEmail, setSponsorEmail] = useState("");
+
+  const [managerPhone, setManagerPhone] = useState("");
+  const [sponsorPhone, setSponsorPhone] = useState("");
+  
   const [description, setDescription] = useState("");
   const [open, setOpen] = useState(false);
 
@@ -87,6 +91,7 @@ const NewProject = (props) => {
 
     setManagerEmail(currentProject.manager?.email);
     setSponsorEmail(currentProject.sponsor?.email);
+    
     setDescription(currentProject.description);
   };
 
@@ -130,8 +135,8 @@ const NewProject = (props) => {
     props.createProject(
       {
         title,
-        manager: { name: manager, email: managerEmail },
-        sponsor: { name: sponsor, email: sponsorEmail },
+        manager: { name: manager, email: managerEmail, phone_number: managerPhone },
+        sponsor: { name: sponsor, email: sponsorEmail, phone_number: sponsorPhone },
         startDate: new Date(`${startDate}`).getTime(),
         endDate: new Date(`${endDate}`).getTime(),
         category,
@@ -270,6 +275,53 @@ const NewProject = (props) => {
                           }
                           value={managerEmail}
                           placeholder="Email Address of Manager"
+                          style={{ height: "36px", fontSize: "15px" }}
+                        />
+                      </Col>
+                    </Row>
+                  </Form.Group>
+
+                  <Form.Group
+                    as={Col}
+                    controlId="formBasicEmail"
+                    className="form-input px-0"
+                    style={{ marginBottom: "27px" }}
+                  >
+                    <Row>
+                      <Col sm={12} md={6} className="name-col">
+                        <Form.Label
+                          className="form-label"
+                          style={{ marginBottom: "7.5px" }}
+                        >
+                          Sponsor Phone:
+                        </Form.Label>
+                        <Form.Control
+                          type="tel"
+                          className="grid-input-style login-input-styles"
+                          onChange={({ target: { value } }) =>
+                            setSponsorPhone(value)
+                          }
+                          // required
+                          value={sponsorPhone}
+                          placeholder="Phone number of Sponsor"
+                          style={{ height: "36px", fontSize: "15px" }}
+                        />
+                      </Col>
+                      <Col sm={12} md={6}>
+                        <Form.Label
+                          className="form-label"
+                          style={{ marginBottom: "7.5px" }}
+                        >
+                          Manager Phone:
+                        </Form.Label>
+                        <Form.Control
+                          type="tel"
+                          className="grid-input-style login-input-styles"
+                          onChange={({ target: { value } }) =>
+                            setManagerPhone(value)
+                          }
+                          value={managerPhone}
+                          placeholder="Phone number Of Manager"
                           style={{ height: "36px", fontSize: "15px" }}
                         />
                       </Col>

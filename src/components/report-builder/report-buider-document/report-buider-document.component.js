@@ -68,7 +68,7 @@ const ReportBuiderDocs = ({ current_report, rendered_div }) => {
           </Style.DocsTopNavContainer>
           <Style.DocsBody id={"project_document"}>
             <Style.Title>{current_report.title}</Style.Title>
-            {rendered_div.description ? <ReportBuilderDescription /> : null}
+            {rendered_div.description ? <ReportBuilderDescription description={current_report.description} /> : null}
             {rendered_div.goals_and_objective ? (
               <ReportBuilderGoals
                 goals={current_report.goals}
