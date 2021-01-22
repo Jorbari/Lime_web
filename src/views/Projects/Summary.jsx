@@ -118,7 +118,7 @@ const SummaryTab = (props) => {
 
             <section className="project__info">
               <p>Phone Number:</p>
-              <h4>{project?.manager?.phone || "----"}</h4>
+              <h4>{project?.manager?.phone_number || "----"}</h4>
             </section>
 
             <section className="project__info">
@@ -135,7 +135,7 @@ const SummaryTab = (props) => {
 
             <section className="project__info">
               <p>Phone Number:</p>
-              <h4>{project?.sponsor?.phone || "----"}</h4>
+              <h4>{project?.sponsor?.phone_number || "----"}</h4>
             </section>
 
             <section className="project__info">
