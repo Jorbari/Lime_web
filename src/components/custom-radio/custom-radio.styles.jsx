@@ -12,6 +12,7 @@ export const CustomRadioContainer = styled.div`
             border: 1px solid #A4D4AE;
             position: relative;
             margin: unset;
+            cursor:pointer;
             &::after{
                 content: '';
                 position: absolute;
