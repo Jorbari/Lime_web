@@ -41,23 +41,23 @@ import { connect } from "react-redux";
 import { debounce } from "../../helper";
 import { withRouter } from "react-router-dom";
 import { Hidden } from "@material-ui/core";
-import {questionDropdownData} from './question.dropdown.data'
+import { questionDropdownData } from "./question.dropdown.data";
 class Question extends React.Component {
   selectBox = React.createRef();
   isCurrent = false;
   constructor(props) {
     super(props);
-    const {title,required,previewMode,format,shape} = props
-    const myState = {title,required,previewMode,format,shape}
+    const { title, required, previewMode, format, shape } = props;
+    const myState = { title, required, previewMode, format, shape };
 
     this.state = {
       ...myState,
-      answer:[]
+      answer: [],
     };
   }
-  
+
   componentDidMount() {
-      this.props.onRef(this);
+    this.props.onRef(this);
   }
 
   componentWillUnmount() {
@@ -75,9 +75,10 @@ class Question extends React.Component {
   onFormatChange = (event) => {
     event.persist();
     const id = event.target?.closest("div.dropdown-item")?.id;
-    if (id) { 
+    if (id) {
       this.setFormatProp(id);
-      this.setState({...setFormat(id)})
+      let title = this.state.title;
+      this.setState({ ...setFormat(id), title });
     }
   };
 
@@ -104,7 +105,7 @@ class Question extends React.Component {
   };
 
   setCurrentId = () => {
-    const {preview} = this.props;
+    const { preview } = this.props;
     if (!this.isCurrent && !preview) {
       this.props.setCurrentId(this.props.questionNumber);
     }
@@ -117,11 +118,11 @@ class Question extends React.Component {
       setCurrentId,
       removeQuestion,
       preview,
-      answerMode
+      answerMode,
     } = this.props;
     const { title, previewMode, required, format, shape } = this.state;
     this.isCurrent = currentQuestionId === questionNumber;
-    
+
     return (
       <MainContainer
         isCurrent
@@ -138,10 +139,7 @@ class Question extends React.Component {
             <QuestionDisplay>
               <span>{questionNumber + 1}.</span>{" "}
               <span>{title || "Question"}</span>
-              {
-                required?(<sup style={{color:'red'}}>*</sup>):null
-              }
-              
+              {required ? <sup style={{ color: "red" }}>*</sup> : null}
             </QuestionDisplay>
           ) : (
             <QuestionTitle
@@ -154,26 +152,21 @@ class Question extends React.Component {
             />
           )}
 
-          
-            <div className="dropdown" style={{visibility: previewMode? "hidden": "visible"}}>
-              <QuestionFormatDropdown
-                data-toggle="dropdown"
-                ref={this.selectBox}
-              >
-                {
-                  questionDropdownData()[format]
-                }
-              </QuestionFormatDropdown>
-              <Caret></Caret>
-              <DropdownMenu
-                className="dropdown-menu"
-                onClick={this.onFormatChange}
-              >
-                {
-                  Object.values(questionDropdownData())
-                }
-              </DropdownMenu>
-            </div>
+          <div
+            className="dropdown"
+            style={{ visibility: previewMode ? "hidden" : "visible" }}
+          >
+            <QuestionFormatDropdown data-toggle="dropdown" ref={this.selectBox}>
+              {questionDropdownData()[format]}
+            </QuestionFormatDropdown>
+            <Caret></Caret>
+            <DropdownMenu
+              className="dropdown-menu"
+              onClick={this.onFormatChange}
+            >
+              {Object.values(questionDropdownData())}
+            </DropdownMenu>
+          </div>
         </ContentHeader>
         <ContentBody>
           {
@@ -184,54 +177,54 @@ class Question extends React.Component {
                   setShape={this.setShape}
                   setAnswer={this.setAnswer}
                   previewMode={previewMode}
-                  answerMode = {answerMode}
-                  questionNumber = {questionNumber}
+                  answerMode={answerMode}
+                  questionNumber={questionNumber}
                 />
               ),
               [questionFormatTypes.checkbox]: (
                 <Checkboxes
                   options={shape}
-                  questionNumber = {questionNumber}
+                  questionNumber={questionNumber}
                   setShape={this.setShape}
                   setAnswer={this.setAnswer}
                   previewMode={previewMode}
-                  answerMode = {answerMode}
+                  answerMode={answerMode}
                 />
               ),
               [questionFormatTypes.dropdown]: (
                 <Dropdown
                   options={shape}
-                  questionNumber = {questionNumber}
+                  questionNumber={questionNumber}
                   setShape={this.setShape}
                   setAnswer={this.setAnswer}
                   previewMode={previewMode}
-                  answerMode = {answerMode}
+                  answerMode={answerMode}
                 />
               ),
               [questionFormatTypes.shortanswer]: (
                 <ShortAnswer
-                questionNumber = {questionNumber}
-                setAnswer={this.setAnswer}
+                  questionNumber={questionNumber}
+                  setAnswer={this.setAnswer}
                   previewMode={previewMode}
-                  answerMode = {answerMode}
+                  answerMode={answerMode}
                 />
               ),
               [questionFormatTypes.paragraph]: (
                 <LongAnswer
-                questionNumber = {questionNumber}
-                setAnswer={this.setAnswer}
+                  questionNumber={questionNumber}
+                  setAnswer={this.setAnswer}
                   previewMode={previewMode}
-                  answerMode = {answerMode}
+                  answerMode={answerMode}
                 />
               ),
               [questionFormatTypes.linearscale]: (
                 <LinearScale
                   shape={shape}
-                  questionNumber = {questionNumber}
+                  questionNumber={questionNumber}
                   setShape={this.setShape}
                   setAnswer={this.setAnswer}
                   previewMode={previewMode}
-                  answerMode = {answerMode}
+                  answerMode={answerMode}
                 />
               ),
             }[format]
