@@ -1,5 +1,5 @@
 import React from "react";
-import { Router, Switch } from "react-router-dom";
+import { Router, Switch,Route } from "react-router-dom";
 import GuestRoute from "./HOCs/GuestRoute";
 import AuthWrapper from "./views/AuthWrapper/AuthWrapper";
 import ProtectedRoute from "./HOCs/ProtectedRoute";
@@ -12,6 +12,8 @@ import SideBar from "./components/side-bar/SideBar";
 import NavBar from "./components/NavBar";
 import NewProject from "./components/new-project/NewProject";
 import ViewReport from "./views/view-report/view-report.component";
+import DisplaySurvey from "./components/display-survey/display-survey.component";
+import SurveyDone from "./components/survey-done/survey-done.component";
 import { MainContentContainer, MainContainer, MainContent } from "./App.styles";
 import SurveyRoutes from "./views/Surveys/survey.routes";
 
@@ -21,6 +23,8 @@ const App = () => {
       <GuestRoute exact path="/signup" component={AuthWrapper} />
       <GuestRoute exact path="/login" component={AuthWrapper} />
       <GuestRoute exact path="/" component={AuthWrapper} />
+      <Route exact path="/survey-done" component={SurveyDone}/>
+      <Route exact path="/survey/:id" component={DisplaySurvey}/>
       <MainContainer>
         <SideBar />
         <MainContentContainer>

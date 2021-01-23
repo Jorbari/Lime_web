@@ -8,6 +8,7 @@ import{
     InputContainer,
     AddOptionButton,
     AddOtherButton,
+    AutoGrowInput,
     CloseButton,
 } from './longAnswer.styles'
 
@@ -20,14 +21,38 @@ class LongAnswer extends React.Component{
         };
     }
 
+    handleAnswer = (event)=>{
+        const {questionNumber, setAnswer} = this.props
+        const value = event.target.textContent;
+        console.log(`Question ${questionNumber} is: ${[value]}`)
+        setAnswer([value])
+    }
+
     render(){
         const {isOther} = this.state
-        const {options,previewMode} = this.props
+        const {options,previewMode,answerMode} = this.props
         return(
             <MainContainer>
-                <OptionContainer>
-                    <InputContainer style={previewMode?null:{borderBottom:'0.5px solid rgba(91, 86, 86, 0.5)'}}previewMode disabled placeholder="Long Answer"></InputContainer>
-                </OptionContainer>
+                {
+                    answerMode?
+                    (   
+                        <div className="" style = {{background: 'rgba(247, 247, 247, 0.8)'}}>
+                            <AutoGrowInput onInput={this.handleAnswer} role="textbox" contentEditable></AutoGrowInput>
+                        </div>
+                    ):
+                    (
+                        <OptionContainer>
+                        <InputContainer 
+                            style={previewMode?null:{borderBottom:'0.5px solid rgba(91, 86, 86, 0.5)'}}
+                            previewMode 
+                            disabled = {answerMode?false:true} 
+                            placeholder="Long Answer"
+                            onChange={(e)=>{this.handleAnswer(e)}}
+                        ></InputContainer>
+                    </OptionContainer>
+                    )
+                }
+
             </MainContainer>
         )
     }

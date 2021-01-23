@@ -14,6 +14,7 @@ export const CustomCheckboxContainer = styled.div`
             display: flex;
             align-items: center;
             justify-content: center;
+            cursor:pointer;
         }
         &:checked + label{
             background: #B6E6BD;

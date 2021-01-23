@@ -32,14 +32,29 @@ class LinearScale extends React.Component{
         id === 'start'? (shape.label[0] = value): (shape.label[1] = value);
         setShape(shape)
     }
+    handleAnswer = (event)=>{
+        const {questionNumber, setAnswer} = this.props
+        const { value } = event.target;
+        console.log(`Question ${questionNumber} is: ${[value]}`)
+        setAnswer([+value])
+    }
     setPreviewRadios = ()=>{
-        const{shape} = this.props
+        const{shape, answerMode,questionNumber,handleAnswer} = this.props
         let previewRadios = []
-        for(let i=shape.range[0]; i < shape.range[1] + 1; i++){
+        for(let index=shape.range[0]; index < shape.range[1] + 1; index++){
             previewRadios.push(
-                <PreviewRadio key={i}>
-                    <span>{i}</span>
-                    <CustomRadio></CustomRadio>
+                <PreviewRadio key={index}>
+                    <span>{index}</span>
+                            {/* to make label and id vary, create a number out of question number and index */}
+                            {/* if answerMode set disabled of input fields to false */}
+                    <CustomRadio 
+                        type="radio" 
+                        disabled = {answerMode?false:true} 
+                        value={index} 
+                        name={`question${questionNumber}`} 
+                        id={`${+(String(questionNumber) + String(index))}`}
+                        onChange={(e)=>{this.handleAnswer(e)}} 
+                    ></CustomRadio>
                 </PreviewRadio>
             )
         }
