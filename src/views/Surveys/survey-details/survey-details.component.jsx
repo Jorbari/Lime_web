@@ -3,7 +3,7 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import { withRouter } from "react-router-dom";
 import { SapsProjectContainer } from "./survey.details.styles";
 import SurveySummary from "../survey-summary/survey-summary";
-import SurveyPreview from "../../../components/survey-preview/survey-preview.component"
+import SurveyPreview from "../../../components/survey-preview/survey-preview.component";
 import SurveyCollector from "../survey-collectors/survey-collectors.component";
 
 class SurveyDetails extends React.Component {
@@ -12,6 +12,9 @@ class SurveyDetails extends React.Component {
 
     this.state = {
       currentSurveyId: this.props.match.params.id,
+      defaultIndex: this.props.location.search.split("=")[1]
+        ? this.props.location.search.split("=")[1]
+        : 0,
     };
   }
 
@@ -33,7 +36,7 @@ class SurveyDetails extends React.Component {
             <button>Analyse</button>
           </div>
 
-          <Tabs>
+          <Tabs defaultIndex={this.state.defaultIndex}>
             <TabList className="tab">
               <Tab className="tab__list">Summary</Tab>
               <Tab className="tab__list">Preview</Tab>
@@ -45,13 +48,13 @@ class SurveyDetails extends React.Component {
               <SurveySummary id={this.state.currentSurveyId} />
             </TabPanel>
             <TabPanel>
-              <SurveyPreview/>
+              <SurveyPreview />
             </TabPanel>
             <TabPanel>
               <SurveyCollector />
             </TabPanel>
             <TabPanel>
-              <h1>Hello four</h1>
+              <h1>Coming soon</h1>
             </TabPanel>
           </Tabs>
         </div>
