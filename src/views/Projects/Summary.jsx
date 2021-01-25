@@ -130,7 +130,7 @@ const SummaryTab = (props) => {
           <div className="project__info--grid project__space">
             <section className="project__info">
               <p>Executive sponsor:</p>
-              <h4>{project?.sponsor?.name || "----"}</h4>
+              <h4>{project?.sponsor?.name || "----"}</h4> -b 
             </section>
 
             <section className="project__info">
