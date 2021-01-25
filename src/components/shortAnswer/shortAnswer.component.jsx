@@ -19,14 +19,25 @@ class ShortAnswer extends React.Component{
             isOther: false,
         };
     }
-
+    handleAnswer = (event)=>{
+        const {questionNumber, setAnswer} = this.props
+        const { value } = event.target;
+        console.log(`Question ${questionNumber} is: ${[value]}`)
+        setAnswer([value])
+    }
     render(){
         const {isOther} = this.state
-        const {options,previewMode} = this.props
+        const {options,previewMode,answerMode} = this.props
         return(
             <MainContainer>
                 <OptionContainer>
-                    <InputContainer style={previewMode?null:{borderBottom:'0.5px solid rgba(91, 86, 86, 0.5)'}}previewMode disabled placeholder="Short Answer"></InputContainer>
+                    <InputContainer 
+                        style={previewMode?null:{borderBottom:'0.5px solid rgba(91, 86, 86, 0.5)'}}
+                        previewMode 
+                        disabled = {answerMode?false:true} 
+                        placeholder="Short Answer"
+                        onChange={(e)=>{this.handleAnswer(e)}}
+                    ></InputContainer>
                 </OptionContainer>
             </MainContainer>
         )

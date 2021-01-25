@@ -27,6 +27,12 @@ class MultiChoice extends React.Component{
         options[index]= value
         setShape(options)
     }
+    handleAnswer = (event)=>{
+        const {questionNumber, setAnswer} = this.props
+        const { value } = event.target;
+        console.log(`Question ${questionNumber} is: ${[value]}`)
+        setAnswer([+value])
+    }
     addOptions = (option="")=>{
         let options,isOther,setShape
         ({options, setShape} = this.props);
@@ -53,15 +59,30 @@ class MultiChoice extends React.Component{
     }
     render(){
         const {isOther} = this.state
-        const {options,previewMode} = this.props
+        const {options,previewMode,answerMode,questionNumber} = this.props
         return(
             <MainContainer>
                 <OptionsContainer>
                 {
                     options.map((option, index)=>(
                         <OptionContainer key={index}>
-                            <CustomRadio type="radio" disabled name={`question${1}`} id={index}/>
-                            <InputContainer style={previewMode?null:{borderBottom:'0.5px solid rgba(91, 86, 86, 0.5)'}}previewMode value={option} onChange={(e)=>{this.handleChange(e,index)}} readOnly={this.isLastAndisOther(index)}></InputContainer>
+                            {/* to make label and id vary form a number out of question number and index */}
+                            {/* if answerMode set disabled of input fields to false */}
+                            <CustomRadio 
+                                type="radio" 
+                                onChange={(e)=>{this.handleAnswer(e)}} 
+                                disabled = {answerMode?false:true} 
+                                name={`question${questionNumber}`} 
+                                id={`${+(String(questionNumber) + String(index))}`} 
+                                value = {index}
+                            />
+                            <InputContainer  
+                                style={previewMode?null:{borderBottom:'0.5px solid rgba(91, 86, 86, 0.5)'}}
+                                previewMode 
+                                value={option} 
+                                onChange={(e)=>{this.handleChange(e,index)}} 
+                                readOnly={this.isLastAndisOther(index) || previewMode}
+                            ></InputContainer>
                             {index && !previewMode ? (<CloseButton onClick={()=>{this.removeOption(index)}}><CloseIcon/></CloseButton>): null}
                         </OptionContainer>
                     ))
@@ -70,7 +91,7 @@ class MultiChoice extends React.Component{
                     previewMode? null:
                     (
                         <OptionContainer>
-                        <CustomRadio type="radio" disabled name={`question${1}`}/>
+                        <CustomRadio type="radio" disabled name={`question${questionNumber}`}/>
                         <div className="" style={{padding:"0 2.7rem"}}>
                             <AddOptionButton onClick = {()=>{this.addOptions()}}>Add option {isOther?null:'or'}</AddOptionButton>
                             {

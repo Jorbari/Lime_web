@@ -17,7 +17,8 @@ class Checkboxes extends React.Component{
         super(props);
         let isOther = props.options[props.options.length - 1] == 'Other'? true: false
         this.state = {
-            isOther
+            isOther,
+            answer:{}
         };
     }
     handleChange = (event, index)=>{
@@ -26,6 +27,19 @@ class Checkboxes extends React.Component{
         const { value } = event.target;
         options[index]= value
         setShape(options)
+    }
+    handleAnswer = (event)=>{
+        const {questionNumber, setAnswer} = this.props
+        const {answer} = this.state
+        const { value } = event.target;
+        if ( value in answer){
+             delete answer[value]
+        }
+        else{
+            answer[value] = +value
+        }
+        this.setState({answer})
+        setAnswer(Object.values(answer))
     }
     addOptions = (option="")=>{
         let options,isOther,setShape
@@ -53,15 +67,30 @@ class Checkboxes extends React.Component{
     }
     render(){
         const {isOther} = this.state
-        const {options,previewMode} = this.props
+        const {options,previewMode,answerMode,questionNumber} = this.props
         return(
             <MainContainer>
                 <OptionsContainer>
                 {
                     options.map((option, index)=>(
-                        <OptionContainer key={index}>
-                            <CustomCheckbox type="checkbox" disabled name={`question${1}`} id={index}/>
-                            <InputContainer style={previewMode?null:{borderBottom:'0.5px solid rgba(91, 86, 86, 0.5)'}}previewMode value={option} onChange={(e)=>{this.handleChange(e,index)}} readOnly={this.isLastAndisOther(index)}></InputContainer>
+                        <OptionContainer key={index} >
+                            {/* to make label and id vary, create a number out of question number and index */}
+                            {/* if answerMode set disabled of input fields to false */}
+                            <CustomCheckbox 
+                                type="checkbox" 
+                                disabled = {answerMode?false:true} 
+                                onChange={(e)=>{this.handleAnswer(e)}} 
+                                value={index} 
+                                name={`question${questionNumber}`} 
+                                id={`${+(String(questionNumber) + String(index))}`}
+                            />
+                            <InputContainer 
+                                style={previewMode?null:{borderBottom:'0.5px solid rgba(91, 86, 86, 0.5)'}}
+                                previewMode 
+                                value={option} 
+                                onChange={(e)=>{this.handleChange(e,index)}} 
+                                readOnly={this.isLastAndisOther(index) || previewMode}
+                            ></InputContainer>
                             {index && !previewMode ? (<CloseButton onClick={()=>{this.removeOption(index)}}><CloseIcon/></CloseButton>): null}
                         </OptionContainer>
                     ))
@@ -70,7 +99,7 @@ class Checkboxes extends React.Component{
                     previewMode? null:
                     (
                         <OptionContainer>
-                        <CustomCheckbox type="radio" disabled name={`question${1}`}/>
+                        <CustomCheckbox type="radio" disabled name={`question${questionNumber}`}/>
                         <div className="" style={{padding:"0 2.7rem"}}>
                             <AddOptionButton onClick = {()=>{this.addOptions()}}>Add option {isOther?null:'or'}</AddOptionButton>
                             {

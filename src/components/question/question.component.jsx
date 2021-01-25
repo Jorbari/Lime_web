@@ -1,10 +1,4 @@
 import React from "react";
-import { ReactComponent as MultichoiceIcon } from "../../assets/multichoice.svg";
-import { ReactComponent as CheckboxIcon } from "../../assets/checkbox.svg";
-import { ReactComponent as DropdownIcon } from "../../assets/dropdown.svg";
-import { ReactComponent as LinearIcon } from "../../assets/linearscale.svg";
-import { ReactComponent as Paragraph } from "../../assets/paragraph.svg";
-import { ReactComponent as ShortanswerIcon } from "../../assets/shortanswer.svg";
 import { ReactComponent as MoveIcon } from "../../assets/move-icon.svg";
 import { ReactComponent as DuplicateIcon } from "../../assets/duplicate-icon.svg";
 import { ReactComponent as DeleteIcon } from "../../assets/delete-icon.svg";
@@ -47,21 +41,23 @@ import { connect } from "react-redux";
 import { debounce } from "../../helper";
 import { withRouter } from "react-router-dom";
 import { Hidden } from "@material-ui/core";
+import { questionDropdownData } from "./question.dropdown.data";
 class Question extends React.Component {
   selectBox = React.createRef();
   isCurrent = false;
   constructor(props) {
     super(props);
-    const {title,required,previewMode,format,shape} = props
-    const myState = {title,required,previewMode,format,shape}
+    const { title, required, previewMode, format, shape } = props;
+    const myState = { title, required, previewMode, format, shape };
 
     this.state = {
       ...myState,
+      answer: [],
     };
   }
-  
+
   componentDidMount() {
-      this.props.onRef(this);
+    this.props.onRef(this);
   }
 
   componentWillUnmount() {
@@ -79,12 +75,10 @@ class Question extends React.Component {
   onFormatChange = (event) => {
     event.persist();
     const id = event.target?.closest("div.dropdown-item")?.id;
-    if (id) { 
+    if (id) {
       this.setFormatProp(id);
-      this.setState({...setFormat(id)})
-      this.selectBox.current.innerHTML = event.target.closest(
-        "div.dropdown-item"
-      ).outerHTML;
+      let title = this.state.title;
+      this.setState({ ...setFormat(id), title });
     }
   };
 
@@ -106,8 +100,12 @@ class Question extends React.Component {
     this.setState({ shape });
   };
 
+  setAnswer = (answer) => {
+    this.setState({ answer });
+  };
+
   setCurrentId = () => {
-    const {preview} = this.props;
+    const { preview } = this.props;
     if (!this.isCurrent && !preview) {
       this.props.setCurrentId(this.props.questionNumber);
     }
@@ -119,11 +117,12 @@ class Question extends React.Component {
       questionNumber,
       setCurrentId,
       removeQuestion,
-      preview
+      preview,
+      answerMode,
     } = this.props;
     const { title, previewMode, required, format, shape } = this.state;
     this.isCurrent = currentQuestionId === questionNumber;
-    
+
     return (
       <MainContainer
         isCurrent
@@ -140,6 +139,7 @@ class Question extends React.Component {
             <QuestionDisplay>
               <span>{questionNumber + 1}.</span>{" "}
               <span>{title || "Question"}</span>
+              {required ? <sup style={{ color: "red" }}>*</sup> : null}
             </QuestionDisplay>
           ) : (
             <QuestionTitle
@@ -152,63 +152,21 @@ class Question extends React.Component {
             />
           )}
 
-          
-            <div className="dropdown" style={{visibility: previewMode? "hidden": "visible"}}>
-              <QuestionFormatDropdown
-                data-toggle="dropdown"
-                ref={this.selectBox}
-              >
-                Multiple choice
-              </QuestionFormatDropdown>
-              <Caret></Caret>
-              <DropdownMenu
-                className="dropdown-menu"
-                onClick={this.onFormatChange}
-              >
-                <div
-                  className="dropdown-item"
-                  id={`${questionFormatTypes.multichoice}`}
-                >
-                  <MultichoiceIcon />
-                  <span>Multiple choice questions</span>
-                </div>
-                <div
-                  className="dropdown-item"
-                  id={`${questionFormatTypes.checkbox}`}
-                >
-                  <CheckboxIcon />
-                  <span>Checkboxes</span>
-                </div>
-                <div
-                  className="dropdown-item"
-                  id={`${questionFormatTypes.dropdown}`}
-                >
-                  <DropdownIcon />
-                  <span>Dropdown</span>
-                </div>
-                <div
-                  className="dropdown-item"
-                  id={`${questionFormatTypes.linearscale}`}
-                >
-                  <LinearIcon />
-                  <span>Linear scale</span>
-                </div>
-                <div
-                  className="dropdown-item"
-                  id={`${questionFormatTypes.shortanswer}`}
-                >
-                  <ShortanswerIcon />
-                  <span>Short answer</span>
-                </div>
-                <div
-                  className="dropdown-item"
-                  id={`${questionFormatTypes.paragraph}`}
-                >
-                  <Paragraph />
-                  <span>Paragraph</span>
-                </div>
-              </DropdownMenu>
-            </div>
+          <div
+            className="dropdown"
+            style={{ visibility: previewMode ? "hidden" : "visible" }}
+          >
+            <QuestionFormatDropdown data-toggle="dropdown" ref={this.selectBox}>
+              {questionDropdownData()[format]}
+            </QuestionFormatDropdown>
+            <Caret></Caret>
+            <DropdownMenu
+              className="dropdown-menu"
+              onClick={this.onFormatChange}
+            >
+              {Object.values(questionDropdownData())}
+            </DropdownMenu>
+          </div>
         </ContentHeader>
         <ContentBody>
           {
@@ -217,38 +175,56 @@ class Question extends React.Component {
                 <MultiChoice
                   options={shape}
                   setShape={this.setShape}
+                  setAnswer={this.setAnswer}
                   previewMode={previewMode}
+                  answerMode={answerMode}
+                  questionNumber={questionNumber}
                 />
               ),
               [questionFormatTypes.checkbox]: (
                 <Checkboxes
                   options={shape}
+                  questionNumber={questionNumber}
                   setShape={this.setShape}
+                  setAnswer={this.setAnswer}
                   previewMode={previewMode}
+                  answerMode={answerMode}
                 />
               ),
               [questionFormatTypes.dropdown]: (
                 <Dropdown
                   options={shape}
+                  questionNumber={questionNumber}
                   setShape={this.setShape}
+                  setAnswer={this.setAnswer}
                   previewMode={previewMode}
+                  answerMode={answerMode}
                 />
               ),
               [questionFormatTypes.shortanswer]: (
                 <ShortAnswer
+                  questionNumber={questionNumber}
+                  setAnswer={this.setAnswer}
                   previewMode={previewMode}
+                  answerMode={answerMode}
                 />
               ),
               [questionFormatTypes.paragraph]: (
                 <LongAnswer
+                  questionNumber={questionNumber}
+                  setAnswer={this.setAnswer}
                   previewMode={previewMode}
+                  answerMode={answerMode}
                 />
               ),
               [questionFormatTypes.linearscale]: (
                 <LinearScale
                   shape={shape}
+                  questionNumber={questionNumber}
                   setShape={this.setShape}
+                  setAnswer={this.setAnswer}
                   previewMode={previewMode}
+                  answerMode={answerMode}
                 />
               ),
             }[format]

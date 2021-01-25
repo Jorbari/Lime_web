@@ -8,16 +8,19 @@ import{
     InputContainer,
     AddOptionButton,
     AddOtherButton,
+    QuestionFormatDropdown,
+    DropdownMenu,
+    Caret,
     CloseButton,
 } from './dropdown.styles'
-
 
 class Dropdown extends React.Component{
     constructor(props) {
         super(props);
         let isOther = props.options[props.options.length - 1] == 'Other'? true: false
         this.state = {
-            isOther
+            isOther,
+            selectedValue: 'Please choose one option'
         };
     }
     handleChange = (event, index)=>{
@@ -26,6 +29,14 @@ class Dropdown extends React.Component{
         const { value } = event.target;
         options[index]= value
         setShape(options)
+    }
+    
+    handleAnswer = (event)=>{
+        const {questionNumber, setAnswer, options} = this.props
+        const {id} = event.target;
+        this.setState({selectedValue: options[+id]})
+        console.log(`Question ${questionNumber} is: ${[+id]}`)
+        setAnswer([+id])
     }
     addOptions = (option="")=>{
         let options,isOther,setShape
@@ -52,33 +63,64 @@ class Dropdown extends React.Component{
         return index+1 === this.props.options.length && this.state.isOther
     }
     render(){
-        const {isOther} = this.state
-        const {options,previewMode} = this.props
+        const {isOther,selectedValue} = this.state
+        const {options,previewMode,answerMode} = this.props
         return(
             <MainContainer>
-                <OptionsContainer>
                 {
-                    options.map((option, index)=>(
-                        <OptionContainer key={index}>
-                            <span>{index + 1}</span>
-                            <InputContainer style={previewMode?null:{borderBottom:'0.5px solid rgba(91, 86, 86, 0.5)'}}previewMode value={option} onChange={(e)=>{this.handleChange(e,index)}} readOnly={this.isLastAndisOther(index)}></InputContainer>
-                            {index && !previewMode ? (<CloseButton onClick={()=>{this.removeOption(index)}}><CloseIcon/></CloseButton>): null}
-                        </OptionContainer>
-                    ))
-                }
-                {
-                    previewMode? null:
+                    answerMode?
                     (
-                        <OptionContainer>
-                        {/* <CustomRadio type="radio" disabled name={`question${1}`}/> */}
-                        <div className="" style={{padding:"0 2.7rem"}}>
-                            <AddOptionButton onClick = {()=>{this.addOptions()}}>Add option</AddOptionButton>
-                        </div>
-                    </OptionContainer>
+                        <div className="dropdown">
+                        <QuestionFormatDropdown
+                            data-toggle="dropdown"
+                            ref={this.selectBox}
+                        >
+                            <span>{selectedValue}</span>
+                        </QuestionFormatDropdown>
+                        <Caret></Caret>
+                        <DropdownMenu
+                            className="dropdown-menu"
+                            onClick={this.onFormatChange}
+                        >
+                            {
+                                options.map((option, index)=>(
+                                    <OptionContainer key={index} id={index} onClick={(e)=>{this.handleAnswer(e)}}>
+                                        <span >{option}</span>
+                                    </OptionContainer>
+                                ))
+                            }
+                        </DropdownMenu>
+                    </div>
+                    ):
+                    (
+                        <OptionsContainer>
+                        {
+                            options.map((option, index)=>(
+                                <OptionContainer key={index}>
+                                    <span>{index + 1}</span>
+                                    <InputContainer style={previewMode?null:{borderBottom:'0.5px solid rgba(91, 86, 86, 0.5)'}}previewMode value={option} onChange={(e)=>{this.handleChange(e,index)}} readOnly={this.isLastAndisOther(index)}></InputContainer>
+                                    {index && !previewMode ? (<CloseButton onClick={()=>{this.removeOption(index)}}><CloseIcon/></CloseButton>): null}
+                                </OptionContainer>
+                            ))
+                        }
+                        {
+                            previewMode? null:
+                            (
+                                <OptionContainer>
+                                {/* <CustomRadio type="radio" disabled name={`question${1}`}/> */}
+                                <div className="" style={{padding:"0 2.7rem"}}>
+                                    <AddOptionButton onClick = {()=>{this.addOptions()}}>Add option</AddOptionButton>
+                                </div>
+                            </OptionContainer>
+                            )
+                        }
+        
+                        </OptionsContainer>
+                    
                     )
                 }
 
-                </OptionsContainer>
+
             </MainContainer>
         )
     }
