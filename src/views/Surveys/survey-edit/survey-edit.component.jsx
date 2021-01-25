@@ -26,7 +26,6 @@ const EditSurvey = ({ updateQuestions, match, setHeading, history }) => {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const [questions, setQuestions] = useState([]);
-  const [previewMode, setPreviewMode] = useState(false);
 
   useEffect(() => {
     const getSurveys = async () => {
@@ -86,7 +85,12 @@ const EditSurvey = ({ updateQuestions, match, setHeading, history }) => {
           </svg>
           <span>Back</span>
         </CustomButton>
-        <CustomButton primary onClick={() => setPreviewMode(!previewMode)}>
+        <CustomButton
+          primary
+          onClick={() =>
+            history.push(`/surveys/details/${match.params.id}?defaultIndex=1`)
+          }
+        >
           <Eye></Eye>
           <span>Preview</span>
         </CustomButton>
