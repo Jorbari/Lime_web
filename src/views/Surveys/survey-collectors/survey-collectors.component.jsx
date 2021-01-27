@@ -5,7 +5,11 @@ import Accordion from "react-bootstrap/Accordion";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import { withRouter } from "react-router-dom";
-import { getAllResponsesForSurvey } from "../../../api/survey";
+import {
+  getAllResponsesForSurvey,
+  getAllResponsesForLiveSurvey,
+  getAllResponsesForWebLink,
+} from "../../../api/survey";
 
 import { SurveyCollectorsStyle } from "./survey-collectors.styles";
 
@@ -15,7 +19,7 @@ class SurveyCollector extends React.Component {
 
     this.state = {
       all_responses: [],
-      all_survey: [],
+      live_survey: [],
       web_link: [],
     };
   }
@@ -28,11 +32,21 @@ class SurveyCollector extends React.Component {
         this.props.match.params.id
       );
 
-      if (all_response_api.data.data.length > 0) {
-        this.setState({ all_responses: all_response_api.data.data });
-      }
+      const live_survey_response_api = await getAllResponsesForLiveSurvey(
+        this.props.match.params.id
+      );
+
+      const web_link_survey_response_api = await getAllResponsesForWebLink(
+        this.props.match.params.id
+      );
+
+      // if (all_response_api.data.data.length > 0) {
+      //   this.setState({ all_responses: all_response_api.data.data });
+      // }
 
       console.log(all_response_api.data.data);
+      console.log(live_survey_response_api.data.data);
+      console.log(web_link_survey_response_api.data.data);
     } catch (err) {
       console.log(err);
     }
