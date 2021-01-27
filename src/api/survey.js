@@ -46,3 +46,9 @@ export const getSurveyQuestions = async (id) =>
 
 export const getAllResponsesForSurvey = async (id) =>
   await http.get(`/api/response/${id}/all`);
+
+export const getAllResponsesForLiveSurvey = async (id) =>
+  await http.get(`/api/response/${id}/live`);
+
+export const getAllResponsesForWebLink = async (id) =>
+  await http.get(`/api/response/${id}/web`);
