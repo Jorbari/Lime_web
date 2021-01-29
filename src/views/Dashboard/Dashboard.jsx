@@ -1,14 +1,48 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import LineChart from "../../components/LineChart/LineChart";
 import BarChart from "../../components/BarChart";
 import { ButtonContainer, FlexGridStyle } from "./dashboard.styles";
 import "./Dashboard.css";
 import { withRouter } from "react-router-dom";
-import { setHeading } from '../../redux/layout/layout.action'
-import {connect} from 'react-redux'
+import { setHeading } from "../../redux/layout/layout.action";
+import {
+  setRecentProject,
+  setRecentSurvey,
+} from "../../redux/dashboard/dashboard.action";
+import { connect } from "react-redux";
+import { recentProject } from "../../api/project";
+import { recentSurvey } from "../../api//survey";
+
 function Dashboard(props) {
-  const { history,setHeading } = props;
-  setHeading("Dashboard")
+  const { history, setHeading, setRecentProject, setRecentSurvey } = props;
+  setHeading("Dashboard");
+
+  useEffect(() => {
+    // Fetch recent project
+    const fetchRecentProject = async () => {
+      try {
+        const data = await recentProject();
+        const data_length = data.data.data.length;
+        setRecentProject(data_length);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    // Fetch recent survey
+    const fetchRecentSurvey = async () => {
+      try {
+        const data = await recentSurvey();
+        const data_length = data.data.data.length;
+        setRecentSurvey(data_length);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchRecentProject();
+    fetchRecentSurvey();
+  }, []);
 
   return (
     <div>
@@ -46,4 +80,6 @@ function Dashboard(props) {
   );
 }
 
-export default connect(null,{setHeading})(withRouter(Dashboard));
+export default connect(null, { setHeading, setRecentProject, setRecentSurvey })(
+  withRouter(Dashboard)
+);
