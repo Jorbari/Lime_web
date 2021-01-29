@@ -34,6 +34,9 @@ class SurveySummary extends React.Component {
         this.props.id
       );
 
+      console.log(live_survey_response_api.data);
+      console.table(live_survey_response_api.data.data);
+
       this.setState({
         isLoading: false,
         surveySummary: res.data.data,

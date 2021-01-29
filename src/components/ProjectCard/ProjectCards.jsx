@@ -1,22 +1,22 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
 import folderIcon from "../../assets/bigFolderNoFill.png";
 import reportIcon from "../../assets/bigReport.png";
 import "./projectCard.scss";
 
-
-export default function ProjectCards() {
+function ProjectCards(props) {
+  const { recentProjects, recentSurveys } = props;
   return (
     <>
-
       <div className="card__section">
         <div className="card__section--img">
           <img alt="" src={folderIcon} />
         </div>
         <div className="card__section--detail">
           <h1>
-            <span>5</span>
+            <span>{recentProjects}</span>
             <span>Recent Projects</span>
           </h1>
           <Link to="/projects">
@@ -27,14 +27,11 @@ export default function ProjectCards() {
 
       <div className="card__section">
         <div className="card__section--img">
-        <img
-            alt=""
-            src={reportIcon}
-            />
+          <img alt="" src={reportIcon} />
         </div>
         <div className="card__section--detail">
           <h1>
-            <span>2</span>
+            <span>{recentSurveys}</span>
             <span>New Surveys</span>
           </h1>
           <Link to="/surveys">
@@ -42,7 +39,13 @@ export default function ProjectCards() {
           </Link>
         </div>
       </div>
-
     </>
   );
 }
+
+const mapStateToProps = (state) => ({
+  recentProjects: state.dashboard.recent_projects,
+  recentSurveys: state.dashboard.recent_surveys,
+});
+
+export default connect(mapStateToProps)(ProjectCards);

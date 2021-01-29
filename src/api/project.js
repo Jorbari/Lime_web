@@ -39,3 +39,5 @@ export const getTeamMember = async (projectId) =>
 
 export const deleteProjectBudget = async (id) =>
   await http.delete(`/api/budget/${id}`);
+
+export const recentProject = async () => await http.get(`/api/project/recent`);

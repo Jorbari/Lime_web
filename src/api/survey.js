@@ -52,3 +52,5 @@ export const getAllResponsesForLiveSurvey = async (id) =>
 
 export const getAllResponsesForWebLink = async (id) =>
   await http.get(`/api/response/${id}/web`);
+
+export const recentSurvey = async () => await http.get(`/api/survey/recent`);
