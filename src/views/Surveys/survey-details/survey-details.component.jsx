@@ -5,6 +5,7 @@ import { SapsProjectContainer } from "./survey.details.styles";
 import SurveySummary from "../survey-summary/survey-summary";
 import SurveyPreview from "../../../components/survey-preview/survey-preview.component";
 import SurveyCollector from "../survey-collectors/survey-collectors.component";
+import SurveyAnalyse from "../survey-analyse/survey-analyse.component";
 
 class SurveyDetails extends React.Component {
   constructor(props) {
@@ -54,7 +55,7 @@ class SurveyDetails extends React.Component {
               <SurveyCollector />
             </TabPanel>
             <TabPanel>
-              <h1>Coming soon</h1>
+              <SurveyAnalyse/>
             </TabPanel>
           </Tabs>
         </div>

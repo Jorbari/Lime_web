@@ -8,6 +8,7 @@ const DEFAULT_STATE = {
     surveys: [],
     response: {},
     responses: [],
+    responseCount: 0,
     link: ""
   };
   
@@ -77,6 +78,11 @@ const DEFAULT_STATE = {
           isLoading: false,
           status: "error",
           error: payload
+        };
+      case SurveyActionTypes.SET_SURVEY_RESPONSE_COUNT:
+        return {
+          ...state,
+          responseCount: payload
         };
       default:
         return state;

@@ -22,6 +22,17 @@ class Dropdown extends React.Component{
             isOther,
             selectedValue: 'Please choose one option'
         };
+
+    }
+    componentDidMount(){
+        const {responseMode,answer,options} =this.props
+        if(responseMode && answer.length > 0){
+            let index = answer[0]
+            let selectedValue = options[index]
+            this.setState({selectedValue}, ()=>{
+                console.log("I was executed")
+            })
+        }
     }
     handleChange = (event, index)=>{
         let options,setShape
@@ -38,6 +49,7 @@ class Dropdown extends React.Component{
         console.log(`Question ${questionNumber} is: ${[+id]}`)
         setAnswer([+id])
     }
+
     addOptions = (option="")=>{
         let options,isOther,setShape
         ({options, setShape} = this.props);
@@ -49,6 +61,7 @@ class Dropdown extends React.Component{
         setShape(options);
         option? this.setState({isOther:true}) : this.setState() // set isother to true if other was added
     }
+
     removeOption = (index)=>{
         let options,isOther,setShape
         ({options, setShape} = this.props);
@@ -59,21 +72,24 @@ class Dropdown extends React.Component{
         setShape(options);
         isOtherIndex? this.setState({isOther:false}) : this.setState()
     }
+
     isLastAndisOther(index){
         return index+1 === this.props.options.length && this.state.isOther
     }
+
     render(){
         const {isOther,selectedValue} = this.state
-        const {options,previewMode,answerMode} = this.props
+        const {options,previewMode,answerMode,responseMode, answer} = this.props
         return(
             <MainContainer>
                 {
-                    answerMode?
+                    answerMode || responseMode?
                     (
                         <div className="dropdown">
                         <QuestionFormatDropdown
                             data-toggle="dropdown"
                             ref={this.selectBox}
+                            style = {{pointerEvents: responseMode? 'none': 'auto'}}
                         >
                             <span>{selectedValue}</span>
                         </QuestionFormatDropdown>

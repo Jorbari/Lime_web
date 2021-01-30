@@ -7,7 +7,8 @@ export const convertQuestions = (arr)=>{
             title: question.question_body,
             shape: question.question_options,
             format: question.format,
-            previewMode: true
+            previewMode: true,
+            answer: question.response || []
         }
         if(index == arr.length -1){
             val.previewMode = false

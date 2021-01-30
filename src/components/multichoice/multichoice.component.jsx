@@ -59,7 +59,7 @@ class MultiChoice extends React.Component{
     }
     render(){
         const {isOther} = this.state
-        const {options,previewMode,answerMode,questionNumber} = this.props
+        const {options,previewMode,answerMode,responseMode, questionNumber, answer} = this.props
         return(
             <MainContainer>
                 <OptionsContainer>
@@ -75,6 +75,7 @@ class MultiChoice extends React.Component{
                                 name={`question${questionNumber}`} 
                                 id={`${+(String(questionNumber) + String(index))}`} 
                                 value = {index}
+                                checked={ responseMode && answer[0] === index} 
                             />
                             <InputContainer  
                                 style={previewMode?null:{borderBottom:'0.5px solid rgba(91, 86, 86, 0.5)'}}

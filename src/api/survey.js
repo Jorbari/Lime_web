@@ -53,6 +53,11 @@ export const getAllResponsesForLiveSurvey = async (id) =>
 export const getAllResponsesForWebLink = async (id) =>
   await http.get(`/api/response/${id}/web`);
 
+export const getIndividualResponse = async (surveyId,responseId) =>
+  await http.get(`/api/survey/${surveyId}/responses?page=${responseId}`);
+
+export const deleteResponse = async (response_id) =>
+  await http.delete(`/api/response/${response_id}`);
 export const recentSurvey = async () => await http.get(`/api/survey/recent`);
 
 export const shareSurvey = async (survey_id, payload) =>

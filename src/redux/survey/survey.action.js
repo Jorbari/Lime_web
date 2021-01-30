@@ -227,3 +227,7 @@ export const emailSurveyLink = (surveyId, mail) => async (dispatch) => {
     });
   }
 };
+
+export const setNoOfSurveyResponses = (number) => (dispatch)=>{
+  dispatch({ type: SurveyActionTypes.SET_SURVEY_RESPONSE_COUNT, payload: number })
+}

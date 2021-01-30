@@ -47,13 +47,17 @@ class Question extends React.Component {
   isCurrent = false;
   constructor(props) {
     super(props);
-    const { title, required, previewMode, format, shape } = props;
+    const { title, required, previewMode, format, shape, answer, responseMode } = props;
     const myState = { title, required, previewMode, format, shape };
 
     this.state = {
       ...myState,
       answer: [],
     };
+
+    if(responseMode){
+      this.setState({answer})
+    }
   }
 
   componentDidMount() {
@@ -119,6 +123,8 @@ class Question extends React.Component {
       removeQuestion,
       preview,
       answerMode,
+      responseMode,
+      answer
     } = this.props;
     const { title, previewMode, required, format, shape } = this.state;
     this.isCurrent = currentQuestionId === questionNumber;
@@ -178,7 +184,9 @@ class Question extends React.Component {
                   setAnswer={this.setAnswer}
                   previewMode={previewMode}
                   answerMode={answerMode}
+                  responseMode={responseMode}
                   questionNumber={questionNumber}
+                  answer = {answer}
                 />
               ),
               [questionFormatTypes.checkbox]: (
@@ -189,6 +197,8 @@ class Question extends React.Component {
                   setAnswer={this.setAnswer}
                   previewMode={previewMode}
                   answerMode={answerMode}
+                  answer = {answer}
+                  responseMode={responseMode}
                 />
               ),
               [questionFormatTypes.dropdown]: (
@@ -199,6 +209,8 @@ class Question extends React.Component {
                   setAnswer={this.setAnswer}
                   previewMode={previewMode}
                   answerMode={answerMode}
+                  responseMode={responseMode}
+                  answer = {answer}
                 />
               ),
               [questionFormatTypes.shortanswer]: (
@@ -207,6 +219,8 @@ class Question extends React.Component {
                   setAnswer={this.setAnswer}
                   previewMode={previewMode}
                   answerMode={answerMode}
+                  responseMode={responseMode}
+                  answer = {answer}
                 />
               ),
               [questionFormatTypes.paragraph]: (
@@ -214,7 +228,9 @@ class Question extends React.Component {
                   questionNumber={questionNumber}
                   setAnswer={this.setAnswer}
                   previewMode={previewMode}
+                  responseMode={responseMode}
                   answerMode={answerMode}
+                  answer = {answer}
                 />
               ),
               [questionFormatTypes.linearscale]: (
@@ -224,7 +240,9 @@ class Question extends React.Component {
                   setShape={this.setShape}
                   setAnswer={this.setAnswer}
                   previewMode={previewMode}
+                  responseMode={responseMode}
                   answerMode={answerMode}
+                  answer = {answer}
                 />
               ),
             }[format]

@@ -67,7 +67,8 @@ class Checkboxes extends React.Component{
     }
     render(){
         const {isOther} = this.state
-        const {options,previewMode,answerMode,questionNumber} = this.props
+        const {options,previewMode,answerMode,responseMode, questionNumber, answer} = this.props
+        let answerSet = new Set(answer)
         return(
             <MainContainer>
                 <OptionsContainer>
@@ -83,6 +84,7 @@ class Checkboxes extends React.Component{
                                 value={index} 
                                 name={`question${questionNumber}`} 
                                 id={`${+(String(questionNumber) + String(index))}`}
+                                checked={ responseMode && answerSet.has(index)} 
                             />
                             <InputContainer 
                                 style={previewMode?null:{borderBottom:'0.5px solid rgba(91, 86, 86, 0.5)'}}

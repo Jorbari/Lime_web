@@ -39,7 +39,7 @@ class LinearScale extends React.Component{
         setAnswer([+value])
     }
     setPreviewRadios = ()=>{
-        const{shape, answerMode,questionNumber,handleAnswer} = this.props
+        const{shape, answerMode,responseMode, questionNumber, answer,handleAnswer} = this.props
         let previewRadios = []
         for(let index=shape.range[0]; index < shape.range[1] + 1; index++){
             previewRadios.push(
@@ -54,6 +54,7 @@ class LinearScale extends React.Component{
                         name={`question${questionNumber}`} 
                         id={`${+(String(questionNumber) + String(index))}`}
                         onChange={(e)=>{this.handleAnswer(e)}} 
+                        checked={ responseMode && answer[0] === index} 
                     ></CustomRadio>
                 </PreviewRadio>
             )

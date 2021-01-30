@@ -30,14 +30,14 @@ class LongAnswer extends React.Component{
 
     render(){
         const {isOther} = this.state
-        const {options,previewMode,answerMode} = this.props
+        const {options,previewMode,answerMode, responseMode, questionNumber, answer} = this.props
         return(
             <MainContainer>
                 {
-                    answerMode?
+                    answerMode || responseMode?
                     (   
                         <div className="" style = {{background: 'rgba(247, 247, 247, 0.8)'}}>
-                            <AutoGrowInput onInput={this.handleAnswer} role="textbox" contentEditable></AutoGrowInput>
+                            <AutoGrowInput onInput={this.handleAnswer} role="textbox" contentEditable = {answerMode}>{answer[0]}</AutoGrowInput>
                         </div>
                     ):
                     (

@@ -27,7 +27,7 @@ class ShortAnswer extends React.Component{
     }
     render(){
         const {isOther} = this.state
-        const {options,previewMode,answerMode} = this.props
+        const {options,previewMode,answerMode,responseMode, answer} = this.props
         return(
             <MainContainer>
                 <OptionContainer>
@@ -37,6 +37,7 @@ class ShortAnswer extends React.Component{
                         disabled = {answerMode?false:true} 
                         placeholder="Short Answer"
                         onChange={(e)=>{this.handleAnswer(e)}}
+                        value = {responseMode? answer[0]: null}
                     ></InputContainer>
                 </OptionContainer>
             </MainContainer>
