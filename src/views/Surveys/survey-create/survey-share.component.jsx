@@ -8,7 +8,11 @@ import Notifier from "../../../components/Notifier/notifier.component";
 import Spinner from "../../../components/spinner/spinner";
 
 class ShareSurveyComponent extends React.Component {
-  baseLinkUrl = "http://localhost:3000";
+  // local host link
+  // baseLinkUrl = "http://localhost:3000";
+
+  // staging-server link
+  baseLinkUrl = "https://limeweb.herokuapp.com";
 
   constructor(props) {
     super(props);

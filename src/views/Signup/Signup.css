@@ -1,5 +1,5 @@
 .login-text {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-style: normal;
   font-weight: bold;
   font-size: 36px;
@@ -11,18 +11,19 @@
 }
 
 .signup-form {
-  width: 420px;
+  width: 90%;
+  margin: 0 auto;
   margin-top: 48px;
 }
 
 .signup-form .form-label {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
   line-height: 20px;
   text-align: center;
-  color: #5B5656;
+  color: #5b5656;
   margin-bottom: 15px;
 }
 
@@ -31,7 +32,7 @@
   margin-bottom: 20px;
 }
 
-.signup-form .form-input:nth-child(2){
+.signup-form .form-input:nth-child(2) {
   margin-top: 0;
 }
 
@@ -44,7 +45,7 @@
 }
 
 .signup-form .login-forget-password {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
@@ -71,7 +72,6 @@
   color: #5b5656;
 }
 
-
 .signup-form .btn-back {
   width: 100%;
   height: 57px;
@@ -89,29 +89,26 @@
 
 .signup-form .link {
   margin-top: 18px;
-
 }
 
-.signup-form .link a{
+.signup-form .link a {
   text-decoration: underline;
   font-size: 16px;
   line-height: 24px;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-style: normal;
   font-weight: 600;
 }
 
-.signup-form .link a:hover{
-
+.signup-form .link a:hover {
   color: initial;
 }
 
-
 .signup-form .error-div {
   /* background-color: green; */
-  min-height: 0 ;
-  padding: 0 ;
-  margin-top: 0px ;
+  min-height: 0;
+  padding: 0;
+  margin-top: 0px;
   margin-bottom: 0;
 }
 
@@ -120,9 +117,9 @@
   color: red;
 }
 
-@media screen and (max-width:767px) {
+@media screen and (max-width: 767px) {
   .signup-form.form-section {
-    width: 100%
+    width: 100%;
   }
 
   .signup-form {
@@ -136,37 +133,36 @@
     line-height: 16px;
   }
 
+  .signup-form .form-group {
+    margin-bottom: 0;
+    margin-bottom: 20px;
+  }
 
-.signup-form .form-group {
-  margin-bottom: 0;
-  margin-bottom: 20px;
-}
-
-  .signup-form .form-input:nth-child(2){
+  .signup-form .form-input:nth-child(2) {
     margin-top: 0;
   }
 
-  .signup-form .form-input:nth-child(4){
+  .signup-form .form-input:nth-child(4) {
     margin-top: 0;
     margin-bottom: 30px;
   }
 
-  .signup-form .name-col{
+  .signup-form .name-col {
     margin-top: 0;
     margin-bottom: 20px;
   }
 
-  .signup-form .form-input.col{
+  .signup-form .form-input.col {
     padding-right: 0;
     padding-left: 0;
   }
 
-  .signup-form .form-group.col{
+  .signup-form .form-group.col {
     padding-right: 0;
     padding-left: 0;
   }
 
-  .signup-form .form-input .col-sm-12{
+  .signup-form .form-input .col-sm-12 {
     padding-right: 0;
     padding-left: 0;
   }
@@ -193,30 +189,26 @@
     line-height: 16px;
   }
 
-
-
-.signup-form .btn-back {
-  width: 100%;
-  height: 45px;
-  border-radius: 4px;
-  font-size: 12px;
-  line-height: 16px;
-}
+  .signup-form .btn-back {
+    width: 100%;
+    height: 45px;
+    border-radius: 4px;
+    font-size: 12px;
+    line-height: 16px;
+  }
 
   .signup-form .link {
     margin-top: 18px;
     margin-bottom: 38px;
     font-size: 12px;
     line-height: 16px;
-  
   }
-  
-  .signup-form .link a{
-  
+
+  .signup-form .link a {
     text-decoration: underline;
     font-size: 12px;
     line-height: 16px;
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
     font-style: normal;
     font-weight: 600;
   }

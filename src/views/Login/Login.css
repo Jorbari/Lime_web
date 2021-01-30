@@ -1,5 +1,5 @@
 .login-text {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-style: normal;
   font-weight: bold;
   font-size: 36px;
@@ -11,18 +11,19 @@
 }
 
 .login-form {
-  width: 420px;
+  width: 90%;
+  margin: 0 auto;
   margin-top: 48px;
 }
 
 .form-label {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
   line-height: 20px;
   text-align: center;
-  color: #5B5656;
+  color: #5b5656;
   margin-bottom: 15px;
 }
 
@@ -30,8 +31,11 @@
   margin-bottom: 0;
 }
 
-.form-input:nth-child(2){
-  margin-top: 22px
+.form-input:nth-child(2) {
+  margin-top: 22px;
+}
+.form-control {
+  font-size: 1.6rem;
 }
 
 .login-input-styles {
@@ -43,7 +47,7 @@
 }
 
 .login-forget-password {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
@@ -72,21 +76,18 @@
 
 .link {
   margin-top: 18px;
-
 }
 
-.link a{
-
+.link a {
   text-decoration: underline;
   font-size: 16px;
   line-height: 24px;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-style: normal;
   font-weight: 600;
 }
 
-.link a:hover{
-
+.link a:hover {
   color: initial;
 }
 .error-div {
@@ -102,13 +103,11 @@
   color: red;
 }
 
+.form-section {
+  width: 100%;
+}
 
-
-@media screen and (max-width:767px) {
-  .form-section {
-    width: 100%
-  }
-
+@media screen and (max-width: 767px) {
   .login-form {
     width: 100%;
     margin-top: 20px;
@@ -120,11 +119,11 @@
     line-height: 16px;
   }
 
-  .form-input:nth-child(2){
-    margin-top: 20px
+  .form-input:nth-child(2) {
+    margin-top: 20px;
   }
 
-  .form-input.col{
+  .form-input.col {
     padding-right: 0;
     padding-left: 0;
   }
@@ -142,7 +141,7 @@
     margin-top: 20px;
     margin-bottom: 20px;
   }
-  .form-group.col{
+  .form-group.col {
     padding-right: 0;
     padding-left: 0;
   }
@@ -155,19 +154,16 @@
     line-height: 16px;
   }
 
-
   .link {
     margin-top: 18px;
     margin-bottom: 38px;
-
   }
 
-  .link a{
-
+  .link a {
     text-decoration: underline;
     font-size: 12px;
     line-height: 16px;
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
     font-style: normal;
     font-weight: 600;
   }

@@ -16,7 +16,7 @@ import Budget from "./Budget";
 import { getSingleProjectRequest } from "../../api/project";
 import { Link } from "react-router-dom";
 import Spinner from "../../components/spinner/spinner";
-import { setHeading } from '../../redux/layout/layout.action'
+import { setHeading } from "../../redux/layout/layout.action";
 
 const SapsProjectContainer = styled.div`
   .sapsHeader {
@@ -107,7 +107,7 @@ const Project = (props) => {
       params: { id },
     },
   } = props;
-  setHeading("Projects")
+  setHeading("Projects");
   const [currentProject, setCurrentProject] = useState({});
   const [currentTab, setCurrentTab] = useState(0);
   // For triggering new budget entry modal
@@ -131,10 +131,9 @@ const Project = (props) => {
     <>
       <div className="relative bg-white">
         {isLoading ? (
-          <div style = {{marginTop: '4rem'}}>
+          <div style={{ marginTop: "4rem" }}>
             <Spinner showSpinner={true} radius={"5rem"} />
           </div>
-          
         ) : (
           <SapsProjectContainer className="relative bg-white pb-32">
             <div className="tab__buttons">
@@ -177,9 +176,9 @@ const Project = (props) => {
                 <Tab className="tab__list" onClick={() => setCurrentTab(2)}>
                   Team
                 </Tab>
-                <Tab className="tab__list" onClick={() => setCurrentTab(3)}>
+                {/* <Tab className="tab__list" onClick={() => setCurrentTab(3)}>
                   Execution plan
-                </Tab>
+                </Tab> */}
                 <Tab className="tab__list" onClick={() => setCurrentTab(4)}>
                   Budget
                 </Tab>
@@ -237,6 +236,8 @@ const mapStateToProps = ({
   projects,
 });
 
-export default connect(mapStateToProps, { getSingleProject, deleteProject,setHeading })(
-  Project
-);
+export default connect(mapStateToProps, {
+  getSingleProject,
+  deleteProject,
+  setHeading,
+})(Project);
