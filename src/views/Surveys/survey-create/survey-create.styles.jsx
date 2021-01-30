@@ -1,58 +1,54 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 import { ReactComponent as caret } from "../../../assets/caret-down.svg";
 import { ReactComponent as eye } from "../../../assets/preview-eye.svg";
-import {variables} from '../../../App.styles'
+import { variables } from "../../../App.styles";
 export const MainContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    height: ${`calc(100vh - ${variables.navHeight})`};
-`
+  display: flex;
+  flex-direction: column;
+  height: ${`calc(100vh - ${variables.navHeight})`};
+`;
 
 export const ButtonContainer = styled.div`
-    padding: 2.7rem;
-    padding-bottom:unset;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    & >:not(:last-child){
-        margin-right: 3rem;
-    }
-`
+  padding: 2.7rem;
+  padding-bottom: unset;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  & > :not(:last-child) {
+    margin-right: 3rem;
+  }
+`;
 
 export const Nav = styled.nav`
-    font-weight: normal;
-    font-size: 1.8rem;
-    padding: 1rem 0;
-    color: #5B5656;
-    border-bottom: 0.5px solid rgba(91, 86, 86, 0.5);
-    margin-bottom: 3.4rem;
-`
+  font-weight: normal;
+  font-size: 1.8rem;
+  padding: 1rem 0;
+  color: #5b5656;
+  border-bottom: 0.5px solid rgba(91, 86, 86, 0.5);
+  margin-bottom: 3.4rem;
+`;
 
 export const NavItem = styled.span`
-    cursor: pointer;
-    padding: 1rem;
-    background:unset;
-    &.active{
-        font-weight: bold;
-        border-bottom: 1px solid #5B5656;
-    }
-`
+  cursor: pointer;
+  padding: 1rem;
+  background: unset;
+  &.active {
+    font-weight: bold;
+    border-bottom: 1px solid #5b5656;
+  }
+`;
 
 export const FormBuilderContainer = styled.div`
-    flex: 1;
-    display: grid;
-    grid-template-columns: max-content 1fr;
-    grid-gap: 3rem;
-    margin-bottom: 3.4rem;
-    min-height: 0;
-`
+  flex: 1;
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  grid-gap: 3rem;
+  margin-bottom: 3.4rem;
+  min-height: 0;
+`;
 
-export const Eye = styled(eye)`
-
-`
-export const CaretDown = styled(caret)`
-
-`
+export const Eye = styled(eye)``;
+export const CaretDown = styled(caret)``;
 
 export const ShareSurvey = styled.div`
   .collector__wrapper {
@@ -109,6 +105,10 @@ export const ShareSurvey = styled.div`
     color: #5b5656;
     font-size: 2.4rem;
     font-weight: 500;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .copy__link > button {
     color: #5b5656;
@@ -130,6 +130,12 @@ export const ShareSurvey = styled.div`
     display: flex;
     align-items: center;
   }
+  .sendViaMail > .form__group > button:nth-child(2) {
+    display: flex;
+  }
+  .sendViaMail > .form__group > button:nth-child(2) > span:nth-child(2) {
+    margin-left: 1rem;
+  }
   .sendViaMail > .form__group > label {
     margin-right: 1rem;
     color: #5b5656;
@@ -141,6 +147,10 @@ export const ShareSurvey = styled.div`
     border-bottom: 0.5px solid rgba(91, 86, 86, 0.5);
     background: transparent;
     width: 100%;
+  }
+
+  .sendViaMail > .form__group > .error__ {
+    border-bottom: 0.5px solid rgb(212 17 17 / 50%);
   }
   .sendViaMail > .form__group:last-child {
     display: flex;
@@ -156,6 +166,11 @@ export const ShareSurvey = styled.div`
     background: #b6e6bd;
     border-radius: 10px;
     padding: 1.1rem 1.8rem;
+  }
+
+  .sendViaMail > .form__group:last-child > button:disabled {
+    cursor: default;
+    background-color: #7fcd9126 !important;
   }
 
   /* Third tab */

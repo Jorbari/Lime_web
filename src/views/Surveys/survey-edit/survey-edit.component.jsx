@@ -10,6 +10,7 @@ import { getSurveyQuestions } from "../../../api/survey";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { convertQuestions } from "../../../helpers/helper";
+import ShareSurveyComponent from "../survey-create/survey-share.component";
 import {
   MainContainer,
   ButtonContainer,
@@ -61,6 +62,10 @@ const EditSurvey = ({ updateQuestions, match, setHeading, history }) => {
     setOpen(false);
   };
 
+  const [navItem, setNavItem] = useState("edit");
+  const isNav = (value) => (value === navItem ? "active" : null);
+  const setNav = (value) => setNavItem(value);
+
   return (
     <MainContainer>
       <Notifier
@@ -96,17 +101,32 @@ const EditSurvey = ({ updateQuestions, match, setHeading, history }) => {
         </CustomButton>
       </ButtonContainer>
       <Nav>
-        <NavItem className="active">Edit</NavItem>
+        {/* <NavItem className="active">Edit</NavItem> */}
+        <NavItem className={isNav("edit")} onClick={() => setNav("edit")}>
+          Edit
+        </NavItem>
+        <NavItem className={isNav("share")} onClick={() => setNav("share")}>
+          Share
+        </NavItem>
       </Nav>
-      {loading ? (
-        <div className="" style={{ marginTop: "2rem" }}>
-          <Spinner showSpinner={true} radius={"5rem"} />
-        </div>
+
+      {navItem == "edit" ? (
+        <>
+          {loading ? (
+            <div className="" style={{ marginTop: "2rem" }}>
+              <Spinner showSpinner={true} radius={"5rem"} />
+            </div>
+          ) : (
+            <FormBuilderContainer>
+              <SurveySideBar></SurveySideBar>
+              <FormBuilder></FormBuilder>
+            </FormBuilderContainer>
+          )}
+        </>
       ) : (
-        <FormBuilderContainer>
-          <SurveySideBar></SurveySideBar>
-          <FormBuilder></FormBuilder>
-        </FormBuilderContainer>
+        <>
+          <ShareSurveyComponent />
+        </>
       )}
     </MainContainer>
   );

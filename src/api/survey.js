@@ -54,3 +54,6 @@ export const getAllResponsesForWebLink = async (id) =>
   await http.get(`/api/response/${id}/web`);
 
 export const recentSurvey = async () => await http.get(`/api/survey/recent`);
+
+export const shareSurvey = async (survey_id, payload) =>
+  await http.post(`/api/survey/${survey_id}/share`, payload);

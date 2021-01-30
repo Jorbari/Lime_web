@@ -26,18 +26,20 @@ const DisplaySurvey = (props) => {
   const [questions, setQuestions] = useState([]);
   const [refArray, setrefArray] = useState([]);
   const [user_location, setUser_location] = useState("");
-  const { match, updateQuestions } = props;
+  const { match, updateQuestions, history } = props;
 
   useEffect(() => {
     const getSurveys = async () => {
-      console.log("i am here >>>>>>>>");
       setLoading(true);
       try {
         const {
           data: { data },
         } = await getSurveyQuestions(match.params.id);
         console.log(data);
-        setQuestions(convertQuestions(data.question));
+        console.log(match.params.surveyType);
+        if (data.question !== null && data.question !== undefined) {
+          setQuestions(convertQuestions(data.question));
+        }
         setLoading(false);
       } catch (err) {
         console.log(err);
@@ -108,13 +110,12 @@ const DisplaySurvey = (props) => {
     if (isValid(response)) {
       setSubmitting(true);
       let responseBody = {
-        collectionMethod: "liveSurvey",
+        collectionMethod: match.params.surveyType,
         location: user_location,
         note: "This is not required",
         response,
       };
-      // console.log(this.props.match.params.id,questions)
-      const { match, history } = props;
+
       try {
         const data = await createSurveyResponse(match.params.id, responseBody);
         setApiMessageFeedback("Your Response has been recoreded successfully");
