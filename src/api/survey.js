@@ -17,6 +17,8 @@ export const createSurveyResponse = async (survey_id, responses) =>
 
 export const getAllSurveysRequest = async () => await http.get("/api/survey");
 
+export const getTotalSurveys = async () => await http.get(`/api/survey/total`);
+
 export const getSingleSurveyRequest = async (id) =>
   await http.get(`/api/survey/${id}`);
 
@@ -53,7 +55,7 @@ export const getAllResponsesForLiveSurvey = async (id) =>
 export const getAllResponsesForWebLink = async (id) =>
   await http.get(`/api/response/${id}/web`);
 
-export const getIndividualResponse = async (surveyId,responseId) =>
+export const getIndividualResponse = async (surveyId, responseId) =>
   await http.get(`/api/survey/${surveyId}/responses?page=${responseId}`);
 
 export const deleteResponse = async (response_id) =>

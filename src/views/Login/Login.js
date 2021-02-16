@@ -140,7 +140,8 @@ const Login = (props) => {
         </div>
         <div className="error-div">
           {props.status === "error" && (
-            <p className="error-text">Username/password is incorrect</p>
+            <p className="error-text">{props.payload}</p>
+            // <p className="error-text">Username/password is incorrect</p>
           )}
         </div>
         <Form.Group as={Col}>

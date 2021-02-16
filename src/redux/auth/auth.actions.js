@@ -42,9 +42,10 @@ export const authenticate = (userData, history) => async (dispatch) => {
     });
     history.push("/dashboard");
   } catch (error) {
+    console.log(error);
     dispatch({
       type: AuthActionTypes.REQUEST_ERROR,
-      payload: error.response.data,
+      payload: "An error occurred,please try again",
     });
   }
 };

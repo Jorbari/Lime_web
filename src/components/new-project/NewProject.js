@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import Notifier from "../Notifier/notifier.component";
 import { getSingleProjectRequest, editProjectRequest } from "../../api/project";
-import { setHeading } from '../../redux/layout/layout.action'
+import { setHeading } from "../../redux/layout/layout.action";
 
 import { createProject } from "../../redux/project/project.actions";
 
@@ -22,7 +22,7 @@ const NewProject = (props) => {
       params: { id },
     },
   } = props;
-  setHeading("Projects")
+  setHeading("Projects");
   const [title, setTitle] = useState("");
   const [manager, setManager] = useState("");
   const [sponsor, setSponsor] = useState("");
@@ -40,12 +40,16 @@ const NewProject = (props) => {
 
   const [managerPhone, setManagerPhone] = useState("");
   const [sponsorPhone, setSponsorPhone] = useState("");
-  
+
   const [description, setDescription] = useState("");
   const [open, setOpen] = useState(false);
 
   const [currentProject, setCurrentProject] = useState({});
   const [apiMessageFeedback, setApiMessageFeedback] = useState("");
+
+  useEffect(() => {
+    // tranform_dates();
+  }, []);
 
   useEffect(() => {
     if (status === "error") {
@@ -74,6 +78,26 @@ const NewProject = (props) => {
     }
   }, [currentProject.title]);
 
+  const tranform_dates = () => {
+    let today = new Date();
+    let dd = today.getDate();
+    let mm = today.getMonth() + 1;
+
+    let yyyy = today.getFullYear();
+
+    if (dd <= 9) {
+      dd = "0" + dd;
+    }
+    if (mm <= 9) {
+      mm = "0" + mm;
+    }
+    today = yyyy + "-" + mm + "-" + dd;
+    console.log(today);
+    return today;
+    // document.getElementById("datefield1").setAttribute("min", today);
+    // document.getElementById("datefield").setAttribute("min", today);
+  };
+
   const patchFormValues = () => {
     console.log(currentProject.manager?.name);
     console.log(currentProject);
@@ -91,7 +115,7 @@ const NewProject = (props) => {
 
     setManagerEmail(currentProject.manager?.email);
     setSponsorEmail(currentProject.sponsor?.email);
-    
+
     setDescription(currentProject.description);
   };
 
@@ -135,8 +159,16 @@ const NewProject = (props) => {
     props.createProject(
       {
         title,
-        manager: { name: manager, email: managerEmail, phone_number: managerPhone },
-        sponsor: { name: sponsor, email: sponsorEmail, phone_number: sponsorPhone },
+        manager: {
+          name: manager,
+          email: managerEmail,
+          phone_number: managerPhone,
+        },
+        sponsor: {
+          name: sponsor,
+          email: sponsorEmail,
+          phone_number: sponsorPhone,
+        },
         startDate: new Date(`${startDate}`).getTime(),
         endDate: new Date(`${endDate}`).getTime(),
         category,
@@ -419,7 +451,7 @@ const NewProject = (props) => {
                             setStartDate(value)
                           }
                           value={startDate}
-                          // required
+                          min={tranform_dates()}
                           style={{ height: "36px", fontSize: "15px" }}
                         />
                       </Col>
@@ -437,7 +469,7 @@ const NewProject = (props) => {
                             setEndDate(value)
                           }
                           value={endDate}
-                          // required
+                          min={tranform_dates()}
                           style={{ height: "36px", fontSize: "15px" }}
                         />
                       </Col>
@@ -682,5 +714,5 @@ const mapStateToProps = ({
 });
 
 export default withRouter(
-  connect(mapStateToProps, { createProject,setHeading })(NewProject)
+  connect(mapStateToProps, { createProject, setHeading })(NewProject)
 );

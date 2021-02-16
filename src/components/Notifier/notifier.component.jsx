@@ -1,6 +1,7 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
 import Snackbar from "@material-ui/core/Snackbar";
+import "./Notifier.styles.css";
 
 export default function Notifier(props) {
   return (
@@ -10,6 +11,7 @@ export default function Notifier(props) {
           vertical: "top",
           horizontal: "center",
         }}
+        className="notifier__style"
         open={props.open}
         autoHideDuration={
           props.autoHideDuration > 0 ? props.autoHideDuration : 6000

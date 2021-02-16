@@ -6,9 +6,9 @@ import {
   getAllResponsesForLiveSurvey,
   getAllResponsesForWebLink,
 } from "../../../api/survey";
-import {setNoOfSurveyResponses} from '../../../redux/survey/survey.action'
+import { setNoOfSurveyResponses } from "../../../redux/survey/survey.action";
 import Spinner from "../../../components/spinner/spinner";
-import {connect} from 'react-redux';
+import { connect } from "react-redux";
 
 class SurveySummary extends React.Component {
   constructor(props) {
@@ -27,7 +27,6 @@ class SurveySummary extends React.Component {
   async getSurveySummary() {
     try {
       let res = await getSingleSurveyRequest(this.props.id);
-      console.log("")
       const live_survey_response_api = await getAllResponsesForLiveSurvey(
         this.props.id
       );
@@ -35,10 +34,7 @@ class SurveySummary extends React.Component {
       const web_link_survey_response_api = await getAllResponsesForWebLink(
         this.props.id
       );
-      this.props.setNoOfSurveyResponses(res.data.data.numberOfResponses)
-
-      console.log(live_survey_response_api.data);
-      console.table(live_survey_response_api.data.data);
+      this.props.setNoOfSurveyResponses(res.data.data.numberOfResponses);
 
       this.setState({
         isLoading: false,
@@ -47,7 +43,9 @@ class SurveySummary extends React.Component {
         web_link: web_link_survey_response_api.data.data.length,
       });
     } catch (err) {
-      console.log(err);
+      this.setState({
+        isLoading: false,
+      });
     }
   }
 
@@ -140,4 +138,4 @@ class SurveySummary extends React.Component {
   }
 }
 
-export default connect(null,{setNoOfSurveyResponses})(SurveySummary);
+export default connect(null, { setNoOfSurveyResponses })(SurveySummary);

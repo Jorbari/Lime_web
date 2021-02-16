@@ -47,7 +47,15 @@ class Question extends React.Component {
   isCurrent = false;
   constructor(props) {
     super(props);
-    const { title, required, previewMode, format, shape, answer, responseMode } = props;
+    const {
+      title,
+      required,
+      previewMode,
+      format,
+      shape,
+      answer,
+      responseMode,
+    } = props;
     const myState = { title, required, previewMode, format, shape };
 
     this.state = {
@@ -55,8 +63,8 @@ class Question extends React.Component {
       answer: [],
     };
 
-    if(responseMode){
-      this.setState({answer})
+    if (responseMode) {
+      this.setState({ answer });
     }
   }
 
@@ -124,7 +132,7 @@ class Question extends React.Component {
       preview,
       answerMode,
       responseMode,
-      answer
+      answer,
     } = this.props;
     const { title, previewMode, required, format, shape } = this.state;
     this.isCurrent = currentQuestionId === questionNumber;
@@ -134,6 +142,7 @@ class Question extends React.Component {
         isCurrent
         style={{
           border: this.isCurrent ? "2px solid #A4D4AE" : "1px solid #A4D4AE",
+          overflowY: "scroll",
         }}
         onClick={this.setCurrentId}
       >
@@ -186,7 +195,7 @@ class Question extends React.Component {
                   answerMode={answerMode}
                   responseMode={responseMode}
                   questionNumber={questionNumber}
-                  answer = {answer}
+                  answer={answer}
                 />
               ),
               [questionFormatTypes.checkbox]: (
@@ -197,7 +206,7 @@ class Question extends React.Component {
                   setAnswer={this.setAnswer}
                   previewMode={previewMode}
                   answerMode={answerMode}
-                  answer = {answer}
+                  answer={answer}
                   responseMode={responseMode}
                 />
               ),
@@ -210,7 +219,7 @@ class Question extends React.Component {
                   previewMode={previewMode}
                   answerMode={answerMode}
                   responseMode={responseMode}
-                  answer = {answer}
+                  answer={answer}
                 />
               ),
               [questionFormatTypes.shortanswer]: (
@@ -220,7 +229,7 @@ class Question extends React.Component {
                   previewMode={previewMode}
                   answerMode={answerMode}
                   responseMode={responseMode}
-                  answer = {answer}
+                  answer={answer}
                 />
               ),
               [questionFormatTypes.paragraph]: (
@@ -230,7 +239,7 @@ class Question extends React.Component {
                   previewMode={previewMode}
                   responseMode={responseMode}
                   answerMode={answerMode}
-                  answer = {answer}
+                  answer={answer}
                 />
               ),
               [questionFormatTypes.linearscale]: (
@@ -242,7 +251,7 @@ class Question extends React.Component {
                   previewMode={previewMode}
                   responseMode={responseMode}
                   answerMode={answerMode}
-                  answer = {answer}
+                  answer={answer}
                 />
               ),
             }[format]

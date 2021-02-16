@@ -6,19 +6,24 @@ import { Spinner } from "react-bootstrap";
 import { decodeUserObject, encodeUserProfile } from "../../api/helpers";
 import { ProfileContainerStyle } from "./profile.styles";
 import { updateUserDetails, updateUserProfileImage } from "../../api/user";
+import { getTotalSurveys } from "../../api/survey";
+import { getTotalProjects } from "../../api/project";
 import Notifier from "../../components/Notifier/notifier.component";
-import { setHeading } from '../../redux/layout/layout.action'
-import {connect} from 'react-redux'
+import { setHeading } from "../../redux/layout/layout.action";
+import { connect } from "react-redux";
 
 // import Teammates from "../../components/teammates/teammates.component";
 
 const Profile = (props) => {
-  const{setHeading} = props
-  setHeading("Profile")
+  const { setHeading } = props;
+  setHeading("Profile");
   const user = decodeUserObject();
   const [open, setOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [apiMessageFeedback, setApiMessageFeedback] = useState("");
+  const [total_surveys_created, set_total_surveys_created] = useState(0);
+  const [total_projects_created, set_total_projects_created] = useState(0);
+
   const [form, setState] = useState({
     userName: "",
     imageUrl: "",
@@ -29,6 +34,29 @@ const Profile = (props) => {
     designation: "",
     email: "",
   });
+
+  useEffect(() => {
+    const getTotalSurvey = async () => {
+      try {
+        const response = await getTotalSurveys();
+        set_total_surveys_created(response.data.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    const getTotalProject = async () => {
+      try {
+        const response = await getTotalProjects();
+        set_total_projects_created(response.data.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    getTotalSurvey();
+    getTotalProject();
+  }, []);
 
   useEffect(() => {
     setState({
@@ -68,7 +96,7 @@ const Profile = (props) => {
     const payload = {
       imageBinary: fileBinary,
     };
-    const profileData = await updateUserProfileImage(payload);
+    await updateUserProfileImage(payload);
   };
 
   const updateValue = (event) => {
@@ -125,7 +153,7 @@ const Profile = (props) => {
           <Tabs>
             <TabList className="tab">
               <Tab className="tab__list">Account</Tab>
-              <Tab className="tab__list">Billing</Tab>
+              {/* <Tab className="tab__list">Billing</Tab> */}
             </TabList>
 
             <TabPanel>
@@ -232,31 +260,6 @@ const Profile = (props) => {
                     </div>
 
                     <div className="grid__2 form__space">
-                      {/* <div className="form-group">
-                        <p>Gender</p>
-
-                        <section className="form__radios">
-                          <div>
-                            <label htmlFor="male">Male</label>
-
-                            <input
-                              type="radio"
-                              name="gender"
-                              className="form-control"
-                            />
-                          </div>
-                          <div>
-                            <label htmlFor="female">Female</label>
-
-                            <input
-                              type="radio"
-                              name="gender"
-                              className="form-control"
-                            />
-                          </div>
-                        </section>
-                      </div> */}
-
                       <div className="form-group flex__right">
                         <button onClick={updateProfile} type="submit">
                           {isLoading ? (
@@ -284,17 +287,17 @@ const Profile = (props) => {
                   <section className="profile__detail">
                     <div className="grid__profile">
                       <h4>Surveys Created</h4>
-                      <button>5</button>
+                      <button>{total_surveys_created}</button>
                     </div>
                     <div className="grid__profile">
                       <h4>Projects Created</h4>
-                      <button>8</button>
+                      <button>{total_projects_created}</button>
                     </div>
                   </section>
                 </div>
               </div>
             </TabPanel>
-            <TabPanel>hello two</TabPanel>
+            {/* <TabPanel>hello two</TabPanel> */}
           </Tabs>
         </div>
       </ProfileContainerStyle>
@@ -302,4 +305,4 @@ const Profile = (props) => {
   );
 };
 
-export default connect(null,{setHeading})(Profile);
+export default connect(null, { setHeading })(Profile);

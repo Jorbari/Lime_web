@@ -3,6 +3,9 @@ import { http } from "./client";
 export const createProjectRequest = async (credentials) =>
   await http.post("/api/project", credentials);
 
+export const getTotalProjects = async () =>
+  await http.get(`/api/project/total`);
+
 export const getAllProjectsRequest = async () => await http.get("/api/project");
 
 export const getSingleProjectRequest = async (id) =>
