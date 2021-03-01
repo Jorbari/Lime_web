@@ -1,4 +1,4 @@
-import React,{ useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import moment from "moment";
@@ -6,10 +6,10 @@ import moment from "moment";
 import { getAllSurveys } from "../../../redux/survey/survey.action";
 import { getAllProjects } from "../../../redux/project/project.actions";
 import { ButtonContainer, SurveysContainer } from "./survey-list.styles";
-import Spinner from '../../../components/spinner/spinner';
+import Spinner from "../../../components/spinner/spinner";
 
 const SurveyList = (props) => {
-  const { history, surveys, projects,isLoading } = props;
+  const { history, surveys, projects, isLoading } = props;
 
   React.useEffect(() => {
     const fetchProjects = async () => {
@@ -48,13 +48,10 @@ const SurveyList = (props) => {
           </div>
         </ButtonContainer>
       </div>
-      {
-        isLoading?
-        (
-          <Spinner showSpinner={true} radius = {'5rem'} />
-        ):
-        (
-          <SurveysContainer
+      {isLoading ? (
+        <Spinner showSpinner={true} radius={"5rem"} />
+      ) : (
+        <SurveysContainer
           className="mx-8 relative bg-white card flex flex-col md:flew-wrap"
           style={{
             height: "fit-content",
@@ -73,7 +70,7 @@ const SurveyList = (props) => {
                   <th className="w-2/4 py-6">Project</th>
                   <th className="w-2/4 py-6">Category</th>
                   <th className="w-2/4 py-6">Responses</th>
-                  <th className="w-2/4 py-6">Status</th>
+                  {/* <th className="w-2/4 py-6">Status</th> */}
                 </tr>
               </thead>
               <tbody>
@@ -137,7 +134,7 @@ const SurveyList = (props) => {
                           {survey?.responses}
                         </Link>
                       </td>
-                      <td className="w-2/4 py-6">
+                      {/* <td className="w-2/4 py-6">
                         <Link
                           to={`/surveys/details/${survey._id}`}
                           key={survey._id}
@@ -145,17 +142,14 @@ const SurveyList = (props) => {
                         >
                           {survey.staus}
                         </Link>
-                      </td>
+                      </td> */}
                     </tr>
                   ))}
               </tbody>
             </table>
           </div>
         </SurveysContainer>
-      
-        )
-      }
-
+      )}
     </div>
   );
 };

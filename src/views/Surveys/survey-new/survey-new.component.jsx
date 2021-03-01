@@ -220,9 +220,9 @@ const SurveyNew = (props) => {
         <CustomButton type="submit" primary onClick={() => toggleModal()}>
           Start from scratch
         </CustomButton>
-        <CustomButton type="submit" primary>
+        {/* <CustomButton type="submit" primary>
           Import questions
-        </CustomButton>
+        </CustomButton> */}
         {/* <CustomButton type="submit" primary>Suggest Template</CustomButton> */}
       </ButtonGroup>
     </div>

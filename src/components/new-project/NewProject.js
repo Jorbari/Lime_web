@@ -47,9 +47,24 @@ const NewProject = (props) => {
   const [currentProject, setCurrentProject] = useState({});
   const [apiMessageFeedback, setApiMessageFeedback] = useState("");
 
+  // error display when input Project_startdate >= Project_endDate
+  const [end_date_error, setEnd_date_error] = useState(false);
+
   useEffect(() => {
-    // tranform_dates();
-  }, []);
+    if (startDate && endDate) {
+      const start = new Date(`${startDate}`);
+      const endDate__ = new Date(`${endDate}`);
+
+      if (endDate__.getTime() > start.getTime()) {
+        setEnd_date_error(false);
+      } else {
+        setEnd_date_error(true);
+      }
+    } else {
+      console.log("invalid");
+      return;
+    }
+  }, [startDate, endDate]);
 
   useEffect(() => {
     if (status === "error") {
@@ -94,8 +109,6 @@ const NewProject = (props) => {
     today = yyyy + "-" + mm + "-" + dd;
     console.log(today);
     return today;
-    // document.getElementById("datefield1").setAttribute("min", today);
-    // document.getElementById("datefield").setAttribute("min", today);
   };
 
   const patchFormValues = () => {
@@ -152,6 +165,23 @@ const NewProject = (props) => {
 
   const handleClick = () => {
     setOpen(false);
+  };
+
+  const end_date_greater_than_start = () => {
+    if (startDate && endDate) {
+      console.log();
+      const start = new Date(`${startDate}`);
+      const endDate__ = new Date(`${endDate}`);
+
+      if (endDate__.getDate() > start.getDate()) {
+        setEnd_date_error(false);
+      } else {
+        setEnd_date_error(true);
+      }
+    } else {
+      console.log("invalid");
+      return;
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -447,9 +477,9 @@ const NewProject = (props) => {
                         <Form.Control
                           type="date"
                           className="grid-input-style login-input-styles"
-                          onChange={({ target: { value } }) =>
-                            setStartDate(value)
-                          }
+                          onChange={({ target: { value } }) => {
+                            setStartDate(value);
+                          }}
                           value={startDate}
                           min={tranform_dates()}
                           style={{ height: "36px", fontSize: "15px" }}
@@ -465,13 +495,18 @@ const NewProject = (props) => {
                         <Form.Control
                           type="date"
                           className="grid-input-style login-input-styles"
-                          onChange={({ target: { value } }) =>
-                            setEndDate(value)
-                          }
+                          onChange={({ target: { value } }) => {
+                            setEndDate(value);
+                          }}
                           value={endDate}
                           min={tranform_dates()}
                           style={{ height: "36px", fontSize: "15px" }}
                         />
+                        {end_date_error && (
+                          <span className="error_sm">
+                            Project end date must be grater than start date
+                          </span>
+                        )}
                       </Col>
                     </Row>
                   </Form.Group>

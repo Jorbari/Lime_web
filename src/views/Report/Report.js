@@ -8,11 +8,11 @@ import { CardContainer, ReportProjectContainer } from "./report.styles";
 import folder from "../../assets/bigFolder.png";
 import { createStructuredSelector } from "reselect";
 import { selectAllReport } from "../../redux/report/report.selectors";
-import { setHeading } from '../../redux/layout/layout.action'
+import { setHeading } from "../../redux/layout/layout.action";
 
 function Report(props) {
-  const { showAllProject, allReport,setHeading } = props;
-  setHeading("Reports")
+  const { showAllProject, allReport, setHeading } = props;
+  setHeading("Reports");
   React.useEffect(() => {
     showAllProject();
   }, []);
@@ -50,14 +50,14 @@ function Report(props) {
               <Tab style={{ paddingLeft: "2rem", paddingRight: "2rem" }}>
                 Built Reports
               </Tab>
-              <Tab style={{ paddingLeft: "2rem", paddingRight: "2rem" }}>
+              {/* <Tab style={{ paddingLeft: "2rem", paddingRight: "2rem" }}>
                 Un-Built Reports
-              </Tab>
+              </Tab> */}
             </TabList>
             <TabPanel className="w-full mb-12 xl:mb-0 pr-4">
               {renderAllProject()}
             </TabPanel>
-            <TabPanel>{renderAllProject()}</TabPanel>
+            {/* <TabPanel>{renderAllProject()}</TabPanel> */}
           </Tabs>
         </ReportProjectContainer>
       </div>
@@ -69,4 +69,4 @@ const mapStateToProps = createStructuredSelector({
   allReport: selectAllReport,
 });
 
-export default connect(mapStateToProps, { showAllProject,setHeading })(Report);
+export default connect(mapStateToProps, { showAllProject, setHeading })(Report);
