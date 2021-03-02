@@ -25,20 +25,16 @@ class FormBuilder extends React.Component {
     this.refArray = [];
   }
   componentDidMount() {
-    console.log("I just mounted");
     console.log(this.props);
     this.setArrayOfReferences();
   }
   componentDidUpdate() {
-    console.log(this.refArray);
-    console.log("I just updated");
     this.setArrayOfReferences();
   }
 
   componentWillUnmount() {
     this.props.updateQuestions(this.getAllQuestions());
     this.refArray = [];
-    console.log("I just unmounted");
   }
 
   setArrayOfReferences = () => {
@@ -68,7 +64,6 @@ class FormBuilder extends React.Component {
       question.shape = JSON.stringify(question.shape);
       questions.push(this.modifyQuestionNodesTitle(question));
     });
-    console.log(this.props.match.params.id, questions);
     const { match } = this.props;
     try {
       if (match.path.includes("create")) {
@@ -87,7 +82,6 @@ class FormBuilder extends React.Component {
         });
       }
     } catch (error) {
-      console.log(error.response);
       this.setState({
         open: true,
         apiMessageFeedback: "An error occurred, please try again !!!",

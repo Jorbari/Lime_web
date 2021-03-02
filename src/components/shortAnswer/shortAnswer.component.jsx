@@ -37,7 +37,7 @@ class ShortAnswer extends React.Component{
                         disabled = {answerMode?false:true} 
                         placeholder="Short Answer"
                         onChange={(e)=>{this.handleAnswer(e)}}
-                        value = {responseMode? answer[0]: null}
+                        value = {responseMode? answer[0]:''}
                     ></InputContainer>
                 </OptionContainer>
             </MainContainer>

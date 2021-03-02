@@ -17,16 +17,13 @@ const SurveyPreview = ({match,updateQuestions}) => {
     useEffect(() => {
 
         const getSurveys = async()=>{
-            console.log('i am here >>>>>>>>')
             setLoading(true)
             try{
                 const {data:{data}} = await getSurveyQuestions(match.params.id)
-                console.log(data);
                 setQuestions(convertQuestions(data.question));
                 setLoading(false)
             }
             catch(err){
-                console.log(err)
                 setLoading(false)
                 setApiMessageFeedback("An Error Occured, Try again 😓")
                 setOpen(true)
@@ -38,7 +35,6 @@ const SurveyPreview = ({match,updateQuestions}) => {
         
     },[])
     useEffect(()=>{
-        console.log(questions)
         updateQuestions(questions);
         return () => {
             updateQuestions([])

@@ -210,3 +210,8 @@ export const ShareSurvey = styled.div`
     justify-content: flex-end;
   }
 `;
+export const QuestionContainer = styled.div`
+    & >:not(:last-child){
+            margin-bottom: 2rem;
+    }
+`

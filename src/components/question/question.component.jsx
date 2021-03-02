@@ -76,7 +76,7 @@ class Question extends React.Component {
     this.props.onRef(undefined);
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevState, prevProps) {
     if (!this.isCurrent && !this.state.previewMode) {
       this.setState({ previewMode: true });
     } else if (this.isCurrent && this.state.previewMode) {
