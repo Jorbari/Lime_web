@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import moment from "moment";
@@ -11,7 +11,7 @@ import Spinner from "../../../components/spinner/spinner";
 const SurveyList = (props) => {
   const { history, surveys, projects, isLoading } = props;
 
-  React.useEffect(() => {
+  useEffect(() => {
     const fetchProjects = async () => {
       await props.getAllProjects();
     };
@@ -23,9 +23,11 @@ const SurveyList = (props) => {
     fetchProjects();
 
     fetchSurveys();
-
-    console.log(surveys);
   });
+
+  useEffect(() => {
+    console.log(surveys);
+  }, [surveys]);
 
   const getProjectName = (id) =>
     projects.find((project) => project._id.toString() === id.toString())?.title;
@@ -113,7 +115,7 @@ const SurveyList = (props) => {
                           key={survey._id}
                           className="mb-4"
                         >
-                          {getProjectName(survey.project)}
+                          {survey?.project}
                         </Link>
                       </td>
                       <td className="w-2/4 py-6">
