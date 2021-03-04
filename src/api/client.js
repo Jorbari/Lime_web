@@ -1,6 +1,8 @@
 import axios from "axios";
 import { getToken } from "./helpers";
 
+export const url = "https://limeapiv1.herokuapp.com";
+
 let http;
 
 (async () => {
@@ -11,8 +13,8 @@ let http;
   }
 
   http = axios.create({
-    baseURL: "https://limeapiv1.herokuapp.com",
-    headers: { ...Authorization }
+    baseURL: url,
+    headers: { ...Authorization },
   });
 })();
 

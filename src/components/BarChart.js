@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Chart from "chart.js";
 
 import styled from "styled-components";
 import ProjectCards from "./ProjectCard/ProjectCards.jsx";
+import { updateUserDetails } from "../api/dashboard";
 
 const BarGraphContainer = styled.div`
   border: 2px solid #7fcd91;
@@ -12,17 +13,33 @@ const BarGraphContainer = styled.div`
 `;
 
 export default function BarChart() {
-  React.useEffect(() => {
+  const [datasets_data, setdatasets_data] = useState({});
+
+  useEffect(() => {
+    const load_bar_chart = async () => {
+      try {
+        const api = await updateUserDetails();
+
+        setdatasets_data(api.data.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    load_bar_chart();
+  }, []);
+
+  useEffect(() => {
     let config = {
       type: "bar",
       data: {
-        labels: ["Mon", "Tue", "Wed", "Thu", "Fri"],
+        labels: Object.keys(datasets_data),
         datasets: [
           {
             label: "",
             backgroundColor: "#575A89",
             // borderColor: "#575A89",
-            data: [4, 5, 6, 5, 4, 7],
+            data: Object.values(datasets_data),
             fill: false,
             barThickness: 8,
           },
@@ -72,7 +89,8 @@ export default function BarChart() {
     //   data: data,
     //   options: options,
     // });
-  }, []);
+  }, [datasets_data]);
+
   return (
     <>
       <div>

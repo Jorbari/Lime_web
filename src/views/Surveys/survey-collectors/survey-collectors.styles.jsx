@@ -70,6 +70,10 @@ export const SurveyCollectorsStyle = styled.div`
     color: #5b5656;
     font-size: 2.4rem;
     font-weight: 500;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .copy__link > button {
     color: #5b5656;
