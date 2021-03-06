@@ -5,7 +5,6 @@ import Accordion from "react-bootstrap/Accordion";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import { withRouter } from "react-router-dom";
-import moment from "moment";
 import {
   getAllResponsesForSurvey,
   getAllResponsesForLiveSurvey,
@@ -15,10 +14,10 @@ import {
 import Notifier from "../../../components/Notifier/notifier.component";
 
 import { SurveyCollectorsStyle } from "./survey-collectors.styles";
-import { url } from "../../../api/client";
+import { lime_web } from "../../../api/client";
 
 class SurveyCollector extends React.Component {
-  baseLinkUrl = url;
+  baseLinkUrl = lime_web;
 
   constructor(props) {
     super(props);
@@ -54,12 +53,6 @@ class SurveyCollector extends React.Component {
       // if (all_response_api.data.data.length > 0) {
       //   this.setState({ all_responses: all_response_api.data.data });
       // }
-
-      this.setState({
-        all_responses: all_response_api.data.data,
-        live_survey: live_survey_response_api.data.data,
-        web_link: web_link_survey_response_api.data.data,
-      });
 
       console.log(all_response_api.data.data);
       console.log(live_survey_response_api.data.data);
@@ -117,29 +110,65 @@ class SurveyCollector extends React.Component {
                     </tr>
                   </thead>
                   <tbody>
-                    {this.state.all_responses.map((data, index) => (
-                      <tr className="table__row" key={data?._id}>
-                        <td className="w-2/4 py-6">
-                          <Link className="mb-4">
-                            <input
-                              type="checkbox"
-                              className="appearance-none checked:bg-gray-900 checked:border-transparent ..."
-                            />
-                          </Link>
-                        </td>
-                        <td className="w-2/4 py-6">
-                          <Link className="mb-4">Response {index + 1}</Link>
-                        </td>
-                        <td className="w-2/4 py-6">
-                          <Link className="mb-4">
-                            {moment(data?.dateCollected).format("DD/MM/YYYY")}
-                          </Link>
-                        </td>
-                        <td className="w-2/4 py-6">
-                          <Link className="mb-4">{data?.collectionMethod}</Link>
-                        </td>
-                      </tr>
-                    ))}
+                    <tr className="table__row">
+                      <td className="w-2/4 py-6">
+                        <Link className="mb-4">
+                          <input
+                            type="checkbox"
+                            className="appearance-none checked:bg-gray-900 checked:border-transparent ..."
+                          />
+                        </Link>
+                      </td>
+                      <td className="w-2/4 py-6">
+                        <Link className="mb-4">Response 110</Link>
+                      </td>
+                      <td className="w-2/4 py-6">
+                        <Link className="mb-4">10/01/2020</Link>
+                      </td>
+                      <td className="w-2/4 py-6">
+                        <Link className="mb-4">Link Sharing</Link>
+                      </td>
+                    </tr>
+
+                    <tr className="table__row">
+                      <td className="w-2/4 py-6">
+                        <Link className="mb-4">
+                          <input
+                            type="checkbox"
+                            className="appearance-none checked:bg-gray-900 checked:border-transparent ..."
+                          />
+                        </Link>
+                      </td>
+                      <td className="w-2/4 py-6">
+                        <Link className="mb-4">Response 110</Link>
+                      </td>
+                      <td className="w-2/4 py-6">
+                        <Link className="mb-4">10/01/2020</Link>
+                      </td>
+                      <td className="w-2/4 py-6">
+                        <Link className="mb-4">Link Sharing</Link>
+                      </td>
+                    </tr>
+
+                    <tr className="table__row">
+                      <td className="w-2/4 py-6">
+                        <Link className="mb-4">
+                          <input
+                            type="checkbox"
+                            className="appearance-none checked:bg-gray-900 checked:border-transparent ..."
+                          />
+                        </Link>
+                      </td>
+                      <td className="w-2/4 py-6">
+                        <Link className="mb-4">Response 110</Link>
+                      </td>
+                      <td className="w-2/4 py-6">
+                        <Link className="mb-4">10/01/2020</Link>
+                      </td>
+                      <td className="w-2/4 py-6">
+                        <Link className="mb-4">Link Sharing</Link>
+                      </td>
+                    </tr>
                   </tbody>
                 </table>
               </TabPanel>
@@ -157,36 +186,72 @@ class SurveyCollector extends React.Component {
                     </tr>
                   </thead>
                   <tbody>
-                    {this.state.live_survey.map((data, index) => (
-                      <tr className="table__row" key={data?._id}>
-                        <td className="w-2/4 py-6">
-                          <Link className="mb-4">
-                            <input
-                              type="checkbox"
-                              className="appearance-none checked:bg-gray-900 checked:border-transparent ..."
-                            />
-                          </Link>
-                        </td>
-                        <td className="w-2/4 py-6">
-                          <Link className="mb-4">Response {index + 1} </Link>
-                        </td>
-                        <td className="w-2/4 py-6">
-                          <Link className="mb-4">
-                            {data?.location == "None" ? "-" : data?.location}
-                          </Link>
-                        </td>
-                        <td className="w-2/4 py-6">
-                          <Link className="mb-4">
-                            {moment(data?.dateCollected).format("DD/MM/YYYY")}
-                          </Link>
-                        </td>
-                        <td className="w-2/4 py-6">
-                          <Link className="mb-4">
-                            {moment(data?.dateCollected).format("hh:mm a")}
-                          </Link>
-                        </td>
-                      </tr>
-                    ))}
+                    <tr className="table__row">
+                      <td className="w-2/4 py-6">
+                        <Link className="mb-4">
+                          <input
+                            type="checkbox"
+                            className="appearance-none checked:bg-gray-900 checked:border-transparent ..."
+                          />
+                        </Link>
+                      </td>
+                      <td className="w-2/4 py-6">
+                        <Link className="mb-4">Response 110</Link>
+                      </td>
+                      <td className="w-2/4 py-6">
+                        <Link className="mb-4">Wuye</Link>
+                      </td>
+                      <td className="w-2/4 py-6">
+                        <Link className="mb-4">10/01/2020</Link>
+                      </td>
+                      <td className="w-2/4 py-6">
+                        <Link className="mb-4">02:00 pm</Link>
+                      </td>
+                    </tr>
+                    <tr className="table__row">
+                      <td className="w-2/4 py-6">
+                        <Link className="mb-4">
+                          <input
+                            type="checkbox"
+                            className="appearance-none checked:bg-gray-900 checked:border-transparent ..."
+                          />
+                        </Link>
+                      </td>
+                      <td className="w-2/4 py-6">
+                        <Link className="mb-4">Response 110</Link>
+                      </td>
+                      <td className="w-2/4 py-6">
+                        <Link className="mb-4">Wuye</Link>
+                      </td>
+                      <td className="w-2/4 py-6">
+                        <Link className="mb-4">10/01/2020</Link>
+                      </td>
+                      <td className="w-2/4 py-6">
+                        <Link className="mb-4">02:00 pm</Link>
+                      </td>
+                    </tr>
+                    <tr className="table__row">
+                      <td className="w-2/4 py-6">
+                        <Link className="mb-4">
+                          <input
+                            type="checkbox"
+                            className="appearance-none checked:bg-gray-900 checked:border-transparent ..."
+                          />
+                        </Link>
+                      </td>
+                      <td className="w-2/4 py-6">
+                        <Link className="mb-4">Response 110</Link>
+                      </td>
+                      <td className="w-2/4 py-6">
+                        <Link className="mb-4">Wuye</Link>
+                      </td>
+                      <td className="w-2/4 py-6">
+                        <Link className="mb-4">10/01/2020</Link>
+                      </td>
+                      <td className="w-2/4 py-6">
+                        <Link className="mb-4">02:00 pm</Link>
+                      </td>
+                    </tr>
                   </tbody>
                 </table>
               </TabPanel>
@@ -223,37 +288,72 @@ class SurveyCollector extends React.Component {
                       </tr>
                     </thead>
                     <tbody>
-                      {this.state.web_link.map((data, index) => (
-                        <tr className="table__row" key={data?._id}>
-                          <td className="w-2/4 py-6">
-                            <Link className="mb-4">
-                              <input
-                                type="checkbox"
-                                className="appearance-none checked:bg-gray-900 checked:border-transparent ..."
-                              />
-                            </Link>
-                          </td>
-                          <td className="w-2/4 py-6">
-                            <Link className="mb-4">Response {index + 1} </Link>
-                          </td>
-                          <td className="w-2/4 py-6">
-                            <Link className="mb-4">
-                              {data?.location == "None" ? "-" : data?.location}
-                            </Link>
-                          </td>
-                          <td className="w-2/4 py-6">
-                            <Link className="mb-4">
-                              {moment(data?.dateCollected).format("DD/MM/YYYY")}
-                            </Link>
-                          </td>
-                          <td className="w-2/4 py-6">
-                            <Link className="mb-4">
-                              {data?.dateCollected &&
-                                moment(data?.dateCollected).format("hh:mm a")}
-                            </Link>
-                          </td>
-                        </tr>
-                      ))}
+                      <tr className="table__row">
+                        <td className="w-2/4 py-6">
+                          <Link className="mb-4">
+                            <input
+                              type="checkbox"
+                              className="appearance-none checked:bg-gray-900 checked:border-transparent ..."
+                            />
+                          </Link>
+                        </td>
+                        <td className="w-2/4 py-6">
+                          <Link className="mb-4">Response 110</Link>
+                        </td>
+                        <td className="w-2/4 py-6">
+                          <Link className="mb-4">Wuye</Link>
+                        </td>
+                        <td className="w-2/4 py-6">
+                          <Link className="mb-4">10/01/2020</Link>
+                        </td>
+                        <td className="w-2/4 py-6">
+                          <Link className="mb-4">02:00 pm</Link>
+                        </td>
+                      </tr>
+                      <tr className="table__row">
+                        <td className="w-2/4 py-6">
+                          <Link className="mb-4">
+                            <input
+                              type="checkbox"
+                              className="appearance-none checked:bg-gray-900 checked:border-transparent ..."
+                            />
+                          </Link>
+                        </td>
+                        <td className="w-2/4 py-6">
+                          <Link className="mb-4">Response 110</Link>
+                        </td>
+                        <td className="w-2/4 py-6">
+                          <Link className="mb-4">Wuye</Link>
+                        </td>
+                        <td className="w-2/4 py-6">
+                          <Link className="mb-4">10/01/2020</Link>
+                        </td>
+                        <td className="w-2/4 py-6">
+                          <Link className="mb-4">02:00 pm</Link>
+                        </td>
+                      </tr>
+                      <tr className="table__row">
+                        <td className="w-2/4 py-6">
+                          <Link className="mb-4">
+                            <input
+                              type="checkbox"
+                              className="appearance-none checked:bg-gray-900 checked:border-transparent ..."
+                            />
+                          </Link>
+                        </td>
+                        <td className="w-2/4 py-6">
+                          <Link className="mb-4">Response 110</Link>
+                        </td>
+                        <td className="w-2/4 py-6">
+                          <Link className="mb-4">Wuye</Link>
+                        </td>
+                        <td className="w-2/4 py-6">
+                          <Link className="mb-4">10/01/2020</Link>
+                        </td>
+                        <td className="w-2/4 py-6">
+                          <Link className="mb-4">02:00 pm</Link>
+                        </td>
+                      </tr>
                     </tbody>
                   </table>
                 </div>

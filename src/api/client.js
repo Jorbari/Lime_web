@@ -2,6 +2,7 @@ import axios from "axios";
 import { getToken } from "./helpers";
 
 export const url = "https://limeapiv1.herokuapp.com";
+export const lime_web = "https://limeweb.herokuapp.com/";
 
 let http;
 

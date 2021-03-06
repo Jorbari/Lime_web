@@ -6,10 +6,10 @@ import { ShareSurvey } from "./survey-create.styles";
 import { shareSurvey } from "../../../api/survey";
 import Notifier from "../../../components/Notifier/notifier.component";
 import Spinner from "../../../components/spinner/spinner";
-import { url } from "../../../api/client";
+import { lime_web } from "../../../api/client";
 
 class ShareSurveyComponent extends React.Component {
-  baseLinkUrl = url;
+  baseLinkUrl = lime_web;
 
   constructor(props) {
     super(props);
