@@ -72,14 +72,35 @@ class Question extends React.Component {
     this.props.onRef(this);
   }
 
+  ifStateNotUpdatedWithProps = ({title,previewMode,format,shape,preview})=>{
+    return (
+      preview &&
+      ( this.state.title !== title
+      ||this.state.previewMode !== previewMode
+      ||this.state.format !== format
+      ||JSON.stringify(this.state.shape) !== JSON.stringify(shape))
+    )
+  }
   componentWillUnmount() {
     this.props.onRef(undefined);
   }
 
   componentDidUpdate(prevState, prevProps) {
-    if (!this.isCurrent && !this.state.previewMode) {
+    if(this.ifStateNotUpdatedWithProps(this.props)){
+      console.log("we dey here")
+      const {
+        title,
+        required,
+        previewMode,
+        format,
+        shape,
+      } = this.props;
+      const myState = { title, required, previewMode, format, shape };
+      this.setState({...myState})
+    }
+    else if (!this.isCurrent && !this.state.previewMode) {
       this.setState({ previewMode: true });
-    } else if (this.isCurrent && this.state.previewMode) {
+    } else if (this.isCurrent && this.state.previewMode && !this.props.preview) {
       this.setState({ previewMode: false });
     }
   }
@@ -141,7 +162,7 @@ class Question extends React.Component {
       <MainContainer
         isCurrent
         style={{
-          border: this.isCurrent ? "2px solid #A4D4AE" : "1px solid #A4D4AE",
+          border: this.isCurrent && !preview ? "2px solid #A4D4AE" : "1px solid #A4D4AE",
           overflowY: "scroll",
         }}
         onClick={this.setCurrentId}

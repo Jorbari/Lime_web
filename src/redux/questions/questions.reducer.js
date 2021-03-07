@@ -13,6 +13,11 @@ const INITIAL_STATE = {
 
 export const questionsReducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
+        case QuestionActionTypes.RESET_QUESTIONS:
+            return {
+                ...state,
+                questions: []
+            }
         case QuestionActionTypes.ADD_QUESTION:
             return {
                 ...state,

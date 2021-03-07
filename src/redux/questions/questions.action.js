@@ -1,6 +1,10 @@
 import { completeSurveyQuestionnaireRequest, createQuestionRequest,addSurveyQuestions } from '../../api/survey';
 import QuestionActionTypes from './questions.types';
 
+export const resetQuestions = () => dispatch => {
+    dispatch({ type: QuestionActionTypes.RESET_QUESTIONS });
+}
+
 export const addQuestion = () => dispatch => {
     dispatch({ type: QuestionActionTypes.ADD_QUESTION });
 }

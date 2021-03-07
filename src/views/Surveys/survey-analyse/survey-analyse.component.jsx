@@ -11,6 +11,7 @@ import {
     FlexContainer,
     Header
 } from './survey-analyse.styles'
+import SurveySummary from '../../../components/survey-summary/survey-summary.component';
 
 const SurveyAnalyse = (props)=>{
     const [isIndividual, setisIndividual] =  useState(false)
@@ -29,7 +30,15 @@ const SurveyAnalyse = (props)=>{
                     <NavItem className = {`${isIndividual? 'active' : null}`} onClick={()=>setisIndividual(true)}>Individual</NavItem>
                 </Nav>
             </Header>
-            <SurveyResponses/>
+            {
+                isIndividual?
+                (
+                    <SurveyResponses/>
+                ):
+                (
+                    <SurveySummary/>
+                ) 
+            }
         </MainContainer>
     )
 }

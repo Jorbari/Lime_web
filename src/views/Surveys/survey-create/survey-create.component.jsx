@@ -6,6 +6,7 @@ import FormBuilder from "../../../components/form-builder/form-builder.component
 import Question from "../../../components/question/question.component";
 import { setHeading } from '../../../redux/layout/layout.action';
 import { selectQuestions } from '../../../redux/questions/questions.selector';
+import { resetQuestions } from '../../../redux/questions/questions.action';
 import { createStructuredSelector } from "reselect";
 import { connect } from "react-redux";
 
@@ -21,11 +22,12 @@ import {
 } from "./survey-create.styles";
 import ShareSurveyComponent from "./survey-share.component";
 
-const CreateSurvey = ({questions, setHeading}) => {
+const CreateSurvey = ({questions, setHeading, resetQuestion}) => {
   setHeading("New Survey")
   const [navItem, setNavItem] =  useState('create')
   const isNav = (value)=> value === navItem?'active':null;
   const setNav = (value)=>setNavItem(value)
+  resetQuestions()
   
   return(
       <MainContainer>
@@ -85,4 +87,4 @@ const CreateSurvey = ({questions, setHeading}) => {
 const mapStateToProps = createStructuredSelector({
   questions: selectQuestions,
 });
-export default connect(mapStateToProps,{setHeading})(CreateSurvey);
+export default connect(mapStateToProps,{setHeading, resetQuestions})(CreateSurvey);
