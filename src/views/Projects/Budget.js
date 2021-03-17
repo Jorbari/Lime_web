@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Modal from "react-bootstrap/Modal";
+import moment from "moment";
 import {
   getProjectBudget,
   createProjectBudget,
@@ -10,8 +11,6 @@ import {
 import ConfirmationBox from "../../components/confirmation-box/confirmationBox";
 import Notifier from "../../components/Notifier/notifier.component";
 import "./Budget.css";
-
-// import profileImage from "../../assets/profileImage.png";
 
 const BudgetContainer = styled.div`
   margin-top: 9rem;
@@ -59,12 +58,8 @@ const Budget = (props) => {
   const { project } = props;
 
   const [newEntry, setNewEntry] = React.useState({
-    item: "",
-    unit: 1,
-    unitCost: 0,
-    amount: 0,
-    editMode: false,
-    id: "",
+    filename: "",
+    budget: "",
   });
   const [budgetData, setBudgetData] = React.useState([]);
   const [apiMessageFeedback, setApiMessageFeedback] = useState("");
@@ -73,88 +68,42 @@ const Budget = (props) => {
   const [deleteEntry, setDeleteEntry] = useState();
 
   const setNewEntryValues = (event) => {
-    if (event.target.name === "unit" || event.target.name === "unitCost") {
-      event.target.name === "unit"
-        ? setNewEntry({
-            ...newEntry,
-            [event.target.name]: event.target.value,
-            amount: event.target.value * newEntry.unitCost,
-          })
-        : setNewEntry({
-            ...newEntry,
-            [event.target.name]: event.target.value,
-            amount: newEntry.unit * event.target.value,
-          });
-    } else {
-      setNewEntry({
-        ...newEntry,
-        [event.target.name]: event.target.value,
-      });
-    }
+    setNewEntry({
+      ...newEntry,
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  const getBudget = async () => {
+    try {
+      const data = await getProjectBudget(`${project._id}`);
+      setBudgetData(data.data.data);
+      console.log(data);
+    } catch (err) {}
   };
 
   useEffect(() => {
-    const val = async () => {
-      const data = await getProjectBudget(`${project._id}`);
-
-      if (data.data) {
-        setBudgetData(data.data.data);
-      }
-    };
-
-    val();
+    getBudget();
   }, []);
 
   const newBudgetEntry = async (event) => {
     event.preventDefault();
 
-    const payload = {
-      item: newEntry.item,
-      unit: parseInt(newEntry.unit),
-      cost: parseInt(newEntry.unitCost),
-      amount: newEntry.amount,
-    };
+    const formData = new FormData();
+    formData.append("budget", newEntry.budget);
+    formData.append("filename", newEntry.filename);
 
-    if (!newEntry.editMode) {
-      const result = await createProjectBudget(project._id, payload);
-      if (result.status === 200) {
-        setOpen(true);
-        setApiMessageFeedback("Budget entry successfully added !!!");
-        props.onHide();
-        setNewEntry({
-          ...newEntry,
-          item: "",
-          unit: 0,
-          unitCost: 0,
-          amount: 0,
-        });
-        setBudgetData([...budgetData, result.data.data]);
-      } else {
-        setOpen(true);
-        setApiMessageFeedback("An error occurred, please try again !!!");
-        props.onHide();
-      }
-    } else {
-      const result = await editProjectBudget(newEntry.id, payload);
-      if (result.status === 200) {
-        setOpen(true);
-        setApiMessageFeedback("Budget successfully edited !!!");
-        props.onHide();
-        setNewEntry({
-          ...newEntry,
-          item: "",
-          unit: 0,
-          unitCost: 0,
-          amount: 0,
-          editMode: false,
-          id: "",
-        });
-        setBudgetData([...budgetData, result.data.data]);
-      } else {
-        setOpen(true);
-        setApiMessageFeedback("An error occurred, please try again !!!");
-        props.onHide();
-      }
+    try {
+      const result = await createProjectBudget(project._id, formData);
+      console.log(result);
+      setOpen(true);
+      setApiMessageFeedback("Budget entry successfully added !!!");
+      getBudget();
+      props.onHide();
+    } catch (err) {
+      setOpen(true);
+      setApiMessageFeedback("An error occurred, please try again !!!");
+      props.onHide();
     }
   };
 
@@ -173,6 +122,26 @@ const Budget = (props) => {
 
   const handleClick = () => {
     setOpen(false);
+  };
+
+  const readImageUrl = (event) => {
+    const limit = 5;
+
+    const file = event.target.files[0];
+    const fileSizeInMb = file.size / (1024 * 1024);
+
+    if (fileSizeInMb < limit) {
+      setNewEntry({
+        ...newEntry,
+        budget: event.target.files[0],
+      });
+    } else {
+      setOpen(true);
+      setApiMessageFeedback(
+        "File size too large, input file not more than 5MB !!!"
+      );
+      props.onHide();
+    }
   };
 
   const handleClose = () => setShow(false);
@@ -212,10 +181,8 @@ const Budget = (props) => {
           <thead>
             <tr className="table-border">
               <th className="w-2/4 py-6">No</th>
-              <th className="w-2/4 py-6">Item</th>
-              <th className="w-2/4 py-6">Unit</th>
-              <th className="w-2/4 py-6">Cost</th>
-              <th className="w-2/4 py-6">Amount</th>
+              <th className="w-2/4 py-6">File name</th>
+              <th className="w-2/4 py-6">Time Created</th>
               <th className="w-2/4 py-6"></th>
               <th className="w-2/4 py-6"></th>
             </tr>
@@ -225,15 +192,22 @@ const Budget = (props) => {
               budgetData?.map((data, index) => (
                 <tr className="table-border" key={index + 1}>
                   <td className="w-2/4 py-6">{index}</td>
-                  <td className="w-2/4 py-6">{data?.item}</td>
-                  <td className="w-2/4 py-6">{data?.unit}</td>
-                  <td className="w-2/4 py-6">{data?.cost}</td>
-                  <td className="w-2/4 py-6">{data?.amount}</td>
+                  <td className="w-2/4 py-6">{data?.fileName}</td>
+                  <td className="w-2/4 py-6">
+                    {data?.uploadedAt
+                      ? new Date(data?.uploadedAt).toDateString()
+                      : ""}
+                    {/* {data?.uploadedAt
+                      ? moment(data?.uploadedAt).format(
+                          "Do of MMMM of HH:mm, YYYY"
+                        )
+                      : ""} */}
+                  </td>
                   <td
                     className="w-2/4 py-6 edit-text"
-                    onClick={() => editBudgetEntry(data)}
+                    onClick={() => window.open(data?.url)}
                   >
-                    Edit
+                    View
                   </td>
                   <td
                     className="w-2/4 py-6 delete-text"
@@ -264,16 +238,26 @@ const Budget = (props) => {
         <Modal.Body className="form__body">
           <form onSubmit={newBudgetEntry}>
             <div className="form-group">
-              <label>Item:</label>
+              <label>Filename:</label>
               <input
                 type="text"
-                name="item"
+                name="filename"
                 className="form-control"
-                value={newEntry.item}
+                value={newEntry.filename}
                 onChange={setNewEntryValues}
               />
             </div>
-            <div className="grid__2">
+            <div className="form-group">
+              <label>File:</label>
+              <input
+                type="file"
+                name="budget"
+                className="form-control"
+                onChange={readImageUrl}
+              />
+            </div>
+
+            {/* <div className="grid__2">
               <div className="form-group">
                 <label>Unit:</label>
                 <input
@@ -299,12 +283,11 @@ const Budget = (props) => {
               <label>Amount:</label>
               <h3>{newEntry.amount}</h3>
             </div>
+             */}
             <div className="form-group center__content">
               <button
                 type="submit"
-                disabled={
-                  !newEntry.item || !newEntry.unit || !newEntry.unitCost
-                }
+                disabled={!newEntry.filename || !newEntry.budget}
               >
                 Done
               </button>

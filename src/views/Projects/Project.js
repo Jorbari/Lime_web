@@ -205,12 +205,12 @@ const Project = (props) => {
                   openDialog={() => setModalShow(true)}
                 />
               </TabPanel>
-              <TabPanel>
+              {/* <TabPanel>
                 <ExecutionPlan
                   showModal={execModalShow}
                   onHide={() => setExecModalShow(false)}
                 />
-              </TabPanel>
+              </TabPanel> */}
               <TabPanel>
                 <Budget
                   project={currentProject}
