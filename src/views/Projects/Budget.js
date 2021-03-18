@@ -151,13 +151,13 @@ const Budget = (props) => {
   };
 
   const DeleteBudgetEntry = async () => {
-    const data = await deleteProjectBudget(`${deleteEntry._id}`);
+    const data = await deleteProjectBudget(`${deleteEntry.id}`);
 
     if (data.status === 200) {
       const findIndex = budgetData.findIndex((x) => x._id === deleteEntry._id);
       budgetData.splice(findIndex, 1);
       setOpen(true);
-      setApiMessageFeedback(`successfully deleted ${deleteEntry.item} !!!`);
+      setApiMessageFeedback(`successfully deleted !!!`);
     }
     handleClose();
   };
