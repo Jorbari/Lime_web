@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Form, Col, Row } from "react-bootstrap";
 import { connect } from "react-redux";
 import { Modal } from "react-responsive-modal";
@@ -21,10 +21,7 @@ const SurveyNew = (props) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const findIndex = projects.find((data) => data._id == project);
-    // console.log(findIndex);
-    // console.log(project);
-
+    const findIndex = projects.find((data) => data._id === project);
     await props.createSurvey(
       {
         name,
@@ -39,10 +36,6 @@ const SurveyNew = (props) => {
       toggleNewSurveyView
     );
   };
-
-  useEffect(() => {
-    props.getAllProjects();
-  }, []);
 
   return (
     <div style={{ position: "relative" }}>

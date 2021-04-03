@@ -51,6 +51,13 @@ const SideBar = (props) => {
           </SidebarListItem>
 
           <SidebarListItem>
+            <SidebarListLink to="/collectors" exact activeClassName="active">
+              <img alt="" src={projectIcon} />
+              <p>Collectors</p>
+            </SidebarListLink>
+          </SidebarListItem>
+
+          <SidebarListItem>
             <SidebarListLink to="/surveys" exact activeClassName="active">
               <img alt="survey icon" src={surveyIcon} />
               <p>Surveys</p>

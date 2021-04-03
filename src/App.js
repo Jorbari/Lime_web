@@ -16,6 +16,7 @@ import DisplaySurvey from "./components/display-survey/display-survey.component"
 import SurveyDone from "./components/survey-done/survey-done.component";
 import { MainContentContainer, MainContainer, MainContent } from "./App.styles";
 import SurveyRoutes from "./views/Surveys/survey.routes";
+import collectorsListComponent from "./views/collectors/collectors-list.component";
 
 const App = () => {
   return (
@@ -40,6 +41,10 @@ const App = () => {
             />
             <ProtectedRoute exact path="/projects/:id" component={Project} />
             <ProtectedRoute path="/surveys" component={SurveyRoutes} />
+            <ProtectedRoute
+              path="/collectors"
+              component={collectorsListComponent}
+            />
             <ProtectedRoute exact path="/report" component={Report} />
             <ProtectedRoute
               exact

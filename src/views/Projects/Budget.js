@@ -6,7 +6,6 @@ import {
   getProjectBudget,
   createProjectBudget,
   deleteProjectBudget,
-  editProjectBudget,
 } from "../../api/project";
 import ConfirmationBox from "../../components/confirmation-box/confirmationBox";
 import Notifier from "../../components/Notifier/notifier.component";

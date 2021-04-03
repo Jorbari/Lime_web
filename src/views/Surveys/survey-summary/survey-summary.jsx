@@ -114,7 +114,7 @@ class SurveySummary extends React.Component {
                 </div>
               </section>
               <section className="flex__two">
-                <h4>Collectors</h4>
+                <h4>Collections</h4>
 
                 <div className="container__curved">
                   <section className="details__grid">

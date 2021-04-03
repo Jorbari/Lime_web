@@ -41,7 +41,7 @@ class SurveyDetails extends React.Component {
             <TabList className="tab">
               <Tab className="tab__list">Summary</Tab>
               <Tab className="tab__list">Preview</Tab>
-              <Tab className="tab__list">Collectors</Tab>
+              <Tab className="tab__list">Collections</Tab>
               <Tab className="tab__list">Analyse</Tab>
             </TabList>
 
@@ -55,7 +55,7 @@ class SurveyDetails extends React.Component {
               <SurveyCollector />
             </TabPanel>
             <TabPanel>
-              <SurveyAnalyse/>
+              <SurveyAnalyse />
             </TabPanel>
           </Tabs>
         </div>

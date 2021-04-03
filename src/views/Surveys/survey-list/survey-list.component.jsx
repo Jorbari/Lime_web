@@ -9,7 +9,7 @@ import { ButtonContainer, SurveysContainer } from "./survey-list.styles";
 import Spinner from "../../../components/spinner/spinner";
 
 const SurveyList = (props) => {
-  const { history, surveys, projects, isLoading } = props;
+  const { history, surveys, isLoading } = props;
 
   useEffect(() => {
     const fetchProjects = async () => {
@@ -24,13 +24,6 @@ const SurveyList = (props) => {
 
     fetchSurveys();
   });
-
-  useEffect(() => {
-    console.log(surveys);
-  }, [surveys]);
-
-  const getProjectName = (id) =>
-    projects.find((project) => project._id.toString() === id.toString())?.title;
 
   return (
     <div>
@@ -136,15 +129,6 @@ const SurveyList = (props) => {
                           {survey?.responses}
                         </Link>
                       </td>
-                      {/* <td className="w-2/4 py-6">
-                        <Link
-                          to={`/surveys/details/${survey._id}`}
-                          key={survey._id}
-                          className="mb-4"
-                        >
-                          {survey.staus}
-                        </Link>
-                      </td> */}
                     </tr>
                   ))}
               </tbody>
@@ -163,7 +147,6 @@ const mapStateToProps = ({
   isLoading,
   status,
   surveys,
-  projects,
 });
 
 export default connect(mapStateToProps, { getAllSurveys, getAllProjects })(
